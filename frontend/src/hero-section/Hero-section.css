@@ -1,0 +1,61 @@
+.HeroSection {
+    display: inline-flex;
+    align-items: center;
+    width: calc(100% - 96px * 2);
+    margin-top: 32px;
+    margin-left: 96px;
+    margin-right: 96px;
+    margin-bottom: 100px;
+    gap: 32px;
+}
+
+.HeroSectionHeader {
+    color: var(--Dark-gray, #545454);
+    align-self: stretch;
+    font-family: "Open Sans";
+    font-size: 90px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 110px;
+}
+
+.HeroSectionText {
+    color: var(--Gray, #686868);
+    align-self: stretch;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+}
+
+.HeroSectionButton {
+    display: flex;
+    width: 288px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: var(--white, #F7F7F7);
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 29px;
+    text-decoration: none;
+    border-radius: 20px;
+    background: var(--Button-Brown-default, #958060);
+}
+
+.HeroSectionIcon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+}
+
+.HeroImage {
+    width: 608px;
+    height: 570px;
+    flex-shrink: 0;
+    fill: var(--Dark-gray, #545454);
+}
