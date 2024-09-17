@@ -11,16 +11,16 @@ export default function Header(props){
         <div className="header-navigation-block">
             <ul className="navigation-list">
                 <li className="navigation">
-                    <a href="advantages" className="link">Advantages</a>
+                    <a href="#advantages" className="link">Advantages</a>
                 </li>
                 <li className="navigation">
-                    <a href="about" className="link">About Us</a>
+                    <a href="#about" className="link">About Us</a>
                 </li>
                 <li className="navigation">
-                    <a href="faq" className="link">FAQ</a>
+                    <a href="#faq" className="link">FAQ</a>
                 </li>
                 <li className="join-button">
-                    <a href="join" className="link">Join us</a>
+                    <a href="#join" className="link">Join us</a>
                 </li>
             </ul>
         </div>
