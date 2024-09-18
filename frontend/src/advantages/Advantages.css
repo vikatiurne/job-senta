@@ -1,4 +1,9 @@
+.AdvantagesBlock {
+    position: relative;
+}
+
 .AdvantagesContainer {
+    position: absolute;
     margin-top: 100px;
     margin-left: 96px;
     margin-right: 96px;
@@ -9,24 +14,8 @@
     gap: 64px;
 }
 
-.AdvantagesHeaderContainer {
-    display: flex;
+.AdvantagesHeaderWidth {
     width: 608px;
-    justify-content: center;
-    gap: 0px 8px;
-    flex-wrap: wrap;
-    border-bottom: 6px solid #958060;
-}
-
-.AdvantagesHeader {
-    color: var(--Dark-gray, #545454);
-    text-align: center;
-    font-family: "Open Sans";
-    font-size: 60px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 90px;
-    margin: 0;
 }
 
 .Advantages {

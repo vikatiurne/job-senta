@@ -1,0 +1,25 @@
+.Background {
+    opacity: 0.3;
+    display: flex;
+    margin-left: 96px;
+    margin-right: 96px;
+    position: absolute;
+}
+
+.Star1 {
+    width: 747.91px;
+    height: 674.53px;
+    transform: rotate(-16.11deg);
+}
+
+.Star2 {
+    width: 251.604px;
+    height: 236.636px;
+    transform: rotate(-32.243deg);
+}
+
+.Star3 {
+    width: 501.06px;
+    height: 451.9px;
+    transform: rotate(-16.11deg);
+}
