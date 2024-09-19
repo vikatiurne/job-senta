@@ -1,3 +1,7 @@
+.BackgorundContainer {
+    position: relative;
+}
+
 .Background {
     opacity: 0.3;
     display: flex;
