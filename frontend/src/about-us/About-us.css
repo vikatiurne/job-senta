@@ -1,5 +1,4 @@
 .AboutUsContainer {
-    margin-top: 200px;
     margin-left: 96px;
     margin-right: 96px;
     margin-bottom: 200px;
@@ -11,4 +10,12 @@
 
 .AboutUsHeaderWidth {
     width: 370px;
+}
+
+.AboutUsPoints {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    align-self: stretch;
 }
