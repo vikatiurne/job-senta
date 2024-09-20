@@ -6,6 +6,7 @@ import HeroSection from './hero-section/Hero-section';
 import Advantages from './advantages/Advantages';
 import AboutUs from './about-us/About-us';
 import Background from './background/Background';
+import Form from './form/Form';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,5 +16,6 @@ root.render(
     <Background />
     <Advantages />
     <AboutUs />
+    <Form/>
   </React.StrictMode>
 );
