@@ -7,7 +7,7 @@
     margin-right: 96px;
 }
 
-.header-logo {
+.headerLogo {
     display: flex;
     width: 190px;
     height: 98px;
@@ -16,7 +16,7 @@
     flex-shrink: 0;
 }
 
-.header-navigation-block {
+.headerNavigationBlock {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,7 @@
     flex-shrink: 0;
 }
 
-.navigation-list {
+.navigationList {
     display: flex;
     align-items: center;
     gap: 24px;
@@ -36,7 +36,7 @@
     align-items: center;
 }
 
-.join-button {
+.joinButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,6 +56,6 @@
     font-style: normal;
 }
 
-.join-button .link {
+.joinButton .link {
     color: #958060;
 }

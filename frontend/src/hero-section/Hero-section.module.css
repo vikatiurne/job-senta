@@ -44,6 +44,7 @@
     line-height: 29px;
     text-decoration: none;
     border-radius: 20px;
+    border: none;
     background: var(--Button-Brown-default, #958060);
 }
 
