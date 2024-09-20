@@ -1,0 +1,69 @@
+.registrationFormContainer {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.registrationFormInputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.registrationFormInput {
+    border: 2px #545454 solid;
+    border-radius: 20px;
+    width: 500px;
+    padding: 18px 45px;
+}
+
+.registrationFormInputPassword {
+    border: 2px #545454 solid;
+    border-radius: 20px;
+    width: 180px;
+    padding: 18px 45px;
+}
+
+.registrationFormInputContainerPass {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 10px;
+    top: 50%; /* Щоб іконка знаходилась по центру вертикалі */
+    transform: translateY(-50%); /* Центруємо іконку по вертикалі */
+}
+
+input {
+    padding-left: 40px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 29px;
+}
+
+.registrationFormButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.registrationFormButton {
+    color: white;
+    background-color: #958060;
+    border: none;
+    padding: 16px 145px;
+    font-size: 24px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
