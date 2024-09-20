@@ -7,17 +7,19 @@ import Advantages from './advantages/Advantages';
 import AboutUs from './about-us/About-us';
 import Background from './background/Background';
 import Form from './form/Form';
+import FAQ from './faq/faq';
 import RegistrationForm from './RegistrationForm/RegistrationForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <Header />
+     <Header />
     <HeroSection />
     <Background />
     <Advantages />
     <AboutUs />
-    <Form /> */}
+    <Form />
+    <FAQ />
     <RegistrationForm/>
   </React.StrictMode>
-);
+); 

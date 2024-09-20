@@ -24,7 +24,7 @@ const Form = () => {
   };
 
   return (
-    <div className={styles.formWrapper}>
+    <div className={styles.formWrapper} id="join">
       <div  className={styles.formContainer}>
         <h2>find out more information and join us!</h2>
         <p>
