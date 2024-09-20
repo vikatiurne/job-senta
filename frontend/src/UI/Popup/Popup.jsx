@@ -1,8 +1,7 @@
 // import { IoClose } from 'react-icons/io5';
-import styles from './Popup.module.css';
+import styles from "./Popup.module.css";
 
 const Popup = ({ active, setActive, children }) => {
-  
   return (
     <div
       className={active ? `${styles.modal} ${styles.active}` : styles.modal}
@@ -16,7 +15,7 @@ const Popup = ({ active, setActive, children }) => {
         }
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={styles.close} onClick={() => setActive()}></div>      
+        <div className={styles.close} onClick={() => setActive()}></div>
         {children}
       </div>
     </div>

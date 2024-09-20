@@ -1,10 +1,14 @@
-.formContainer {
+.formWrapper {
   margin: 0 auto 205px;
 
   display: block;
   max-width: 1056px;
   width: 100%;
   text-align: center;
+}
+.formContainer {
+  padding-left: 24px;
+  padding-right: 24px;
 }
 .formContainer h2 {
   font-size: 60px;
@@ -52,6 +56,9 @@
   font-size: 24px;
   color: var(--white);
 }
+.popup{
+  padding: 48px;
+}
 .popup h4 {
   margin-top: 0;
   margin-bottom: 32px;
@@ -60,14 +67,41 @@
   text-transform: uppercase;
 }
 .popup p {
+  font-family: var(--montserrat);
   margin-bottom: 32px;
 }
 
 .popup p:last-child {
   margin-top: 45px;
   margin-bottom: 0;
-}
-.popup p:last-child {
   display: flex;
   flex-direction: column;
+}
+
+
+@media (max-width: 390px) {
+  .inputs {
+    flex-direction: column;
+  }
+  .formContainer h2 {
+    font-size: 27px;
+  }
+  .formContainer p {
+    font-size: 16px;
+  }
+  .popup{
+    padding: 24px;
+  }
+  .popup h4 {
+    margin-bottom: 24px;
+    max-width: 229px;
+    width: 100%;
+  }
+  .popup p {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  .popup p:last-child {
+    margin-top: 24px;
+  }
 }
