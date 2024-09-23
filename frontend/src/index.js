@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './layout/styles/normalize.css';
 import './index.css';
 import Header from './header/Header';
 import HeroSection from './hero-section/Hero-section';
@@ -9,17 +10,19 @@ import Background from './background/Background';
 import Form from './form/Form';
 import FAQ from './faq/faq';
 import RegistrationForm from './RegistrationForm/RegistrationForm';
+import Footer from './components/Footer/Footer.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-     <Header />
+    <Header />
     <HeroSection />
     <Background />
     <Advantages />
     <AboutUs />
     <Form />
     <FAQ />
-    <RegistrationForm/>
+    <RegistrationForm />
+    <Footer />
   </React.StrictMode>
 ); 
