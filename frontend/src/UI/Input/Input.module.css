@@ -7,16 +7,16 @@
   margin-bottom: 16px;
   padding: 14px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-bottom: var(--brown) solid 2px;
-
 }
 .icon {
   height: 28px;
 }
 
 .inputField {
-    padding: 0;
+  padding: 0;
   font-size: 16px;
   font-family: var(--montserrat);
   font-weight: 600;
@@ -33,7 +33,7 @@
 }
 
 @media (max-width: 390px) {
-  .inputField{
+  .inputField {
     font-size: 12px;
   }
 }
