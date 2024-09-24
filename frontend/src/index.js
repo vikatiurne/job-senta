@@ -7,7 +7,7 @@ import HeroSection from './hero-section/Hero-section';
 import Advantages from './advantages/Advantages';
 import AboutUs from './about-us/About-us';
 import Background from './background/Background';
-import Form from './form/Form';
+import ContactsForm from './form/ContactsForm';
 import FAQ from './faq/faq';
 import RegistrationForm from './RegistrationForm/RegistrationForm';
 import Footer from './components/Footer/Footer.jsx';
@@ -20,7 +20,7 @@ root.render(
     <Background />
     <Advantages />
     <AboutUs />
-    <Form />
+    <ContactsForm />
     <FAQ />
     <RegistrationForm />
     <Footer />

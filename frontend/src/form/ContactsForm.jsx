@@ -1,60 +1,62 @@
 import { useState } from "react";
+import { Form, Formik } from "formik";
+import { initialValues, schemas } from "./helper";
+
 import Input from "../UI/Input/Input";
+import Button from "../UI/Button/Button";
+import Popup from "../UI/Popup/Popup";
 import userIcon from "../assets/userIcon.png";
 import mailIcon from "../assets/mailIcon.png";
 
-import styles from "./Form.module.css";
-import Button from "../UI/Button/Button";
-import Popup from "../UI/Popup/Popup";
+import styles from "./ContactsForm.module.css";
 
-const Form = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+const ContactsForm = () => {
   const [modalActive, setModalActive] = useState(false);
-
-  const nameHandler = (e) => {
-    setName(e.target.value);
-  };
-  const emailHandler = (e) => {
-    setEmail(e.target.value);
-  };
 
   const sendContactsHandler = () => {
     setModalActive(true);
   };
 
+  const submitFormHandler = () => {
+    //отправка формы на сервер
+    console.log("Sucsess");
+  };
+
   return (
     <div className={styles.formWrapper} id="join">
-      <div  className={styles.formContainer}>
+      <div className={styles.formContainer}>
         <h2>find out more information and join us!</h2>
         <p>
           Become the first user of our service! Fill out the form and get
           exclusive access to create a professional resume. Leave your contacts
           now, and we will give you bonuses upon registration!
         </p>
-        <div className={styles.inputs}>
-          <Input
-            type={"text"}
-            onChange={(e) => nameHandler(e)}
-            placeholder={"Your full name"}
-            value={name}
-            inputClass={styles.input}
-            wrapperClass={styles.inputWrapper}
-            src={userIcon}
-            alt="userIcon"
-          />
+        <Formik
+          initialValues={initialValues}
+          validationSchema={schemas.custom}
+          validateOnBlur
+          onSubmit={submitFormHandler}
+        >
+          <Form className={styles.inputs}>
+            <Input
+              type="text"
+              name="name"
+              placeholder={"Your full name"}
+              inputClass={styles.input}
+              wrapperClass={styles.inputWrapper}
+              img={userIcon}
+            />
 
-          <Input
-            type={"email"}
-            onChange={(e) => emailHandler(e)}
-            placeholder={"Your email"}
-            value={email}
-            inputClass={styles.input}
-            wrapperClass={styles.inputWrapper}
-            src={mailIcon}
-            alt="userIcon"
-          />
-        </div>
+            <Input
+              type="email"
+              name="email"
+              placeholder={"Your email"}
+              inputClass={styles.input}
+              wrapperClass={styles.inputWrapper}
+              img={mailIcon}
+            />
+          </Form>
+        </Formik>
         <Button onClick={sendContactsHandler} className={styles.sendBtn}>
           Send contacts
         </Button>
@@ -79,4 +81,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default ContactsForm;

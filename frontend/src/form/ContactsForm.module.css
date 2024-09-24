@@ -1,5 +1,5 @@
 .formWrapper {
-  margin: 0 auto 205px;
+  margin: 0 auto;
 
   display: block;
   max-width: 1056px;
@@ -31,14 +31,7 @@
   justify-content: center;
   gap: 32px;
 }
-.inputWrapper {
-  display: flex;
-  align-items: center;
-  border-bottom: var(--brown) solid 2px;
-  padding: 10px;
-  max-width: 501px;
-  width: 100%;
-}
+
 .input {
   width: 100%;
   border: none;
@@ -55,6 +48,13 @@
   font-weight: 600;
   font-size: 24px;
   color: var(--white);
+}
+
+.sendBtn:hover{
+  background-color: var(--brown-hover);
+}
+.sendBtn:focus{
+  background-color: var(--brown-focused);
 }
 .popup{
   padding: 48px;
