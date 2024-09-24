@@ -8,7 +8,6 @@ import AboutUs from './about-us/About-us';
 import Background from './background/Background';
 import Form from './form/Form';
 import FAQ from './faq/faq';
-import RegistrationForm from './RegistrationForm/RegistrationForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +19,5 @@ root.render(
     <AboutUs />
     <Form />
     <FAQ />
-    {/* <RegistrationForm/> */}
   </React.StrictMode>
 ); 
