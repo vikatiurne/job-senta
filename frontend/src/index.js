@@ -22,7 +22,7 @@ root.render(
     <AboutUs />
     <Form />
     <FAQ />
-    <RegistrationForm />
+    {/* <RegistrationForm /> */}
     <Footer />
   </React.StrictMode>
 ); 
