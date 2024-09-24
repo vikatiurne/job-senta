@@ -37,14 +37,15 @@
     align-items: center;
     gap: 8px;
     color: var(--white, #F7F7F7);
-    font-family: Montserrat;
+    font-family: var(--montserrat);
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: 29px;
     text-decoration: none;
+    border: none;
     border-radius: 20px;
-    background: var(--Button-Brown-default, #958060);
+    background: var(--brown);
 }
 
 .HeroSectionIcon {

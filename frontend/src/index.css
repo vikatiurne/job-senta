@@ -3,7 +3,12 @@
     --background:#F9F9F9;
     --white:#F7F7F7;
     --dark-gray:#545454;
-    --gray: #686868
+    --gray: #686868;
+    --gray-disabled:#A2A2A2;
+    --brown-hover:#604B2B;
+    --brown-focused:#C8B18D;
+    --red:#AF2121;
+    --green:#2E7F21;
     --open-sans:"Open Sans", sans-serif;
     --montserrat: "Montserrat", sans-serif;
   }
