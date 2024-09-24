@@ -72,6 +72,7 @@
 .popup p {
   font-family: var(--montserrat);
   margin-bottom: 32px;
+  color: var(--white);
 }
 
 .popup p:last-child {
