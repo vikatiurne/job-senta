@@ -1,8 +1,8 @@
 import React from 'react';
 import './registrationForm.css';
 import { Formik } from 'formik';
-import userIcon from '../assets/userIcon.png';
-import mailIcon from "../assets/mailIcon.png";
+import userIcon from '../assets/userIconReg.png';
+import mailIcon from "../assets/userMailReg.png";
 import passwordIcon from "../assets/passwordIcon.svg";
 import Button from '../UI/Button/Button';
 

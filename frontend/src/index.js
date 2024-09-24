@@ -20,6 +20,6 @@ root.render(
     <AboutUs />
     <Form />
     <FAQ />
-    <RegistrationForm/>
+    {/* <RegistrationForm/> */}
   </React.StrictMode>
 ); 
