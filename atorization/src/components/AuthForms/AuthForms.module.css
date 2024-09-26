@@ -1,0 +1,160 @@
+.passwordField {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+}
+.passwordField div {
+  max-width: 289px;
+  width: 100%;
+}
+.passwordField div p {
+  position: absolute;
+  left: 0;
+}
+.authBtn,.recoveryBtn {
+  margin-top: 32px;
+  padding: 16px 150px;
+  font-size: 24px;
+  font-family: var(--montserrat);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--white);
+  background-color: var(--brown);
+  border-radius: 20px;
+  transition: all 0.3s ease-in;
+}
+.authBtn:hover, .recoveryBtn:hover {
+  background: var(--brown-hover);
+  color: var(--white);
+}
+.authBtn:active, .recoveryBtn:active {
+  background: var(--brown-focused);
+  color: var(--white);
+}
+.authBtn:disabled, .recoveryBtn:disabled {
+  background: var(--gray-disabled);
+}
+
+.alernativText {
+  display: none;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+.passOptions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.checkboxLabel,
+.forgotPass {
+  font-size: 16px;
+  font-family: var(--montserrat);
+  font-weight: 600;
+}
+.checkboxLabel {
+  color: var(--gray);
+}
+.checkboxInput {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.checkboxInput + .checkboxLabel {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.checkboxInput + .checkboxLabel::before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 2px solid var(--brown);
+  border-radius: 2px;
+  margin-right: 8px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 85% 85%;
+}
+.checkboxInput:checked + .checkboxLabel::before {
+  background-image: url("../../assets/check.svg");
+}
+
+.popup {
+  padding: 48px;
+}
+.popup h4 {
+  margin-top: 0;
+  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 27px;
+  line-height: 32px;
+  text-transform: uppercase;
+}
+.popup p {
+  font-family: var(--montserrat);
+  font-size: 22px;
+  margin-bottom: 32px;
+  line-height: 32px;
+}
+
+.popup p:last-child {
+  margin-top: 45px;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 390px) {
+  .popup {
+    padding: 24px;
+  }
+  .popup h4 {
+    margin-bottom: 24px;
+    max-width: 229px;
+    width: 100%;
+  }
+  .popup p {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  .popup p:last-child {
+    margin-top: 24px;
+  }
+  .passwordField {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .passwordField div {
+    max-width: 100%;
+  }
+  .authBtn {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    padding: 16px 119px;
+    width: 100%;
+  }
+  .recoveryBtn{
+    margin-top: 24px;
+    margin-bottom: 16px;
+    padding: 16px 72px;
+    width: 100%;
+  }
+  .alernativText {
+    display: flex;
+  }
+  .passOptions {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+}

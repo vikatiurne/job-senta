@@ -1,0 +1,82 @@
+.authContainer {
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+  max-width: 638px;
+  width: 100%;
+}
+
+.logo {
+  margin-bottom: 45px;
+}
+.authContainer h2 {
+  margin-bottom: 32px;
+  font-size: 60px;
+  font-weight: 800;
+}
+.socialBtns {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.toggleAuth {
+  position: relative;
+  margin-bottom: 24px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--montserrat);
+  color: var(--gray);
+}
+.toggleAuth::after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 6px;
+  left: 0px;
+  width: 181px;
+  height: 2px;
+  background: var(--brown);
+}
+.toggleAuth::before {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 6px;
+  right: 0px;
+  width: 181px;
+  height: 2px;
+  background: var(--brown);
+}
+
+.infoTitle {
+  margin: 0 auto 24px;
+  max-width: 378px;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  font-family: var(--montserrat);
+  color: var(--gray);
+}
+
+@media (max-width: 390px) {
+  .authContainer {
+    padding: 24px;
+    text-align: left;
+  }
+  .authContainer h2 {
+    margin-bottom: 24px;
+    font-size: 32px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .toggleAuth {
+    text-align: center;
+  }
+  .toggleAuth::before,
+  .toggleAuth::after {
+    width: 68px;
+  }
+}
