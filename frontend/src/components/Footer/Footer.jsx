@@ -44,15 +44,15 @@ const Footer = () => {
                     </li>
                     <li className={style.footerNavItem}>
                         <h2 className={style.footerNavItemTitle}>FOLLOW US</h2>
-                        <ul className={style.footerItemListMessage}>
+                        <ul className={style.footerItemListMessanger}>
                             <li>
-                                <a href="#"><Twitter /></a>
+                                <a className={style.footerTwitterLink} href="#"><Twitter /></a>
                             </li>
                             <li>
-                                <a href="#"><Instagram /></a>
+                                <a className={style.footerInstagramLink} href="#"><Instagram /></a>
                             </li>
                             <li>
-                                <a href="#"><Facebook /></a>
+                                <a className={style.footerFacebookLink} href="#"><Facebook /></a>
                             </li>
                         </ul>
                     </li>

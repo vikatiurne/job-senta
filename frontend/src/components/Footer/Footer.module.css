@@ -1,19 +1,36 @@
 .footer {
     padding-top: 64px;
-    padding-bottom: 45px;
+    padding-bottom: 64px;
     background-color: var(--dark-gray);
     color: var(--white);
 }
 
 .footerNav {
     display: grid;
-    gap: 32px;
-    grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
     justify-items: center;
-    padding-bottom: 32px;
     border-bottom: 1px solid var(--white);
+}
+
+@media(max-width:390px), (min-width:390px) {
+    .footerNav {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 70px 16px;
+        padding-bottom: 67px;
+    }
 
 }
+
+@media(min-width:1440px) {
+    .footerNav {
+        grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+        grid-template-rows: 1fr;
+        gap: 32px;
+        padding-bottom: 32px;
+    }
+
+}
+
 
 .footerNavItemTitle {
     font-size: 27px;
@@ -39,7 +56,11 @@
     font-family: var(--montserrat);
 }
 
-.footerItemListMessage {
+.footerNavItemLink:hover {
+    color: var(--brown);
+}
+
+.footerItemListMessanger {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -62,4 +83,13 @@
     align-items: center;
     border: 1.19px solid var(--white);
     border-radius: 50%;
+}
+
+.footerFacebookLink:hover svg path,
+.footerInstagramLink:hover svg path {
+    fill: var(--brown)
+}
+
+.footerTwitterLink:hover svg path {
+    stroke: var(--brown)
 }
