@@ -1,7 +1,8 @@
-/* .heroContentContainer{
+.heroContentContainer{
     max-width: 1280px;
     margin: 0 auto;
-} */
+    padding: 0 20px;
+}
  .heroContent{
     display: flex;
     justify-content: space-between;
@@ -38,6 +39,13 @@
     font-size: 24px;
     font-family: var(--montserrat);
     font-weight: 600;
+    cursor: pointer;
+}
+.heroContentButton:hover{
+    background-color: #604B2B;
+}
+.heroContentButton:focus{
+    background-color: #C8B18D;
 }
  .heroContentIcon{
     width: 500px;
