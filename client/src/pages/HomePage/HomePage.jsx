@@ -1,11 +1,16 @@
+import DreamBlock from "../../components/DreamBlock/DreamBlock";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import styles from "./HomePage.module.css";
+import HeroBlock from "../../components/HeroBlock/HeroBlock";
+// import styles from "./HomePage.module.css";
 
 const HomePage = () => {
   return (
     <>
       <Header />
-      <h1>Home Page</h1>
+      <HeroBlock />
+      <DreamBlock />
+      <Footer/>
     </>
   );
 };
