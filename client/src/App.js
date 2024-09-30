@@ -1,7 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
 import AnimatedRoutes from "./components/AnimatedRoutes/AnimatedRoutes";
-import Container from "./hoc/layout/container/Container";
 
 function App() {
   const {
@@ -21,9 +20,9 @@ function App() {
 
   // console.log(getAccessTokenSilently({detailedResponse: true}))
   return (
-    <Container>
+
       <AnimatedRoutes />
-    </Container>
+
   );
 }
 
