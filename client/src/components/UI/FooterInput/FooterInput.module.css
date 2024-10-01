@@ -1,0 +1,23 @@
+.footerInputContainer{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid white ;
+}
+.footerInput{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    padding: 16px;
+    color: white;
+    width: 395px;
+    cursor: pointer;
+}
+.footerImage{
+    width: 30px;
+}
+.footerInput::placeholder{
+    color: white;
+    font-family:  "Montserrat", sans-serif;
+}
+input:focus {
+  outline: none;
+}
