@@ -66,7 +66,7 @@
   .info h2 {
     font-size: 45px;
   }
-  .imgHero{
+  .imgHero {
     right: 60px;
   }
 }
@@ -147,14 +147,9 @@
 
   .info h2 {
     margin-bottom: 24px;
-  
   }
 
   .getStartedBtn {
     padding: 16px 45px;
-  }
-  .imgHero {
-    /* max-width: 294px;
-    right: 24px; */
   }
 }
