@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import WelcomeSection from "../../../components/WelcomeSection/WelcomeSection";
+import WelcomeSection from "../../../components/AutorizationPage/WelcomeSection/WelcomeSection";
 import Button from "../../../components/UI/Button/Button";
-import AuthSection from "../../../components/AuthSection/AuthSection";
+import AuthSection from "../../../components/AutorizationPage/AuthSection/AuthSection";
 import { textData } from "../../../utils/textData";
 
 import styles from "../Autorization.module.css";

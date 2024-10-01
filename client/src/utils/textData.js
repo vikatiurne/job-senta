@@ -1,7 +1,7 @@
-import LoginForm from "../components/AuthForms/LoginForm";
-import RegistrationForm from "../components/AuthForms/RegistrationForm";
-import PasswordRecoveryForm from "../components/AuthForms/PasswordRecoveryForm";
-import NewPasswordForm from "../components/AuthForms/NewPasswordForm";
+import LoginForm from "../components/AutorizationPage/AuthForms/LoginForm";
+import RegistrationForm from "../components/AutorizationPage/AuthForms/RegistrationForm";
+import PasswordRecoveryForm from "../components/AutorizationPage/AuthForms/PasswordRecoveryForm";
+import NewPasswordForm from "../components/AutorizationPage/AuthForms/NewPasswordForm";
 
 export const textData = {
   "/registration": {
@@ -14,8 +14,8 @@ export const textData = {
     choiceInfo: "Or use email for registration:",
     infoTitle: "",
     sendBtn: "sing up",
-        component: <RegistrationForm />,
-    path:"registration"
+    component: <RegistrationForm />,
+    path: "registration",
   },
   "/login": {
     greetings: "Hello!",
@@ -26,8 +26,8 @@ export const textData = {
     choiceInfo: "Or use email for registration",
     infoTitle: "",
     sendBtn: "sing in",
-      component: <LoginForm />,
-      path:"login"
+    component: <LoginForm />,
+    path: "login",
   },
   "/forgot-password": {
     greetings: "It’s ok!",
@@ -39,8 +39,8 @@ export const textData = {
     infoTitle:
       "Enter your email and we'll send you password recovery instructions.",
     sendBtn: "send",
-      component: <PasswordRecoveryForm />,
-    path: "forgot-password"
+    component: <PasswordRecoveryForm />,
+    path: "forgot-password",
   },
   "/recovery-password": {
     greetings: "Hello!",
@@ -52,7 +52,7 @@ export const textData = {
     choiceInfo: null,
     infoTitle: "Create a new password for your personal account and confirm it",
     sendBtn: "save changes",
-      component: <NewPasswordForm />,
-    path: "recovery-password"
+    component: <NewPasswordForm />,
+    path: "recovery-password",
   },
 };
