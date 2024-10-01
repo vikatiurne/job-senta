@@ -4,7 +4,7 @@ import styles from "./Join.module.css";
 
 const Join = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="price">
      
         <h2 className={styles.title}>
           Do you want to stand <span className={styles.secondLine}>out among</span>

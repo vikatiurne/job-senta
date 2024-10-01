@@ -5,7 +5,7 @@ import styles from "./RegisterResume.module.css";
 
 const RegisterResume = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} >
       <div className={styles.infoWrapper}>
         <div className={styles.info}>
           <h2>

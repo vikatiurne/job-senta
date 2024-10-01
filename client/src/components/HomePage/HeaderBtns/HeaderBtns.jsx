@@ -7,7 +7,7 @@ import userIcon from "../../../assets/userIcon.svg";
 
 import styles from './HeaderBtns.module.css'
 
-const HeaderBtns = () => {
+const HeaderBtns = ({burgerActive}) => {
     const { isAuthenticated } = useAuth0();
 
     const render = isAuthenticated ? (
@@ -26,7 +26,7 @@ const HeaderBtns = () => {
       </>
     );
   
-    return <div className={styles.btnContainer}>{render}</div>;
+    return <div className={!burgerActive? styles.btnContainer: styles.btnContainerShow}>{render}</div>;
 }
 
 export default HeaderBtns
