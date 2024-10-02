@@ -53,8 +53,8 @@ const OurService = () => {
                     <div className={style.sectionOurServiceContentSlides}>
                         <div className={cn(style.sectionOurServiceSlide,
                             { [style.slideFirst]: activeContent === resumeBuilder },
-                            { [style.slideSecond]: activeContent !== resumeBuilder }
-
+                            { [style.slideSecond]: activeContent !== resumeBuilder },
+                            style.slideResumeBuilder
                         )}>
                             <p className={style.sectionOurServiceDesc}>
                                 Our tool allows you to quickly and conveniently create a professional resume using ready-made, stylish templates. Just enter your details and you'll have a perfectly structured resume in just a few minutes.
@@ -68,42 +68,47 @@ const OurService = () => {
                         </div>
                         <div className={cn(style.sectionOurServiceSlide,
                             { [style.slideSecond]: activeContent === analyzerAi },
-                            { [style.slideFirst]: activeContent !== analyzerAi }
+                            { [style.slideFirst]: activeContent !== analyzerAi },
+                            style.slideAnalyzerAi
 
                         )}>
                             <p className={style.sectionOurServiceDesc}>
                                 Powerful artificial intelligence analyzes your resume and provides detailed recommendations on how to improve it. It will help increase the chances of success by highlighting strengths and suggesting areas for improvement.
                             </p>
-                            <div >
-                                <img src={ResumeFirst} width='181px' height='255px' alt="exampe resume" />
-                            </div>
-                            <div className={style.sectionOurServiceAnalysis}>
-                                <h3 className={style.sectionOurServiceAnalysisTitle} ><FileAi /> Summary analysis: </h3>
-                                <ul className={style.sectionOurServiceAnalysisList} >
-                                    <li className={style.sectionOurServiceAnalysisPlus}>
-                                        <div>
-                                            <Plus />
-                                        </div>
-                                        <p className={style.sectionOurServiceAnalysisText}>
-                                            Professional design: modern style, cleanliness and conciseness.
-                                            <br />
-                                            Good structure: Logical division into blocks, easy reading.
-                                            <br />
-                                            Clarity and brevity: Information is presented clearly and without unnecessary details.
 
-                                        </p>
-                                    </li>
-                                    <li className={style.sectionOurServiceAnalysisMinus}>
-                                        <div>
-                                            <Minus />
-                                        </div>
-                                        <p className={style.sectionOurServiceAnalysisText}>
-                                            Lack of specifics: Poor descriptions of work experience, lack of information about projects, responsibilities, results.
-                                            <br />
-                                            Insufficiently detailed profile: No description of key qualities, strengths.
-                                        </p>
-                                    </li>
-                                </ul>
+                            <div className={style.sectionOurServiceAnalysis}>
+                                <div >
+                                    <img src={ResumeFirst} width='181px' height='255px' alt="exampe resume" />
+                                </div>
+                                <div>
+                                    <h3 className={style.sectionOurServiceAnalysisTitle} ><FileAi /> Summary analysis: </h3>
+                                    <ul className={style.sectionOurServiceAnalysisList} >
+                                        <li className={style.sectionOurServiceAnalysisPlus}>
+                                            <div>
+                                                <Plus />
+                                            </div>
+                                            <p className={style.sectionOurServiceAnalysisText}>
+                                                Professional design: modern style, cleanliness and conciseness.
+                                                <br />
+                                                Good structure: Logical division into blocks, easy reading.
+                                                <br />
+                                                Clarity and brevity: Information is presented clearly and without unnecessary details.
+
+                                            </p>
+                                        </li>
+                                        <li className={style.sectionOurServiceAnalysisMinus}>
+                                            <div>
+                                                <Minus />
+                                            </div>
+                                            <p className={style.sectionOurServiceAnalysisText}>
+                                                Lack of specifics: Poor descriptions of work experience, lack of information about projects, responsibilities, results.
+                                                <br />
+                                                Insufficiently detailed profile: No description of key qualities, strengths.
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </div>
 
                         </div>
