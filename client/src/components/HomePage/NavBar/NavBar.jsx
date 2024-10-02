@@ -8,6 +8,8 @@ import HeaderBtns from "../HeaderBtns/HeaderBtns";
 
 import styles from "./NavBar.module.css";
 
+const navBar = ["Tools", "About us", "Price"];
+
 const NavBar = ({ burgerActive, setBurgerActive }) => {
   return (
     <>
@@ -19,16 +21,12 @@ const NavBar = ({ burgerActive, setBurgerActive }) => {
         }
       >
         <ul className={!burgerActive ? styles.navList : styles.navListBurger}>
-          <a href="#">
-            <li>Tools</li>
-          </a>
-          <a href="#aboutus">
-            {" "}
-            <li>About us</li>
-          </a>
-          <a href="#price">
-            <li>Price</li>
-          </a>
+          {navBar.map((item, i) => (
+            <a href={`#${item}`} key={item+i} onClick={()=>setBurgerActive(false)}>
+              <li>{item}</li>
+            </a>
+          ))}
+         
         </ul>
         <HeaderBtns burgerActive={burgerActive} />
       </nav>
