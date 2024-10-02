@@ -1,0 +1,60 @@
+.inputWrapper {
+  position: relative;
+  max-width: 501px;
+  width: 100%;
+}
+.inputContainer {
+  margin-bottom: 16px;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: center;
+  border-bottom: var(--brown) solid 2px;
+}
+.icon {
+  height: 24px;
+}
+
+.inputField {
+  padding: 0;
+  font-size: 16px;
+  font-family: var(--montserrat);
+  font-weight: 600;
+  border: none;
+  outline: none;
+  color: var(--dark-gray);
+}
+.inputFieldCorrect {
+  font-size: 16px;
+  font-family: var(--montserrat);
+  font-weight: 600;
+  border: none;
+  outline: none;
+  color: var(--green);
+}
+.inputFieldErr p{
+  color: var(--red);
+}
+.inputNotvisible {
+  display: none;
+}
+.errField {
+  display: block;
+  position: absolute;
+  top: 16px;
+  left: 13px;
+  font-family: var(--montserrat);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--red);
+}
+.hideErrField {
+  display: none;
+}
+
+@media (max-width: 390px) {
+  .inputField {
+    font-size: 12px;
+  }
+}
