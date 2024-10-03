@@ -50,12 +50,118 @@
     background-color: #C8B18D;
 }
  .heroContentIcon{
-    width: 500px;
     max-width: 100%;
     width: 100%;
  }
  @media (max-width: 1250px){
     .heroContentTitle{
         font-size: 45px;
+        line-height: 70px;
     }
  }
+  @media (max-width: 1105px){
+    .heroContentTitle{
+        font-size: 42px;
+    }
+ }
+  @media (max-width: 1024px){
+ 
+    .heroContentTitle{
+        font-size: 35px;
+        line-height: 60px;
+        margin-bottom: 5px;
+    }
+    .heroContentSubTitle{
+        margin-bottom: 25px;
+        font-size: 20px;
+    }
+    .heroContentButton{
+        padding: 14px 70px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+ } 
+@media (max-width: 920px){
+   
+    .heroContentTitle{
+        font-size: 32px;
+        line-height: 50px;
+        margin-bottom: 5px;
+    }
+    .heroContentSubTitle{
+        margin-bottom: 25px;
+        font-size: 19px;
+    }
+    .heroContentButton{
+        padding: 16px 70px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .heroContentIcon{
+        width: 700px;
+    }
+}
+@media (max-width: 768px) {
+    .heroContent{
+        padding: 0 50px;
+    }
+    .heroContentIcon{
+        width: 350px;
+    }
+    .heroContentTitle{
+        font-size: 37px;
+    }
+    .heroContentSubTitle{
+        font-size: 22px;
+    }
+    .heroContentButton{
+        padding: 20px 80px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .heroContent {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        justify-items: center;
+        gap: 20px; 
+        padding: 0 20px;
+    }
+   
+    .heroContentIcon {
+        grid-row: 1;
+    }
+    
+    .heroContentBlock {
+        grid-row: 2; 
+        text-align: center;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroContentTitle{
+        font-size: 30px;
+        line-height: 45px;
+    }
+    .heroContentSubTitle{
+        font-size: 18px;
+        line-height: 27px;
+        padding: 0 20px;
+    }
+    
+}
+@media (max-width: 380px) {
+    .heroContentTitle{
+        font-size: 27px;
+        line-height: 35px;
+    }
+    .heroContentSubTitle{
+        font-size: 16px;
+        line-height: 23px;
+    }
+    .heroContentButton{
+        width: 100%;
+        padding: 20px 20px;
+    }
+}

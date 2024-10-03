@@ -1,23 +1,32 @@
-.dreamBlockContainer{
+.dreamBlockContainer {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 20px;
 }
-.dreamBlockContent{
-    margin-bottom: 125px;
+
+.dreamBlockContent {
     display: flex;
+    flex-wrap: wrap; 
+    align-items: center; 
+    margin-bottom: 125px;
 }
-.dreamContentIconContent{
+
+.dreamContentIconContent {
     margin-right: 32px;
+    flex: 1 1 35%; 
 }
-.dreamContentIcon{
-    width: 100%;
-    max-width: 100%;
+
+.dreamBlockContentElement {
+    flex: 1 1 50%; 
+    width: auto; 
 }
-.dreamBlockContentElement{
-    width: 700px;
+
+.dreamContentIcon {
+    width: 100%; 
+    height: auto; 
 }
-.dreamContentTitle{
+
+.dreamContentTitle {
     font-size: 32px;
     line-height: 48px;
     color: #545454;
@@ -26,38 +35,133 @@
     font-weight: 700;
     text-align: center;
 }
+
 .centeredLine {
     display: block;
     text-align: center;
 }
-.dreamContentSubTitle{
+
+.dreamContentSubTitle {
     color: #686868;
     margin-bottom: 32px;
     font-size: 22px;
     line-height: 32px;
-    font-family: var(montserrat);
-
+    font-family: var(--montserrat);
 }
-.dreamContentButtonContainer{
+
+.dreamContentButtonContainer {
     display: flex;
     justify-content: center;
 }
-.dreamContentButton{
+
+.dreamContentButton {
     background-color: #958060;
     padding: 16px 191px;
     border-radius: 20px;
     color: #F7F7F7;
-    font-family: var(montserrat);
+    font-family: var(--montserrat);
     font-weight: 700;
     font-size: 24px;
     line-height: 29px;
     cursor: pointer;
-     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.655);
-    transition: 0.2s ease; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.655);
+    transition: 0.2s ease;
 }
-.dreamContentButton:hover{
+
+.dreamContentButton:hover {
     background-color: #604B2B;
 }
-.dreamContentButton:focus{
+
+.dreamContentButton:focus {
     background-color: #C8B18D;
+}
+
+@media (max-width: 1400px) {
+    .dreamBlockContainer {
+        max-width: 100%;
+    }
+
+    .dreamContentButton {
+        padding: 14px 100px;
+        font-size: 20px;
+    }
+}
+
+/* Адаптивні стилі для екранів до 1066px */
+@media (max-width: 1100px) {
+    .dreamContentTitle {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 20px;
+    }
+
+    .dreamContentButton {
+        padding: 14px 150px;
+        font-size: 22px;
+    }
+
+    .dreamContentSubTitle {
+        margin-bottom: 15px;
+        font-size: 21px;
+        line-height: 30px;
+    }
+}
+
+/* Адаптивні стилі для екранів до 768px */
+@media (max-width: 1024px) {
+    .dreamContentIconContent {
+        margin-right: 32px;
+        flex: 1 1 35%; 
+    }
+
+    .dreamBlockContentElement {
+        flex: 1 1 30%; 
+        width: auto; 
+    }
+
+    .dreamContentIcon {
+        
+    }
+
+    .dreamBlockContent {
+        display: grid; 
+        grid-template-columns: 1fr; 
+        text-align: center; 
+        padding:  0 20px;
+    }
+    .dreamContentIconContent {
+        margin-right: 0;
+        margin-bottom: 20px; /* Відступ між картинкою та контентом */
+    }
+    .dreamContentSubTitle{
+        text-align: left;
+    }
+}
+@media (max-width: 550px) {
+    .dreamContentIcon {
+        padding: 0 20px;
+    }
+    .dreamContentTitle{
+        line-height: 30px;
+    }
+    .dreamContentSubTitle{
+        font-size: 16px;
+        line-height: 25px;
+    }
+    .dreamContentButton{
+        padding: 20px 80px;
+    }
+}
+@media (max-width: 350px) {
+    .dreamContentButton{
+        padding: 20px 70px;
+    }
+    .dreamContentTitle{
+        font-size: 25px;
+        line-height: 25px;
+    }
+    .dreamContentSubTitle{
+        font-size: 12px;
+        line-height: 20px;
+    }
 }

@@ -8,11 +8,11 @@ import OurService from "../../components/OurService/OurService";
 const HomePage = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <HeroBlock />
       <DreamBlock />
       <OurService />
-      <Footer/>
+      {/* <Footer/> */}
     </>
   );
 };
