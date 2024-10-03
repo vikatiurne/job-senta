@@ -113,6 +113,7 @@
 
 @media (max-width: 391px) {
   .navContainer {
+    max-width: 40px;
     opacity: 0;
   }
   .burger {

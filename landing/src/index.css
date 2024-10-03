@@ -12,7 +12,9 @@
   --open-sans: "Open Sans", sans-serif;
   --montserrat: "Montserrat", sans-serif;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
@@ -40,4 +42,7 @@ a {
   color: var(--brown);
   font-weight: 600;
   text-decoration: none;
+}
+li {
+  list-style: none;
 }

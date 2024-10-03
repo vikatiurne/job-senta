@@ -8,7 +8,7 @@ import Button from "../UI/Button/Button";
 
 import styles from "./NavBar.module.css";
 
-const navBar = [" Advantages", "About us", "FAQ"];
+const navBar = ["Advantages", "About us", "FAQ"];
 
 const NavBar = ({ burgerActive, setBurgerActive }) => {
   return (
@@ -42,8 +42,8 @@ const NavBar = ({ burgerActive, setBurgerActive }) => {
             </a>
           ))}
         </ul>
-        <Button className={styles.joinBtn}>
-          <a href="#Join us">Join us</a>
+        <Button className={styles.joinBtn} onClick={()=>setBurgerActive(false)}>
+          <a href="#join">Join us</a>
         </Button>
       </nav>
 

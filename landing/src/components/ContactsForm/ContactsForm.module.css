@@ -50,18 +50,19 @@
   font-weight: 600;
   font-size: 24px;
   color: var(--white);
+  cursor: pointer;
 }
 
-.sendBtn:hover{
+.sendBtn:hover {
   background-color: var(--brown-hover);
 }
-.sendBtn:focus{
+.sendBtn:focus {
   background-color: var(--brown-focused);
 }
 .sendBtn:disabled {
   background: var(--gray-disabled);
 }
-.popup{
+.popup {
   padding: 48px;
 }
 .popup h4 {
@@ -84,8 +85,14 @@
   flex-direction: column;
 }
 
-
 @media (max-width: 390px) {
+  .formWrapper{
+    margin-bottom: 100px;
+  }
+  .formContainer {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .inputs {
     flex-direction: column;
   }
@@ -95,7 +102,7 @@
   .formContainer p {
     font-size: 16px;
   }
-  .popup{
+  .popup {
     padding: 24px;
   }
   .popup h4 {

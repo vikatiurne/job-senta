@@ -1,10 +1,11 @@
-
-import './App.css';
-import About from './components/About/About';
-import Advantages from './components/Advantages/Advantages';
-import ContactsForm from './components/ContactsForm/ContactsForm';
-import Header from './components/Header/Header';
-import Hero from './components/Hero/Hero';
+import "./App.css";
+import About from "./components/About/About";
+import Advantages from "./components/Advantages/Advantages";
+import ContactsForm from "./components/ContactsForm/ContactsForm";
+import Faq from "./components/Faq/Faq";
+import Footer from "./components/Footer/Foter";
+import Header from "./components/Header/Header";
+import Hero from "./components/Hero/Hero";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
       <Hero />
       <Advantages />
       <About />
-      <ContactsForm/>
+      <ContactsForm />
+      <Faq />
+      <Footer />
     </>
   );
 }

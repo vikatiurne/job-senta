@@ -2,13 +2,13 @@
   margin: 0 auto;
 }
 
-@media (max-width: 1440px) {
+@media (min-width:1440px) {
   .container {
     max-width: 1248px;
   }
 }
 
-@media (max-width: 390px) {
+@media(max-width:390px), (min-width:390px) {
   .container {
     min-width: 342px;
     padding-left: 24px;

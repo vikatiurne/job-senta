@@ -5,7 +5,7 @@ import styles from "./About.module.css";
 
 const About = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="About us">
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>About us</h2>
       </div>

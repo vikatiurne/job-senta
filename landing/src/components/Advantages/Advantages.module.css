@@ -63,6 +63,9 @@
 }
 
 @media (max-width: 391px) {
+  .container{
+    margin-bottom: 93px;
+  }
   .title {
     font-size: 27px;
     line-height: 32px;
