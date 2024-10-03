@@ -1,0 +1,31 @@
+.img {
+  margin-bottom: 16px;
+  max-width: 160px;
+  width: 100%;
+}
+.title {
+  margin-bottom: 16px;
+  font-size: 27px;
+  line-height: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--dark-gray);
+}
+.text {
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 400;
+}
+
+@media (max-width: 391px) {
+  .img {
+    max-width: 100px;
+  }
+  .title {
+    margin-bottom: 8px;
+  }
+  .text {
+    font-size: 12px;
+    line-height: 19px;
+  }
+}
