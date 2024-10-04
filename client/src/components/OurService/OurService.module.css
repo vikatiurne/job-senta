@@ -1,7 +1,6 @@
 .sectionOurService {
     padding-top: 60px;
     padding-bottom: 60px;
-
 }
 
 .sectionOurServiceTitile {
@@ -144,8 +143,6 @@
     gap: 32px;
 }
 
-
-
 .sectionOurServiceDesc {
     font-family: var(--montserrat);
     font-weight: 500;
@@ -166,7 +163,7 @@
 }
 
 
-.sectionOurServiceSlide img:nth-of-type(2) {
+.slideResumeBuilder img:nth-of-type(2) {
     position: absolute;
     z-index: -2;
     top: 0;
@@ -175,7 +172,7 @@
 
 }
 
-.sectionOurServiceSlide img:nth-of-type(3) {
+.slideResumeBuilder img:nth-of-type(3) {
     position: absolute;
     z-index: -3;
     right: 0;
@@ -197,38 +194,23 @@
 }
 
 .sectionOurServiceAnalysis {
-    display: flex;
-    max-width: 608px;
-    width: 100%;
-    gap: 32px;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
 }
 
+
 .sectionOurServiceAnalysisTitle {
-    margin-bottom: 20px;
     font-family: var(--montserrat);
     gap: 8px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
     color: var(--dark-gray);
-}
 
-
-.sectionOurServiceAnalysisList {
-    display: flex;
-    gap: 32px
 }
 
 .sectionOurServiceAnalysisPlus,
 .sectionOurServiceAnalysisMinus {
     display: flex;
     gap: 7px;
-
 }
 
 .sectionOurServiceAnalysisText {
@@ -237,8 +219,6 @@
     line-height: 19px;
     color: var(--gray);
     font-family: var(--montserrat);
-    max-width: 164px;
-    width: 100%;
 
 }
 
@@ -273,7 +253,6 @@
         width: 100%;
     }
 
-
     .slideAnalyzerAi .sectionOurServiceDesc {
         display: none;
     }
@@ -284,9 +263,31 @@
     }
 
     .sectionOurServiceAnalysis {
-        gap: 16px;
-        flex-wrap: wrap;
-        justify-content: center;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+        gap: 8px 16px;
+    }
+
+    .sectionOurServiceAnalysisImg {
+        grid-column: 1;
+        grid-row: 1/3;
+    }
+
+    .sectionOurServiceAnalysisTitle {
+        grid-column: 2/3;
+        font-size: 12px;
+        line-height: 19px;
+        font-weight: 500;
+        justify-content: flex-start;
+    }
+
+    .sectionOurServiceAnalysisTitle svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sectionOurServiceAnalysisMinus {
+        grid-column: 1/3;
     }
 }
 
@@ -321,6 +322,32 @@
         flex-wrap: wrap;
     }
 
+    .sectionOurServiceAnalysis {
+        max-width: 608px;
+        width: 100%;
+        justify-content: center;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, auto);
+    }
+
+    .sectionOurServiceAnalysisTitle {
+        align-self: flex-start;
+        grid-column: 2/4;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        justify-content: center;
+    }
+
+    .sectionOurServiceAnalysisMinus {
+        grid-column: 3/4;
+    }
+
+    .sectionOurServiceAnalysisTitle svg {
+        width: 35px;
+        height: 35px;
+    }
+
 }
 
 @media(min-width:580px) {
@@ -352,10 +379,8 @@
         flex-wrap: nowrap;
     }
 
-
     .sectionOurServiceAnalysis {
-
-        gap: 32px
+        gap: 20px 32px;
     }
 
 }

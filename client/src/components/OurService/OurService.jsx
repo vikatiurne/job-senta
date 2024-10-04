@@ -77,40 +77,33 @@ const OurService = () => {
                             </p>
 
                             <div className={style.sectionOurServiceAnalysis}>
-                                <div >
+                                <div className={style.sectionOurServiceAnalysisImg} >
                                     <img src={ResumeFirst} width='181px' height='255px' alt="exampe resume" />
                                 </div>
-                                <div>
-                                    <h3 className={style.sectionOurServiceAnalysisTitle} ><FileAi /> Summary analysis: </h3>
-                                    <ul className={style.sectionOurServiceAnalysisList} >
-                                        <li className={style.sectionOurServiceAnalysisPlus}>
-                                            <div>
-                                                <Plus />
-                                            </div>
-                                            <p className={style.sectionOurServiceAnalysisText}>
-                                                Professional design: modern style, cleanliness and conciseness.
-                                                <br />
-                                                Good structure: Logical division into blocks, easy reading.
-                                                <br />
-                                                Clarity and brevity: Information is presented clearly and without unnecessary details.
-
-                                            </p>
-                                        </li>
-                                        <li className={style.sectionOurServiceAnalysisMinus}>
-                                            <div>
-                                                <Minus />
-                                            </div>
-                                            <p className={style.sectionOurServiceAnalysisText}>
-                                                Lack of specifics: Poor descriptions of work experience, lack of information about projects, responsibilities, results.
-                                                <br />
-                                                Insufficiently detailed profile: No description of key qualities, strengths.
-                                            </p>
-                                        </li>
-                                    </ul>
+                                <h3 className={style.sectionOurServiceAnalysisTitle} ><FileAi /> Summary analysis: </h3>
+                                <div className={style.sectionOurServiceAnalysisPlus}>
+                                    <div >
+                                        <Plus />
+                                    </div>
+                                    <p className={style.sectionOurServiceAnalysisText}>
+                                        Professional design: modern style, cleanliness and conciseness.
+                                        <br />
+                                        Good structure: Logical division into blocks, easy reading.
+                                        <br />
+                                        Clarity and brevity: Information is presented clearly and without unnecessary details.
+                                    </p>
                                 </div>
-
+                                <div className={style.sectionOurServiceAnalysisMinus}>
+                                    <div>
+                                        <Minus />
+                                    </div>
+                                    <p className={style.sectionOurServiceAnalysisText}>
+                                        Lack of specifics: Poor descriptions of work experience, lack of information about projects, responsibilities, results.
+                                        <br />
+                                        Insufficiently detailed profile: No description of key qualities, strengths.
+                                    </p>
+                                </div>
                             </div>
-
                         </div>
                     </div>
 

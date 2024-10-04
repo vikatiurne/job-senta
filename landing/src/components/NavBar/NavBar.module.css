@@ -1,0 +1,145 @@
+.burgerWrapper {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: var(--white);
+}
+.navContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navContainerBurger {
+  display: flex;
+  flex-direction: column-reverse;
+  position: fixed;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: -390px;
+  z-index: 10;
+  overflow: hidden;
+  background-color: var(--white);
+  transition: all 0.5s ease-in;
+}
+.navBurgerActive {
+  transform: translateX(390px);
+}
+.navContainerShow .navList {
+  flex-direction: column;
+}
+.navList {
+  margin-right: 56px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.navListBurger {
+  padding-right: 24px;
+  flex-direction: column;
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+}
+.navListBurger a li {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 60px;
+  font-family: var(--montserrat);
+  cursor: pointer;
+  list-style: none;
+  color: var(--dark-gray);
+}
+.navList a,
+.navListBurger a {
+  text-decoration: none;
+}
+.navList a li {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29px;
+  font-family: var(--montserrat);
+  cursor: pointer;
+  list-style: none;
+  color: var(--dark-gray);
+}
+.joinBtn {
+  border-radius: 20px;
+  border: 2px solid var(--brown);
+  padding: 8px 24px;
+}
+.joinBtn:hover {
+  border: 2px solid var(--brown-hover);
+}
+.joinBtn:active {
+  border: 2px solid var(--brown-focused);
+}
+.joinBtn a {
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: var(--montserrat);
+}
+.joinBtn a:hover {
+  color: var(--brown-hover);
+}
+.joinBtn a:active {
+  color: var(--brown-focused);
+}
+.socialLincs {
+  opacity: 0;
+  position: fixed;
+  bottom: 32px;
+  left: -390px;
+  z-index: 30;
+  transition: all 0.5s ease-in;
+}
+.socialLincsActive {
+  opacity: 1;
+  transform: translateX(595px);
+}
+.burger {
+  display: none;
+}
+.open {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+}
+
+@media (max-width: 391px) {
+  .navContainer {
+    max-width: 40px;
+    opacity: 0;
+  }
+  .burger {
+    display: block;
+    cursor: pointer;
+    position: fixed;
+    z-index: 20;
+    top: 19px;
+    right: 24px;
+  }
+  .close {
+    display: block;
+    cursor: pointer;
+    position: fixed;
+    z-index: 20;
+    top: 32px;
+    right: 24px;
+  }
+  .joinBtn {
+    position: fixed;
+    top: 32px;
+    left: 24px;
+  }
+}
+@media (min-width: 391px) {
+  .navContainerBurger {
+    opacity: 0;
+  }
+}
