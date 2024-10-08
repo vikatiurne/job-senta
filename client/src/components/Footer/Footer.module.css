@@ -88,3 +88,41 @@
     width: 600px;
     margin-bottom: 26px;
 }
+
+@media (max-width: 1024px) {
+    .footerContant{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+    }
+     
+    
+}
+@media (max-width: 750px) {
+    .footerContant {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "logo logo"
+            "resources company"
+            "inputs inputs";
+        /* gap: 20px; */
+    }
+
+    .footerContantElement:nth-child(1) {
+        grid-area: logo;
+    }
+
+    .footerContantElement:nth-child(2) {
+        grid-area: resources;
+    }
+
+    .footerContantElement:nth-child(3) {
+        grid-area: company;
+    }
+
+    .footerContantElement:nth-child(4) {
+        grid-area: inputs;
+    }
+}
+

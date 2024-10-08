@@ -11,8 +11,8 @@ const HomePage = () => {
       {/* <Header /> */}
       <HeroBlock />
       <DreamBlock />
-      <OurService />
-      {/* <Footer/> */}
+      {/* <OurService /> */}
+      <Footer/>
     </>
   );
 };
