@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import {motion} from 'framer-motion'
 
-import AuthSection from "../../../components/AuthSection/AuthSection";
-import WelcomeSection from "../../../components/WelcomeSection/WelcomeSection";
+import AuthSection from "../../../components/AutorizationPage/AuthSection/AuthSection";
+import WelcomeSection from "../../../components/AutorizationPage/WelcomeSection/WelcomeSection";
 import Button from "../../../components/UI/Button/Button";
 import { textData } from "../../../utils/textData";
 

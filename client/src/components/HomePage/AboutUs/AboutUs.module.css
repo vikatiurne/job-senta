@@ -1,0 +1,155 @@
+.container {
+  margin-bottom: 120px;
+}
+.title {
+  margin-bottom: 32px;
+  text-align: center;
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 62px;
+  color: var(--dark-gray);
+}
+.info {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  gap: 32px;
+  justify-items: stretch;
+}
+.info p {
+  font-family: var(--montserrat);
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 500;
+  color: var(--gray);
+}
+.images {
+  position: relative;
+  min-height: 545px;
+  height: 100%;
+}
+
+.image1,
+.image2,
+.image3 {
+  position: absolute;
+}
+.image1 {
+  max-width: 393px;
+  width: 100%;
+  top: 0;
+  left: 117px;
+}
+.image2 {
+  max-width: 288px;
+  width: 100%;
+  top: 210px;
+  left: 0;
+}
+.image3 {
+  max-width: 288px;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+}
+@media (max-width: 1350px) {
+  .info {
+    margin-right: 24px;
+    margin-left: 24px;
+  }
+  .info p {
+    padding-right: 24px;
+  }
+}
+@media (max-width: 1040px) {
+  .images {
+    min-height: 510px;
+  }
+  .image1 {
+    left: 55px;
+  }
+  .image2,
+  .image3 {
+    max-width: 240px;
+  }
+}
+@media (max-width: 920px) {
+  .title {
+    font-size: 45px;
+  }
+  .info p {
+    font-size: 18px;
+  }
+
+  .image1 {
+    left: 30px;
+  }
+  .image2,
+  .image3 {
+    max-width: 240px;
+  }
+}
+@media (max-width: 870px) {
+  .info {
+    gap: 0px;
+  }
+  .images {
+    min-height: 620px;
+  }
+  .image1,
+  .image2,
+  .image3 {
+    max-width: 240px;
+    left: 0;
+  }
+  .image2 {
+    top: 190px;
+  }
+  .image3 {
+    top: 410px;
+  }
+}
+@media (max-width: 662px) {
+  .container {
+    margin-bottom: 100px;
+  }
+  .title {
+    text-transform: uppercase;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 32px;
+  }
+  .info {
+    grid-template-columns: 1fr;
+    margin: 0;
+  }
+  .images {
+    margin-bottom: 24px;
+    min-height: 402px;
+    height: 100%;
+    gap: 32px;
+  }
+  .image1 {
+    max-width: 342px;
+    width: 100%;
+    top: 0;
+    left: 0px;
+  }
+  .image2 {
+    max-width: 163px;
+    width: 100%;
+    top: 192px;
+    left: 0;
+  }
+  .image3 {
+    max-width: 163px;
+    width: 100%;
+    top: 260px;
+    left: 180px;
+  }
+  .info p {
+    padding: 0;
+    font-size: 12px;
+    line-height: 19px;
+  }
+}

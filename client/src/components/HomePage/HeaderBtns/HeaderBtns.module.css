@@ -1,0 +1,40 @@
+.btnContainer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.btnContainerShow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.link {
+  text-decoration: none;
+}
+.registrBtn,
+.loginBtn {
+  padding: 8px 16px;
+  font-size: 24px;
+  color: var(--brown);
+  font-family: var(--montserrat);
+  font-weight: 700;
+  border: 2px solid var(--brown);
+  border-radius: 20px;
+  cursor: pointer;
+}
+.loginBtn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 390px) {
+  .btnContainer {
+    display: none;
+  }
+  .btnContainerShow {
+    flex-direction: row-reverse;
+  }
+}

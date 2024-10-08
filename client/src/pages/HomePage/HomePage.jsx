@@ -1,18 +1,24 @@
-import DreamBlock from "../../components/DreamBlock/DreamBlock";
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
-import HeroBlock from "../../components/HeroBlock/HeroBlock";
-import OurService from "../../components/OurService/OurService";
-// import styles from "./HomePage.module.css";
+import DreamBlock from "../../components/HomePage/DreamBlock/DreamBlock";
+import Footer from "../../components/HomePage/Footer/Footer";
+import RegisterResume from "../../components/HomePage/RegisterResume/RegisterResume";
+import Header from "../../components/HomePage/Header/Header";
+import HeroBlock from "../../components/HomePage/HeroBlock/HeroBlock";
+import Container from "../../hoc/layout/container/layout/container/Container";
+import AboutUs from "../../components/HomePage/AboutUs/AboutUs";
+import Join from "../../components/HomePage/Join/Join";
 
 const HomePage = () => {
   return (
     <>
-      {/* <Header /> */}
-      <HeroBlock />
-      <DreamBlock />
-      {/* <OurService /> */}
-      <Footer/>
+      <Container>
+        <Header />
+        <HeroBlock />
+        <DreamBlock />
+        <RegisterResume />
+        <AboutUs />
+        <Join/>
+      </Container>
+      <Footer />
     </>
   );
 };

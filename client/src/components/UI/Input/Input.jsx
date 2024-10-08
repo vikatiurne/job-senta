@@ -30,11 +30,11 @@ const Input = ({ id, name, placeholder, img, error, touched }) => {
           id={id}
           placeholder={placeholder}
           className={
-            !touched[name]
-              ? styles.inputField
-              : !error[name] || isHideErrMsg
-              ? styles.inputFieldCorrect
-              : styles.inputNotvisible
+            !touched[name] || isHideErrMsg || !error[name]
+              ? error[name]
+                ? `${styles.inputField} ${styles.inputFieldErr}`
+                : `${styles.inputField} ${styles.inputFieldCorrect}`
+              : `${styles.inputField} ${styles.inputNotvisible}`
           }
         />
       </div>
