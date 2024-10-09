@@ -5,11 +5,12 @@ import Login from "../../pages/Autorization/Login/Login";
 import Registration from "../../pages/Autorization/Registartion/Registration";
 import PasswordRecovery from "../../pages/Autorization/PasswordRecovery/PasswordRecovery";
 import NewPassword from "../../pages/Autorization/NewPassword/NewPassword";
+import UserPage from "../../pages/UserPage/UserPage.jsx";
 import { AnimatePresence } from "framer-motion";
 
 const AnimatedRoutes = () => {
-    const location = useLocation()
-    
+  const location = useLocation()
+
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
@@ -18,6 +19,8 @@ const AnimatedRoutes = () => {
         <Route path="/registration" element={<Registration />} />
         <Route path="/forgot-password" element={<PasswordRecovery />} />
         <Route path="/recovery-password" element={<NewPassword />} />
+        <Route path="/user/*" element={< UserPage />} />
+
       </Routes>
     </AnimatePresence>
   );

@@ -1,0 +1,10 @@
+.userPageWrap {
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+    padding: 32px;
+    font-family: var(--montserrat);
+    min-height: 100vh;
+
+
+}

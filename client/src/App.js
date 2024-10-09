@@ -21,7 +21,8 @@ function App() {
   // console.log(getAccessTokenSilently({detailedResponse: true}))
   return (
 
-      <AnimatedRoutes />
+    <AnimatedRoutes />
+
 
   );
 }
