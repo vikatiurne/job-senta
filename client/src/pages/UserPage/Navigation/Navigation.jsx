@@ -19,7 +19,6 @@ const Navigation = () => {
 
     const isActive = (path) => location.pathname === path
 
-
     return (
         <nav className={style.userNav}>
             <Link

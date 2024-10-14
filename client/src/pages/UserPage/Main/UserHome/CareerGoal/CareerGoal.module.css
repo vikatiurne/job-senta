@@ -1,0 +1,44 @@
+.sectCareerGoal {
+    position: relative;
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+    background-color: var(--white);
+}
+
+.sectCareerGoalTitle {
+    font-family: var(--open-sans);
+    font-size: 27px;
+    line-height: 32px;
+    color: var(--dark-gray);
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.sectCareerGoalList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectCareerGoalItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.sectCareerGoalText {
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: 500;
+    color: #A4A4A4;
+}
+
+.sectCareerGoalAdd {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+}

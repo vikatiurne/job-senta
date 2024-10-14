@@ -1,0 +1,69 @@
+.sectWidgetList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectWidgetBtn {
+    font-family: var(--montserrat);
+    cursor: pointer;
+    padding: 16px 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    border-radius: 20px;
+}
+
+.sectWidgetBtn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.sectWidgetBtnImport {
+    background-color: var(--brown-focused);
+}
+
+.sectWidgetBtnImport:hover {
+    background-color: var(--brown-hover);
+}
+
+.sectWidgetBtnContact {
+    background-color: var(--brown);
+}
+
+.sectWidgetBtnContact:hover {
+    background-color: var(--brown-hover);
+}
+
+.sectWidgetBtnResume {
+    background-color: #A49B8D;
+}
+
+.sectWidgetBtnResume:hover {
+    background-color: var(--brown);
+}
+
+.sectWidgetBtnAnalyse {
+    background-color: #A6A482;
+}
+
+.sectWidgetBtnAnalyse:hover {
+    background-color: #747250;
+}
+
+.sectWidgetBtnAccount {
+    background-color: #737084;
+}
+
+.sectWidgetBtnAccount svg path {
+    fill: var(--white)
+}
+
+.sectWidgetBtnAccount:hover {
+    background-color: #413E52;
+}
