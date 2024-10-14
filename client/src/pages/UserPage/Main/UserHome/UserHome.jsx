@@ -6,7 +6,7 @@ import WelcomeMessAndSearch from './WelcomeMessAndSearch/WelcomeMessAndSearch';
 import CareerGoal from './CareerGoal/CareerGoal.jsx';
 import WidgetsBtn from './WidgetsBtn/WidgetsBtn.jsx';
 import ScoreResume from './ScoreResume/ScoreResume.jsx';
-
+import TopResume from './TopResume/TopResume.jsx';
 
 const UserHome = () => {
     return (
@@ -22,7 +22,9 @@ const UserHome = () => {
 
             <ScoreResume
             />
+            <TopResume
 
+            />
 
         </div>
 

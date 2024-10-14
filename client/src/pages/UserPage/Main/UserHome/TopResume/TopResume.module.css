@@ -1,0 +1,103 @@
+.sectResume {
+
+    padding: 16px;
+    background-color: var(--white);
+    border-radius: 20px;
+    max-width: 672px;
+    width: 100%;
+    box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+}
+
+.sectResumeTitle {
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    font-size: 27px;
+    line-height: 32px;
+    font-family: var(--open-sans);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.sectResumeWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.sectResumeToTrack {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.sectResumeBtnDropDown svg {
+    transform: rotate(-180deg);
+
+}
+
+.sectResumeBtnDropDown svg path {
+    fill: var(--brown);
+}
+
+.sectResumeText {
+    font-family: var(--montserrat);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--dark-gray);
+    display: inline-block;
+
+}
+
+.sectResumeResourse {
+    margin-left: 8px;
+    color: var(--brown);
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+
+}
+
+.sectResumeDate {
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 24px;
+    color: #A4A4A4;
+}
+
+/* Circle */
+
+.sectResumeDescScore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.sectResumeScorePercent {
+    font-family: var(--open-sans);
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 48px;
+    color: var(--brown);
+
+}
+
+.sectResumeScoreText {
+    text-align: center;
+    font-family: var(--montserrat);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A4A4A4;
+
+
+}
