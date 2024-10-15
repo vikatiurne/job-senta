@@ -1,0 +1,51 @@
+.sectAcriveArchiv {
+    padding: 16px;
+    background-color: var(--white);
+    border-radius: 20px;
+    max-width: 786px;
+    width: 100%;
+    box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+}
+
+.sectAcriveArchivBlock {
+    width: 100%;
+    text-align: center;
+    padding: 16px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+}
+
+.activeResume {
+    border-color: var(--brown);
+    color: var(--brown);
+}
+
+.archivResume {
+    border-color: var(--gray);
+    color: var(--gray);
+}
+
+.activeResumeCount,
+.archivResumeCount {
+    font-family: var(--open-sans);
+    font-weight: 800;
+    font-size: 90px;
+    line-height: 110px;
+    margin-bottom: 21px;
+
+}
+
+.archiResumeText,
+.activeResumeText {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 32px;
+    font-family: var(--montserrat);
+    color: #a4a4a4;
+}

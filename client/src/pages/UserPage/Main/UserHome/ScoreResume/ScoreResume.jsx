@@ -9,7 +9,7 @@ import { ReactComponent as Eye } from '../../../../../assets/user_page/home/eye.
 import DropDown from '../../../../../components/UI/DropDown/DropDown.jsx';
 
 
-const ScoreResume = () => {
+const ScoreResume = ({ className }) => {
 
     const [selectedMinScore, setSelectedMinScore] = useState(false)
     const [selectedMaxScore, setSelectedMaxScore] = useState(false)
@@ -20,7 +20,7 @@ const ScoreResume = () => {
 
 
     return (
-        <section className={style.sectScoreResume}>
+        <section className={cn(style.sectScoreResume, className)}>
             <ul className={style.sectScoreResumeList} >
                 <li className={cn(
                     style.sectScoreResumeItem,

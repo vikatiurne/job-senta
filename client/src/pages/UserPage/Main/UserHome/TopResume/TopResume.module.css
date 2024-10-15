@@ -1,5 +1,4 @@
 .sectResume {
-
     padding: 16px;
     background-color: var(--white);
     border-radius: 20px;
@@ -21,6 +20,7 @@
 }
 
 .sectResumeWrap {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,6 +33,10 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
+}
+
+.sectResumeBtnDropDown {
+    cursor: pointer;
 }
 
 .sectResumeBtnDropDown svg {
@@ -72,6 +76,77 @@
     color: #A4A4A4;
 }
 
+/* Dropdown */
+.sectResumeBtnDropDownActive svg {
+    transform: rotate(0deg);
+}
+
+.sectResumeDropDown {
+    padding: 8px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--brown);
+    color: var(--brown);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    max-width: 532px;
+    width: 100%;
+    margin-left: auto;
+}
+
+.sectResumeDropDownTitle {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 19px;
+    text-align: center;
+    color: var(--brown);
+    margin-bottom: 4px;
+}
+
+
+.sectResumeDropDownList {
+    counter-reset: list-counter;
+}
+
+.sectResumeDropDownItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    counter-increment: list-counter;
+}
+
+.sectResumeDropDownItem::before {
+    content: counter(list-counter)".";
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray);
+}
+
+
+.sectResumeDropDownItem svg {
+    width: 19px;
+    height: 19px;
+
+}
+
+.sectResumeDropDownText {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 19px;
+    color: var(--gray);
+}
+
+.sectResumeDropDownDate {
+    margin-left: auto;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 19px;
+    color: #a4a4a4;
+}
+
+
 /* Circle */
 
 .sectResumeDescScore {
@@ -98,6 +173,18 @@
     font-size: 10px;
     line-height: 12px;
     color: #A4A4A4;
+}
 
+/* progress bar */
 
+.sectResumeProgressBar {
+    margin-top: 4px;
+}
+
+.sectResumeProgressBarIssues {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 19px;
+    font-weight: 500;
+    color: var(--brown);
 }

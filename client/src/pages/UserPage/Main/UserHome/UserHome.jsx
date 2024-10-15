@@ -7,23 +7,28 @@ import CareerGoal from './CareerGoal/CareerGoal.jsx';
 import WidgetsBtn from './WidgetsBtn/WidgetsBtn.jsx';
 import ScoreResume from './ScoreResume/ScoreResume.jsx';
 import TopResume from './TopResume/TopResume.jsx';
+import ActiveAndArchivResume from './ActiveAndArchivResume/ActiveAndArchivResume.jsx';
 
 const UserHome = () => {
     return (
         <div className={style.pageHome}>
             <WelcomeMessAndSearch
-                className={style.sectfirst}
+                className={style.welcome}
             />
             <CareerGoal
-                className={style.sectsecond}
+                className={style.career}
             />
             <WidgetsBtn
+                className={style.widget}
             />
-
             <ScoreResume
+                className={style.score}
             />
             <TopResume
-
+                className={style.resume}
+            />
+            <ActiveAndArchivResume
+                className={style.activeAndArchiv}
             />
 
         </div>
