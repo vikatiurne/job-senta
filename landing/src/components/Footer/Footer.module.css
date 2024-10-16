@@ -1,95 +1,90 @@
 .footer {
-    padding-top: 64px;
-    padding-bottom: 64px;
-    background-color: var(--dark-gray);
-    color: var(--white);
+  padding-top: 64px;
+  padding-bottom: 64px;
+  background-color: var(--dark-gray);
+  color: var(--white);
 }
 
 .footerNav {
-    display: grid;
-    justify-items: center;
-    border-bottom: 1px solid var(--white);
+  display: grid;
+  justify-items: center;
+  border-bottom: 1px solid var(--white);
 }
 
-@media(max-width:390px), (min-width:390px) {
-    .footerNav {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 70px 16px;
-        padding-bottom: 67px;
-    }
-
+@media (max-width: 390px), (min-width: 390px) {
+  .footerNav {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 70px 16px;
+    padding-bottom: 67px;
+  }
 }
 
-@media(min-width:1440px) {
-    .footerNav {
-        grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-        grid-template-rows: 1fr;
-        gap: 32px;
-        padding-bottom: 32px;
-    }
-
+@media (min-width: 1440px) {
+  .footerNav {
+    grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
+    grid-template-rows: 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+  }
 }
-
 
 .footerNavItemTitle {
-    font-size: 27px;
-    line-height: 32px;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-
+  font-size: 27px;
+  line-height: 32px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
 }
 
 .footerItemList {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
 }
 
 .footerNavItemLink {
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 32px;
-    font-family: var(--montserrat);
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 32px;
+  font-family: var(--montserrat);
 }
 
 .footerNavItemLink:hover {
-    color: var(--brown);
+  color: var(--brown);
 }
 
 .footerItemListMessanger {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .footerCopyright {
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
 .footerCopyrightIcon {
-    width: 19px;
-    height: 19px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1.19px solid var(--white);
-    border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.19px solid var(--white);
+  border-radius: 50%;
 }
 
 .footerFacebookLink:hover svg path,
 .footerInstagramLink:hover svg path {
-    fill: var(--brown)
+  fill: var(--brown);
 }
 
 .footerTwitterLink:hover svg path {
-    stroke: var(--brown)
+  stroke: var(--brown);
 }

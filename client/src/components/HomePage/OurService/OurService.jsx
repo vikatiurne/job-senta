@@ -6,14 +6,14 @@ import cn from 'classnames'
 import Button from '../../UI/Button/Button.jsx';
 import Container from '../../../hoc/layout/container/Container.jsx'
 
-import { ReactComponent as File } from '../../assets/file.svg'
-import { ReactComponent as Ai } from '../../assets/ai.svg'
-import { ReactComponent as FileAi } from '../../assets/fileAi.svg'
-import { ReactComponent as Plus } from '../../assets/plus.svg'
-import { ReactComponent as Minus } from '../../assets/minus.svg'
-import ResumeFirst from '../../assets/exampe-resume-1.png'
-import ResumeSecond from '../../assets/exampe-resume-2.png'
-import ResumeThree from '../../assets/exampe-resume-3.png'
+import { ReactComponent as File } from '../../../assets/file.svg'
+import { ReactComponent as Ai } from '../../../assets/ai.svg'
+import { ReactComponent as FileAi } from '../../../assets/fileAi.svg'
+import { ReactComponent as Plus } from '../../../assets/plus.svg'
+import { ReactComponent as Minus } from '../../../assets/minus.svg'
+import ResumeFirst from '../../../assets/exampe-resume-1.png'
+import ResumeSecond from '../../../assets/exampe-resume-2.png'
+import ResumeThree from '../../../assets/exampe-resume-3.png'
 
 const OurService = () => {
     const resumeBuilder = 'builder'

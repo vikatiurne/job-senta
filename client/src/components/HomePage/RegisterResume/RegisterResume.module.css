@@ -1,7 +1,9 @@
 .container {
-  padding-top: 75px;
-  margin-bottom: 120px;
   position: relative;
+  padding: 75px 0 0;
+  margin: 0 auto 120px;
+  max-width: 1248px;
+  width: 100%;
 }
 
 .infoWrapper {
@@ -42,7 +44,7 @@
   border: 2px solid var(--brown-hover);
   box-shadow: 0 0 10px 0 var(--brown-hover);
 }
-.getStartedBtn:active {
+.getStartedBtn:focus {
   color: var(--brown-focused);
   border: 2px solid var(--brown-focused);
   box-shadow: 0 0 10px 0 var(--brown-focused);

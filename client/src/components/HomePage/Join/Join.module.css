@@ -1,6 +1,8 @@
 .container {
-  margin-bottom: 64px;
+  margin:0 auto 64px;
   text-align: center;
+  max-width: 1248px;
+  width: 100%;
 }
 .title {
   margin-bottom: 32px;
@@ -28,7 +30,7 @@
   background-color: var(--brown-hover);
   box-shadow: 0 0 10px 0 rgba(96, 75, 43, 0.6);
 }
-.joinBtn:active {
+.joinBtn:focus {
   background-color: var(--brown-focused);
   box-shadow: 0 0 10px 0 rgba(200, 177, 141, 0.6);
 }

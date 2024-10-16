@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import Button from "../../UI/Button/Button";
 import LogoutButton from "../../../components/AutorizationPage/LogoutButton/LogoutButton";
-import userIcon from "../../../assets/userIcon.svg";
 
 import styles from './HeaderBtns.module.css'
 
@@ -15,8 +14,8 @@ const HeaderBtns = ({burgerActive}) => {
     ) : (
       <>
         <Link to="/login" className={styles.link}>
-          <Button className={styles.loginBtn}>
-            <img src={userIcon} alt="userIcon" />
+            <Button className={styles.loginBtn}>
+              <div className={styles.userIcon}></div>
             Login
           </Button>
         </Link>

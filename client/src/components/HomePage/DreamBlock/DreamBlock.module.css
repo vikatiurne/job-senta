@@ -1,5 +1,5 @@
 .dreamBlockContainer {
-    max-width: 1280px;
+    max-width: 1248px;
     margin: 0 auto;
 }
 
@@ -20,14 +20,8 @@
     width: auto; 
 }
 .dreamContentIcon{
-    width: 500px;
-    max-width: 100%;
+    max-width: 500px;
     width: 100%;
-}
-
-.dreamContentIcon {
-    /* width: 100%; 
-    height: auto;  */
 }
 
 .dreamContentTitle {
