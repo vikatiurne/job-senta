@@ -24,14 +24,13 @@
 
  .customScrollContent::-webkit-scrollbar {
      width: 8px;
-     /* height: 50px; */
+
  }
 
  .customScrollContent::-webkit-scrollbar-thumb {
      position: relative;
      background-color: var(--brown);
      border-radius: 20px;
-     /* min-height: 17px; */
 
  }
 

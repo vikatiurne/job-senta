@@ -15,7 +15,6 @@ import { ReactComponent as Logout } from '../../../assets/user_page/home/logout.
 
 const Navigation = () => {
     const location = useLocation()
-    console.log(location);
 
     const isActive = (path) => location.pathname === path
 

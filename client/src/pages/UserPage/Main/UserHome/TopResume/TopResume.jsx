@@ -73,21 +73,6 @@ const TopResume = ({ className }) => {
                                 <time className={style.sectResumeDropDownDate}>23 March 2024</time>
                                 <StarBorder />
                             </li>
-                            <li className={style.sectResumeDropDownItem}>
-                                <p className={style.sectResumeDropDownText}>Administrator</p>
-                                <time className={style.sectResumeDropDownDate}>29 February 2024</time>
-                                <StarBorder />
-                            </li>
-                            <li className={style.sectResumeDropDownItem}>
-                                <p className={style.sectResumeDropDownText}>Human Resources</p>
-                                <time className={style.sectResumeDropDownDate}>03 March 2024</time>
-                                <Star />
-                            </li>
-                            <li className={style.sectResumeDropDownItem}>
-                                <p className={style.sectResumeDropDownText}>Customer search manager</p>
-                                <time className={style.sectResumeDropDownDate}>23 March 2024</time>
-                                <StarBorder />
-                            </li>
                         </ul>
                     </Scroll>
 
