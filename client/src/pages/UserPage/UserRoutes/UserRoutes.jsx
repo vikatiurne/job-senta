@@ -1,12 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 
 import UserHome from '../Main/UserHome/UserHome.jsx';
+import Builder from '../Main/Builder/Builder.jsx';
 
 const UserRoutes = () => {
     return (
         <Routes>
             <Route path='home' element={<UserHome />} />
-            <Route path='builder' />
+            <Route path='builder' element={ <Builder/>} />
             <Route path='analyse' />
             <Route path='contact' />
             <Route path='settings' />
