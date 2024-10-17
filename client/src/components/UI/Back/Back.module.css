@@ -1,0 +1,14 @@
+.back {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.back p {
+  color: var(--dark-gray);
+  font-family: var(--montserrat);
+  font-size: 16px;
+  line-height: 24px;
+}

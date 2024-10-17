@@ -1,9 +1,12 @@
-import React from 'react'
+
+import styles from "./Builder.module.css";
 
 const Builder = () => {
   return (
-    <div>Builder</div>
-  )
-}
+    <div className={styles.container}>
+      <div>Таблиця з резюмешками (Alexey)</div>
+    </div>
+  );
+};
 
-export default Builder
+export default Builder;

@@ -1,0 +1,29 @@
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid var(--brown);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.withDropDown{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+}
+
+.btn p {
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 500;
+  font-family: var(--montserrat);
+  color: var(--brown);
+}
+
+.menuBtn {
+  padding: 14px 39px;
+}
+.newResumeBtn {
+  padding: 14px 27px;
+}

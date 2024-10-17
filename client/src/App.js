@@ -19,12 +19,7 @@ function App() {
   } = useAuth0();
 
   // console.log(getAccessTokenSilently({detailedResponse: true}))
-  return (
-
-    <AnimatedRoutes />
-
-
-  );
+  return <AnimatedRoutes />;
 }
 
 export default App;
