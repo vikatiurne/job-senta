@@ -5,7 +5,7 @@ import cn from 'classnames'
 import DropDown from '../../../../../components/UI/DropDown/DropDown';
 import ScoreResumeCircle from './ScoreResumeCircle/ScoreResumeCircle';
 import ProgressBar from './ProgressBar/ProgressBar';
-
+import Scroll from '../../../../../components/UI/Scroll/Scroll';
 import { ReactComponent as DropDownIcon } from '../../../../../assets/user_page/home/dropdown.svg'
 import { ReactComponent as Star } from '../../../../../assets/user_page/home/star.svg'
 import { ReactComponent as StarBorder } from '../../../../../assets/user_page/home/starborder.svg'
@@ -39,23 +39,57 @@ const TopResume = ({ className }) => {
                     maxHeight='119px'
                 >
                     <h3 className={style.sectResumeDropDownTitle}>Select the resume you want to track</h3>
-                    <ul className={style.sectResumeDropDownList}>
-                        <li className={style.sectResumeDropDownItem}>
-                            <p className={style.sectResumeDropDownText}>Administrator</p>
-                            <time datetime='2024-12-29' className={style.sectResumeDropDownDate}>29 February 2024</time>
-                            <StarBorder />
-                        </li>
-                        <li className={style.sectResumeDropDownItem}>
-                            <p className={style.sectResumeDropDownText}>Human Resources</p>
-                            <time datetime='2024-12-29' className={style.sectResumeDropDownDate}>03 March 2024</time>
-                            <Star />
-                        </li>
-                        <li className={style.sectResumeDropDownItem}>
-                            <p className={style.sectResumeDropDownText}>Customer search manager</p>
-                            <time datetime='2024-12-29' className={style.sectResumeDropDownDate}>23 March 2024</time>
-                            <StarBorder />
-                        </li>
-                    </ul>
+                    <Scroll
+                        height="80px"
+                    >
+                        <ul className={style.sectResumeDropDownList}>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Administrator</p>
+                                <time className={style.sectResumeDropDownDate}>29 February 2024</time>
+                                <StarBorder />
+                            </li>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Human Resources</p>
+                                <time className={style.sectResumeDropDownDate}>03 March 2024</time>
+                                <Star />
+                            </li>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Customer search manager</p>
+                                <time className={style.sectResumeDropDownDate}>23 March 2024</time>
+                                <StarBorder />
+                            </li>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Administrator</p>
+                                <time className={style.sectResumeDropDownDate}>29 February 2024</time>
+                                <StarBorder />
+                            </li>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Human Resources</p>
+                                <time className={style.sectResumeDropDownDate}>03 March 2024</time>
+                                <Star />
+                            </li>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Customer search manager</p>
+                                <time className={style.sectResumeDropDownDate}>23 March 2024</time>
+                                <StarBorder />
+                            </li>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Administrator</p>
+                                <time className={style.sectResumeDropDownDate}>29 February 2024</time>
+                                <StarBorder />
+                            </li>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Human Resources</p>
+                                <time className={style.sectResumeDropDownDate}>03 March 2024</time>
+                                <Star />
+                            </li>
+                            <li className={style.sectResumeDropDownItem}>
+                                <p className={style.sectResumeDropDownText}>Customer search manager</p>
+                                <time className={style.sectResumeDropDownDate}>23 March 2024</time>
+                                <StarBorder />
+                            </li>
+                        </ul>
+                    </Scroll>
 
                 </DropDown>
 

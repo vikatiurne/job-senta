@@ -65,7 +65,7 @@ const WidgetsBtn = ({ className }) => {
 };
 
 WidgetsBtn.propTypes = {
-    className: PropTypes.object,
+    className: PropTypes.string,
 };
 
 export default WidgetsBtn;

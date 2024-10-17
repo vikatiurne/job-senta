@@ -9,6 +9,8 @@ import ScoreResume from './ScoreResume/ScoreResume.jsx';
 import TopResume from './TopResume/TopResume.jsx';
 import ActiveAndArchivResume from './ActiveAndArchivResume/ActiveAndArchivResume.jsx';
 
+import Scroll from '../../../../components/UI/Scroll/Scroll.jsx';
+
 const UserHome = () => {
     return (
         <div className={style.pageHome}>
@@ -30,7 +32,6 @@ const UserHome = () => {
             <ActiveAndArchivResume
                 className={style.activeAndArchiv}
             />
-
         </div>
 
     );

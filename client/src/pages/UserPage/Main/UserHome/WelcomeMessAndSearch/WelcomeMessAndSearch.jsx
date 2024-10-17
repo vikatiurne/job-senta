@@ -4,7 +4,7 @@ import { ReactComponent as Search } from '../../../../../assets/user_page/home/s
 import style from './WelcomeMessAndSearch.module.css'
 import cn from 'classnames';
 const WelcomeMessAndSearch = ({ className }) => {
-    console.log(className);
+    console.log(typeof className);
 
     return (
         <section className={cn(style.sectWelcome, className)}>
@@ -21,7 +21,7 @@ const WelcomeMessAndSearch = ({ className }) => {
 };
 
 WelcomeMessAndSearch.propTypes = {
-    className: PropTypes.object,
+    className: PropTypes.string,
 };
 
 export default WelcomeMessAndSearch;

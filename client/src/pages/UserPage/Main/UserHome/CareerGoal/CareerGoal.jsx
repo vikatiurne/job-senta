@@ -37,7 +37,7 @@ const CareerGoal = ({ className }) => {
 };
 
 CareerGoal.propTypes = {
-    className: PropTypes.object,
+    className: PropTypes.string,
 };
 
 export default CareerGoal;

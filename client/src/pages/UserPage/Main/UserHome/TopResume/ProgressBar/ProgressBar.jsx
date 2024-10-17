@@ -59,10 +59,10 @@ const ProgressBar = (props) => {
                     <text
                         x={`${progressLine}`}
                         y={`${heightLine}`}
-                        dominant-baseline="middle"
-                        text-anchor="middle"
-                        font-size="10"
-                        font-weight='500'
+                        dominantBaseline="middle"
+                        textAnchor="middle"
+                        fontSize="10"
+                        fontWeight='500'
                         height={`${height}`}
                         fill="#f7f7f7"
                     >{progressValue}</text>
