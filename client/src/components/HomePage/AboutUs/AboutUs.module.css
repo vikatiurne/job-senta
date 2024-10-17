@@ -1,5 +1,7 @@
 .container {
-  margin-bottom: 120px;
+  margin: 0 auto 120px;
+  max-width: 1248px;
+  width: 100%;
 }
 .title {
   margin-bottom: 32px;
@@ -22,11 +24,15 @@
   line-height: 32px;
   font-weight: 500;
   color: var(--gray);
+  max-width: 608px;
+  width: 100%;
 }
 .images {
   position: relative;
   min-height: 545px;
   height: 100%;
+  max-width: 608px;
+  width: 100%;
 }
 
 .image1,

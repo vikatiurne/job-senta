@@ -6,6 +6,7 @@ import HeroBlock from "../../components/HomePage/HeroBlock/HeroBlock";
 import Container from "../../hoc/layout/container/layout/container/Container";
 import AboutUs from "../../components/HomePage/AboutUs/AboutUs";
 import Join from "../../components/HomePage/Join/Join";
+import OurService from "../../components/HomePage/OurService/OurService";
 
 const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ const HomePage = () => {
         <Header />
         <HeroBlock />
         <DreamBlock />
+        <OurService/>
         <RegisterResume />
         <AboutUs />
         <Join/>
