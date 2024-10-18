@@ -11,9 +11,10 @@ const NewResume = () => {
 
   return (
     <div className={styles.wrapper}>
+      
       <EnteringForm />
 
-      <div className="previewResume">
+      <div className={styles.previewContainer}>
         <h4>{userName}</h4>
         <p>{position}</p>
       </div>

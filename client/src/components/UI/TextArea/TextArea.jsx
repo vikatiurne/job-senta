@@ -1,22 +1,24 @@
 import { Field } from "formik";
-
-import styles from "./InputForResume.module.css";
+import { ReactComponent as Pen } from "../../../assets/user_page/builder/createResume/pen.svg";
+import styles from "./TextArea.module.css";
 
 const InputForResume = ({
   id,
   name,
   placeholder,
-  img,
   touched,
+  error,
   handleChange,
 }) => {
-  return (
 
+  return (
+    <>
       <div className={styles.inputContainer}>
-        {img}
+        <Pen />
 
         <Field
-          autoComplete="off"
+          as="textarea"
+          type="textarea"
           name={name}
           id={id}
           placeholder={placeholder}
@@ -28,7 +30,10 @@ const InputForResume = ({
           }
         />
       </div>
- 
+      <p className={!!error[name] ? styles.limitErr : styles.limit}>
+        (0 of 500 characters)
+      </p>
+    </>
   );
 };
 
