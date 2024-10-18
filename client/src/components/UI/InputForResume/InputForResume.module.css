@@ -1,0 +1,7 @@
+.inputContainer{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid var(--brown);
+    border-radius: 10px;
+}
