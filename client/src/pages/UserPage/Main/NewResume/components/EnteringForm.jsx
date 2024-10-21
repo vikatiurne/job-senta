@@ -18,11 +18,15 @@ import arrow from "../../../../../assets/user_page/builder/arrow-outlined.svg";
 import { initialValues, schemas } from "../helper";
 
 import styles from "./EnteringForm.module.css";
-import { setPosition } from "../NewResumeSlice";
-import { useState } from "react";
+import { setPosition, setProject } from "../NewResumeSlice";
+import { useEffect, useState } from "react";
+import RenderBlocks from "../utils/renderBlocks";
+import { Block } from "../utils/addField";
 
 const EnteringForm = () => {
   const [pressAdd, setPressAdd] = useState(false);
+  const [blocks, setBlocks] = useState([]);
+  console.log(blocks)
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,12 +37,14 @@ const EnteringForm = () => {
   const handleChangeEmail = (e) => {};
   const handleChangeLinkedIn = (e) => {};
   const handleChangePrSum = (e) => {};
-  const handleChangeProject = (e) => {};
+  const handleChangeProject = (e) => dispatch(setProject(e.target.value));
   const handleChangeRole = (e) => {};
   const handleChangeProjectLink = (e) => {};
 
-  const addFieldsHandler = () => {
+  const addFieldsHandler = (values, touched, errors) => {
     setPressAdd(true);
+    
+    setBlocks([...blocks, { id: Math.random() }]);
   };
 
   const submitFormHandler = (values) => {
@@ -46,11 +52,16 @@ const EnteringForm = () => {
     console.log("Sucsess", values);
   };
 
+  useEffect(() => {
+    console.log("render");
+  }, [pressAdd]);
+
   return (
     <Formik
       initialValues={initialValues.entering}
       validationSchema={schemas.entering}
       onSubmit={(values, { resetForm }) => {
+        console.log(values)
         submitFormHandler(values);
         resetForm();
         navigate("/user/builder");
@@ -143,7 +154,12 @@ const EnteringForm = () => {
 
             <div className={styles.add}>
               <p className={styles.label}>Project Experience</p>
-              <Plus className={styles.plus} onClick={addFieldsHandler} />
+              <Plus
+                className={styles.plus}
+                onClick={(values, touched, errors) =>
+                  addFieldsHandler(values, touched, errors)
+                }
+              />
             </div>
 
             <InputForResume
@@ -181,6 +197,55 @@ const EnteringForm = () => {
               touched={touched}
               handleChange={(e) => handleChangeProjectLink(e)}
             />
+{console.log(values)}
+{console.log(touched)}
+            {blocks.map((id,i) => (
+          
+              <div key={i}>
+                <InputForResume
+                 
+                  name={`projectName${i + 1}`}
+                  id={`projectName${i + 1}`}
+                  placeholder="Name of the project"
+                  img={
+                    <Project
+                      className={
+                        values[`projectName${i + 1}`] !== "" ? styles.gray : null
+                      }
+                    />
+                  }
+                  values={values}
+                  touched={touched}
+                  handleChange={(e) => dispatch(setProject(e.target.value))}
+                />
+                <TextArea
+                 
+                  name={`role${i + 1}`}
+                  id={`role${i + 1}`}
+                  placeholder="Your roles and achievements"
+                  values={values}
+                  touched={touched}
+                  error={errors}
+                  handleChange={(e) => handleChangeRole(e)}
+                />
+                <InputForResume
+                
+                  name={`projectLink${i + 1}`}
+                  id={`projectLink${i + 1}`}
+                  placeholder="Project link (if any)"
+                  img={
+                    <Linked
+                      className={
+                        values["projectLink"] !== "" ? styles.gray : null
+                      }
+                    />
+                  }
+                  values={values}
+                  touched={touched}
+                  handleChange={(e) => handleChangeProjectLink(e)}
+                />
+              </div>
+            ))}
           </div>
         </Form>
       )}

@@ -2,7 +2,7 @@ import { Field } from "formik";
 import { ReactComponent as Pen } from "../../../assets/user_page/builder/createResume/pen.svg";
 import styles from "./TextArea.module.css";
 
-const InputForResume = ({
+const TextArea = ({
   id,
   name,
   placeholder,
@@ -37,4 +37,4 @@ const InputForResume = ({
   );
 };
 
-export default InputForResume;
+export default TextArea;

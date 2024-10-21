@@ -6,7 +6,7 @@ const initialState = {
   email: "",
   LinkedIn: "",
   professionalSummary: "",
-  projectName: "",
+  projectName: [],
   role: "",
   projectLink: "",
   companyName: "",
@@ -34,11 +34,17 @@ const createResumeReducer = createSlice({
             reducer(state, { payload }) {
                 state.desiredPosition = payload
           }
+      },
+        setProject: {
+            reducer(state, { payload }) {
+                state.projectName.push(payload)
+          }
       }
   },
 });
 
 export const {
-   setPosition
+  setPosition,
+  setProject
   } = createResumeReducer.actions;
   export default createResumeReducer.reducer;
