@@ -48,7 +48,7 @@
 
 .react-calendar__month-view__days {
     display: grid !important;
-    gap: 8px;
+    column-gap: 8px;
     grid-template-columns: repeat(7, 1fr);
 }
 
@@ -69,7 +69,6 @@
 }
 
 
-/* react-calendar__tile */
 .react-calendar__tile--now {
     background-color: var(--brown);
     border-radius: 20px;
@@ -79,12 +78,3 @@
 .react-calendar__tile--now abbr {
     color: var(--white);
 }
-
-
-
-
-/* react-calendar__tile--range
-   react-calendar__tile--rangeStart 
-   react-calendar__tile--rangeEnd 
-   react-calendar__tile--rangeBothEnds 
-   react-calendar__month-view__days__day */
