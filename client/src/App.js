@@ -8,7 +8,7 @@ function App() {
     // error,
     // isAuthenticated,
     // isLoading,
-    // user,
+    user,
     // // Auth methods:
     // getAccessTokenSilently,
     // getAccessTokenWithPopup,
@@ -17,6 +17,7 @@ function App() {
     // loginWithPopup,
     // logout,
   } = useAuth0();
+  console.log(user)
 
   // console.log(getAccessTokenSilently({detailedResponse: true}))
   return <AnimatedRoutes />;
