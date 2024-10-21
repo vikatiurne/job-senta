@@ -1,0 +1,44 @@
+.header {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.title {
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--brown);
+  font-family: var(--open-sans);
+}
+.menu, .newResume {
+  position: relative;
+}
+.sectMenuDropDown {
+  padding: 14px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--brown);
+  color: var(--brown);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 100%;
+  margin-left: auto;
+}
+.sectMenuDropDown a{
+  text-decoration: none;
+}
+
+.sectMenuDropDownItem {
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: var(--montserrat);
+  cursor: pointer;
+
+}
+.sectMenuDropDownItem:last-child{
+    margin-bottom: 0;
+}

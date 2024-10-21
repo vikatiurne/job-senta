@@ -9,7 +9,7 @@ import UserPage from "../../pages/UserPage/UserPage.jsx";
 import { AnimatePresence } from "framer-motion";
 
 const AnimatedRoutes = () => {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <AnimatePresence>
@@ -19,8 +19,7 @@ const AnimatedRoutes = () => {
         <Route path="/registration" element={<Registration />} />
         <Route path="/forgot-password" element={<PasswordRecovery />} />
         <Route path="/recovery-password" element={<NewPassword />} />
-        <Route path="/user/*" element={< UserPage />} />
-
+        <Route path="/user/*" element={<UserPage />} />
       </Routes>
     </AnimatePresence>
   );
