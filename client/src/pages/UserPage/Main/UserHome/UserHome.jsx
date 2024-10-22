@@ -25,7 +25,8 @@ const UserHome = () => {
             <ScoreResume
                 className={style.score}
             />
-            <TopResume
+
+            {/* <TopResume
                 className={style.resume}
             />
             <ActiveAndArchivResume
@@ -33,7 +34,7 @@ const UserHome = () => {
             />
             <CalendarUser
                 className={style.calendarUser}
-            />
+            /> */}
 
         </div>
 
