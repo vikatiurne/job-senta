@@ -1,20 +1,64 @@
 .pageHome {
     width: 100%;
     display: grid;
-    gap: 32px;
-    grid-template-columns: 437px 1fr 320px;
 }
 
-.welcome,
-.career,
-.widget {
-    grid-column: 1 /4;
+
+@media(max-width: 390px), (min-width:390px) {
+    .pageHome {
+        gap: 10px 16px;
+        grid-template-columns: minmax(205px) minmax(127px);
+    }
+
+    .welcome,
+    .career,
+    .widget {
+        grid-column: 1 /3;
+    }
+
+    .resume {
+        grid-column: 1/3;
+        grid-row: 5/6;
+    }
+
+    .activeAndArchiv {
+        grid-column: 2/3;
+        grid-row: 4/5;
+    }
+
+
+    .calendarUser {
+        grid-column: 1/3;
+    }
 }
 
-.resume {
-    grid-column: 2 /4;
-}
+@media (min-width:1440px) {
+    .pageHome {
+        gap: 32px;
+        grid-template-columns: 437px 1fr 320px;
+    }
 
-.activeAndArchiv {
-    grid-column: 1/3;
+    .welcome,
+    .career,
+    .widget {
+        grid-column: 1 /4;
+    }
+
+    .resume {
+        grid-column: 2 /4;
+        grid-row: 4/5;
+    }
+
+    .activeAndArchiv {
+        grid-column: 1/3;
+        grid-row: 5/6;
+    }
+
+    .activeAndArchiv {
+        grid-column: 1/3;
+    }
+
+    .calendarUser {
+        grid-column: 3/4;
+    }
 }

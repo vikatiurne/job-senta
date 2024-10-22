@@ -1,26 +1,13 @@
 .userNav {
-    max-width: 203px;
-    width: 100%;
-    min-height: 100%;
-    border-radius: 20px;
     background-color: var(--brown);
-    padding-top: 32px;
-    padding-bottom: 32px;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-
 }
 
 .userNavBar {
-    margin-top: 32px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
     width: 100%;
     height: 100%;
-
 }
 
 .userNavBarItem {
@@ -28,35 +15,98 @@
 }
 
 
-
 .userLink {
     text-decoration: none;
+    color: var(--white);
     width: 100%;
-    padding: 8px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 4px;
+}
 
+
+/*mobile  */
+
+.userNavMobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.userNavMobile .userNavLogo {
+    display: none;
+}
+
+.userNavMobile .userNavBar {
+    padding: 4px 27px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.userNavMobile .userLink {
+    flex-direction: column;
+    font-size: 10px;
+    line-height: 12px;
+    text-align: center;
+}
+
+.userNavMobile .userLink:focus-within svg path {
+    fill: var(--brown-focused);
+    stroke: var(--brown-focused);
+}
+
+.userNavMobile .userLink:focus-within {
+    color: var(--brown-focused);
+}
+
+
+/* Desktop */
+
+.userNavDesktop {
+    min-height: 100%;
+    max-width: 203px;
+    border-radius: 20px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userNavDesktop .userNavBar {
+    margin-top: 32px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.userNavDesktop .userLink {
+    border-radius: 20px;
+    flex-direction: row;
+    padding: 8px 0;
     font-size: 16px;
     line-height: 24px;
-    color: var(--white);
-    border-radius: 20px;
 
 }
 
-.userLink:hover {
+.userNavDesktop .userLink:hover {
     background-color: var(--brown-hover);
 }
 
-.userLinkActive {
+.userNavDesktop .userLinkActive {
     background-color: var(--brown-focused);
 }
 
-.userLinkActive:hover {
+.userNavDesktop .userLinkActive:hover {
     background-color: var(--brown-focused);
 }
 
-.userNavBarItemPlace {
+.userNavDesktop .userNavBarItemPlace {
     margin-top: auto;
 }

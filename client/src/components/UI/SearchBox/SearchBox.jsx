@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ReactComponent as Search } from "../../../assets/user_page/home/search.svg";
-
 import styles from "./SearchBox.module.css";
 
 const SearchBox = () => {
@@ -9,7 +8,7 @@ const SearchBox = () => {
   const changeHandler = (e) => {
     const text = e.target.value;
     setSearchText(text);
-    
+
   };
   return (
     <div className={styles.search}>

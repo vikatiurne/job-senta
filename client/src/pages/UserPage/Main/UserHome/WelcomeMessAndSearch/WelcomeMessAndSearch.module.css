@@ -5,11 +5,35 @@
 }
 
 .sectWelcomeTitle {
-    font-family: var(--open-sans);
-    text-transform: uppercase;
-    font-weight: 800;
-    font-size: 32px;
-    line-height: 48px;
     color: var(--brown);
 }
 
+
+
+/* @media(max-width: 390px), (min-width:390px) {
+ 
+}
+
+@media (min-width:1440px) {
+ 
+} */
+
+@media(max-width: 390px), (min-width:390px) {
+    .sectWelcomeTitle {
+        font-family: var(--montserrat);
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
+@media (min-width:1440px) {
+
+    .sectWelcomeTitle {
+        font-family: var(--open-sans);
+        text-transform: uppercase;
+        font-weight: 800;
+        font-size: 32px;
+        line-height: 48px;
+    }
+}
