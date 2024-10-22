@@ -15,12 +15,14 @@ const InputForResume = ({
       <div className={styles.inputContainer}>
         {img}
 
-        <Field
+      <Field
+     
           autoComplete="off"
           name={name}
           id={id}
           placeholder={placeholder}
-          onKeyUp={handleChange}
+          onBlur={handleChange}
+          // onKeyUp={handleChange}
           className={
             !touched[name]
               ? `${styles.inputField} `

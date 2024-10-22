@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik";
+import { Field, FieldArray, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -12,7 +12,9 @@ import { ReactComponent as Email } from "../../../../../assets/user_page/builder
 import { ReactComponent as Linked } from "../../../../../assets/user_page/builder/createResume/link.svg";
 import { ReactComponent as Project } from "../../../../../assets/user_page/builder/createResume/project-name.svg";
 import { ReactComponent as Plus } from "../../../../../assets/user_page/builder/btn_plus.svg";
+import { ReactComponent as Minus } from "../../../../../assets/user_page/builder/createResume/minus.svg";
 import { ReactComponent as Check } from "../../../../../assets/user_page/builder/createResume/check.svg";
+import { ReactComponent as Pen } from "../../../../../assets/user_page/builder/createResume/pen.svg";
 
 import arrow from "../../../../../assets/user_page/builder/arrow-outlined.svg";
 import { initialValues, schemas } from "../helper";
@@ -22,12 +24,9 @@ import { setPosition, setProject } from "../NewResumeSlice";
 import { useEffect, useState } from "react";
 import RenderBlocks from "../utils/renderBlocks";
 import { Block } from "../utils/addField";
+import InputsBlock from "../../../../../components/UI/InputsBlock/InputsBlock";
 
-const EnteringForm = () => {
-  const [pressAdd, setPressAdd] = useState(false);
-  const [blocks, setBlocks] = useState([]);
-  console.log(blocks)
-
+const EnterForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -41,27 +40,16 @@ const EnteringForm = () => {
   const handleChangeRole = (e) => {};
   const handleChangeProjectLink = (e) => {};
 
-  const addFieldsHandler = (values, touched, errors) => {
-    setPressAdd(true);
-    
-    setBlocks([...blocks, { id: Math.random() }]);
-  };
-
   const submitFormHandler = (values) => {
     //отправка формы на сервер сохранение в бд
     console.log("Sucsess", values);
   };
-
-  useEffect(() => {
-    console.log("render");
-  }, [pressAdd]);
 
   return (
     <Formik
       initialValues={initialValues.entering}
       validationSchema={schemas.entering}
       onSubmit={(values, { resetForm }) => {
-        console.log(values)
         submitFormHandler(values);
         resetForm();
         navigate("/user/builder");
@@ -152,100 +140,132 @@ const EnteringForm = () => {
               handleChange={(e) => handleChangePrSum(e)}
             />
 
-            <div className={styles.add}>
-              <p className={styles.label}>Project Experience</p>
-              <Plus
-                className={styles.plus}
-                onClick={(values, touched, errors) =>
-                  addFieldsHandler(values, touched, errors)
-                }
-              />
-            </div>
+            <InputsBlock
+              blockName="projExp"
+              labelBlock="Project Experience"
+              values={values}
+              touched={touched}
+              errors={errors}
+              fields={[
+                {
+                  name: "name",
+                  id: "name",
+                  placeholder: "Name of the project",
+                  type: "input",
 
-            <InputForResume
-              name="projectName"
-              id="projectName"
-              placeholder="Name of the project"
-              img={
-                <Project
-                  className={values["projectName"] !== "" ? styles.gray : null}
-                />
-              }
-              values={values}
-              touched={touched}
-              handleChange={(e) => handleChangeProject(e)}
+                  img: <Project />,
+                },
+                {
+                  name: "role",
+                  id: "role",
+                  placeholder: "Your roles and achievements",
+                  type: "textarea",
+                  warning: "(0 of 500 characters)",
+
+                  img: <Pen />,
+                },
+                {
+                  name: "link",
+                  id: "link",
+                  placeholder: "Project link (if any)",
+                  type: "input",
+
+                  img: <Linked />,
+                },
+              ]}
             />
-            <TextArea
-              name="role"
-              id="role"
-              placeholder="Your roles and achievements"
-              values={values}
-              touched={touched}
-              error={errors}
-              handleChange={(e) => handleChangeRole(e)}
-            />
-            <InputForResume
-              name="projectLink"
-              id="projectLink"
-              placeholder="Project link (if any)"
-              img={
-                <Linked
-                  className={values["projectLink"] !== "" ? styles.gray : null}
-                />
-              }
-              values={values}
-              touched={touched}
-              handleChange={(e) => handleChangeProjectLink(e)}
-            />
-{console.log(values)}
-{console.log(touched)}
-            {blocks.map((id,i) => (
-          
-              <div key={i}>
-                <InputForResume
-                 
-                  name={`projectName${i + 1}`}
-                  id={`projectName${i + 1}`}
-                  placeholder="Name of the project"
-                  img={
-                    <Project
-                      className={
-                        values[`projectName${i + 1}`] !== "" ? styles.gray : null
-                      }
-                    />
-                  }
-                  values={values}
-                  touched={touched}
-                  handleChange={(e) => dispatch(setProject(e.target.value))}
-                />
-                <TextArea
-                 
-                  name={`role${i + 1}`}
-                  id={`role${i + 1}`}
-                  placeholder="Your roles and achievements"
-                  values={values}
-                  touched={touched}
-                  error={errors}
-                  handleChange={(e) => handleChangeRole(e)}
-                />
-                <InputForResume
-                
-                  name={`projectLink${i + 1}`}
-                  id={`projectLink${i + 1}`}
-                  placeholder="Project link (if any)"
-                  img={
-                    <Linked
-                      className={
-                        values["projectLink"] !== "" ? styles.gray : null
-                      }
-                    />
-                  }
-                  values={values}
-                  touched={touched}
-                  handleChange={(e) => handleChangeProjectLink(e)}
-                />
-              </div>
-            ))}
+            {/* <FieldArray name="projExp">
+                {({ insert, remove, push }) => (
+                  <div>
+                    <div className={styles.add}>
+                      <p className={styles.label}>Project Experience</p>
+
+                      <Plus
+                        className={styles.plus}
+                        onClick={() => push({ name: "", role: "", link: "" })}
+                      />
+                    </div>
+                    {values.projExp.length > 0 &&
+                      values.projExp.map((_, i) => (
+                        <div key={i}>
+                          {i !== 0 && (
+                            <Button
+                              onClick={() => remove(i)}
+                              className={styles.minus}
+                            >
+                              <Minus />
+                            </Button>
+                          )}
+                          <div className={styles.inputContainer}>
+                            <Project
+                              className={
+                                values[`projExp.${i}.name`] !== ""
+                                  ? styles.gray
+                                  : null
+                              }
+                            />
+
+                            <Field
+                              name={`projExp.${i}.name`}
+                              id={`projExp.${i}.name`}
+                              placeholder="Name of the project"
+                              className={
+                                !touched[`projExp.${i}.name`]
+                                  ? `${styles.inputField} `
+                                  : `${styles.inputField} ${styles.inputFieldTouched}`
+                              }
+                            />
+                          </div>
+                          <div className={styles.textareaContainer}>
+                            <Pen />
+
+                            <Field
+                              as="textarea"
+                              type="textarea"
+                              name={`projExp.${i}.role`}
+                              id={`projExp.${i}.role`}
+                              placeholder="Your roles and achievements"
+                              className={
+                                !touched[`projExp.${i}.role`]
+                                  ? `${styles.textareaField} `
+                                  : `${styles.textareaField} ${styles.textareaFieldTouched}`
+                              }
+                            />
+                          </div>
+                          <p
+                            className={
+                              !!errors[`projExp.${i}.role`]
+                                ? styles.limitErr
+                                : styles.limit
+                            }
+                          >
+                            (0 of 500 characters)
+                          </p>
+                          <div className={styles.inputContainer}>
+                            <Linked
+                              className={
+                                values[`projExp.${i}.link`] !== ""
+                                  ? styles.gray
+                                  : null
+                              }
+                            />
+
+                            <Field
+                              name={`projExp.${i}.link`}
+                              id={`projExp.${i}.link`}
+                              placeholder="Project link (if any)"
+                              className={
+                                !touched[`projExp.${i}.link`]
+                                  ? `${styles.inputField} `
+                                  : `${styles.inputField} ${styles.inputFieldTouched}`
+                              }
+                            />
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </FieldArray> */}
           </div>
         </Form>
       )}
@@ -253,4 +273,4 @@ const EnteringForm = () => {
   );
 };
 
-export default EnteringForm;
+export default EnterForm;

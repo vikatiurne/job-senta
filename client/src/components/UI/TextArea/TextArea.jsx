@@ -30,7 +30,9 @@ const TextArea = ({
           }
         />
       </div>
-      <p className={!!error[name] ? styles.limitErr : styles.limit}>
+      <p
+        className={!!error[name] ? styles.limitErr : styles.limit}
+      >
         (0 of 500 characters)
       </p>
     </>
