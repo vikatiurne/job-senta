@@ -1,15 +1,25 @@
+import { useSelector } from "react-redux";
+import EnteringForm from "./components/EnteringForm";
 
-
-import Back from '../../../../components/UI/Back/Back'
-import styles from './NewResume.module.css'
+import styles from "./NewResume.module.css";
 
 const NewResume = () => {
-  return (
-    <div>
-      <Back />
-      <h2>2 трудные таблички на завтра</h2>
-    </div>
-  )
-}
+  const position = useSelector((state) => state.createResume.desiredPosition);
 
-export default NewResume
+  //имя вытаскивавем из БД
+  const userName = "Darina Taranenko";
+
+  return (
+    <div className={styles.wrapper}>
+      
+      <EnteringForm />
+
+      <div className={styles.previewContainer}>
+        <h4>{userName}</h4>
+        <p>{position}</p>
+      </div>
+    </div>
+  );
+};
+
+export default NewResume;
