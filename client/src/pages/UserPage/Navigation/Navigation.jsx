@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import style from './Navigation.module.css'
 import { Link, useLocation } from 'react-router-dom';
 import cn from 'classnames'
-
+import { useMedia } from '../../../hoc/useMedia/useMedia.js'
 
 import { ReactComponent as Logo } from '../../../assets/user_page/home/logo.svg'
 import { ReactComponent as Home } from '../../../assets/user_page/home/home.svg'
@@ -15,13 +15,18 @@ import { ReactComponent as Logout } from '../../../assets/user_page/home/logout.
 
 const Navigation = () => {
     const location = useLocation()
-    console.log(location);
-
+    const isMediaQuery = useMedia("(max-width:1440px)")
     const isActive = (path) => location.pathname === path
+    console.log('isMediaQuery', isMediaQuery);
 
     return (
-        <nav className={style.userNav}>
+        <nav className={cn(style.userNav,
+            { [style.userNavMobile]: isMediaQuery },
+            { [style.userNavDesktop]: !isMediaQuery },
+        )
+        }>
             <Link
+                className={style.userNavLogo}
                 to='/'
             ><Logo /></Link>
             <ul className={style.userNavBar}>

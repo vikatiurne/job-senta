@@ -4,22 +4,18 @@ import cn from 'classnames'
 import style from './Scroll.module.css'
 
 const Scroll = (props) => {
-    const { children, width = "100%", height = "100%" } = props
-    const scrollContainerRef = useRef(null)
-    const [hasScroll, setHasScroll] = useState(false);
 
-    console.log('hasScroll', hasScroll);
+    const { children, width = "100%", height = "100%" } = props;
+    const scrollContainerRef = useRef(null);
+    const [hasScroll, setHasScroll] = useState(false);
 
     useEffect(() => {
         const container = scrollContainerRef.current
-        // console.log(container.scrollHeight, container);
-        // console.log(container.firstChild.firstChild.clientHeight, container.firstChild.firstChild);
+        const checkScroll = () => {
+            setHasScroll(container.firstChild.firstChild.clientHeight > container.scrollHeight);
+        };
 
-
-        setHasScroll(container.firstChild.firstChild.clientHeight > container.scrollHeight);
-
-        // console.log(container.firstChild.firstChild)
-
+        checkScroll();
 
         const handleScroll = (e) => {
             if (container.scrollHeight > container.clientHeight) {
@@ -27,13 +23,16 @@ const Scroll = (props) => {
                 container.scrollTop += e.deltaY;
 
             }
-        }
+        };
         container.addEventListener('wheel', handleScroll);
+        container.addEventListener('resize', checkScroll);
+
         return () => {
-            container.removeEventListener('wheel', handleScroll)
+            container.removeEventListener('wheel', handleScroll);
+            container.removeEventListener('resize', checkScroll);
         }
 
-    }, [])
+    }, [children])
 
     return (
         <div

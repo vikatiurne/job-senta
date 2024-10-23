@@ -1,6 +1,7 @@
 .inputWrapper {
   position: relative;
 }
+
 .inputContainer {
   margin-bottom: 16px;
   padding: 14px;
@@ -11,6 +12,7 @@
   border-color: var(--dark-gray);
   border-radius: 20px;
 }
+
 .icon {
   height: 28px;
 }
@@ -22,16 +24,22 @@
   border: none;
   outline: none;
   color: var(--gray);
+  background-color: transparent;
+  width: 100%;
 }
+
 .inputFieldCorrect {
   color: var(--green);
 }
+
 .inputFieldErr {
   color: var(--red);
 }
+
 .inputNotvisible {
   display: none;
 }
+
 .errField {
   display: block;
   position: absolute;
@@ -42,9 +50,11 @@
   font-size: 16px;
   color: var(--red);
 }
+
 .hideErrField {
   display: none;
 }
+
 @media (max-width: 390px) {
   .inputContainer {
     margin-bottom: 8px;

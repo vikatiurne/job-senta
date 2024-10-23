@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
-import AnimatedRoutes from "./components/AnimatedRoutes/AnimatedRoutes";
+// import AnimatedRoutes from "./components/AnimatedRoutes/AnimatedRoutes";
+import RootRouter from "./router/Router.jsx";
 
 function App() {
   const {
@@ -20,7 +21,13 @@ function App() {
   console.log(user)
 
   // console.log(getAccessTokenSilently({detailedResponse: true}))
-  return <AnimatedRoutes />;
+  return (
+
+    // <AnimatedRoutes />
+    <RootRouter />
+
+
+  );
 }
 
 export default App;

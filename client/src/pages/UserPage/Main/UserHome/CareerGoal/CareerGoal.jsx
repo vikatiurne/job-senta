@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import style from './CareerGoal.module.css'
 import { ReactComponent as User } from '../../../../../assets/user_page/home/user.svg'
@@ -7,8 +7,17 @@ import { ReactComponent as Salary } from '../../../../../assets/user_page/home/s
 import { ReactComponent as Add } from '../../../../../assets/user_page/home/plus.svg'
 import cn from 'classnames'
 
+import ModalCareerGoal from './ModalCareerGoal/ModalCareerGoal';
+import { ModalContext } from '../../../../../context/ModalContext.jsx';
+
 const CareerGoal = ({ className }) => {
-    console.log(className);
+
+    const { showModalCareerGoal, fnShowModalCareerGoal } = useContext(ModalContext)
+
+    const handleShowModalCareerGoal = () => {
+        fnShowModalCareerGoal()
+    }
+
 
     return (
         <section className={cn([style.sectCareerGoal], className)}>
@@ -29,9 +38,12 @@ const CareerGoal = ({ className }) => {
             </ul>
             <button
                 className={style.sectCareerGoalAdd}
-                type='button'>
+                type='button'
+                onClick={handleShowModalCareerGoal}
+            >
                 <Add />
             </button>
+            {showModalCareerGoal && <ModalCareerGoal />}
         </section>
     );
 };
