@@ -8,8 +8,7 @@ import WidgetsBtn from './WidgetsBtn/WidgetsBtn.jsx';
 import ScoreResume from './ScoreResume/ScoreResume.jsx';
 import TopResume from './TopResume/TopResume.jsx';
 import ActiveAndArchivResume from './ActiveAndArchivResume/ActiveAndArchivResume.jsx';
-
-import Scroll from '../../../../components/UI/Scroll/Scroll.jsx';
+import CalendarUser from './CalendarUser/CalendarUser.jsx';
 
 const UserHome = () => {
     return (
@@ -32,6 +31,10 @@ const UserHome = () => {
             <ActiveAndArchivResume
                 className={style.activeAndArchiv}
             />
+            <CalendarUser
+                className={style.calendarUser}
+            />
+
         </div>
 
     );

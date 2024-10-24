@@ -1,0 +1,17 @@
+.modalWrap {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(149, 128, 96, 0.4);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.modal {
+    background-color: var(--white);
+    border-radius: 20px;
+}

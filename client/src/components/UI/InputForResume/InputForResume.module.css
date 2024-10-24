@@ -1,0 +1,21 @@
+.inputContainer {
+  padding: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid var(--brown);
+  border-radius: 10px;
+}
+
+.inputField {
+  background-color: var(--white);
+  font-size: 12px;
+  line-height: 19px;
+  font-family: var(--montserrat);
+  font-weight: 500;
+  border: none;
+  outline: none;
+  color: var(--gray);
+  width: 100%;
+}

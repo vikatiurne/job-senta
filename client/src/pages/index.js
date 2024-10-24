@@ -1,0 +1,1 @@
+export { default as createResumeReducer } from './UserPage/Main/NewResume/NewResumeSlice'
