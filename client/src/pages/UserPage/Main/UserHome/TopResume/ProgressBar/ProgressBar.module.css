@@ -18,3 +18,20 @@
     line-height: 12px;
     color: #a4a4a4;
 }
+
+@media(max-width: 390px), (min-width:390px) {
+    .progressBarTitle {
+        font-size: 10px;
+        line-height: 12px;
+    }
+}
+
+@media (min-width:1440px) {
+    .progressBarTitle {
+
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+}

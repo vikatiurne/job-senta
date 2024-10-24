@@ -1,6 +1,4 @@
 .sectCalendar {
-    padding: 32px 38px;
-    max-width: 320px;
     width: 100%;
     background-color: var(--white);
     border-radius: 20px;
@@ -21,4 +19,27 @@
     font-size: 16px;
     line-height: 25px;
     font-family: var(--monserrat);
+}
+
+
+
+
+@media(max-width: 390px), (min-width:390px) {
+
+    .sectCalendar {
+        padding: 8px 0px;
+        max-height: 35px;
+        overflow: hidden;
+    }
+}
+
+@media (min-width:1440px) {
+
+    .sectCalendar {
+        padding: 32px 38px;
+        max-width: 320px;
+        max-height: unset;
+    }
+
+
 }

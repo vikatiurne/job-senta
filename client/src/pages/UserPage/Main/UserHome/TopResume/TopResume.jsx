@@ -9,12 +9,14 @@ import Scroll from '../../../../../components/UI/Scroll/Scroll';
 import { ReactComponent as DropDownIcon } from '../../../../../assets/user_page/home/dropdown.svg'
 import { ReactComponent as Star } from '../../../../../assets/user_page/home/star.svg'
 import { ReactComponent as StarBorder } from '../../../../../assets/user_page/home/starborder.svg'
-
+import { useMedia } from '../../../../../hoc/useMedia/useMedia.js'
 
 const TopResume = ({ className }) => {
 
     const [selectedResumes, setSelectedResumes] = useState(false)
     const handleSelectedResume = () => (setSelectedResumes(!selectedResumes))
+    const hasMediaQuery = useMedia("(max-width:1440px)")
+    console.log('hasMediaQuery', hasMediaQuery);
 
     return (
         <section className={cn(style.sectResume, className)}>
@@ -79,8 +81,10 @@ const TopResume = ({ className }) => {
                 </DropDown>
 
             </div>
+
+
             <ScoreResumeCircle
-                size={140}
+                size={hasMediaQuery ? 110 : 140}
                 strokeWidth={10}
                 progress={65}
                 colorProgress='#958060'
@@ -92,7 +96,7 @@ const TopResume = ({ className }) => {
             </ScoreResumeCircle>
             <div className={style.sectResumeProgressBar}>
                 <ProgressBar
-                    width={573}
+                    width={hasMediaQuery ? 262 : 573}
                     height={16}
                     title='Resume Structure'
                     progressColor='#A6A482'
@@ -100,7 +104,7 @@ const TopResume = ({ className }) => {
                     progressValue={6}
                 />
                 <ProgressBar
-                    width={573}
+                    width={hasMediaQuery ? 262 : 573}
                     height={16}
                     title='Measurable Results'
                     progressColor='#685843'
@@ -108,7 +112,7 @@ const TopResume = ({ className }) => {
                     progressValue={2}
                 />
                 <ProgressBar
-                    width={573}
+                    width={hasMediaQuery ? 262 : 573}
                     height={16}
                     title='Resume Structure'
                     progressColor='#737084'

@@ -65,6 +65,7 @@ const ModalCareerGoal = () => {
                             touched={touched}
                         />
                         <Input
+                            type='number'
                             id='salary'
                             name="salary"
                             img={Salary}

@@ -5,14 +5,11 @@
     max-width: 672px;
     width: 100%;
     box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+    margin: 0 auto;
 }
 
 .sectResumeTitle {
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    font-size: 27px;
     line-height: 32px;
-    font-family: var(--open-sans);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +21,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4px;
 }
 
 .sectResumeToTrack {
@@ -177,14 +173,130 @@
 
 /* progress bar */
 
-.sectResumeProgressBar {
-    margin-top: 4px;
-}
+
 
 .sectResumeProgressBarIssues {
-    margin-top: 4px;
-    font-size: 12px;
-    line-height: 19px;
     font-weight: 500;
     color: var(--brown);
+}
+
+
+
+@media(max-width: 390px), (min-width:390px) {
+
+    .sectResumeTitle {
+        font-size: 22px;
+        font-weight: 500;
+        font-family: var(--montserrat);
+        text-transform: none;
+    }
+
+    .sectResumeText {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .sectResumeResourse {
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .sectResumeDate {
+
+        font-size: 10px;
+        line-height: 12px;
+
+    }
+
+    .sectResumeDropDownText {
+        font-size: 10px;
+        line-height: 12px;
+
+    }
+
+    .sectResumeDropDownDate {
+
+        font-size: 10px;
+        line-height: 12px;
+
+    }
+
+    .sectResumeScorePercent {
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 32px;
+
+    }
+
+    .sectResumeProgressBarIssues {
+        font-size: 10px;
+        line-height: 12px;
+    }
+}
+
+@media (min-width:1440px) {
+    .sectResumeTitle {
+        font-size: 27px;
+        font-weight: 700;
+        font-family: var(--open-sans);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+
+    .sectResumeWrap {
+        margin-bottom: 4px;
+    }
+
+    .sectResumeText {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .sectResumeResourse {
+        font-size: 16px;
+        line-height: 24px;
+
+    }
+
+    .sectResumeDate {
+        font-size: 12px;
+        line-height: 24px;
+
+    }
+
+
+    .sectResumeDropDownText {
+        font-size: 12px;
+        line-height: 19px;
+    }
+
+
+    .sectResumeDropDownDate {
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .sectResumeScorePercent {
+        font-weight: 800;
+        font-size: 32px;
+        line-height: 48px;
+
+    }
+
+    .sectResumeProgressBarIssues {
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .sectResumeProgressBar {
+        margin-top: 4px;
+    }
+
 }

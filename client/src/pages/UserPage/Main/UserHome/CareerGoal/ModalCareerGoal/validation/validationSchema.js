@@ -4,15 +4,17 @@ const validation = yup.object({
     title: yup
         .string()
         .trim()
-        .required(' asdas'),
+        .required(' '),
     date: yup
         .string()
-        .trim()
-        .required(' asd'),
+        .trim(' ')
+
+        .required(' '),
     salary: yup
         .string()
-        .trim()
-        .required(' asdasd'),
+        .trim(' ')
+        .matches(/^\d*(\.\d+)?$/, ' ')
+        .required(' '),
 })
 
 export default validation 
