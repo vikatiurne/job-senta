@@ -10,14 +10,18 @@ import { ReactComponent as Remove } from '../../../../assets/user_page/builder/A
 import { ReactComponent as Block } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/majesticons_lock-line.svg'
 import { ReactComponent as Copy } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/bx_duplicate.svg'
 import { ReactComponent as Edit } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg'
-// import removeIcon from ''
+import { Link } from "react-router-dom";
 
-export default function Builder({className}){
+export default function Builder(){
   return (
     <div className={styles.container}>
       <div className={styles.bilderContantContainerNav}>
-        <Button children={'Active Resumes'} className={styles.bilderNavLink } />
-        <Button children={'Active Resumes'} className={styles.bilderNavLink } />
+        <Link to={''} className={styles.bilderNavLinkEl}>
+          <Button children={'Active Resumes'} className={styles.bilderNavLink } />
+        </Link>
+        <Link to={'archived'}>
+          <Button children={'Archived Resumes'} className={styles.bilderNavLink } />
+        </Link>
       </div>
       <div className={styles.bilderContantContainer}>
         <div className={styles.containerTitle}>
@@ -48,11 +52,11 @@ export default function Builder({className}){
               <ScoreResumeCircle
                   size={50}
                   strokeWidth={5}
-                  progress={89}
+                  progress={50}
                   colorProgress='#958060'
               >
                   <div className={styles.sectResumeDescScore}>
-                      <p className={styles.sectResumeScorePercent}>89</p>
+                      <p className={styles.sectResumeScorePercent}>50</p>
                       <p className={styles.sectResumeScoreText}>100</p>
                   </div>
               </ScoreResumeCircle>
@@ -71,7 +75,7 @@ export default function Builder({className}){
             <a href="#" className={styles.tableAction}><Edit/></a>
           </div>
         </div>
-         <div className={styles.bilderTableContainer}>
+        <div className={styles.bilderTableContainer}>
           <div className={styles.tableElement}>
             <input type="checkbox" name="" id="" className={styles.checkBox} />
             <div className={styles.bilderTablePosition}>C</div>
@@ -107,18 +111,18 @@ export default function Builder({className}){
         <div className={styles.bilderTableContainer}>
           <div className={styles.tableElement}>
             <input type="checkbox" name="" id="" className={styles.checkBox} />
-            <div className={styles.bilderTablePosition}>looooooooooooooooooooooooooooong names</div>
+            <div className={styles.bilderTablePosition}>C</div>
           </div>
           <nav className={styles.bilderNavTitles}>
             <div className={styles.tableElement}>
               <ScoreResumeCircle
                   size={50}
                   strokeWidth={5}
-                  progress={99}
+                  progress={33}
                   colorProgress='#958060'
               >
                   <div className={styles.sectResumeDescScore}>
-                      <p className={styles.sectResumeScorePercent}>99</p>
+                      <p className={styles.sectResumeScorePercent}>33</p>
                       <p className={styles.sectResumeScoreText}>100</p>
                   </div>
               </ScoreResumeCircle>

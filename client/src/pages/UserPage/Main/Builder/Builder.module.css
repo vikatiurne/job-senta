@@ -9,6 +9,9 @@
     margin-bottom: 24px;
     margin-top: 32px;
 }
+.bilderNavLinkEl{
+    margin-right: 15px;
+}
 .bilderNavLink{
     font-size: 22px;
     line-height: 32px;

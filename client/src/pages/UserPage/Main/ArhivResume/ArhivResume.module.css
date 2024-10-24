@@ -1,0 +1,111 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.bilderContantContainerNav{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 24px;
+    margin-top: 32px;
+}
+.bilderNavLinkEl{
+    margin-right: 15px;
+}
+.bilderNavLink{
+    font-size: 22px;
+    line-height: 32px;
+    font-family: "Montserrat", sans-serif;
+    color: #958060;
+    border-bottom: 2px solid #958060;
+    margin-right: 24px;
+}
+.bilderNavLink:last-of-type{
+    margin-right: 0;
+    border-bottom: none;
+}
+/* ------------- NAVIGATION END-------------- */
+
+.bilderContantContainer{
+    border: 2px solid #958060;
+    border-radius: 15px;
+
+}
+.containerTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #958060;
+    border-bottom: 2px solid #958060;
+    padding: 24px;
+}
+.titleElement{
+    color: #958060;
+    font-size:  22px;
+    font-family: "Montserrat", sans-serif;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+}
+.bilderTableContainer{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    padding: 13px 24px;
+    align-items: center;
+    border-bottom: 2px solid #958060;
+}
+.bilderTableContainer:last-of-type{
+    border: none;
+}
+.bilderNavTitle{
+    display: flex;
+    justify-content: space-between;
+    width: 62%;
+    margin-right: 30px;
+}
+
+.checkBox {
+     transform: scale(1.5)
+}
+.bilderNavTitles {
+    display: flex;
+    justify-content: inherit;
+    width: 52%; 
+}
+
+/* ---- */
+.bilderTableContainer{
+    padding: 13px 24px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.bilderTablePosition{
+    max-width: 250px;
+    min-width: 250px;
+}
+.bilderTablePosition{
+    margin-left: 8px;
+}
+.tableElement{
+    grid-column: span 1; /* Адаптуй ширину відповідно до стовпця */
+    display: flex;
+    align-items: center;
+}
+.sectResumeScorePercent{
+    font-size: 16px;
+    font-weight: 600;
+    color: #958060;
+}
+.sectResumeScoreText{
+    font-size: 14px;
+}
+.tableAction{
+    margin-right: 5px;
+    cursor: pointer;
+    fill: inherit; 
+}
+ .tableAction:hover svg {
+    /* color: #604B2B; */
+    color: red;
+ }
