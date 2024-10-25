@@ -48,8 +48,8 @@
     align-items: center;
 }
 .bilderTableContainer{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     padding: 13px 24px;
     align-items: center;
     border-bottom: 2px solid #958060;
@@ -74,12 +74,6 @@
 }
 
 /* ---- */
-.bilderTableContainer{
-    padding: 13px 24px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-}
 .bilderTablePosition{
     max-width: 250px;
     min-width: 250px;
@@ -88,7 +82,6 @@
     margin-left: 8px;
 }
 .tableElement{
-    grid-column: span 1; /* Адаптуй ширину відповідно до стовпця */
     display: flex;
     align-items: center;
 }

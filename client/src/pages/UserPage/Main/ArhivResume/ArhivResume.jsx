@@ -11,9 +11,9 @@ import { ReactComponent as Block } from '../../../../assets/user_page/builder/Ac
 import { ReactComponent as Edit } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg'
 import { Link  } from "react-router-dom";
 
-export default function Builder() {
+export default function ArhivResume() {
     function handleArchivedClick() {
-        alert(1)
+        alert('problem...')
     }
 
   return (
@@ -49,7 +49,7 @@ export default function Builder() {
         <div className={styles.bilderTableContainer}>
           <div className={styles.tableElement}>
             <input type="checkbox" name="" id="" className={styles.checkBox} />
-            <div className={styles.bilderTablePosition}> names</div>
+            <div className={styles.bilderTablePosition}> -</div>
           </div>
           <nav className={styles.bilderNavTitles}>
             <div className={styles.tableElement}>
@@ -66,10 +66,10 @@ export default function Builder() {
               </ScoreResumeCircle>
             </div>
             <div className={styles.tableElement}>
-              <div className="">28 Fabruary 2024</div>
+              <div className="">22 march 2024</div>
             </div>
             <div className={styles.tableElement}>
-              <div className="">23 March 2024</div>
+              <div className="">-</div>
             </div>
           </nav>
           <div className={styles.tableElement}>
@@ -98,10 +98,10 @@ export default function Builder() {
               </ScoreResumeCircle>
             </div>
             <div className={styles.tableElement}>
-              <div className="">28 Fabruary 2024</div>
+              <div className="">22 march 2024</div>
             </div>
             <div className={styles.tableElement}>
-              <div className="">23 March 2024</div>
+              <div className="">-</div>
             </div>
           </nav>
           <div className={styles.tableElement}>
