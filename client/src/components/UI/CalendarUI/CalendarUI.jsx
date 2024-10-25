@@ -6,6 +6,7 @@ import { ReactComponent as CalendarIcon } from "../../../assets/user_page/home/c
 
 const CalendarUI = (props) => {
   const { date, ...restProps } = props;
+  console.log(date);
   return (
     <>
       <Calendar
@@ -22,8 +23,8 @@ const CalendarUI = (props) => {
               <CalendarIcon />
               <span>
                 {date.toLocaleDateString("en-US", {
-                  month: "long",
                   day: "numeric",
+                  month: "long",
                   year: "numeric",
                 })}{" "}
               </span>

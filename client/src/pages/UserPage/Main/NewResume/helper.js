@@ -14,42 +14,48 @@ export const schemas = {
         link: Yup.string().trim(),
       })
     ),
-    // workExp: Yup.object([
-    //   {
-    //     companyName: Yup.string().trim(),
-    //     position: Yup.string().trim(),
-    //     responsibilities: Yup.string().trim().min(0).max(500),
-    //   },
-    // ]),
-    // educ: Yup.object([
-    //   { educName: Yup.string().trim(), specialty: Yup.string().trim() },
-    // ]),
-    // certif: Yup.object([
-    //   {
-    //     certificateName: Yup.string().trim(),
-    //     institution: Yup.string().trim(),
-    //   },
-    // ]),
-    // award: Yup.object([
-    //   {
-    //     nameAward: Yup.string().trim(),
-    //     institutionAward: Yup.string().trim(),
-    //     merit: Yup.string().trim().min(0).max(500),
-    //   },
-    // ]),
-    // voluntering: Yup.object([
-    //   {
-    //     voluntering: Yup.string().trim(),
-    //     obligations: Yup.string().trim().min(0).max(500),
-    //   },
-    // ]),
-    // publ: Yup.object([
-    //   {
-    //     publication: Yup.string().trim(),
-    //     publicationLink: Yup.string().trim(),
-    //     interests: Yup.string().trim().min(0).max(500),
-    //   },
-    // ]),
+    workExp: Yup.array().of(
+      Yup.object().shape(
+      {
+        companyName: Yup.string().trim(),
+        position: Yup.string().trim(),
+        responsibilities: Yup.string().trim().min(0).max(500),
+      }
+    )),
+    educ: Yup.array().of(
+      Yup.object().shape(
+      { educName: Yup.string().trim(), specialty: Yup.string().trim() },
+    )),
+    certif: Yup.array().of(
+      Yup.object().shape(
+      {
+        certificateName: Yup.string().trim(),
+        institution: Yup.string().trim(),
+      },
+    )),
+    award: Yup.array().of(
+      Yup.object().shape(
+      {
+        nameAward: Yup.string().trim(),
+        institutionAward: Yup.string().trim(),
+        merit: Yup.string().trim().min(0).max(500),
+      },
+    )),
+    voluntering: Yup.array().of(
+      Yup.object().shape(
+      {
+        voluntering: Yup.string().trim(),
+        obligations: Yup.string().trim().min(0).max(500),
+      },
+    )),
+    publ: Yup.array().of(
+      Yup.object().shape(
+      {
+        publication: Yup.string().trim(),
+        publicationLink: Yup.string().trim(),
+        interests: Yup.string().trim().min(0).max(500),
+      },
+    )),
   }),
 };
 
@@ -60,51 +66,55 @@ export const initialValues = {
     email: "",
     LinkedIn: "",
     professionalSummary: "",
-    ["projExp"]: [
+    projExp: [
       {
         name: "",
         role: "",
         link: "",
       },
     ],
-    // workExp: [
-    //   {
-    //     companyName: "",
-    //     position: "",
-    //     responsibilities: "",
-    //   },
-    // ],
-    // educ: [
-    //   {
-    //     educName: "",
-    //     specialty: "",
-    //   },
-    // ],
-    // certif: [
-    //   {
-    //     certificateName: "",
-    //     institution: "",
-    //   },
-    // ],
-    // award: [
-    //   {
-    //     nameAward: "",
-    //     institutionAward: "",
-    //     merit: "",
-    //   },
-    // ],
-    // voluntering: [
-    //   {
-    //     voluntering: "",
-    //     obligations: "",
-    //   },
-    // ],
-    // publ: [
-    //   {
-    //     publication: "",
-    //     publicationLink: "",
-    //     interests: "",
-    //   },
-    // ],
+    workExp: [
+      {
+        companyName: "",
+        position: "",
+        dateStart: '',
+        dateEnd: '',
+        responsibilities: "",
+      },
+    ],
+    educ: [
+      {
+        educName: "",
+        specialty: "",
+        dateStart: '',
+        dateEnd: '',
+      },
+    ],
+    certif: [
+      {
+        certificateName: "",
+        institution: "",
+      },
+    ],
+    award: [
+      {
+        nameAward: "",
+        institutionAward: "",
+        merit: "",
+      },
+    ],
+    voluntering: [
+      {
+        voluntering: "",
+        obligations: "",
+      },
+    ],
+    publ: [
+      {
+        publication: "",
+        publicationLink: "",
+        interests: "",
+      },
+    ],
   },
 };

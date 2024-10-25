@@ -1,4 +1,4 @@
-import { Field, FieldArray, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -11,20 +11,17 @@ import { ReactComponent as Phone } from "../../../../../assets/user_page/builder
 import { ReactComponent as Email } from "../../../../../assets/user_page/builder/createResume/email.svg";
 import { ReactComponent as Linked } from "../../../../../assets/user_page/builder/createResume/link.svg";
 import { ReactComponent as Project } from "../../../../../assets/user_page/builder/createResume/project-name.svg";
-import { ReactComponent as Plus } from "../../../../../assets/user_page/builder/btn_plus.svg";
-import { ReactComponent as Minus } from "../../../../../assets/user_page/builder/createResume/minus.svg";
 import { ReactComponent as Check } from "../../../../../assets/user_page/builder/createResume/check.svg";
 import { ReactComponent as Pen } from "../../../../../assets/user_page/builder/createResume/pen.svg";
-
+import { ReactComponent as Bag } from "../../../../../assets/user_page/builder/createResume/bag.svg";
+import { ReactComponent as Calendar } from "../../../../../assets/user_page/builder/createResume/calendar.svg";
 import arrow from "../../../../../assets/user_page/builder/arrow-outlined.svg";
+
 import { initialValues, schemas } from "../helper";
+import InputsBlock from "../../../../../components/UI/InputsBlock/InputsBlock";
+import { setPosition, setProject } from "../NewResumeSlice";
 
 import styles from "./EnteringForm.module.css";
-import { setPosition, setProject } from "../NewResumeSlice";
-import { useEffect, useState } from "react";
-import RenderBlocks from "../utils/renderBlocks";
-import { Block } from "../utils/addField";
-import InputsBlock from "../../../../../components/UI/InputsBlock/InputsBlock";
 
 const EnterForm = () => {
   const navigate = useNavigate();
@@ -36,7 +33,7 @@ const EnterForm = () => {
   const handleChangeEmail = (e) => {};
   const handleChangeLinkedIn = (e) => {};
   const handleChangePrSum = (e) => {};
-  const handleChangeProject = (e) => dispatch(setProject(e.target.value));
+  const handleChangeProjExp = (e) => dispatch(setProject(e.target.value));
   const handleChangeRole = (e) => {};
   const handleChangeProjectLink = (e) => {};
 
@@ -82,7 +79,6 @@ const EnterForm = () => {
                   <Check />
                 )
               }
-              values={values}
               touched={touched}
               handleChange={(e) => handleChangePositin(e)}
             />
@@ -94,10 +90,14 @@ const EnterForm = () => {
                 placeholder="Phone number"
                 img={
                   <Phone
-                    className={values["phone"] !== "" ? styles.gray : null}
+                  className={
+                    values["phone"] === "" &&
+                    touched["phone"]
+                      ? styles.gray
+                      : null
+                  }
                   />
                 }
-                values={values}
                 touched={touched}
                 handleChange={(e) => handleChangePhone(e)}
               />
@@ -107,10 +107,14 @@ const EnterForm = () => {
                 placeholder="Email"
                 img={
                   <Email
-                    className={values["email"] !== "" ? styles.gray : null}
+                  className={
+                    values["email"] === "" &&
+                    touched["email"]
+                      ? styles.gray
+                      : null
+                  }
                   />
                 }
-                values={values}
                 touched={touched}
                 handleChange={(e) => handleChangeEmail(e)}
               />
@@ -120,10 +124,14 @@ const EnterForm = () => {
                 placeholder="LinkedIn link or portfolio"
                 img={
                   <Linked
-                    className={values["LinkedIn"] !== "" ? styles.gray : null}
+                  className={
+                    values["LinkedIn"] === "" &&
+                    touched["LinkedIn"]
+                      ? styles.gray
+                      : null
+                  }
                   />
                 }
-                values={values}
                 touched={touched}
                 handleChange={(e) => handleChangeLinkedIn(e)}
               />
@@ -134,8 +142,8 @@ const EnterForm = () => {
               name="professionalSummary"
               id="professionalSummary"
               placeholder="Brief description of professional summary or career goal"
-              values={values}
               touched={touched}
+              values={values}
               error={errors}
               handleChange={(e) => handleChangePrSum(e)}
             />
@@ -143,9 +151,13 @@ const EnterForm = () => {
             <InputsBlock
               blockName="projExp"
               labelBlock="Project Experience"
-              values={values}
-              touched={touched}
+              handleChange={(e) => handleChangeProjExp(e)}
               errors={errors}
+              initial={{
+                name: "",
+                role: "",
+                link: "",
+              }}
               fields={[
                 {
                   name: "name",
@@ -174,7 +186,106 @@ const EnterForm = () => {
                 },
               ]}
             />
-           
+            <InputsBlock
+              blockName="workExp"
+              labelBlock="Work Experience"
+              initial={{
+                companyName: "",
+                position: "",
+                dateStart: "",
+                dateEnd: "",
+                responsibilities: "",
+              }}
+              errors={errors}
+              fields={[
+                {
+                  name: "companyName",
+                  id: "companyName",
+                  placeholder: "Company name",
+                  type: "input",
+                  img: <Bag />,
+                },
+                {
+                  name: "position",
+                  id: "position",
+                  placeholder: "Position",
+                  type: "input",
+                  img: <Bag />,
+                },
+                {
+                  dates: [
+                    {
+                      name: "dateStart",
+                      id: "dateStart",
+                      placeholder: "Date of start of work",
+                      type: "input",
+                      img: <Calendar />,
+                    },
+                    {
+                      name: "dateEnd",
+                      id: "dateEnd",
+                      placeholder: "End date of work",
+                      type: "input",
+                      img: <Calendar />,
+                    },
+                  ],
+                },
+
+                {
+                  name: "responsibilities",
+                  id: "responsibilities",
+                  placeholder: "Main responsibilities and achievements",
+                  type: "textarea",
+                  warning: "(0 of 500 characters)",
+                  img: <Pen />,
+                },
+              ]}
+            />
+            <InputsBlock
+              blockName="educ"
+              labelBlock="Education"
+              initial={{
+                educName: "",
+                specialty: "",
+                dateStart: "",
+                dateEnd: "",
+              }}
+              errors={errors}
+              fields={[
+                {
+                  name: "educName",
+                  id: "educName",
+                  placeholder: "Name of the educational institution",
+                  type: "input",
+                  img: <Bag />,
+                },
+                {
+                  name: "specialty",
+                  id: "specialty",
+                  placeholder: "Specialty",
+                  type: "input",
+                  img: <Bag />,
+                },
+                {
+                  dates: [
+                    {
+                      name: "dateStart",
+                      id: "dateStart",
+                      placeholder: "Date of start of educational",
+                      type: "input",
+                      img: <Calendar />,
+                    },
+                    {
+                      name: "dateEnd",
+                      id: "dateEnd",
+                      placeholder: "End date of educational",
+                      type: "input",
+                      img: <Calendar />,
+                    },
+                  ],
+                },
+              ]}
+            />
           </div>
         </Form>
       )}

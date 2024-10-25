@@ -9,12 +9,18 @@ const TextArea = ({
   touched,
   error,
   handleChange,
+  values
 }) => {
 
   return (
     <>
       <div className={styles.inputContainer}>
-        <Pen />
+        <Pen className={
+                      values[`${name}`] === "" &&
+                      touched[`${name}`]
+                        ? styles.gray
+                        : null
+                    }/>
 
         <Field
           as="textarea"

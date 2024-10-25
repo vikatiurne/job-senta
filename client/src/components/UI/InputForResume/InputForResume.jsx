@@ -21,8 +21,8 @@ const InputForResume = ({
           name={name}
           id={id}
           placeholder={placeholder}
-          onBlur={handleChange}
-          // onKeyUp={handleChange}
+          // onBlur={handleChange}
+          onKeyUp={handleChange}
           className={
             !touched[name]
               ? `${styles.inputField} `

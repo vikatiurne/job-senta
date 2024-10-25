@@ -39,3 +39,6 @@
   margin-bottom: 8px;
   color: var(--red);
 }
+.gray {
+  fill: var(--dark-gray);
+}
