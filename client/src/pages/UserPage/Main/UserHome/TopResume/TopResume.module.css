@@ -237,7 +237,7 @@
     }
 }
 
-@media (min-width:1440px) {
+@media (min-width:1024px) {
     .sectResumeTitle {
         font-size: 27px;
         font-weight: 700;

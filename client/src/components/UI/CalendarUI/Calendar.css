@@ -3,7 +3,9 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 4px;
+
 }
+
 
 .react-calendar__navigation__label {
     font-family: var(--monserrat);
@@ -64,17 +66,63 @@
     color: var(--dark-gray);
 }
 
+
+/* .react-calendar__month-view__days__day abbr:hover {
+    cursor: pointer;
+    font-weight: 800;
+} */
+
 .react-calendar__month-view__days__day.react-calendar__month-view__days__day--neighboringMonth abbr {
-    color: #a4a4a4;
+    color: var(--gray-light);
 }
 
 
-.react-calendar__tile--now {
+.react-calendar__tile--active {
     background-color: var(--brown);
     border-radius: 20px;
-
 }
 
-.react-calendar__tile--now abbr {
+
+
+.react-calendar__tile--active abbr {
     color: var(--white);
 }
+
+.react-calendar__year-view__months {
+    flex-direction: column;
+}
+
+.react-calendar__year-view__months__month abbr {
+    font-family: var(--monserrat);
+    font-size: 12px;
+    line-height: 19px;
+    font-weight: 500;
+    color: var(--gray-light);
+}
+
+.react-calendar__year-view__months__month abbr:hover {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--dark-gray);
+}
+
+.react-calendar__year-view__months .react-calendar__tile--hasActive {
+    background-color: var(--white);
+}
+
+.react-calendar__year-view__months .react-calendar__tile--hasActive abbr {
+    font-family: var(--monserrat);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: var(--dark-gray);
+}
+
+
+.react-calendar__decade-view__years {
+    flex-direction: column;
+}
+
+/* react-calendar__tile react-calendar__decade-view__years__year */
+
+/* react-calendar__tile react-calendar__decade-view__years__year */

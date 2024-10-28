@@ -33,7 +33,7 @@
     }
 }
 
-@media (min-width:1440px) {
+@media (min-width:1024px) {
 
     .sectCalendar {
         padding: 32px 38px;
