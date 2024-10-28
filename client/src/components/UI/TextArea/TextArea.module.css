@@ -1,11 +1,12 @@
 .inputContainer {
   padding: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   display: flex;
   align-items: flex-start;
   gap: 8px;
   border: 2px solid var(--brown);
   border-radius: 10px;
+  height: 80px;
 }
 
 .inputField {
@@ -14,7 +15,6 @@
   outline: none;
   width: 100%;
   resize: none;
-  height: 80px;
 }
 .inputField::-webkit-scrollbar {
   width: 0px;

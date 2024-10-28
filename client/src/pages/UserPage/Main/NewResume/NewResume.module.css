@@ -1,11 +1,29 @@
-.wrapper{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 33px;
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 33px;
 }
-.previewContainer {
-    margin-top: 32px;
-    padding: 24px;
-    border-radius: 20px;
-    box-shadow: 0px 0px 5px 0px rgba(149,128,96,0.2)
-  }
+.exportBtns{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 32px;
+}
+.export {
+  padding: 8px 28px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--white);
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 500;
+  font-family: var(--montserrat);
+  border-radius: 20px;
+}
+.exportDoc {
+  background-color: var(--brown-light);
+}
+.exportPdf {
+  background-color: var(--brown);
+}

@@ -1,5 +1,4 @@
-import { FieldArray, Field, useField } from "formik";
-import DataView from "react-datepicker";
+import { FieldArray, Field } from "formik";
 
 import { ReactComponent as Plus } from "../../../assets/user_page/builder/btn_plus.svg";
 import { ReactComponent as Minus } from "../../../assets/user_page/builder/createResume/minus.svg";
@@ -7,20 +6,9 @@ import { ReactComponent as Check } from "../../../assets/user_page/builder/creat
 
 import styles from "./InputsBlock.module.css";
 import Button from "../Button/Button";
-import { initialValues } from "../../../pages/UserPage/Main/NewResume/helper";
-import { useState } from "react";
-import CalendarUI from "../CalendarUI/CalendarUI";
 import InputDate from "../InputDate/InputDate";
-import DatePicker from "../InputDate/InputDate";
 
-const InputsBlock = ({
-  blockName,
-  labelBlock,
-  initial,
-  handleChange,
-  errors,
-  fields,
-}) => {
+const InputsBlock = ({ blockName, labelBlock, initial, errors, fields }) => {
   return (
     <FieldArray
       name={blockName}
@@ -37,16 +25,25 @@ const InputsBlock = ({
               values[blockName].map((_, j) => (
                 <div key={j}>
                   {j !== 0 && (
-                    <Button onClick={() => remove(j)} className={styles.minus}>
-                      <Minus />
-                    </Button>
+                    <div className={styles.controlBtns}>
+                      <Button
+                        onClick={() => remove(j)}
+                        className={styles.minus}
+                      >
+                        <Minus />
+                      </Button>
+                      <Plus
+                        className={styles.plus}
+                        onClick={() => push(initial)}
+                      />
+                    </div>
                   )}
                   {fields.map((item, i) => {
                     return !item.dates ? (
                       <div key={i}>
                         <div
                           className={
-                            item["type"] != "textarea"
+                            item["type"] !== "textarea"
                               ? styles.inputContainer
                               : styles.textareaContainer
                           }
@@ -54,7 +51,7 @@ const InputsBlock = ({
                           {!values[blockName][j][item.name] ? (
                             <div
                               className={
-                                touched[blockName]?.[j][item.name]
+                                touched[blockName]?.[j]?.[item.name]
                                   ? styles.inputFieldTouched
                                   : null
                               }
@@ -64,19 +61,25 @@ const InputsBlock = ({
                           ) : (
                             <Check />
                           )}
-
-                          <Field
-                            onKeyUp={handleChange}
-                            type={item["type"]}
-                            name={`${blockName}.${j}.${item["name"]}`}
-                            id={`${blockName}.${j}.${item["name"]}`}
-                            placeholder={item["placeholder"]}
-                            className={
-                              item["type"] != "textarea"
-                                ? styles.inputField
-                                : styles.textareaField
-                            }
-                          />
+                          {item.type !== "date" ? (
+                            <Field
+                              type={item["type"]}
+                              name={`${blockName}.${j}.${item["name"]}`}
+                              id={`${blockName}.${j}.${item["name"]}`}
+                              placeholder={item["placeholder"]}
+                              className={
+                                item["type"] !== "textarea"
+                                  ? styles.inputField
+                                  : styles.textareaField
+                              }
+                            />
+                          ) : (
+                            <InputDate
+                              name={`${blockName}.${j}.${item["name"]}`}
+                              id={`${blockName}.${j}.${item["name"]}`}
+                              placeholder={`${item["placeholder"]}`}
+                            />
+                          )}
                         </div>
                         {!!item["warning"] && (
                           <p
@@ -97,7 +100,7 @@ const InputsBlock = ({
                             {!values[blockName][j][item.dates[k].name] ? (
                               <div
                                 className={
-                                  touched[blockName]?.[j][item.dates[k].name]
+                                  touched[blockName]?.[j]?.[item.dates[k].name]
                                     ? styles.inputFieldTouched
                                     : null
                                 }

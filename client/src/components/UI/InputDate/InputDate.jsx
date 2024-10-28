@@ -4,31 +4,27 @@ import { ReactComponent as Calendar } from "../../../assets/user_page/builder/cr
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./InputDate.css";
-// import { useState } from "react";
+
 
 const InputDate = ({ name, placeholder, start, end }) => {
   const [field, meta, helpers] = useField(name);
   const { value } = meta;
   const { setValue } = helpers;
 
-  // console.log(value)
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(startDate);
 
   return (
     <DatePicker
       {...field}
       placeholderText={placeholder}
       selected={value}
-      // selected={start ? startDate : endDate}
-      // startDate={startDate}
-      // endDate={endDate}
-      // selectsStart={start ? true : null}
-      // selectsEnd={end ? true : null}
-      // minDate={end ? startDate : null}
       onChange={(date) => {
-        setValue(date);
-        // start ? setStartDate(date) : setEndDate(date);
+        const timeMs = Date.parse(date);
+        setValue(
+          new Date(timeMs).toLocaleString("en-US", {
+            month: "long",
+            year: "numeric",
+          })
+        );
       }}
       className="datePicker"
       showPopperArrow={false}
@@ -38,7 +34,7 @@ const InputDate = ({ name, placeholder, start, end }) => {
           <div className="calendar-header">
             <Calendar className="icon" />
             <p>
-              {date.toLocaleDateString("en-US", {
+              {new Date(Date.parse(date)).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",

@@ -19,6 +19,9 @@
   border: none;
   color: var(--dark-gray);
 }
+.react-datepicker-wrapper{
+  width: 100%;
+}
 .react-datepicker-popper {
   border: 2px solid var(--brown);
   border-bottom-left-radius: 20px;

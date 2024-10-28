@@ -15,47 +15,46 @@ export const schemas = {
       })
     ),
     workExp: Yup.array().of(
-      Yup.object().shape(
-      {
+      Yup.object().shape({
         companyName: Yup.string().trim(),
         position: Yup.string().trim(),
         responsibilities: Yup.string().trim().min(0).max(500),
-      }
-    )),
+      })
+    ),
     educ: Yup.array().of(
-      Yup.object().shape(
-      { educName: Yup.string().trim(), specialty: Yup.string().trim() },
-    )),
+      Yup.object().shape({
+        educName: Yup.string().trim(),
+        specialty: Yup.string().trim(),
+      })
+    ),
     certif: Yup.array().of(
-      Yup.object().shape(
-      {
+      Yup.object().shape({
         certificateName: Yup.string().trim(),
         institution: Yup.string().trim(),
-      },
-    )),
+      })
+    ),
     award: Yup.array().of(
-      Yup.object().shape(
-      {
+      Yup.object().shape({
         nameAward: Yup.string().trim(),
         institutionAward: Yup.string().trim(),
         merit: Yup.string().trim().min(0).max(500),
-      },
-    )),
+      })
+    ),
     voluntering: Yup.array().of(
-      Yup.object().shape(
-      {
+      Yup.object().shape({
         voluntering: Yup.string().trim(),
         obligations: Yup.string().trim().min(0).max(500),
-      },
-    )),
+      })
+    ),
     publ: Yup.array().of(
-      Yup.object().shape(
-      {
+      Yup.object().shape({
         publication: Yup.string().trim(),
         publicationLink: Yup.string().trim(),
         interests: Yup.string().trim().min(0).max(500),
-      },
-    )),
+      })
+    ),
+    skills: Yup.string().trim(),
+    interests: Yup.string().trim().min(0).max(500),
   }),
 };
 
@@ -77,8 +76,8 @@ export const initialValues = {
       {
         companyName: "",
         position: "",
-        dateStart: '',
-        dateEnd: '',
+        dateStart: "",
+        dateEnd: "",
         responsibilities: "",
       },
     ],
@@ -86,14 +85,16 @@ export const initialValues = {
       {
         educName: "",
         specialty: "",
-        dateStart: '',
-        dateEnd: '',
+        dateStart: "",
+        dateEnd: "",
       },
     ],
     certif: [
       {
         certificateName: "",
         institution: "",
+        dateStart: "",
+        dateEnd: "",
       },
     ],
     award: [
@@ -101,20 +102,25 @@ export const initialValues = {
         nameAward: "",
         institutionAward: "",
         merit: "",
+        date: "",
       },
     ],
     voluntering: [
       {
         voluntering: "",
         obligations: "",
+        dateStart: "",
+        dateEnd: "",
       },
     ],
     publ: [
       {
         publication: "",
         publicationLink: "",
-        interests: "",
+        date: "",
       },
     ],
+    skills: "",
+    interests: "",
   },
 };

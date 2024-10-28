@@ -12,24 +12,31 @@
   align-items: center;
   justify-content: space-between;
 }
+.controlBtns{
+  display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    padding-right: 9px;
+}
 .plus {
   cursor: pointer;
 }
 .minus {
-  padding: 9px;
+  padding-bottom: 5px;
   height: 32px;
-  width: 100%;
   cursor: pointer;
   text-align: right;
 }
 .inputContainer {
   padding: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   display: flex;
   gap: 8px;
   border: 2px solid var(--brown);
   border-radius: 10px;
   width: 100%;
+  height: 36px;
 }
 
 .inputField {

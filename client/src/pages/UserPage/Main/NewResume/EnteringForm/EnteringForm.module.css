@@ -1,0 +1,54 @@
+.back {
+  cursor: pointer;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.back p {
+  color: var(--dark-gray);
+  font-family: var(--montserrat);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.enteringContainer {
+  padding: 24px 24px 0;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+}
+.title {
+  margin-bottom: 8px;
+  font-size: 27px;
+  line-height: 32px;
+  font-weight: 700;
+  font-family: var(--open-sans);
+  color: var(--brown);
+  text-transform: uppercase;
+}
+.label {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: var(--montserrat);
+  color: var(--dark-gray);
+}
+.gray {
+  fill: var(--dark-gray);
+}
+.contacts {
+  display: grid;
+  gap: 4px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+.contacts div:nth-child(3) {
+  grid-area: 2 / 1 / 3 / 3;
+}
+
+
