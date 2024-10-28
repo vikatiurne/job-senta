@@ -25,7 +25,6 @@ const UserHome = () => {
             <ScoreResume
                 className={style.score}
             />
-
             <TopResume
                 className={style.resume}
             />
