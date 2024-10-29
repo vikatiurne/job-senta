@@ -7,7 +7,8 @@
 @media(max-width: 390px), (min-width:390px) {
     .pageHome {
         gap: 10px 16px;
-        grid-template-columns: minmax(205px) minmax(127px);
+        grid-template-columns: minmax(205px, 1fr) minmax(127px, 1fr);
+        height: max-content;
     }
 
     .welcome,

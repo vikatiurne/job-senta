@@ -34,7 +34,7 @@ const ScoreResume = ({ className }) => {
                     style.sectScoreResumeItemMin,
                     { [style.sectScoreResumeItemMinAcive]: selectedMinScore },
                 )}>
-                    <h6 className={style.sectScoreResumeItemTitle} >Min score  <Score /></h6>
+                    <h6 className={style.sectScoreResumeItemTitle} >Min&nbsp;score  <Score /></h6>
                     <p className={style.sectScoreResumeItemScore} >0%</p>
                     <button
                         type='text'
@@ -88,7 +88,7 @@ const ScoreResume = ({ className }) => {
                     style.sectScoreResumeItemMax,
                     { [style.sectScoreResumeItemMaxAcive]: selectedMaxScore },
                 )}>
-                    <h6 className={style.sectScoreResumeItemTitle} >Max score  <Score /></h6>
+                    <h6 className={style.sectScoreResumeItemTitle} >Max&nbsp;score  <Score /></h6>
                     <p className={style.sectScoreResumeItemScore} >0%</p>
 
                     <button

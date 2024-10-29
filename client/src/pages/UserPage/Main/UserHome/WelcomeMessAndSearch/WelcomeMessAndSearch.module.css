@@ -10,14 +10,6 @@
 
 
 
-/* @media(max-width: 390px), (min-width:390px) {
- 
-}
-
-@media (min-width:1440px) {
- 
-} */
-
 @media(max-width: 390px), (min-width:390px) {
     .sectWelcomeTitle {
         font-family: var(--montserrat);

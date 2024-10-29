@@ -5,7 +5,7 @@ import style from './Scroll.module.css'
 
 const Scroll = (props) => {
 
-    const { children, width = "100%", height = "100%" } = props;
+    const { children, classContent, width = "100%", height = "100%" } = props;
     const scrollContainerRef = useRef(null);
     const [hasScroll, setHasScroll] = useState(false);
 
@@ -40,10 +40,12 @@ const Scroll = (props) => {
             style={{ height, width }}
             className={style.customScroll}
         >
-            <div className={cn(style.customScrollContent,
+            <div className={cn(style.customScrollContent, classContent,
                 { [style.withScroll]: hasScroll }
             )}>
-                {children}
+                <div className={style.scrollWrap}>
+                    {children}
+                </div>
             </div>
         </div >
     );
