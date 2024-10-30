@@ -24,6 +24,8 @@ const LoginForm = () => {
     <Formik
       initialValues={initialValues.registration}
       validationSchema={schemas.registration}
+      validateOnBlur
+      validateOnChange={false}
       onSubmit={(values, { resetForm }) => {
         submitFormHandler(values);
         resetForm();

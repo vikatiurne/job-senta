@@ -26,6 +26,8 @@ const NewPasswordForm = () => {
     <Formik
       initialValues={initialValues.newpass}
       validationSchema={schemas.newpass}
+      validateOnBlur
+      validateOnChange={false}
       onSubmit={(values, { resetForm }) => {
         submitFormHandler(values);
         resetForm();

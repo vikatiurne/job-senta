@@ -18,19 +18,21 @@ const Input = ({ id, name, placeholder, img, error, touched }) => {
       <div className={styles.inputContainer}>
         {!touched[name] ? (
           <img src={img} alt={img} className={styles.icon} />
-        ) : error[name] ? (
-          <img src={crossIcon} alt="cross" className={styles.icon} />
         ) : (
-          <img src={checkIcon} alt="check" className={styles.icon} />
+          <img
+            src={error[name] ? crossIcon : checkIcon}
+            alt="icon"
+            className={styles.icon}
+          />
         )}
-
+        {/* {console.log(name, ":", error[name])} */}
         <Field
           autoComplete="off"
           name={name}
           id={id}
           placeholder={placeholder}
           className={
-            !touched[name] || isHideErrMsg
+            !touched[name] || !error[name] || isHideErrMsg
               ? error[name]
                 ? `${styles.inputField} ${styles.inputFieldErr}`
                 : `${styles.inputField} ${styles.inputFieldCorrect}`
@@ -38,14 +40,15 @@ const Input = ({ id, name, placeholder, img, error, touched }) => {
           }
         />
       </div>
-      {error[name] && touched[name] ? (
+
+      {error[name] && touched[name] && (
         <div
           onClick={() => setIsHideErrMsg(true)}
           className={isHideErrMsg ? styles.hideErrField : styles.errField}
         >
           <p>{error[name]}</p>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

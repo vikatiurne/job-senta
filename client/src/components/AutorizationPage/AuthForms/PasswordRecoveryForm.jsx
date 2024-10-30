@@ -31,6 +31,8 @@ const PasswordRecoveryForm = () => {
     <Formik
       initialValues={initialValues.recovery}
       validationSchema={schemas.recovery}
+      validateOnBlur
+      validateOnChange={false}
       onSubmit={(values, { resetForm }) => {
         submitFormHandler(values);
         resetForm();
