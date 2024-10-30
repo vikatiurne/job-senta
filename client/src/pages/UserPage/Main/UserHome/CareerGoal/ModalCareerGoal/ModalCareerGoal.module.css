@@ -1,0 +1,135 @@
+.modalCareer {
+    border: 2px solid var(--brown);
+
+    width: 100%;
+}
+
+.modalCareerContent {
+    position: relative;
+    text-align: center;
+}
+
+.modalCareerTitle {
+    text-transform: uppercase;
+    font-family: var(--open-sans);
+    margin-bottom: 8px;
+    color: var(--brown);
+
+}
+
+.modalCareerText {
+    font-family: var(--montserrat);
+    font-weight: 500;
+    color: var(--gray);
+    margin-bottom: 16px;
+}
+
+.modalCareerSubmit {
+    cursor: pointer;
+    font-family: var(--montserrat);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    padding: 8px 46px;
+    border-radius: 20px;
+    color: var(--brown);
+    border: 2px solid var(--brown);
+}
+
+
+.modalCareerSubmit:hover {
+    color: var(--brown-hover);
+    border-color: var(--brown-hover);
+}
+
+.modalCareerSubmit:focus-visible {
+    color: var(--brown-focused);
+    border-color: var(--brown-focused);
+}
+
+.modalCareerSubmit[disabled] {
+    color: var(--gray-disabled);
+    border-color: var(--gray-disabled);
+}
+
+
+.modalCareerClose {
+    cursor: pointer;
+    position: absolute;
+}
+
+.modalCareerClose:hover svg path {
+    fill: var(--brown-focused);
+    stroke: var(--brown-focused);
+}
+
+
+@media(max-width: 390px), (min-width:390px) {
+    .modalCareer {
+        max-width: 342px;
+    }
+
+    .modalCareerContent {
+        padding: 16px;
+    }
+
+    .modalCareerTitle {
+        font-family: var(--montserrat);
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 600;
+    }
+
+    .modalCareerText {
+
+        font-size: 10px;
+        line-height: 12px;
+
+    }
+
+
+
+    .modalCareerClose {
+        top: 16px;
+        right: 16px;
+    }
+
+    .modalCareerClose svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (min-width:1440px) {
+    .modalCareer {
+        max-width: 570px;
+    }
+
+    .modalCareerContent {
+        padding: 24px;
+
+    }
+
+    .modalCareerTitle {
+        font-family: var(--open-sans);
+        font-size: 27px;
+        line-height: 32px;
+        font-weight: 700;
+    }
+
+    .modalCareerText {
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .modalCareerClose {
+        top: 24px;
+        right: 24px;
+    }
+
+    .modalCareerClose svg {
+        width: 32px;
+        height: 32px;
+    }
+}

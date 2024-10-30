@@ -1,0 +1,108 @@
+.sectAcriveArchiv {
+    background-color: var(--white);
+    border-radius: 20px;
+    max-width: 786px;
+    width: 100%;
+    box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectAcriveArchivBlock {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+}
+
+.activeResume {
+    border-color: var(--brown);
+    color: var(--brown);
+}
+
+.archivResume {
+    border-color: var(--gray);
+    color: var(--gray);
+}
+
+.activeResumeCount,
+.archivResumeCount {
+    font-family: var(--open-sans);
+    font-weight: 800;
+    font-size: 90px;
+    line-height: 110px;
+    margin-bottom: 21px;
+
+}
+
+.archiResumeText,
+.activeResumeText {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 32px;
+    font-family: var(--montserrat);
+    color: #a4a4a4;
+}
+
+
+@media(max-width: 390px), (min-width:390px) {
+    .sectAcriveArchiv {
+        padding: 4px;
+        flex-direction: column;
+        gap: 2px;
+
+    }
+
+    .sectAcriveArchivBlock {
+        padding: 8px;
+    }
+
+    .activeResumeCount,
+    .archivResumeCount {
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 32px;
+        margin-bottom: 4px;
+
+    }
+
+
+    .archiResumeText,
+    .activeResumeText {
+        font-size: 10px;
+        line-height: 12px;
+    }
+}
+
+@media (min-width:1440px) {
+
+    .sectAcriveArchiv {
+        flex-direction: row;
+        padding: 16px;
+        gap: 16px;
+
+    }
+
+    .sectAcriveArchivBlock {
+        padding: 16px;
+    }
+
+    .activeResumeCount,
+    .archivResumeCount {
+        font-weight: 800;
+        font-size: 90px;
+        line-height: 110px;
+        margin-bottom: 21px;
+
+    }
+
+    .archiResumeText,
+    .activeResumeText {
+        font-size: 22px;
+        line-height: 32px;
+
+    }
+}

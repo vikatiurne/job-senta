@@ -1,0 +1,65 @@
+.btnContainer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.btnContainerShow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.userIcon {
+  width: 26px;
+  height: 28px;
+  background-image: url("../../../assets/userIcon.svg");
+}
+
+.registrBtn,
+.loginBtn {
+  padding: 8px 16px;
+  font-size: 24px;
+  color: var(--brown);
+  font-family: var(--montserrat);
+  font-weight: 700;
+  border: 2px solid var(--brown);
+  border-radius: 20px;
+  cursor: pointer;
+}
+.loginBtn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.registrBtn:hover,
+.loginBtn:hover {
+  color: var(--brown-hover);
+  border: 2px solid var(--brown-hover);
+}
+
+.loginBtn:hover .userIcon {
+  background-image: url("../../../assets/userIcon_hover.svg");
+}
+.registrBtn:focus,
+.loginBtn:focus {
+  color: var(--brown-focused);
+  border: 2px solid var(--brown-focused);
+}
+.loginBtn:focus .userIcon {
+  background-image: url("../../../assets/userIcon_focus.svg");
+}
+
+@media (max-width: 390px) {
+  .btnContainer {
+    display: none;
+  }
+  .btnContainerShow {
+    flex-direction: row-reverse;
+  }
+}

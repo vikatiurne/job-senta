@@ -1,0 +1,291 @@
+.sectScoreResume {
+    background-color: var(--white);
+    border-radius: 20px;
+    max-width: 437px;
+    width: 100%;
+    box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+}
+
+.sectScoreResumeList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.sectScoreResumeItem {
+    color: var(--white);
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.sectScoreResumeItemAverage {
+    grid-column: 1 / 3;
+    background-color: #A6A482;
+}
+
+
+.sectScoreResumeItemMin {
+    background-color: var(--brown);
+}
+
+.sectScoreResumeItemMinAcive,
+.sectScoreResumeItemMaxAcive {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.sectScoreResumeItemMax {
+    background-color: #737084;
+}
+
+
+.sectScoreResumeItemTitle {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+
+.sectScoreResumeItemDropDown {
+    cursor: pointer;
+    transform: rotate(180deg);
+}
+
+.sectScoreResume .scoreActive {
+    transform: rotate(0deg);
+}
+
+
+
+/* DropDown */
+.scoreMaxDropDown {
+    padding-left: 8px;
+    padding-right: 8px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #737084;
+    color: #737084;
+}
+
+.scoreMinDropDown {
+
+    padding-left: 8px;
+    padding-right: 8px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--brown);
+    color: var(--brown);
+
+}
+
+.scoreDropDownTitle {
+
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 19px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+
+}
+
+.scoreDropDownList {
+
+    counter-reset: list-counter;
+
+}
+
+.scoreDropDownItem {
+    counter-increment: list-counter;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.scoreDropDownItem::before {
+    text-align: center;
+    max-width: 24px;
+    margin-right: 4px;
+    height: 24px;
+    width: 100%;
+    content: counter(list-counter)".";
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray);
+
+}
+
+.scoreMinDropDown .scoreDropDownItem:nth-child(1):before {
+    background-color: var(--brown);
+    color: var(--white);
+    border-radius: 20px;
+}
+
+.scoreMaxDropDown .scoreDropDownItem:nth-child(1):before {
+    background-color: #737084;
+    color: var(--white);
+    border-radius: 20px;
+}
+
+
+.scoreDropDownItemText {
+    font-size: 12px;
+    line-height: 19px;
+    color: var(--gray);
+}
+
+.scoreDropDownItemBtn {
+    margin-left: auto;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media(max-width: 390px), (min-width:390px) {
+    .sectScoreResume {
+        padding: 8px;
+
+    }
+
+    .sectScoreResumeList {
+        gap: 4px;
+
+    }
+
+    .sectScoreResumeItemAverage {
+        padding: 8px;
+
+    }
+
+    .sectScoreResumeItemAverage svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .sectScoreResumeItemMin,
+    .sectScoreResumeItemMax {
+        padding: 4px;
+
+    }
+
+    .sectScoreResumeItemMin svg,
+    .sectScoreResumeItemMax svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .sectScoreResumeItemTitle {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 19px;
+        gap: 4px;
+    }
+
+
+    .sectScoreResumeItemScore {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 600;
+        font-family: var(--montserrat);
+    }
+
+    .sectScoreResumeItemAverage .sectScoreResumeItemScore {
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 32px;
+    }
+
+
+    .sectScoreResume .scoreMaxDropDown {
+        width: 194px;
+        transform: translateX(calc(-194px / 2 - 5px)) translateY(100%);
+        border-top-left-radius: 20px;
+    }
+
+    .sectScoreResume .scoreMinDropDown {
+        width: 194px;
+
+        border-top-right-radius: 20px;
+    }
+
+}
+
+@media (min-width:1440px) {
+    .sectScoreResume {
+        padding: 16px;
+    }
+
+    .sectScoreResumeList {
+        gap: 16px;
+
+    }
+
+
+    .sectScoreResumeItemAverage {
+        padding: 24px;
+
+    }
+
+    .sectScoreResumeItemAverage svg,
+    .sectScoreResumeItemMin svg,
+    .sectScoreResumeItemMax svg {
+        width: 24px;
+        height: 24px;
+    }
+
+
+    .sectScoreResumeItemMin,
+    .sectScoreResumeItemMax {
+        padding: 16px;
+    }
+
+
+    .sectScoreResumeItemTitle {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 600;
+        gap: 16px;
+        margin-bottom: 4px;
+    }
+
+
+    .sectScoreResumeItemScore {
+        font-size: 32px;
+        line-height: 48px;
+        font-weight: 800;
+        font-family: var(--open-sans);
+    }
+
+    .sectScoreResumeItemAverage .sectScoreResumeItemScore {
+        font-size: 90px;
+        line-height: 110px;
+    }
+
+
+    .sectScoreResume .scoreMaxDropDown {
+        width: 100%;
+        transform: translateY(100%);
+        border-top-left-radius: 0px;
+    }
+
+    .sectScoreResume .scoreMinDropDown {
+        width: 100%;
+
+        border-top-right-radius: 0px;
+    }
+
+
+
+}

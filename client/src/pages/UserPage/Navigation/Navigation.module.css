@@ -1,0 +1,61 @@
+.userNav {
+  margin-bottom: 32px;
+  max-width: 203px;
+  width: 100%;
+  min-height: 100%;
+  border-radius: 20px;
+  background-color: var(--brown);
+  padding-top: 32px;
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userNavBar {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+.userNavBarItem {
+  width: inherit;
+}
+.logoutBtn {
+}
+
+.userLink {
+  text-decoration: none;
+  width: 100%;
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--montserrat);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--white);
+  border-radius: 20px;
+}
+
+.userLink:hover {
+  background-color: var(--brown-hover);
+}
+
+.userLinkActive {
+  background-color: var(--brown-focused);
+}
+
+.userLinkActive:hover {
+  background-color: var(--brown-focused);
+}
+
+.userNavBarItemPlace {
+  margin-top: auto;
+}

@@ -1,0 +1,302 @@
+.sectResume {
+    padding: 16px;
+    background-color: var(--white);
+    border-radius: 20px;
+    max-width: 672px;
+    width: 100%;
+    box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+    margin: 0 auto;
+}
+
+.sectResumeTitle {
+    line-height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.sectResumeWrap {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectResumeToTrack {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.sectResumeBtnDropDown {
+    cursor: pointer;
+}
+
+.sectResumeBtnDropDown svg {
+    transform: rotate(-180deg);
+
+}
+
+.sectResumeBtnDropDown svg path {
+    fill: var(--brown);
+}
+
+.sectResumeText {
+    font-family: var(--montserrat);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--dark-gray);
+    display: inline-block;
+
+}
+
+.sectResumeResourse {
+    margin-left: 8px;
+    color: var(--brown);
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+
+}
+
+.sectResumeDate {
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 24px;
+    color: #A4A4A4;
+}
+
+/* Dropdown */
+.sectResumeBtnDropDownActive svg {
+    transform: rotate(0deg);
+}
+
+.sectResumeDropDown {
+    padding: 8px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--brown);
+    color: var(--brown);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    max-width: 532px;
+    width: 100%;
+    margin-left: auto;
+}
+
+.sectResumeDropDownTitle {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 19px;
+    text-align: center;
+    color: var(--brown);
+    margin-bottom: 4px;
+}
+
+
+.sectResumeDropDownList {
+    counter-reset: list-counter;
+}
+
+.sectResumeDropDownItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    counter-increment: list-counter;
+}
+
+.sectResumeDropDownItem::before {
+    content: counter(list-counter)".";
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray);
+}
+
+
+.sectResumeDropDownItem svg {
+    width: 19px;
+    height: 19px;
+
+}
+
+.sectResumeDropDownText {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 19px;
+    color: var(--gray);
+}
+
+.sectResumeDropDownDate {
+    margin-left: auto;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 19px;
+    color: #a4a4a4;
+}
+
+
+/* Circle */
+
+.sectResumeDescScore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.sectResumeScorePercent {
+    font-family: var(--open-sans);
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 48px;
+    color: var(--brown);
+
+}
+
+.sectResumeScoreText {
+    text-align: center;
+    font-family: var(--montserrat);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A4A4A4;
+}
+
+/* progress bar */
+
+
+
+.sectResumeProgressBarIssues {
+    font-weight: 500;
+    color: var(--brown);
+}
+
+
+
+@media(max-width: 390px), (min-width:390px) {
+
+    .sectResumeTitle {
+        font-size: 22px;
+        font-weight: 500;
+        font-family: var(--montserrat);
+        text-transform: none;
+    }
+
+    .sectResumeText {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .sectResumeResourse {
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .sectResumeDate {
+
+        font-size: 10px;
+        line-height: 12px;
+
+    }
+
+    .sectResumeDropDownText {
+        font-size: 10px;
+        line-height: 12px;
+
+    }
+
+    .sectResumeDropDownDate {
+
+        font-size: 10px;
+        line-height: 12px;
+
+    }
+
+    .sectResumeScorePercent {
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 32px;
+
+    }
+
+    .sectResumeProgressBarIssues {
+        font-size: 10px;
+        line-height: 12px;
+    }
+}
+
+@media (min-width:1440px) {
+    .sectResumeTitle {
+        font-size: 27px;
+        font-weight: 700;
+        font-family: var(--open-sans);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+
+    .sectResumeWrap {
+        margin-bottom: 4px;
+    }
+
+    .sectResumeText {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .sectResumeResourse {
+        font-size: 16px;
+        line-height: 24px;
+
+    }
+
+    .sectResumeDate {
+        font-size: 12px;
+        line-height: 24px;
+
+    }
+
+
+    .sectResumeDropDownText {
+        font-size: 12px;
+        line-height: 19px;
+    }
+
+
+    .sectResumeDropDownDate {
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .sectResumeScorePercent {
+        font-weight: 800;
+        font-size: 32px;
+        line-height: 48px;
+
+    }
+
+    .sectResumeProgressBarIssues {
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 19px;
+
+    }
+
+    .sectResumeProgressBar {
+        margin-top: 4px;
+    }
+
+}
