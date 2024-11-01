@@ -60,7 +60,7 @@ const EnteringForm = () => {
             <h4 className={styles.title}>Entering information</h4>
 
             <Scroll height="calc(100vh - 252px)">
-              <p className={styles.label}>Tatget Title</p>
+              <p className={styles.label}>Target Title</p>
               <InputForResume
                 name="desiredPosition"
                 id="desiredPosition"

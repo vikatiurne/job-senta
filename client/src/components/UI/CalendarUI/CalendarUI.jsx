@@ -22,7 +22,7 @@ const CalendarUI = (props) => {
             <>
               <CalendarIcon />
               <span>
-                {date.toLocaleDateString("en-US", {
+                {date?.toLocaleDateString("en-US", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",

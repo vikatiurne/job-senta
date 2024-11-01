@@ -1,6 +1,7 @@
 .authContainer {
   margin: 0 auto;
-  padding: 15px;
+  padding:0 15px 0;
+  height: 100vh;
   text-align: center;
   max-width: 638px;
   width: 100%;
