@@ -82,7 +82,6 @@ const EnteringForm = () => {
                 }
                 touched={touched}
               />
-              {console.log(touched)}
               <p className={styles.label}>Contacts</p>
               <div className={styles.contacts}>
                 <InputForResume
