@@ -53,7 +53,7 @@ export const schemas = {
         interests: Yup.string().trim().min(0).max(500),
       })
     ),
-    skills: Yup.string().trim(),
+    // skills: Yup.array().of(Yup.object().shape({ value: Yup.string().trim() })),
     interests: Yup.string().trim().min(0).max(500),
   }),
 };
@@ -120,7 +120,7 @@ export const initialValues = {
         date: "",
       },
     ],
-    skills: "",
+    skills: [],
     interests: "",
   },
 };

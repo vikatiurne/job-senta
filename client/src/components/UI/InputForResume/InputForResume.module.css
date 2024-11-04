@@ -18,6 +18,10 @@
   outline: none;
   color: var(--gray);
   width: 100%;
+  
+}
+.inputField::placeholder{
+  color: var(--gray-light);
 }
 .skills{
   margin-bottom: 4px;
