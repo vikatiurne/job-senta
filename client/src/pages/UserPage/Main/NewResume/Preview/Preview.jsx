@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useRef} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { jsPDF } from "jspdf";
 import "jspdf/dist/polyfills.es.js";
@@ -11,11 +11,18 @@ import exportImg from "../../../../../assets/user_page/builder/createResume/expo
 
 import styles from "./Preview.module.css";
 import DateServices from "../../../../../utils/DateServices";
+import { setInfo } from "../NewResumeSlice";
 
 const Preview = () => {
   const pdfRef = useRef(null);
+  const dispatch = useDispatch()
 
   const info = useSelector((state) => state.createResume.info);
+
+ //обнуление листа резюме, нужно убрать когда данные будет тянуться с бд
+  useEffect(() => {
+    return ()=> dispatch(setInfo([]))
+  },[dispatch])
 
   const handleDownload = () => {
     const content = pdfRef.current;
@@ -314,12 +321,12 @@ const Preview = () => {
             </div>
           )}
           <div className={`${styles.skills} ${styles.block}`}>
-            {(info.skills || info.interests) && (
+            {(!!info.skills?.length || info.interests) && (
               <p className={styles.title}> Skills & Interests</p>
             )}
-            {info.skills && (
+            {!!info.skills?.length && (
               <p className={styles.info}>
-                Skills: <span className={styles.text}>{info.skills}</span>
+                Skills: <span className={styles.text}>{info.skills.join(', ')}</span>
               </p>
             )}
             {info.interests && (

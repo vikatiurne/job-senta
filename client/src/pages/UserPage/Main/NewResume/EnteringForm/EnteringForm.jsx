@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -29,12 +29,13 @@ import { initialValues, schemas } from "../helper";
 import { setInfo } from "../NewResumeSlice";
 
 import styles from "./EnteringForm.module.css";
+import MultiSelect from "../../../../../components/UI/MultiSelect/MultiSelect";
+import { skilsData } from "../../../../../utils/skilsData";
 
 const EnteringForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
- 
   const submitFormHandler = (values) => {
     //отправка формы на сервер сохранение в бд
     console.log("Sucsess", values);
@@ -50,8 +51,8 @@ const EnteringForm = () => {
         navigate("/user/builder");
       }}
     >
-      {({ values, touched, errors }) => (
-        <Form className={styles.form} onBlur={()=>dispatch(setInfo(values))}>
+      {({ values, touched, errors,field }) => (
+        <Form className={styles.form} onBlur={() => dispatch(setInfo(values))}>
           <Button type="submit" className={styles.back}>
             <img src={arrow} alt="arrow" />
             <p>Back</p>
@@ -81,6 +82,7 @@ const EnteringForm = () => {
                 }
                 touched={touched}
               />
+              {console.log(touched)}
               <p className={styles.label}>Contacts</p>
               <div className={styles.contacts}>
                 <InputForResume
@@ -88,13 +90,14 @@ const EnteringForm = () => {
                   id="phone"
                   placeholder="Phone number"
                   img={
+                    !values["phone"] ?
                     <Phone
                       className={
                         values["phone"] === "" && touched["phone"]
                           ? styles.gray
                           : null
                       }
-                    />
+                    />: <Check />
                   }
                   touched={touched}
                 />
@@ -103,13 +106,14 @@ const EnteringForm = () => {
                   id="email"
                   placeholder="Email"
                   img={
+                    !values["email"]?
                     <Email
                       className={
                         values["email"] === "" && touched["email"]
                           ? styles.gray
                           : null
                       }
-                    />
+                    />: <Check/>
                   }
                   touched={touched}
                 />
@@ -118,13 +122,14 @@ const EnteringForm = () => {
                   id="LinkedIn"
                   placeholder="LinkedIn link or portfolio"
                   img={
+                    !values["LinkedIn"]?
                     <Linked
                       className={
                         values["LinkedIn"] === "" && touched["LinkedIn"]
                           ? styles.gray
                           : null
                       }
-                    />
+                    />: <Check/>
                   }
                   touched={touched}
                 />
@@ -444,27 +449,30 @@ const EnteringForm = () => {
                 ]}
               />
 
-              <p className={styles.label}>Skills & Interests</p>
-              <InputForResume
-                className="skills"
-                name="skills"
-                id="skills"
-                placeholder="Skills (enter manually or choose from the presented ones)"
-                img={
-                  values["skills"] === "" ? (
-                    <Skills
-                      className={
-                        values["skills"] === "" && touched["skills"]
-                          ? styles.gray
-                          : null
-                      }
-                    />
-                  ) : (
-                    <Check />
-                  )
-                }
-                touched={touched}
-              />
+
+              <p className={styles.label}>Skills & Interests</p> 
+              <div className={styles.skills}>
+                {!values["skills"].length ? (
+                  <Skills
+                    className={
+                      !values["skills"].length && touched['react-select-2-input']
+                        ? styles.gray
+                        : null
+                    }
+                  />
+                ) : (
+                  <Check />
+                )}
+
+                <Field
+                  name="skills"
+                  id="skills"
+                  placeholder="Skills (enter manually or choose from the presented ones)"
+                  isMulti={true}
+                  component={MultiSelect}
+                  options={skilsData}
+                />
+              </div>
               <TextArea
                 name="interests"
                 id="interests"

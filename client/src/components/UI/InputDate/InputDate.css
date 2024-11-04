@@ -9,6 +9,9 @@
   color: var(--gray);
   width: 100%;
 }
+.datePicker::placeholder{
+  color: var(--gray-light);
+}
 .react-datepicker {
   border-top-left-radius: 0;
   border-top-right-radius: 0;

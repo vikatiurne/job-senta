@@ -63,6 +63,9 @@
   color: var(--gray);
   width: 100%;
 }
+.inputField::placeholder{
+  color: var(--gray-light);
+}
 .inputFieldTouched svg {
   fill: var(--gray);
 }
@@ -74,6 +77,9 @@
   width: 100%;
   resize: none;
   color: var(--gray);
+}
+.textareaField::placeholder{
+  color: var(--gray-light);
 }
 .textareaField::-webkit-scrollbar {
   width: 0px;
