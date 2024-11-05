@@ -70,6 +70,7 @@
 /* Desktop */
 
 .userNavDesktop {
+  margin-bottom: 16px;
   min-height: 100%;
   max-width: 203px;
   border-radius: 20px;

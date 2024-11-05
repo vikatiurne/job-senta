@@ -100,10 +100,10 @@
   }
   .mobileBtns {
     display: flex;
-    gap: 8px;
+    gap: 50px;
     align-items: center;
     position: absolute;
-    top: 60px;
+    top: 39px;
     right: 0;
   }
 }

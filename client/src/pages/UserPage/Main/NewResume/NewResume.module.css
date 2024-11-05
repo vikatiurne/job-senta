@@ -10,3 +10,8 @@
     gap: 0;
   }
 }
+@media (max-width: 675px) {
+  .wrapper {
+    margin-right: 24px;
+  }
+}

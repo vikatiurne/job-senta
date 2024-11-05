@@ -16,6 +16,7 @@
 }
 .enteringContainer {
   padding: 24px 24px 0;
+  height: calc(100% - 41px);
   border-radius: 20px;
   box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
 }
@@ -59,9 +60,6 @@
   border: 2px solid var(--brown);
   border-radius: 10px;
 }
-/* .scroll {
-  height: calc(100vh - 252px);
-} */
 
 @media (max-width: 1111px) {
   .enteringContainer {
@@ -84,4 +82,11 @@
   .scroll::-webkit-scrollbar-thumb:hover {
     background: transparent;
   }
+}
+@media (max-width: 390px) {
+
+  .scroll {
+    height: 100%;
+  }
+ 
 }
