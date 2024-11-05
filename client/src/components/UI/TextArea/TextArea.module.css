@@ -1,20 +1,23 @@
 .inputContainer {
   padding: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   display: flex;
   align-items: flex-start;
   gap: 8px;
   border: 2px solid var(--brown);
   border-radius: 10px;
+  height: 80px;
 }
-
 .inputField {
   background-color: var(--white);
   border: none;
   outline: none;
   width: 100%;
   resize: none;
-  height: 80px;
+  color: var(--gray);
+}
+.inputField::placeholder{
+  color: var(--gray-light);
 }
 .inputField::-webkit-scrollbar {
   width: 0px;
@@ -28,9 +31,6 @@
   font-family: var(--montserrat);
   font-weight: 500;
 }
-.inputField{
-  color: var(--gray-light);
-}
 .limit {
   margin-bottom: 8px;
   color: var(--gray);
@@ -38,4 +38,7 @@
 .limitErr {
   margin-bottom: 8px;
   color: var(--red);
+}
+.gray {
+  fill: var(--dark-gray);
 }

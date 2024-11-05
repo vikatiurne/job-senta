@@ -1,81 +1,118 @@
+.label {
+  margin-bottom: 4px;
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: var(--montserrat);
+  color: var(--dark-gray);
+}
 .add {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .plus {
-    cursor: pointer;
-  }
-  .minus {
-    padding: 9px;
-    height: 32px;
-    width: 100%;
-    cursor: pointer;
-    text-align: right;
-  }
-  .inputContainer {
-    padding: 8px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 2px solid var(--brown);
-    border-radius: 10px;
-  }
-  
-  .inputField {
-    background-color: var(--white);
-    font-size: 12px;
-    line-height: 19px;
-    font-family: var(--montserrat);
-    font-weight: 500;
-    border: none;
-    outline: none;
-    color: var(--gray);
-    width: 100%;
-  }
-  .inputFieldTouched svg{
-    fill:var(--gray)
-  }
-  
-  .textareaContainer {
-    padding: 8px;
-    margin-bottom: 8px;
-    height: 80px;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    border: 2px solid var(--brown);
-    border-radius: 10px;
-  }
-  
-  .textareaField {
-    background-color: var(--white);
-    border: none;
-    outline: none;
-    width: 100%;
-    resize: none;
-    color: var(--gray);
-  }
-  .textareaField::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-  }
-  .textareaField,
-  .limit,
-  .limitErr {
-    font-size: 12px;
-    line-height: 19px;
-    font-family: var(--montserrat);
-    font-weight: 500;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.controlBtns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+  padding-right: 9px;
+}
+.plus {
+  cursor: pointer;
+}
+.minus {
+  padding-bottom: 5px;
+  height: 32px;
+  cursor: pointer;
+  text-align: right;
+}
+.inputContainer,
+.dateContainer,
+.textareaContainer {
+  padding: 8px;
+  margin-bottom: 4px;
+  display: flex;
+  gap: 8px;
+  border: 2px solid var(--brown);
+  border-radius: 10px;
+}
+.inputContainer,
+.dateContainer {
+  width: 100%;
+  height: 36px;
+}
+.dateContainer {
+  position: relative;
+}
+.textareaContainer {
+  height: 80px;
 
-  .limit {
-    margin-bottom: 8px;
-    color: var(--gray);
-  }
-  .limitErr {
-    margin-bottom: 8px;
-    color: var(--red);
-  }
-  
+  align-items: flex-start;
+}
+
+.inputField {
+  background-color: var(--white);
+  font-size: 12px;
+  line-height: 19px;
+  font-family: var(--montserrat);
+  font-weight: 500;
+  border: none;
+  outline: none;
+  color: var(--gray);
+  width: 100%;
+}
+.inputField::placeholder{
+  color: var(--gray-light);
+}
+.inputFieldTouched svg {
+  fill: var(--gray);
+}
+
+.textareaField {
+  background-color: var(--white);
+  border: none;
+  outline: none;
+  width: 100%;
+  resize: none;
+  color: var(--gray);
+}
+.textareaField::placeholder{
+  color: var(--gray-light);
+}
+.textareaField::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+.textareaField,
+.limit,
+.limitErr {
+  font-size: 12px;
+  line-height: 19px;
+  font-family: var(--montserrat);
+  font-weight: 500;
+}
+
+.limit {
+  margin-bottom: 8px;
+  color: var(--gray);
+}
+.limitErr {
+  margin-bottom: 8px;
+  color: var(--red);
+}
+.datesContainer {
+  position: relative;
+  display: flex;
+  gap: 4px;
+}
+.calendar {
+  padding: 8px 38px;
+  position: absolute;
+  right: 0;
+  background-color: var(--white);
+  border: 2px solid var(--gray);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}

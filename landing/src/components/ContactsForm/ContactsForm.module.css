@@ -21,8 +21,9 @@
 .formContainer p {
   margin-bottom: 32px;
   font-family: var(--montserrat);
+  font-weight: 600;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 32px;
   max-width: 1034px;
   width: 100%;
 }

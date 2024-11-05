@@ -1,5 +1,6 @@
 import { Field } from "formik";
 import { ReactComponent as Pen } from "../../../assets/user_page/builder/createResume/pen.svg";
+import { ReactComponent as Check } from "../../../assets/user_page/builder/createResume/check.svg";
 import styles from "./TextArea.module.css";
 
 const TextArea = ({
@@ -8,13 +9,23 @@ const TextArea = ({
   placeholder,
   touched,
   error,
-  handleChange,
+  // handleChange,
+  values,
 }) => {
-
   return (
     <>
       <div className={styles.inputContainer}>
-        <Pen />
+        {!values[`${name}`] ? (
+          <Pen
+            className={
+              values[`${name}`] === "" && touched[`${name}`]
+                ? styles.gray
+                : null
+            }
+          />
+        ) : (
+          <Check />
+        )}
 
         <Field
           as="textarea"
@@ -22,7 +33,7 @@ const TextArea = ({
           name={name}
           id={id}
           placeholder={placeholder}
-          onKeyUp={handleChange}
+          // onKeyUp={handleChange}
           className={
             !touched[name]
               ? `${styles.inputField} `
@@ -30,9 +41,7 @@ const TextArea = ({
           }
         />
       </div>
-      <p
-        className={!!error[name] ? styles.limitErr : styles.limit}
-      >
+      <p className={!!error[name] ? styles.limitErr : styles.limit}>
         (0 of 500 characters)
       </p>
     </>

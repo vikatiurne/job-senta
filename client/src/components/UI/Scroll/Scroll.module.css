@@ -24,7 +24,6 @@
 
  .customScrollContent::-webkit-scrollbar {
      width: 8px;
-
  }
 
  .customScrollContent::-webkit-scrollbar-thumb {

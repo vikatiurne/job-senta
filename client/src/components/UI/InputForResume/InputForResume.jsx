@@ -8,11 +8,11 @@ const InputForResume = ({
   placeholder,
   img,
   touched,
-  handleChange,
+  className
 }) => {
   return (
 
-      <div className={styles.inputContainer}>
+      <div className={`${styles.inputContainer} ${styles[`${className}`]}`}>
         {img}
 
       <Field
@@ -21,8 +21,6 @@ const InputForResume = ({
           name={name}
           id={id}
           placeholder={placeholder}
-          onBlur={handleChange}
-          // onKeyUp={handleChange}
           className={
             !touched[name]
               ? `${styles.inputField} `
