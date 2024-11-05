@@ -30,38 +30,57 @@
   margin-bottom: 0;
   text-align: left;
 }
-.info{
+.info {
   font-size: 16px;
   line-height: 24px;
   font-weight: 600;
 }
-.text{
+.text {
   font-size: 12px;
   line-height: 19px;
   font-weight: 500;
 }
-.exportBtns{
+.exportBtns {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 32px;
 }
 .export {
-padding: 8px 28px;
-display: flex;
-gap: 8px;
-align-items: center;
-color: var(--white);
-font-size: 22px;
-line-height: 32px;
-font-weight: 500;
-font-family: var(--montserrat);
-border-radius: 20px;
-cursor: pointer;
+  padding: 8px 28px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--white);
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 500;
+  font-family: var(--montserrat);
+  border-radius: 20px;
+  cursor: pointer;
 }
 .exportDoc {
-background-color: var(--brown-light);
+  background-color: var(--brown-light);
 }
 .exportPdf {
-background-color: var(--brown);
+  background-color: var(--brown);
+}
+
+@media (max-width: 1400px) {
+  .export {
+    font-size: 16px;
+  }
+}
+@media (max-width: 1220px) {
+  .export {
+    padding: 8px 12px;
+  }
+}
+@media (max-width: 1111px) {
+  .previewContainer{
+    display: none;
+  }
+  .previewVisible{
+    display: block;
+  }
 }

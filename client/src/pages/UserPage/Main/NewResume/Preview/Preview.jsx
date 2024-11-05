@@ -1,49 +1,35 @@
-import { useEffect, useRef} from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { jsPDF } from "jspdf";
-import "jspdf/dist/polyfills.es.js";
 
 import Scroll from "../../../../../components/UI/Scroll/Scroll";
-import Button from "../../../../../components/UI/Button/Button";
-
-import exportImg from "../../../../../assets/user_page/builder/createResume/export.svg";
-
-import styles from "./Preview.module.css";
-import DateServices from "../../../../../utils/DateServices";
 import { setInfo } from "../NewResumeSlice";
 
-const Preview = () => {
-  const pdfRef = useRef(null);
-  const dispatch = useDispatch()
+import DateServices from "../../../../../utils/DateServices";
+
+
+
+import styles from "./Preview.module.css";
+
+const Preview = ({active}) => {
+  const dispatch = useDispatch();
 
   const info = useSelector((state) => state.createResume.info);
 
- //обнуление листа резюме, нужно убрать когда данные будет тянуться с бд
+  //обнуление листа резюме, нужно убрать когда данные будет тянуться с бд
   useEffect(() => {
-    return ()=> dispatch(setInfo([]))
-  },[dispatch])
-
-  const handleDownload = () => {
-    const content = pdfRef.current;
-    console.log(pdfRef);
-
-    const doc = new jsPDF();
-
-    doc.html(content, {
-      callback: function (doc) {
-        doc.save("resume.pdf");
-      },
-    });
-  };
+    return () => dispatch(setInfo([]));
+  }, [dispatch]);
 
   //имя вытаскивавем из БД
   // const user = "Darina Taranenko";
   const { user } = useAuth0();
 
   return (
-    <>
-      <div ref={pdfRef} className={styles.previewContainer}>
+  
+
+
+      <div className={`${styles.previewContainer} ${active?styles.previewVisible:null}`}>
         <h4 className={styles.userName}>{user?.name}</h4>
         <Scroll height="calc(100vh - 303px)">
           {info.desiredPosition && (
@@ -326,7 +312,8 @@ const Preview = () => {
             )}
             {!!info.skills?.length && (
               <p className={styles.info}>
-                Skills: <span className={styles.text}>{info.skills.join(', ')}</span>
+                Skills:{" "}
+                <span className={styles.text}>{info.skills.join(", ")}</span>
               </p>
             )}
             {info.interests && (
@@ -337,20 +324,7 @@ const Preview = () => {
           </div>
         </Scroll>
       </div>
-      <div className={styles.exportBtns}>
-        <Button className={`${styles.export} ${styles.exportDoc}`}>
-          <img src={exportImg} alt="export" />
-          <p>Export in DOC</p>
-        </Button>
-        <Button
-          className={`${styles.export} ${styles.exportPdf}`}
-          onClick={() => handleDownload()}
-        >
-          <img src={exportImg} alt="export" />
-          <p>Export in PDF</p>
-        </Button>
-      </div>
-    </>
+   
   );
 };
 

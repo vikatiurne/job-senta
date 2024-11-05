@@ -66,6 +66,7 @@ const MultiSelect = ({ field, form, options, placeholder }) => {
           padding: "4px 8px ",
           color: "#686868",
           ":hover": { background: "transparent" },
+          ":active": { background: "transparent" },
         }),
         menu: (styles) => ({
           ...styles,
@@ -83,7 +84,7 @@ const MultiSelect = ({ field, form, options, placeholder }) => {
           ...styles,
           maxHeight: "130px",
           "::-webkit-scrollbar": {
-            width: "4px",
+            width: "0px",
             height: "0px",
           },
           "::-webkit-scrollbar-track": {
@@ -94,7 +95,7 @@ const MultiSelect = ({ field, form, options, placeholder }) => {
             borderRadius: "4px",
           },
           "::-webkit-scrollbar-thumb:hover": {
-            background: "#604B2B",
+            background: "transparent",
           },
         }),
         multiValue: (styles) => ({

@@ -52,10 +52,36 @@
 }
 .skills {
   margin-bottom: 4px;
-  padding:0 8px ;
+  padding: 0 8px;
   display: flex;
   align-items: center;
   gap: 4px;
   border: 2px solid var(--brown);
   border-radius: 10px;
+}
+/* .scroll {
+  height: calc(100vh - 252px);
+} */
+
+@media (max-width: 1111px) {
+  .enteringContainer {
+    box-shadow: none;
+    padding: 0;
+  }
+  .scroll {
+    height: calc(100vh - 219px);
+  }
+  .scroll::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  .scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scroll::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+  .scroll::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
 }

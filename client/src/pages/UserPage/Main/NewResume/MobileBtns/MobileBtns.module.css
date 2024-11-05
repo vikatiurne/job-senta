@@ -1,0 +1,109 @@
+.exportBtns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 32px;
+}
+.export {
+  padding: 8px 28px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--white);
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 500;
+  font-family: var(--montserrat);
+  border-radius: 20px;
+  cursor: pointer;
+}
+.exportDoc {
+  background-color: var(--brown-light);
+  transition: all 0.3s ease-in;
+}
+.exportDoc:hover {
+  background-color: var(--brown);
+}
+.exportPdf {
+  background-color: var(--brown);
+  transition: all 0.3s ease-in;
+}
+.exportPdf:hover {
+  background-color: var(--brown-hover);
+}
+.mobileBtns {
+  display: none;
+}
+.exportMob {
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid var(--brown);
+  cursor: pointer;
+}
+.exportMob,
+.dropDownItem {
+  color: var(--brown);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  font-family: var(--montserrat);
+}
+.dropDownItem {
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.dropDownActive {
+  border-bottom-right-radius: 0;
+}
+.exportMob:hover {
+  border-color: var(--brown-hover);
+  color: var(--brown-hover);
+}
+.exportMob:hover svg {
+  fill: var(--brown-hover);
+}
+
+.exportDropDown {
+  padding: 16px 14px;
+  left: initial;
+  bottom: 2px;
+  width: 150px;
+  border: 2px solid var(--brown);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.eye {
+  cursor: pointer;
+}
+.eye:hover {
+  fill: var(--brown-hover);
+}
+
+@media (max-width: 1400px) {
+  .export {
+    font-size: 16px;
+  }
+}
+@media (max-width: 1220px) {
+  .export {
+    padding: 8px 12px;
+  }
+}
+@media (max-width: 1111px) {
+  .exportBtns {
+    display: none;
+  }
+  .mobileBtns {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    position: absolute;
+    top: 60px;
+    right: 0;
+  }
+}
