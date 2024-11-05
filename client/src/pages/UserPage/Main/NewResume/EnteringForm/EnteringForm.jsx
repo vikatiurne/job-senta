@@ -30,7 +30,7 @@ import { setInfo } from "../NewResumeSlice";
 
 import styles from "./EnteringForm.module.css";
 import MultiSelect from "../../../../../components/UI/MultiSelect/MultiSelect";
-import { skilsData } from "../../../../../utils/skilsData";
+import { skillsData } from "../../../../../utils/skillsData";
 
 const EnteringForm = () => {
   const navigate = useNavigate();
@@ -469,7 +469,7 @@ const EnteringForm = () => {
                   placeholder="Skills (enter manually or choose from the presented ones)"
                   isMulti={true}
                   component={MultiSelect}
-                  options={skilsData}
+                  options={skillsData}
                 />
               </div>
               <TextArea

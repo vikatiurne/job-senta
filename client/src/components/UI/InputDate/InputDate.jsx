@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { useField } from "formik";
 import DatePicker from "react-datepicker";
 import { getMonth, addDays, getYear } from "date-fns";
 import range from "lodash/range";
 
+import DateServices from "../../../utils/DateServices";
 import { ReactComponent as Calendar } from "../../../assets/user_page/builder/createResume/calendar.svg";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./InputDate.css";
 
-import { useState } from "react";
-import DateServices from "../../../utils/DateServices";
-import Scroll from "../Scroll/Scroll";
+
 
 const InputDate = ({ name, placeholder }) => {
   const [field, meta, helpers] = useField(name);
@@ -66,7 +66,7 @@ const InputDate = ({ name, placeholder }) => {
                 {selectedMonth ? selectedMonth : months[getMonth(date)]}
               </div>
               <div className={`options ${isOpenMonth ? "show" : null}`}>
-              <Scroll>
+
                 {months.map((option) => (
                   <div
                     key={option}
@@ -80,7 +80,7 @@ const InputDate = ({ name, placeholder }) => {
                     {option}
                   </div>
                 ))}
-                  </Scroll>
+
               </div>
             </div>
             <p className="header-day">{DateServices.getDate(date, "day")},</p>
@@ -92,7 +92,7 @@ const InputDate = ({ name, placeholder }) => {
                 {selectedYear ? selectedYear : getYear(date)}
               </div>
               <div className={`options ${isOpenYear ? "show" : null}`}>
-                <Scroll>
+
                   {years.reverse().map((option) => (
                     <div
                       key={option}
@@ -106,7 +106,7 @@ const InputDate = ({ name, placeholder }) => {
                       {option}
                     </div>
                   ))}
-                </Scroll>
+
               </div>
             </div>
           </div>

@@ -9,7 +9,7 @@
   color: var(--gray);
   width: 100%;
 }
-.datePicker::placeholder{
+.datePicker::placeholder {
   color: var(--gray-light);
 }
 .react-datepicker {
@@ -60,21 +60,24 @@
   cursor: pointer;
   font-family: var(--montserrat);
 }
+.option:hover {
+  background-color: transparent !important;
+}
 .option {
   font-size: 12px;
   font-weight: 500;
   line-height: 19px;
   color: var(--gray-light);
+  transition: all 0.3s ease-in;
 }
-.active {
+.active,
+.option:hover {
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
   color: var(--dark-gray);
 }
-.option:hover {
-  background-color: #f0f0f0;
-}
+
 .options {
   padding: 8px 10px;
   position: absolute;
@@ -90,6 +93,22 @@
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease;
+  overflow: auto;
+}
+
+.options::-webkit-scrollbar {
+  width: 4px;
+  height: 0;
+}
+.options::-webkit-scrollbar-track {
+  background: transparent;
+}
+.options::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+.options::-webkit-scrollbar-thumb:hover {
+  background: "#604B2B";
 }
 
 .options.show {
@@ -124,4 +143,10 @@
 .react-datepicker__day--today {
   background-color: transparent;
   color: var(--dark-gray);
+}
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  background-color: transparent;
 }

@@ -1,5 +1,6 @@
 import CreatableSelect from "react-select/creatable";
 
+
 const MultiSelect = ({ field, form, options, placeholder }) => {
 
   function onChange(option) {
@@ -20,6 +21,7 @@ const MultiSelect = ({ field, form, options, placeholder }) => {
       })}
       options={options}
       components={{
+        ClearIndicator: ()=>null,
         IndicatorSeparator: () => null,
         DropdownIndicator: () => null,
       }}
@@ -45,7 +47,7 @@ const MultiSelect = ({ field, form, options, placeholder }) => {
           lineHeight: "19px",
           color: "#A4A4A4",
         }),
-        clearIndicator: (styles) => ({ ...styles, color: "#686868" }),
+        // clearIndicator: (styles) => ({ ...styles, color: "#686868" }),
         container: (styles) => ({ ...styles, width: "100%" }),
         input: (styles) => ({
           ...styles,
@@ -88,7 +90,7 @@ const MultiSelect = ({ field, form, options, placeholder }) => {
             background: "transparent",
           },
           "::-webkit-scrollbar-thumb": {
-            background: "#958060",
+            background: "transparent",
             borderRadius: "4px",
           },
           "::-webkit-scrollbar-thumb:hover": {
