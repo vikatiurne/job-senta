@@ -41,7 +41,7 @@ const Scroll = (props) => {
             className={style.customScroll}
         >
             <div className={cn(style.customScrollContent, classContent,
-                { [style.withScroll]: hasScroll }
+                { [style.withScroll]: hasScroll && height }
             )}>
                 <div className={style.scrollWrap}>
                     {children}

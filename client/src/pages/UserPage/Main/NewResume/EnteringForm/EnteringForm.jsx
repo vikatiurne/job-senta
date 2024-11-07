@@ -64,7 +64,7 @@ const EnteringForm = () => {
             <h4 className={styles.title}>Entering information</h4>
 
             <Scroll
-              height={!isMediaQuery ? "calc(100vh - 223px)" : "100%"}
+              height={!isMediaQuery ? "calc(100vh - 223px)" : ""}
               classContent={styles.scroll}
             >
               <section className={styles.target}>
@@ -78,7 +78,7 @@ const EnteringForm = () => {
                       <User
                         className={
                           values["desiredPosition"] === "" &&
-                          touched["desiredPosition"]
+                            touched["desiredPosition"]
                             ? styles.gray
                             : null
                         }
@@ -478,7 +478,7 @@ const EnteringForm = () => {
                     <Skills
                       className={
                         !values["skills"].length &&
-                        touched["react-select-2-input"]
+                          touched["react-select-2-input"]
                           ? styles.gray
                           : null
                       }
