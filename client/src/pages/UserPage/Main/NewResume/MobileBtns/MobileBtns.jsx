@@ -1,8 +1,10 @@
 import { useState } from "react";
-import Button from "../../../../../components/UI/Button/Button";
+
 import exportImg from "../../../../../assets/user_page/builder/createResume/export.svg";
 import { ReactComponent as Export } from "../../../../../assets/user_page/builder/mobile/export.svg";
 import { ReactComponent as Eye } from "../../../../../assets/user_page/builder/mobile/eye.svg";
+
+import Button from "../../../../../components/UI/Button/Button";
 import DropDown from "../../../../../components/UI/DropDown/DropDown";
 import Popup from "../../../../../components/UI/Popup/Popup";
 import Preview from "../Preview/Preview";
@@ -12,7 +14,7 @@ import "jspdf/dist/polyfills.es.js";
 
 import styles from "./MobileBtns.module.css";
 
-const MobileBtns = ({pdfRef}) => {
+const MobileBtns = () => {
   const [selectedExport, setSelectedExport] = useState(false);
   const [preview, setPreview] = useState(false);
   const handleSelectedExport = () => setSelectedExport((prev) => !prev);
@@ -54,9 +56,13 @@ const MobileBtns = ({pdfRef}) => {
       </div>
 
       <div className={styles.mobileBtns}>
-        <Eye onClick={() => setPreview(true)} className={styles.eye } />
+        <Eye onClick={() => setPreview(true)} className={styles.eye} />
         {preview && (
-          <Popup active={preview} setActive={setPreview}>
+          <Popup
+            active={preview}
+            setActive={setPreview}
+            className={styles.previewResume}
+          >
             <Preview active={preview} />
           </Popup>
         )}

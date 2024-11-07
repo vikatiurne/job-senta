@@ -83,18 +83,30 @@
 .eye:hover {
   fill: var(--brown-hover);
 }
+.previewResume {
+  background-color: var(--white);
+  color: var(--dark-gray);
+  width: 100vw;
+  height: calc(100vh - 32px);
+  bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.previewResume * {
+  font-family: var(--montserrat);
+  text-transform: capitalize;
+}
 
 @media (max-width: 1400px) {
   .export {
-    font-size: 16px;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .export img {
+    width: 25px;
   }
 }
-@media (max-width: 1220px) {
-  .export {
-    padding: 8px 12px;
-  }
-}
-@media (max-width: 1111px) {
+@media (max-width: 1024px) {
   .exportBtns {
     display: none;
   }
@@ -103,7 +115,12 @@
     gap: 50px;
     align-items: center;
     position: absolute;
-    top: 39px;
+    top: 34px;
     right: 0;
+  }
+}
+@media (max-width: 675px) {
+  .mobileBtns {
+    gap: 8px;
   }
 }

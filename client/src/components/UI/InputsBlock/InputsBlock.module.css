@@ -63,7 +63,7 @@
   color: var(--gray);
   width: 100%;
 }
-.inputField::placeholder{
+.inputField::placeholder {
   color: var(--gray-light);
 }
 .inputFieldTouched svg {
@@ -78,7 +78,7 @@
   resize: none;
   color: var(--gray);
 }
-.textareaField::placeholder{
+.textareaField::placeholder {
   color: var(--gray-light);
 }
 .textareaField::-webkit-scrollbar {
@@ -115,4 +115,18 @@
   border: 2px solid var(--gray);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+@media (max-width: 675px) {
+  .label {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-family: var(--montserrat);
+  }
+}
+@media (max-width: 450px) {
+  .datesContainer{
+    flex-direction: column;
+  }
 }

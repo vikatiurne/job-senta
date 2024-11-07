@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 33px;
 }
-@media (max-width: 1111px) {
+@media (max-width: 1024px) {
   .wrapper {
     position: relative;
     grid-template-columns: 1fr;
@@ -12,6 +12,6 @@
 }
 @media (max-width: 675px) {
   .wrapper {
-    margin-right: 24px;
+    margin: 0 auto;
   }
 }

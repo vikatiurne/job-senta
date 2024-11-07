@@ -24,17 +24,19 @@ import { ReactComponent as Check } from "../../../../../assets/user_page/builder
 import { ReactComponent as Calendar } from "../../../../../assets/user_page/builder/createResume/calendar.svg";
 import arrow from "../../../../../assets/user_page/builder/arrow-outlined.svg";
 
+import MultiSelect from "../../../../../components/UI/MultiSelect/MultiSelect";
 import InputsBlock from "../../../../../components/UI/InputsBlock/InputsBlock";
+import { skillsData } from "../../../../../utils/skillsData";
 import { initialValues, schemas } from "../helper";
+import { useMedia } from "../../../../../hoc/useMedia/useMedia";
 import { setInfo } from "../NewResumeSlice";
 
 import styles from "./EnteringForm.module.css";
-import MultiSelect from "../../../../../components/UI/MultiSelect/MultiSelect";
-import { skillsData } from "../../../../../utils/skillsData";
 
 const EnteringForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isMediaQuery = useMedia("(max-width:1024px)");
 
   const submitFormHandler = (values) => {
     //отправка формы на сервер сохранение в бд
@@ -49,9 +51,10 @@ const EnteringForm = () => {
         submitFormHandler(values);
         resetForm();
         navigate("/user/builder");
+        dispatch(setInfo({}));
       }}
     >
-      {({ values, touched, errors,field }) => (
+      {({ values, touched, errors, field }) => (
         <Form className={styles.form} onBlur={() => dispatch(setInfo(values))}>
           <Button type="submit" className={styles.back}>
             <img src={arrow} alt="arrow" />
@@ -60,89 +63,109 @@ const EnteringForm = () => {
           <div className={styles.enteringContainer}>
             <h4 className={styles.title}>Entering information</h4>
 
-            <Scroll height="calc(100vh - 223px)" classContent={styles.scroll}>
-              <p className={styles.label}>Target Title</p>
-              <InputForResume
-                name="desiredPosition"
-                id="desiredPosition"
-                placeholder="Name of desired position"
-                img={
-                  values["desiredPosition"] === "" ? (
-                    <User
-                      className={
-                        values["desiredPosition"] === "" &&
-                        touched["desiredPosition"]
-                          ? styles.gray
-                          : null
+            <Scroll
+              height={!isMediaQuery ? "calc(100vh - 223px)" : "100%"}
+              classContent={styles.scroll}
+            >
+              <section className={styles.target}>
+                <p className={styles.label}>Target Title</p>
+                <InputForResume
+                  name="desiredPosition"
+                  id="desiredPosition"
+                  placeholder="Name of desired position"
+                  img={
+                    values["desiredPosition"] === "" ? (
+                      <User
+                        className={
+                          values["desiredPosition"] === "" &&
+                          touched["desiredPosition"]
+                            ? styles.gray
+                            : null
+                        }
+                      />
+                    ) : (
+                      <Check />
+                    )
+                  }
+                  touched={touched}
+                />
+              </section>
+              <section className={styles.sectContacts}>
+                <p className={styles.label}>Contacts</p>
+                <div>
+                  <div className={styles.contacts}>
+                    <InputForResume
+                      name="phone"
+                      id="phone"
+                      placeholder="Phone number"
+                      img={
+                        !values["phone"] ? (
+                          <Phone
+                            className={
+                              values["phone"] === "" && touched["phone"]
+                                ? styles.gray
+                                : null
+                            }
+                          />
+                        ) : (
+                          <Check />
+                        )
                       }
+                      touched={touched}
                     />
-                  ) : (
-                    <Check />
-                  )
-                }
-                touched={touched}
-              />
-              <p className={styles.label}>Contacts</p>
-              <div className={styles.contacts}>
-                <InputForResume
-                  name="phone"
-                  id="phone"
-                  placeholder="Phone number"
-                  img={
-                    !values["phone"] ?
-                    <Phone
-                      className={
-                        values["phone"] === "" && touched["phone"]
-                          ? styles.gray
-                          : null
+                    <InputForResume
+                      name="email"
+                      id="email"
+                      placeholder="Email"
+                      img={
+                        !values["email"] ? (
+                          <Email
+                            className={
+                              values["email"] === "" && touched["email"]
+                                ? styles.gray
+                                : null
+                            }
+                          />
+                        ) : (
+                          <Check />
+                        )
                       }
-                    />: <Check />
-                  }
-                  touched={touched}
-                />
-                <InputForResume
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  img={
-                    !values["email"]?
-                    <Email
-                      className={
-                        values["email"] === "" && touched["email"]
-                          ? styles.gray
-                          : null
-                      }
-                    />: <Check/>
-                  }
-                  touched={touched}
-                />
-                <InputForResume
-                  name="LinkedIn"
-                  id="LinkedIn"
-                  placeholder="LinkedIn link or portfolio"
-                  img={
-                    !values["LinkedIn"]?
-                    <Linked
-                      className={
-                        values["LinkedIn"] === "" && touched["LinkedIn"]
-                          ? styles.gray
-                          : null
-                      }
-                    />: <Check/>
-                  }
-                  touched={touched}
-                />
-              </div>
+                      touched={touched}
+                    />
+                  </div>
+                  <InputForResume
+                    name="LinkedIn"
+                    id="LinkedIn"
+                    placeholder="LinkedIn link or portfolio"
+                    img={
+                      !values["LinkedIn"] ? (
+                        <Linked
+                          className={
+                            values["LinkedIn"] === "" && touched["LinkedIn"]
+                              ? styles.gray
+                              : null
+                          }
+                        />
+                      ) : (
+                        <Check />
+                      )
+                    }
+                    touched={touched}
+                  />
+                </div>
+              </section>
 
-              <p className={styles.label}>Professional Summary</p>
-              <TextArea
-                name="professionalSummary"
-                id="professionalSummary"
-                placeholder="Brief description of professional summary or career goal"
-                touched={touched}
-                values={values}
-                error={errors}
-              />
+              <section className={styles.sectProfSum}>
+                <p className={styles.label}>Professional Summary</p>
+                <TextArea
+                  name="professionalSummary"
+                  id="professionalSummary"
+                  placeholder="Brief description of professional summary or career goal"
+                  touched={touched}
+                  values={values}
+                  error={errors}
+                />
+              </section>
 
               <InputsBlock
                 blockName="projExp"
@@ -448,38 +471,40 @@ const EnteringForm = () => {
                 ]}
               />
 
+              <section className={styles.skillInterests}>
+                <p className={styles.label}>Skills & Interests</p>
+                <div className={styles.skills}>
+                  {!values["skills"].length ? (
+                    <Skills
+                      className={
+                        !values["skills"].length &&
+                        touched["react-select-2-input"]
+                          ? styles.gray
+                          : null
+                      }
+                    />
+                  ) : (
+                    <Check />
+                  )}
 
-              <p className={styles.label}>Skills & Interests</p> 
-              <div className={styles.skills}>
-                {!values["skills"].length ? (
-                  <Skills
-                    className={
-                      !values["skills"].length && touched['react-select-2-input']
-                        ? styles.gray
-                        : null
-                    }
+                  <Field
+                    name="skills"
+                    id="skills"
+                    placeholder="Skills (enter manually or choose from the presented ones)"
+                    isMulti={true}
+                    component={MultiSelect}
+                    options={skillsData}
                   />
-                ) : (
-                  <Check />
-                )}
-
-                <Field
-                  name="skills"
-                  id="skills"
-                  placeholder="Skills (enter manually or choose from the presented ones)"
-                  isMulti={true}
-                  component={MultiSelect}
-                  options={skillsData}
+                </div>
+                <TextArea
+                  name="interests"
+                  id="interests"
+                  placeholder="Write your own interests"
+                  touched={touched}
+                  values={values}
+                  error={errors}
                 />
-              </div>
-              <TextArea
-                name="interests"
-                id="interests"
-                placeholder="Write your own interests"
-                touched={touched}
-                values={values}
-                error={errors}
-              />
+              </section>
             </Scroll>
           </div>
         </Form>

@@ -6,6 +6,10 @@
   border: 2px solid var(--brown);
   border-radius: 10px;
   height: 36px;
+  width: 100%;
+}
+.inputContainer:nth-child(3) {
+  grid-area: 2 / 1 / 3 / 3;
 }
 
 .inputField {
@@ -18,11 +22,10 @@
   outline: none;
   color: var(--gray);
   width: 100%;
-  
 }
-.inputField::placeholder{
+.inputField::placeholder {
   color: var(--gray-light);
 }
-.skills{
+.skills {
   margin-bottom: 4px;
 }
