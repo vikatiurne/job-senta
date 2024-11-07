@@ -66,6 +66,7 @@ const EnteringForm = () => {
             <Scroll
               height={!isMediaQuery ? "calc(100vh - 223px)" : ""}
               classContent={styles.scroll}
+              withScroll={'withScroll'}
             >
               <section className={styles.target}>
                 <p className={styles.label}>Target Title</p>
