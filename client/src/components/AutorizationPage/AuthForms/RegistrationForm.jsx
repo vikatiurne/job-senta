@@ -1,4 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
 
@@ -11,12 +12,22 @@ import passIcon from "../../../assets/passIcon.png";
 import { textData } from "../../../utils/textData";
 
 import styles from "./AuthForms.module.css";
+import { fetchRegistration } from "../../../pages/Autorization/AuthSlice";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
 
   const submitFormHandler = (values) => {
-    //отправка формы на сервер сохранение в бд 
+    dispatch(
+      fetchRegistration({
+        email: values.email,
+        password: values.password,
+        name: values.name,
+        lastName: values.lastName,
+      })
+    );
+    //отправка формы на сервер сохранение в бд
     console.log("Sucsess", values);
   };
 

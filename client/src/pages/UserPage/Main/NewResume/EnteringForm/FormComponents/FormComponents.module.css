@@ -1,0 +1,53 @@
+.title {
+    margin-bottom: 8px;
+    font-size: 27px;
+    line-height: 32px;
+    font-weight: 700;
+    font-family: var(--open-sans);
+    color: var(--brown);
+    text-transform: uppercase;
+  }
+  .label {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: var(--montserrat);
+    color: var(--dark-gray);
+  }
+  .gray {
+    fill: var(--dark-gray);
+  }
+  .contacts {
+    margin-bottom: 4px;
+    display: flex;
+    gap: 4px;
+  }
+  
+  .skills {
+    margin-bottom: 4px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 2px solid var(--brown);
+    border-radius: 10px;
+  }
+
+  @media (max-width: 675px) {
+    .title,
+    .label {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      text-transform: capitalize;
+      font-family: var(--montserrat);
+    }
+  }
+  @media (max-width: 450px) {
+    .contacts {
+      flex-wrap: wrap;
+    }
+  }
