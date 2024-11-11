@@ -1,6 +1,7 @@
 .pageHome {
     width: 100%;
     display: grid;
+    overflow: hidden;
 }
 
 
