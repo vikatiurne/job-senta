@@ -1,13 +1,14 @@
+import App from "./App";
 import { BrowserRouter} from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { Provider } from "react-redux";
-import App from "./App";
+
 import { store } from "./app/store";
+
 import "./index.css";
 
 const root = createRoot(document.getElementById("root"));
-console.log(process.env.REACT_APP_AUTH0_DOMAIN);
 
 const portalDiv = document.createElement('div')
 portalDiv.id = 'portal'
