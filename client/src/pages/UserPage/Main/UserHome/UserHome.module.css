@@ -2,6 +2,7 @@
     width: 100%;
     display: grid;
     overflow: hidden;
+    padding: 1px;
 }
 
 
