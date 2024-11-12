@@ -11,7 +11,6 @@ const SearchBox = () => {
   const [isInputFocus, setIsInputFocus] = useState(true)
   const [showInputForMobile, setShowInputForMobile] = useState(false)
   const isMediaQuery = useMedia('(max-width:1150px)')
-  console.log('showInputForMobile', !showInputForMobile);
 
   const changeHandler = (e) => {
     const text = e.target.value;

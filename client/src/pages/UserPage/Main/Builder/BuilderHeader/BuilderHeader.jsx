@@ -10,8 +10,23 @@ import styles from "./BuilderHeader.module.css";
 const BuilderHeader = () => {
   const [selectedMenu, setSelectedMenu] = useState(false);
   const [selectedNewResume, setSelectedNewResume] = useState(false);
-  const handleSelectedMenu = () => setSelectedMenu((prev) => !prev);
-  const handleSelectedNewResume = () => setSelectedNewResume((prev) => !prev);
+  const handleSelectedMenu = () => {
+    setSelectedMenu((prev) => !prev);
+    if (selectedNewResume) {
+      setSelectedNewResume(false)
+    }
+
+  }
+
+  const handleSelectedNewResume = () => {
+    setSelectedNewResume((prev) => !prev);
+    if (selectedMenu) {
+      setSelectedMenu(false)
+    }
+  }
+
+
+
 
   const deleteHandler = () => { };
   const guideHandler = () => { };
