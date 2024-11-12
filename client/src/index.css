@@ -48,6 +48,7 @@ button {
 a {
   color: var(--brown);
   font-weight: 600;
+  text-decoration: none;
 }
 
 

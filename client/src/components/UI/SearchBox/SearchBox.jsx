@@ -10,7 +10,7 @@ const SearchBox = () => {
   const [searchText, setSearchText] = useState("");
   const [isInputFocus, setIsInputFocus] = useState(true)
   const [showInputForMobile, setShowInputForMobile] = useState(false)
-  const isMediaQuery = useMedia('(max-width:1024px)')
+  const isMediaQuery = useMedia('(max-width:1150px)')
   console.log('showInputForMobile', !showInputForMobile);
 
   const changeHandler = (e) => {
@@ -28,7 +28,7 @@ const SearchBox = () => {
         <button
           type="button"
           className={styles.btnIconSearchMobile}
-          onClick={() => { setShowInputForMobile(true) }}
+          onClick={() => { setShowInputForMobile(!showInputForMobile) }}
         >
           <Search />
         </button>
