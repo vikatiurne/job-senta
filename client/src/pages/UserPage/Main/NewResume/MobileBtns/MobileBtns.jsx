@@ -55,7 +55,7 @@ const MobileBtns = () => {
       const documentCreator = new DocumentCreator();
       const doc = documentCreator.create(info, user);
 
-      Packer.toBlob(doc).then((blob) => {
+    Packer.toBlob(doc).then((blob) => {
         saveAs(blob, "example.docx");
       });
   

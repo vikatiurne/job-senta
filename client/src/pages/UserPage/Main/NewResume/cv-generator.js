@@ -5,6 +5,7 @@ import {
   Paragraph,
   TabStopType,
   TextRun,
+  Footer,
 } from "docx";
 
 import DateServices from "../../../../utils/DateServices";
@@ -26,6 +27,24 @@ export class DocumentCreator {
     const publ = info?.publ;
     const skills = info?.skills;
     const interests = info?.interests;
+
+    const footer = new Footer({
+      children: [
+        new Paragraph({
+          alignment: "center",
+          spacing: { before: 0, after: 200 },
+          shading: { fill: "#685843", color: "#685843" },
+          children: [
+            new TextRun({
+              text: "©    2024 Creativity Inc. All rights reserved ",
+              font: "Montserrat",
+              size: 18,
+              color: "#F7F7F7",
+            }),
+          ],
+        }),
+      ],
+    });
 
     const document = new Document({
       sections: [
@@ -92,8 +111,8 @@ export class DocumentCreator {
                     this.createDescription(item.role),
                     new Paragraph("")
                   );
-                  return arr;
                 }
+                return arr;
               })
               .reduce((prev, curr) => prev.concat(curr), []),
 
@@ -104,7 +123,7 @@ export class DocumentCreator {
                 const arr = [];
                 if (item.companyName !== "") {
                   arr.push(
-                    this.createSubHeading(`Company: `, item.companyName),
+                    this.createSubHeading("Company: ", item.companyName),
                     this.createSubHeading("Position: ", item.position),
                     this.createDateBlock(item.dateStart, item.dateEnd),
                     this.createSubHeading(
@@ -235,44 +254,10 @@ export class DocumentCreator {
 
             // Skills & Interests
             this.createHeadingSkills(skills, interests, "Skills & Interests"),
-            // console.log(this.createSkillList(skills, interests)),
-            // this.createSkillList(skills, interests)
-            //   .map((item) => {
-            //  console.log(item.skill)
-            //  console.log(item.interests)
-            //   const arr = [];
-            //     if (item.skill !== "" || item.interests !== "")
-            //     {
-            //     arr.push(
-            //       this.createSubHeading(
-            //         "Skills: ",
-            //         item.skill
-            //       ),
-            //       this.createSubHeading(
-            //         "Interests: ",
-            //         item.interests
-            //       ),
-            //     );
-            //   }
-            //   return arr;
-            // })
-            // .reduce((prev, curr) => prev.concat(curr), []),
-            // this.createHeading("Skills & Interests"),
-            // this.createSubHeading("Skills"),
-            // ...skills.reduce((prev, curr) => prev.concat(curr), []),
-            // this.createSubHeading("Interests"),
-            // this.createInterests(interests),
-
-            // this.createHeading("References"),
-            // new Paragraph(
-            //   "Dr. Dean Mohamedally Director of Postgraduate Studies Department of Computer Science, University College London Malet Place, Bloomsbury, London WC1E d.mohamedally@ucl.ac.uk"
-            // ),
-            // new Paragraph("More references upon request"),
-            // new Paragraph({
-            //   text: "This CV was generated in real-time based on my Linked-In profile from my personal website www.dolan.bio.",
-            //   alignment: AlignmentType.CENTER,
-            // }),
+            this.createSubHeading("Skills: ", this.createSkillList(skills)),
+            this.createSubHeading("Interests: ", interests),
           ],
+          footers: { default: footer },
         },
       ],
     });
@@ -309,43 +294,21 @@ export class DocumentCreator {
   }
 
   createHeadingText(value, text, color = false) {
-    return value !== "" && this.createHeading(text, color);
+    if (value !== "") return this.createHeading(text, color);
   }
 
   createHeadingSkills(val1, val2, text, color = false) {
-    return (val1.length || val2 !== "") && this.createHeading(text, color);
+    if (val1.length || val2 !== "") return this.createHeading(text, color);
   }
 
-  createHeadingBlock(value, text, name, color = false) {
-    const arr = value.filter((item) => item[name] !== "");
-    return arr.length && this.createHeading(text, color);
-  }
-
-  createDescription(text) {
-    return (
-      text &&
-      new Paragraph({
-        indent: {
-          left: 1000, // Левый отступ
-          right: 720, // Правый отступ
-        },
-        children: [
-          new TextRun({
-            text: text.toLowerCase(),
-            font: "Montserrat",
-            size: 18,
-            color: "#686868",
-          }),
-        ],
-      })
-    );
+  createHeadingBlock(value, text, nameBlock, color = false) {
+    const arr = value.filter((item) => item[nameBlock] !== "");
+    if (arr.length) return this.createHeading(text, color);
   }
 
   createContactParagraph(info, text) {
-    console.log(info);
-    return (
-      info &&
-      new Paragraph({
+    if (info)
+      return new Paragraph({
         shading: { fill: "#685843" },
         tabStops: [
           {
@@ -369,63 +332,79 @@ export class DocumentCreator {
             color: "#F7F7F7",
           }),
         ],
-      })
-    );
+      });
   }
 
   createSubHeading(title, value) {
-    return new Paragraph({
-      indent: {
-        left: 1000, // Левый отступ
-        right: 720, // Правый отступ
-      },
-      children: [
-        new TextRun({
-          text: title,
-          size: 24,
-          bold: true,
-          font: "Montserrat",
-          color: "#545454",
-        }),
-        new TextRun({
-          text: value,
-          size: 18,
-          font: "Montserrat",
-          color: "#686868",
-        }),
-      ],
-    });
-  }
-
-  createDateBlock(dateStart, dateEnd) {
-    const start = DateServices.getDate(dateStart, "short");
-    let end = "Present";
-    if (!!dateEnd) {
-      end = ` - ${DateServices.getDate(dateEnd, "short")}`;
-    }
-
-    return new Paragraph({
-      tabStops: [
-        {
-          type: TabStopType.NUM,
-          position: 1000,
+    if (value)
+      return new Paragraph({
+        indent: {
+          left: 1000, // Левый отступ
+          right: 720, // Правый отступ
         },
-      ],
-      children: [
-        new TextRun({
-          text: `\t${start}${end}`,
-          size: 15,
-          font: "Montserrat",
-          color: "#686868",
-        }),
-      ],
-    });
+        children: [
+          new TextRun({
+            text: title,
+            size: 24,
+            bold: true,
+            font: "Montserrat",
+            color: "#545454",
+          }),
+          new TextRun({
+            text: value,
+            size: 18,
+            font: "Montserrat",
+            color: "#686868",
+          }),
+        ],
+      });
   }
 
-  createSkillList(skills, interests) {
-    const arr = [];
-    skills.map((item) => arr.push({ skill: item }));
-    arr.push({ interests: interests });
-    return arr;
+  createDescription(text) {
+    if (text)
+      return new Paragraph({
+        indent: {
+          left: 1000, // Левый отступ
+          right: 720, // Правый отступ
+        },
+        children: [
+          new TextRun({
+            text: text.toLowerCase(),
+            font: "Montserrat",
+            size: 18,
+            color: "#686868",
+          }),
+        ],
+      });
+  }
+  createDateBlock(dateStart, dateEnd) {
+    if (dateStart) {
+      const start = DateServices.getDate(dateStart, "short");
+      let end = "Present";
+      if (!!dateEnd) {
+        end = ` - ${DateServices.getDate(dateEnd, "short")}`;
+      }
+
+      return new Paragraph({
+        tabStops: [
+          {
+            type: TabStopType.NUM,
+            position: 1000,
+          },
+        ],
+        children: [
+          new TextRun({
+            text: `\t${start}${end}`,
+            size: 15,
+            font: "Montserrat",
+            color: "#686868",
+          }),
+        ],
+      });
+    }
+  }
+
+  createSkillList(skills) {
+    return skills.join(", ");
   }
 }
