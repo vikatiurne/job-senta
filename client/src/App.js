@@ -18,7 +18,7 @@ function App() {
     // loginWithPopup,
     // logout,
   } = useAuth0();
-  console.log(user)
+  console.log('user Auth0:',user)
 
   // console.log(getAccessTokenSilently({detailedResponse: true}))
   return (
