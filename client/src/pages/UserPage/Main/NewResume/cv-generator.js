@@ -82,13 +82,13 @@ export class DocumentCreator {
             this.createDescription(professionalSummary),
 
             // Project Experience
-            this.createHeadingBlock(projExp, "Project Experience"),
+            this.createHeadingBlock(projExp, "Project Experience", "name"),
             ...projExp
               .map((item) => {
                 const arr = [];
                 if (item.name !== "") {
                   arr.push(
-                    this.createSubHeading(`Project: `, item.name),
+                    this.createSubHeading("Project: ", item.name),
                     this.createDescription(item.role),
                     new Paragraph("")
                   );
@@ -98,7 +98,7 @@ export class DocumentCreator {
               .reduce((prev, curr) => prev.concat(curr), []),
 
             // Work Experience
-            this.createHeadingBlock(workExp, "Work Experience"),
+            this.createHeadingBlock(workExp, "Work Experience", "companyName"),
             ...workExp
               .map((item) => {
                 const arr = [];
@@ -119,7 +119,7 @@ export class DocumentCreator {
               .reduce((prev, curr) => prev.concat(curr), []),
 
             // Education
-            this.createHeadingBlock(educ, "Education"),
+            this.createHeadingBlock(educ, "Education", "educName"),
             ...educ
               .map((item) => {
                 const arr = [];
@@ -136,7 +136,11 @@ export class DocumentCreator {
               .reduce((prev, curr) => prev.concat(curr), []),
 
             // Certifications
-            this.createHeadingBlock(certif, "Certifications"),
+            this.createHeadingBlock(
+              certif,
+              "Certifications",
+              "certificateName"
+            ),
             ...certif
               .map((item) => {
                 const arr = [];
@@ -156,7 +160,11 @@ export class DocumentCreator {
               .reduce((prev, curr) => prev.concat(curr), []),
 
             // Awards & Scholarships
-            this.createHeadingBlock(award, "Awards & Scholarships"),
+            this.createHeadingBlock(
+              award,
+              "Awards & Scholarships",
+              "nameAward"
+            ),
             ...award
               .map((item) => {
                 const arr = [];
@@ -179,7 +187,11 @@ export class DocumentCreator {
               .reduce((prev, curr) => prev.concat(curr), []),
 
             // Volunteering & Leadership
-            this.createHeadingBlock(voluntering, "Volunteering & Leadership"),
+            this.createHeadingBlock(
+              voluntering,
+              "Volunteering & Leadership",
+              "voluntering"
+            ),
             ...voluntering
               .map((item) => {
                 const arr = [];
@@ -199,7 +211,7 @@ export class DocumentCreator {
               .reduce((prev, curr) => prev.concat(curr), []),
 
             // Publications
-            this.createHeadingBlock(publ, "Publications"),
+            this.createHeadingBlock(publ, "Publications", "publication"),
             ...publ
               .map((item) => {
                 const arr = [];
@@ -222,10 +234,7 @@ export class DocumentCreator {
               .reduce((prev, curr) => prev.concat(curr), []),
 
             // Skills & Interests
-            // this.createHeadingBlock(
-            //   this.createSkillList(skills, interests),
-            //   "Skills & Interests"
-            // ),
+            this.createHeadingSkills(skills, interests, "Skills & Interests"),
             // console.log(this.createSkillList(skills, interests)),
             // this.createSkillList(skills, interests)
             //   .map((item) => {
@@ -254,7 +263,15 @@ export class DocumentCreator {
             // this.createSubHeading("Interests"),
             // this.createInterests(interests),
 
-            
+            // this.createHeading("References"),
+            // new Paragraph(
+            //   "Dr. Dean Mohamedally Director of Postgraduate Studies Department of Computer Science, University College London Malet Place, Bloomsbury, London WC1E d.mohamedally@ucl.ac.uk"
+            // ),
+            // new Paragraph("More references upon request"),
+            // new Paragraph({
+            //   text: "This CV was generated in real-time based on my Linked-In profile from my personal website www.dolan.bio.",
+            //   alignment: AlignmentType.CENTER,
+            // }),
           ],
         },
       ],
@@ -295,8 +312,12 @@ export class DocumentCreator {
     return value !== "" && this.createHeading(text, color);
   }
 
-  createHeadingBlock(value, text, color = false) {
-    const arr = value.filter((item) => item.name !== "");
+  createHeadingSkills(val1, val2, text, color = false) {
+    return (val1.length || val2 !== "") && this.createHeading(text, color);
+  }
+
+  createHeadingBlock(value, text, name, color = false) {
+    const arr = value.filter((item) => item[name] !== "");
     return arr.length && this.createHeading(text, color);
   }
 
@@ -321,6 +342,7 @@ export class DocumentCreator {
   }
 
   createContactParagraph(info, text) {
+    console.log(info);
     return (
       info &&
       new Paragraph({
@@ -406,10 +428,4 @@ export class DocumentCreator {
     arr.push({ interests: interests });
     return arr;
   }
-
- 
-
-
-
- 
 }

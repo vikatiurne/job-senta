@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import htmlDocx from 'html-docx-js/dist/html-docx';
 
 import Scroll from "../../../../../components/UI/Scroll/Scroll";
 
@@ -19,7 +18,7 @@ const Preview = ({ active }) => {
   const { user } = useAuth0();
 
   return (
-    <div id="content"
+    <div
       className={`${styles.previewContainer} ${
         active ? styles.previewVisible : null
       }`}
@@ -87,11 +86,12 @@ const Preview = ({ active }) => {
                     Company:{" "}
                     <span className={styles.text}>{item.companyName}</span>
                   </p>
-                  <p className={styles.info}>
-                    Position:{" "}
-                    <span className={styles.text}>{item.position}</span>
-                  </p>
-                  <p className={styles.info}>
+                  {item.position && < p className={styles.info}>
+                  Position:{" "}
+                  <span className={styles.text}>{item.position}</span>
+                  </p>}
+                  
+                 { item.dateStart && <p className={styles.info}>
                     Dates:{" "}
                     {item.dateStart && (
                       <>
@@ -112,11 +112,14 @@ const Preview = ({ active }) => {
                           : DateServices.getDate(item.dateEnd, "short")}
                       </span>
                     )}
-                  </p>
-                  <p className={styles.info}>
+                  </p>}
+
+
+                 { item.responsibilities && <p className={styles.info}>
                     Responsibilities:{" "}
                     <span className={styles.text}>{item.responsibilities}</span>
-                  </p>
+                  </p>}
+
                 </div>
               ))}
           </div>
@@ -131,11 +134,13 @@ const Preview = ({ active }) => {
                     Institution:{" "}
                     <span className={styles.text}>{item.educName}</span>
                   </p>
-                  <p className={styles.info}>
+
+                 { item.specialty &&  <p className={styles.info}>
                     Degree:{" "}
                     <span className={styles.text}>{item.specialty}</span>
-                  </p>
-                  <p className={styles.info}>
+                  </p>}
+
+                 { item.dateStart && <p className={styles.info}>
                     Dates:{" "}
                     {item.dateStart && (
                       <>
@@ -156,7 +161,8 @@ const Preview = ({ active }) => {
                           : DateServices.getDate(item.dateEnd, "short")}
                       </span>
                     )}
-                  </p>
+                  </p>}
+
                 </div>
               ))}
           </div>
@@ -171,11 +177,13 @@ const Preview = ({ active }) => {
                     Certificate:{" "}
                     <span className={styles.text}>{item.certificateName}</span>
                   </p>
-                  <p className={styles.info}>
+
+                 { item.institution &&  <p className={styles.info}>
                     Institution:{" "}
                     <span className={styles.text}>{item.institution}</span>
-                  </p>
-                  <p className={styles.info}>
+                  </p>}
+
+                  {item.dateStart &&  <p className={styles.info}>
                     Dates:{" "}
                     {item.dateStart && (
                       <>
@@ -196,7 +204,8 @@ const Preview = ({ active }) => {
                           : DateServices.getDate(item.dateEnd, "short")}
                       </span>
                     )}
-                  </p>
+                  </p>}
+
                 </div>
               ))}
           </div>
@@ -210,19 +219,22 @@ const Preview = ({ active }) => {
                   <p className={styles.info}>
                     Award: <span className={styles.text}>{item.nameAward}</span>
                   </p>
-                  <p className={styles.info}>
+
+                  {item.institution && <p className={styles.info}>
                     Institution:{" "}
-                    <span className={styles.text}>{item.institutionAward}</span>
-                  </p>
-                  <p className={styles.info}>
+                    <span className={styles.text}>{item.institution}</span>
+                  </p>}
+
+                 {item.date && <p className={styles.info}>
                     Date:{" "}
                     <span className={styles.text}>
                       {DateServices.getDate(item.date, "short")}
                     </span>
-                  </p>
-                  <p className={styles.info}>
+                  </p>}
+
+                  {item.merit && <p className={styles.info}>
                     Merit: <span className={styles.text}>{item.merit}</span>
-                  </p>
+                  </p>}
                 </div>
               ))}
           </div>
@@ -238,7 +250,7 @@ const Preview = ({ active }) => {
                     <span className={styles.text}>{item.voluntering}</span>
                   </p>
 
-                  <p className={styles.info}>
+                 {item.dateStart && <p className={styles.info}>
                     Dates:{" "}
                     {item.dateStart && (
                       <>
@@ -259,11 +271,13 @@ const Preview = ({ active }) => {
                           : DateServices.getDate(item.dateEnd, "short")}
                       </span>
                     )}
-                  </p>
-                  <p className={styles.info}>
+                  </p>}
+
+                 {item.obligations && <p className={styles.info}>
                     Obligations:{" "}
                     <span className={styles.text}>{item.obligations}</span>
-                  </p>
+                  </p>}
+
                 </div>
               ))}
           </div>
@@ -278,12 +292,13 @@ const Preview = ({ active }) => {
                     Publication:{" "}
                     <span className={styles.text}>{item.publication}</span>
                   </p>
-                  <p className={styles.info}>
+
+                  {item.date && <p className={styles.info}>
                     Date:{" "}
                     <span className={styles.text}>
                       {DateServices.getDate(item.date, "short")}
                     </span>
-                  </p>
+                  </p>}
 
                   {!!item.publicationLink && (
                     <p className={styles.info}>

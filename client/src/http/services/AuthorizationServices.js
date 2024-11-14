@@ -1,5 +1,5 @@
 import $api from '../../http/axios';
-import axios from 'axios';
+
 
 export default class AuthorizationServices {
   static async login(email, password) {

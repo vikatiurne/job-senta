@@ -11,7 +11,7 @@ import Preview from "../Preview/Preview";
 
 import { jsPDF } from "jspdf";
 import "jspdf/dist/polyfills.es.js";
-import htmlDocx from 'html-docx-js/dist/html-docx';
+import htmlDocx from "html-docx-js/dist/html-docx";
 import { saveAs } from "file-saver";
 import { Packer } from "docx";
 
@@ -48,20 +48,21 @@ const MobileBtns = () => {
   };
 
   const handleDownloadDoc = () => {
-
     setSelectedExport(false);
-// const doc = generateResume(info, user)
- 
-    const documentCreator = new DocumentCreator();
-    const doc = documentCreator.create(info, user);
+    // const doc = generateResume(info, user)
 
-   Packer.toBlob(doc).then(blob => {
-      saveAs(blob, "example.docx");
-    });
+   
+      const documentCreator = new DocumentCreator();
+      const doc = documentCreator.create(info, user);
+
+      Packer.toBlob(doc).then((blob) => {
+        saveAs(blob, "example.docx");
+      });
   
+
     // const content = document.getElementById('content').innerHTML; // Получаем HTML-код содержимого
     // const converted = htmlDocx.asBlob(content); // Конвертируем в DOCX
-    
+
     // // Создаем ссылку для скачивания
     // const link = document.createElement('a');
     // link.href = URL.createObjectURL(converted);
