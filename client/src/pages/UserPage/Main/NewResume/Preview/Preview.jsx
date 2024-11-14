@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import htmlDocx from 'html-docx-js/dist/html-docx';
 
 import Scroll from "../../../../../components/UI/Scroll/Scroll";
 
@@ -18,7 +19,7 @@ const Preview = ({ active }) => {
   const { user } = useAuth0();
 
   return (
-    <div
+    <div id="content"
       className={`${styles.previewContainer} ${
         active ? styles.previewVisible : null
       }`}
@@ -211,7 +212,7 @@ const Preview = ({ active }) => {
                   </p>
                   <p className={styles.info}>
                     Institution:{" "}
-                    <span className={styles.text}>{item.institution}</span>
+                    <span className={styles.text}>{item.institutionAward}</span>
                   </p>
                   <p className={styles.info}>
                     Date:{" "}

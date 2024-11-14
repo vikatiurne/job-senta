@@ -11,12 +11,26 @@ import Preview from "../Preview/Preview";
 
 import { jsPDF } from "jspdf";
 import "jspdf/dist/polyfills.es.js";
+import htmlDocx from 'html-docx-js/dist/html-docx';
+import { saveAs } from "file-saver";
+import { Packer } from "docx";
 
 import styles from "./MobileBtns.module.css";
+import { DocumentCreator } from "../cv-generator";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
+import { generateResume } from "../generator-cv";
 
 const MobileBtns = () => {
   const [selectedExport, setSelectedExport] = useState(false);
   const [preview, setPreview] = useState(false);
+
+  const info = useSelector((state) => state.createResume.info);
+
+  //имя вытаскивавем из БД
+  // const user = "Darina Taranenko";
+  const { user } = useAuth0();
+
   const handleSelectedExport = () => setSelectedExport((prev) => !prev);
 
   const handleDownloadPdf = () => {
@@ -32,8 +46,27 @@ const MobileBtns = () => {
     //   },
     // });
   };
+
   const handleDownloadDoc = () => {
+
     setSelectedExport(false);
+// const doc = generateResume(info, user)
+ 
+    const documentCreator = new DocumentCreator();
+    const doc = documentCreator.create(info, user);
+
+   Packer.toBlob(doc).then(blob => {
+      saveAs(blob, "example.docx");
+    });
+  
+    // const content = document.getElementById('content').innerHTML; // Получаем HTML-код содержимого
+    // const converted = htmlDocx.asBlob(content); // Конвертируем в DOCX
+    
+    // // Создаем ссылку для скачивания
+    // const link = document.createElement('a');
+    // link.href = URL.createObjectURL(converted);
+    // link.download = 'resume.docx'; // Имя файла
+    // link.click();
   };
 
   return (
