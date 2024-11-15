@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import exportImg from "../../../../../assets/user_page/builder/createResume/export.svg";
 import { ReactComponent as Export } from "../../../../../assets/user_page/builder/mobile/export.svg";
@@ -24,8 +24,13 @@ import { generateResume } from "../generator-cv";
 const MobileBtns = () => {
   const [selectedExport, setSelectedExport] = useState(false);
   const [preview, setPreview] = useState(false);
+  const [emptyResume, setEmptyResume] = useState(true);
 
   const info = useSelector((state) => state.createResume.info);
+
+  useEffect(() => {
+    setEmptyResume(!Object.keys(info).length)
+  }, [info])
 
   //имя вытаскивавем из БД
   // const user = "Darina Taranenko";
@@ -76,6 +81,7 @@ const MobileBtns = () => {
         <Button
           className={`${styles.export} ${styles.exportDoc}`}
           onClick={handleDownloadDoc}
+          disabled={emptyResume}
         >
           <img src={exportImg} alt="export" />
           <p>Export in DOC</p>
@@ -83,6 +89,7 @@ const MobileBtns = () => {
         <Button
           className={`${styles.export} ${styles.exportPdf}`}
           onClick={handleDownloadPdf}
+          disabled={emptyResume}
         >
           <img src={exportImg} alt="export" />
           <p>Export in PDF</p>
@@ -107,6 +114,7 @@ const MobileBtns = () => {
               selectedExport ? styles.dropDownActive : null
             }`}
             onClick={() => handleSelectedExport()}
+            disabled={emptyResume}
           >
             <Export />
             <p>Export</p>

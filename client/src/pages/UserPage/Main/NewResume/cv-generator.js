@@ -12,7 +12,6 @@ import DateServices from "../../../../utils/DateServices";
 
 export class DocumentCreator {
   create(info, user) {
-    console.log(info);
     const desiredPosition = info?.desiredPosition;
     const phone = info?.phone;
     const email = info?.email;

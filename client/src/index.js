@@ -8,7 +8,6 @@ import ModalProvider from "./context/ModalContext";
 import "./index.css";
 
 const root = createRoot(document.getElementById("root"));
-console.log(process.env.REACT_APP_AUTH0_DOMAIN);
 
 const portalDiv = document.createElement('div')
 portalDiv.id = 'portal'
