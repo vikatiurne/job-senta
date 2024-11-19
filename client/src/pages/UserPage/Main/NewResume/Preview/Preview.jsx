@@ -14,7 +14,7 @@ const Preview = ({ active }) => {
   const info = useSelector((state) => state.createResume.info);
 
   //имя вытаскивавем из БД
-  // const user = "Darina Taranenko";
+  // const user ={name: "Darina Taranenko"};
   const { user } = useAuth0();
 
   return (

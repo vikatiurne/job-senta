@@ -9,17 +9,17 @@ import DropDown from "../../../../../components/UI/DropDown/DropDown";
 import Popup from "../../../../../components/UI/Popup/Popup";
 import Preview from "../Preview/Preview";
 
-import { jsPDF } from "jspdf";
-import "jspdf/dist/polyfills.es.js";
-import htmlDocx from "html-docx-js/dist/html-docx";
 import { saveAs } from "file-saver";
 import { Packer } from "docx";
 
+import pdfMake from "pdfmake/build/pdfmake";
+
+
 import styles from "./MobileBtns.module.css";
-import { DocumentCreator } from "../cv-generator";
+import { DocumentCreator } from "../CV-generators/cv-generator-docx";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
-import { generateResume } from "../generator-cv";
+import { PdfCreator } from "../CV-generators/cv-generator-pdf";
 
 const MobileBtns = () => {
   const [selectedExport, setSelectedExport] = useState(false);
@@ -29,8 +29,8 @@ const MobileBtns = () => {
   const info = useSelector((state) => state.createResume.info);
 
   useEffect(() => {
-    setEmptyResume(!Object.keys(info).length)
-  }, [info])
+    setEmptyResume(!Object.keys(info).length);
+  }, [info]);
 
   //имя вытаскивавем из БД
   // const user = "Darina Taranenko";
@@ -40,39 +40,22 @@ const MobileBtns = () => {
 
   const handleDownloadPdf = () => {
     setSelectedExport(false);
-    // const content = pdfRef.current;
-    // console.log(pdfRef);
-
-    // const doc = new jsPDF();
-
-    // doc.html(content, {
-    //   callback: function (doc) {
-    //     doc.save("resume.pdf");
-    //   },
-    // });
+    const doc = new PdfCreator();
+    const docDefinition = doc.create(info, user);
+    const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+    pdfDocGenerator.getBlob((blob) => {
+      saveAs(blob, "resume.pdf");
+    });
   };
 
   const handleDownloadDoc = () => {
     setSelectedExport(false);
-    // const doc = generateResume(info, user)
-
-   
-      const documentCreator = new DocumentCreator();
-      const doc = documentCreator.create(info, user);
-
+    const documentCreator = new DocumentCreator();
+    const doc = documentCreator.create(info, user);
     Packer.toBlob(doc).then((blob) => {
-        saveAs(blob, "example.docx");
-      });
-  
-
-    // const content = document.getElementById('content').innerHTML; // Получаем HTML-код содержимого
-    // const converted = htmlDocx.asBlob(content); // Конвертируем в DOCX
-
-    // // Создаем ссылку для скачивания
-    // const link = document.createElement('a');
-    // link.href = URL.createObjectURL(converted);
-    // link.download = 'resume.docx'; // Имя файла
-    // link.click();
+      console.log(blob);
+      saveAs(blob, "resume.docx");
+    });
   };
 
   return (

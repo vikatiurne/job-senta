@@ -5,10 +5,11 @@ import {
   Paragraph,
   TabStopType,
   TextRun,
+  ImageRun,
   Footer,
 } from "docx";
-
-import DateServices from "../../../../utils/DateServices";
+import footerImage from "./bottom_resume.png";
+import DateServices from "../../../../../utils/DateServices";
 
 export class DocumentCreator {
   create(info, user) {
@@ -31,14 +32,14 @@ export class DocumentCreator {
       children: [
         new Paragraph({
           alignment: "center",
-          spacing: { before: 0, after: 200 },
-          shading: { fill: "#685843", color: "#685843" },
+          spacing: { before: 0, after: 0 },
           children: [
-            new TextRun({
-              text: "©    2024 Creativity Inc. All rights reserved ",
-              font: "Montserrat",
-              size: 18,
-              color: "#F7F7F7",
+            new ImageRun({
+              data: this.createImgFooter(),
+              transformation: {
+                width: 500,
+                height: 25,
+              },
             }),
           ],
         }),
@@ -51,7 +52,7 @@ export class DocumentCreator {
           properties: {
             page: {
               size: { width: "210mm", height: "297mm" },
-              margin: { top: "6.35mm", left: 0, right: 0, bottom: 0 },
+              margin: { top: "6.35mm", left: 0, right: 0, bottom: "0mm" },
             },
           },
 
@@ -65,7 +66,7 @@ export class DocumentCreator {
                   new TextRun({
                     text: desiredPosition.toUpperCase(),
                     font: "Montserrat",
-                    size: 33,
+                    size: 44,
                     color: "#545454",
                   }),
                 ],
@@ -77,9 +78,9 @@ export class DocumentCreator {
               heading: HeadingLevel.TITLE,
               children: [
                 new TextRun({
-                  text: user?.name.toUpperCase(),
-                  font: "Montserrat",
-                  size: 41,
+                  text: user?.name,
+                  font: "Open Sans",
+                  size: 54,
                   bold: true,
                   color: "#545454",
                 }),
@@ -278,7 +279,7 @@ export class DocumentCreator {
           ],
           text: `\t${text}`,
           font: "Montserrat",
-          size: 33,
+          size: 40,
           color: color ? "#F7F7F7" : "#545454",
         }),
       ],
@@ -289,7 +290,7 @@ export class DocumentCreator {
     if (phone) contacts.push(phone);
     if (email) contacts.push(email);
     if (LinkedIn) contacts.push(LinkedIn);
-    return contacts.length && this.createHeading(text, color);
+    if (contacts.length) return this.createHeading(text, color);
   }
 
   createHeadingText(value, text, color = false) {
@@ -320,14 +321,14 @@ export class DocumentCreator {
           new TextRun({
             text: `\t${text}`,
             font: "Montserrat",
-            size: 24,
+            size: 26,
             color: "#F7F7F7",
             bold: true,
           }),
           new TextRun({
             text: info,
             font: "Montserrat",
-            size: 18,
+            size: 22,
             color: "#F7F7F7",
           }),
         ],
@@ -344,14 +345,14 @@ export class DocumentCreator {
         children: [
           new TextRun({
             text: title,
-            size: 24,
+            size: 26,
             bold: true,
             font: "Montserrat",
             color: "#545454",
           }),
           new TextRun({
             text: value,
-            size: 18,
+            size: 22,
             font: "Montserrat",
             color: "#686868",
           }),
@@ -370,7 +371,7 @@ export class DocumentCreator {
           new TextRun({
             text: text.toLowerCase(),
             font: "Montserrat",
-            size: 18,
+            size: 22,
             color: "#686868",
           }),
         ],
@@ -394,7 +395,7 @@ export class DocumentCreator {
         children: [
           new TextRun({
             text: `\t${start}${end}`,
-            size: 15,
+            size: 18,
             font: "Montserrat",
             color: "#686868",
           }),
@@ -405,5 +406,11 @@ export class DocumentCreator {
 
   createSkillList(skills) {
     return skills.join(", ");
+  }
+
+  async createImgFooter() {
+    const imageResponse = await fetch(footerImage);
+    const imageBlob = await imageResponse.blob();
+    return await imageBlob.arrayBuffer();
   }
 }
