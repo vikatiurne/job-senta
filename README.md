@@ -2,7 +2,7 @@
 фронт: директория /landing 
        запуск - npm start
 Переменные окружения:
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL= server url
 back: директоория  /server
       запуск - npm start
 Переменные окружения:
