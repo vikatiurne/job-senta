@@ -27,9 +27,9 @@ const NavBar = ({ burgerActive, setBurgerActive }) => {
               : `${styles.socialLincsActive} ${styles.socialLincs}`
           }
         >
-         <a href=""><img src={iconTwiter} alt="twiter" /></a> 
-         <a href=""><img src={iconInstagram} alt="instagram" /></a> 
-          <a href=""><img src={iconFacebook} alt="facebook" /></a>
+         <a href="#join"><img src={iconTwiter} alt="twiter" /></a> 
+         <a href="#join"><img src={iconInstagram} alt="instagram" /></a> 
+          <a href="#join"><img src={iconFacebook} alt="facebook" /></a>
         </div>
         <ul className={!burgerActive ? styles.navList : styles.navListBurger}>
           {navBar.map((item, i) => (

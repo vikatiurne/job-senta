@@ -7,7 +7,7 @@
   position: absolute;
   width: 100%;
   opacity: 0.3;
-  top: -150px;
+  top: -50px;
   left: 0;
 }
 .titleContainer {
@@ -90,10 +90,10 @@
     margin-bottom: 93px;
   }
   .bg{
-    width: 300%;
-    height: 150%;
-    top: -200px;
-    left: -120px;
+    max-width: 300%;
+    max-height: 150%;
+    top: 100px;
+    left: 0;
   }
   .title {
     font-size: 27px;
