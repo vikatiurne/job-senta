@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import exportImg from "../../../../../assets/user_page/builder/createResume/export.svg";
 import { ReactComponent as Export } from "../../../../../assets/user_page/builder/mobile/export.svg";
@@ -9,21 +9,57 @@ import DropDown from "../../../../../components/UI/DropDown/DropDown";
 import Popup from "../../../../../components/UI/Popup/Popup";
 import Preview from "../Preview/Preview";
 
+import { saveAs } from "file-saver";
+import { Packer } from "docx";
+
+import pdfMake from "pdfmake/build/pdfmake";
 
 
 import styles from "./MobileBtns.module.css";
+import { DocumentCreator } from "../CV-generators/cv-generator-docx";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
+import { PdfCreator } from "../CV-generators/cv-generator-pdf";
 
 const MobileBtns = () => {
   const [selectedExport, setSelectedExport] = useState(false);
   const [preview, setPreview] = useState(false);
+  const [emptyResume, setEmptyResume] = useState(true);
+
+  const info = useSelector((state) => state.createResume.info);
+
+  useEffect(() => {
+    setEmptyResume(!Object.keys(info).length);
+  }, [info]);
+
+  //имя вытаскивавем из БД
+  // const user = "Darina Taranenko";
+  const { user } = useAuth0();
+
   const handleSelectedExport = () => setSelectedExport((prev) => !prev);
 
   const handleDownloadPdf = () => {
     setSelectedExport(false);
+    // const content = pdfRef.current;
+    // console.log(pdfRef);
 
+    // const doc = new jsPDF();
+
+    // doc.html(content, {
+    //   callback: function (doc) {
+    //     doc.save("resume.pdf");
+    //   },
+    // });
   };
+
   const handleDownloadDoc = () => {
     setSelectedExport(false);
+    const documentCreator = new DocumentCreator();
+    const doc = documentCreator.create(info, user);
+    Packer.toBlob(doc).then((blob) => {
+      console.log(blob);
+      saveAs(blob, "resume.docx");
+    });
   };
 
   return (
@@ -32,6 +68,7 @@ const MobileBtns = () => {
         <Button
           className={`${styles.export} ${styles.exportDoc}`}
           onClick={handleDownloadDoc}
+          disabled={emptyResume}
         >
           <img src={exportImg} alt="export" />
           <p>Export in DOC</p>
@@ -39,6 +76,7 @@ const MobileBtns = () => {
         <Button
           className={`${styles.export} ${styles.exportPdf}`}
           onClick={handleDownloadPdf}
+          disabled={emptyResume}
         >
           <img src={exportImg} alt="export" />
           <p>Export in PDF</p>
@@ -63,6 +101,7 @@ const MobileBtns = () => {
               selectedExport ? styles.dropDownActive : null
             }`}
             onClick={() => handleSelectedExport()}
+            disabled={emptyResume}
           >
             <Export />
             <p>Export</p>

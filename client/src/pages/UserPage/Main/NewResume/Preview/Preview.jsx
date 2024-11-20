@@ -14,7 +14,7 @@ const Preview = ({ active }) => {
   const info = useSelector((state) => state.createResume.info);
 
   //имя вытаскивавем из БД
-  // const user = "Darina Taranenko";
+  // const user ={name: "Darina Taranenko"};
   const { user } = useAuth0();
 
   return (
@@ -86,36 +86,48 @@ const Preview = ({ active }) => {
                     Company:{" "}
                     <span className={styles.text}>{item.companyName}</span>
                   </p>
-                  <p className={styles.info}>
-                    Position:{" "}
-                    <span className={styles.text}>{item.position}</span>
-                  </p>
-                  <p className={styles.info}>
-                    Dates:{" "}
-                    {item.dateStart && (
-                      <>
-                        <span className={styles.text}>
-                          {DateServices.getDate(item.dateStart, "short")}
-                        </span>
+                  {item.position && (
+                    <p className={styles.info}>
+                      Position:{" "}
+                      <span className={styles.text}>{item.position}</span>
+                    </p>
+                  )}
 
-                        <span className={styles.text}>-</span>
-                      </>
-                    )}
-                    {item.dateEnd && (
+                  {item.dateStart && (
+                    <p className={styles.info}>
+                      Dates:{" "}
+                      {item.dateStart && (
+                        <>
+                          <span className={styles.text}>
+                            {DateServices.getDate(item.dateStart, "short")}
+                          </span>
+
+                          <span className={styles.text}>-</span>
+                        </>
+                      )}
+                      {item.dateEnd ? (
+                        <span className={styles.text}>
+                          {new Date().toLocaleString("en-US", {
+                            month: "long",
+                            year: "numeric",
+                          }) === DateServices.getDate(item.dateEnd, "short")
+                            ? "Present"
+                            : DateServices.getDate(item.dateEnd, "short")}
+                        </span>
+                      ) : (
+                        <span className={styles.text}>Present</span>
+                      )}
+                    </p>
+                  )}
+
+                  {item.responsibilities && (
+                    <p className={styles.info}>
+                      Responsibilities:{" "}
                       <span className={styles.text}>
-                        {new Date().toLocaleString("en-US", {
-                          month: "long",
-                          year: "numeric",
-                        }) === DateServices.getDate(item.dateEnd, "short")
-                          ? "Present"
-                          : DateServices.getDate(item.dateEnd, "short")}
+                        {item.responsibilities}
                       </span>
-                    )}
-                  </p>
-                  <p className={styles.info}>
-                    Responsibilities:{" "}
-                    <span className={styles.text}>{item.responsibilities}</span>
-                  </p>
+                    </p>
+                  )}
                 </div>
               ))}
           </div>
@@ -130,32 +142,40 @@ const Preview = ({ active }) => {
                     Institution:{" "}
                     <span className={styles.text}>{item.educName}</span>
                   </p>
-                  <p className={styles.info}>
-                    Degree:{" "}
-                    <span className={styles.text}>{item.specialty}</span>
-                  </p>
-                  <p className={styles.info}>
-                    Dates:{" "}
-                    {item.dateStart && (
-                      <>
-                        <span className={styles.text}>
-                          {DateServices.getDate(item.dateStart, "short")}
-                        </span>
 
-                        <span className={styles.text}>-</span>
-                      </>
-                    )}
-                    {item.dateEnd && (
-                      <span className={styles.text}>
-                        {new Date().toLocaleString("en-US", {
-                          month: "long",
-                          year: "numeric",
-                        }) === DateServices.getDate(item.dateEnd, "short")
-                          ? "Present"
-                          : DateServices.getDate(item.dateEnd, "short")}
-                      </span>
-                    )}
-                  </p>
+                  {item.specialty && (
+                    <p className={styles.info}>
+                      Degree:{" "}
+                      <span className={styles.text}>{item.specialty}</span>
+                    </p>
+                  )}
+
+                  {item.dateStart && (
+                    <p className={styles.info}>
+                      Dates:{" "}
+                      {item.dateStart && (
+                        <>
+                          <span className={styles.text}>
+                            {DateServices.getDate(item.dateStart, "short")}
+                          </span>
+
+                          <span className={styles.text}>-</span>
+                        </>
+                      )}
+                      {item.dateEnd ? (
+                        <span className={styles.text}>
+                          {new Date().toLocaleString("en-US", {
+                            month: "long",
+                            year: "numeric",
+                          }) === DateServices.getDate(item.dateEnd, "short")
+                            ? "Present"
+                            : DateServices.getDate(item.dateEnd, "short")}
+                        </span>
+                      ) : (
+                        <span className={styles.text}>Present</span>
+                      )}
+                    </p>
+                  )}
                 </div>
               ))}
           </div>
@@ -170,32 +190,40 @@ const Preview = ({ active }) => {
                     Certificate:{" "}
                     <span className={styles.text}>{item.certificateName}</span>
                   </p>
-                  <p className={styles.info}>
-                    Institution:{" "}
-                    <span className={styles.text}>{item.institution}</span>
-                  </p>
-                  <p className={styles.info}>
-                    Dates:{" "}
-                    {item.dateStart && (
-                      <>
-                        <span className={styles.text}>
-                          {DateServices.getDate(item.dateStart, "short")}
-                        </span>
 
-                        <span className={styles.text}>-</span>
-                      </>
-                    )}
-                    {item.dateEnd && (
-                      <span className={styles.text}>
-                        {new Date().toLocaleString("en-US", {
-                          month: "long",
-                          year: "numeric",
-                        }) === DateServices.getDate(item.dateEnd, "short")
-                          ? "Present"
-                          : DateServices.getDate(item.dateEnd, "short")}
-                      </span>
-                    )}
-                  </p>
+                  {item.institution && (
+                    <p className={styles.info}>
+                      Institution:{" "}
+                      <span className={styles.text}>{item.institution}</span>
+                    </p>
+                  )}
+
+                  {item.dateStart && (
+                    <p className={styles.info}>
+                      Dates:{" "}
+                      {item.dateStart && (
+                        <>
+                          <span className={styles.text}>
+                            {DateServices.getDate(item.dateStart, "short")}
+                          </span>
+
+                          <span className={styles.text}>-</span>
+                        </>
+                      )}
+                      {item.dateEnd ? (
+                        <span className={styles.text}>
+                          {new Date().toLocaleString("en-US", {
+                            month: "long",
+                            year: "numeric",
+                          }) === DateServices.getDate(item.dateEnd, "short")
+                            ? "Present"
+                            : DateServices.getDate(item.dateEnd, "short")}
+                        </span>
+                      ) : (
+                        <span className={styles.text}>Present</span>
+                      )}
+                    </p>
+                  )}
                 </div>
               ))}
           </div>
@@ -209,19 +237,28 @@ const Preview = ({ active }) => {
                   <p className={styles.info}>
                     Award: <span className={styles.text}>{item.nameAward}</span>
                   </p>
-                  <p className={styles.info}>
-                    Institution:{" "}
-                    <span className={styles.text}>{item.institution}</span>
-                  </p>
-                  <p className={styles.info}>
-                    Date:{" "}
-                    <span className={styles.text}>
-                      {DateServices.getDate(item.date, "short")}
-                    </span>
-                  </p>
-                  <p className={styles.info}>
-                    Merit: <span className={styles.text}>{item.merit}</span>
-                  </p>
+
+                  {item.institution && (
+                    <p className={styles.info}>
+                      Institution:{" "}
+                      <span className={styles.text}>{item.institution}</span>
+                    </p>
+                  )}
+
+                  {item.date && (
+                    <p className={styles.info}>
+                      Date:{" "}
+                      <span className={styles.text}>
+                        {DateServices.getDate(item.date, "short")}
+                      </span>
+                    </p>
+                  )}
+
+                  {item.merit && (
+                    <p className={styles.info}>
+                      Merit: <span className={styles.text}>{item.merit}</span>
+                    </p>
+                  )}
                 </div>
               ))}
           </div>
@@ -237,32 +274,39 @@ const Preview = ({ active }) => {
                     <span className={styles.text}>{item.voluntering}</span>
                   </p>
 
-                  <p className={styles.info}>
-                    Dates:{" "}
-                    {item.dateStart && (
-                      <>
-                        <span className={styles.text}>
-                          {DateServices.getDate(item.dateStart, "short")}
-                        </span>
+                  {item.dateStart && (
+                    <p className={styles.info}>
+                      Dates:{" "}
+                      {item.dateStart && (
+                        <>
+                          <span className={styles.text}>
+                            {DateServices.getDate(item.dateStart, "short")}
+                          </span>
 
-                        <span className={styles.text}>-</span>
-                      </>
-                    )}
-                    {item.dateEnd && (
-                      <span className={styles.text}>
-                        {new Date().toLocaleString("en-US", {
-                          month: "long",
-                          year: "numeric",
-                        }) === DateServices.getDate(item.dateEnd, "short")
-                          ? "Present"
-                          : DateServices.getDate(item.dateEnd, "short")}
-                      </span>
-                    )}
-                  </p>
-                  <p className={styles.info}>
-                    Obligations:{" "}
-                    <span className={styles.text}>{item.obligations}</span>
-                  </p>
+                          <span className={styles.text}>-</span>
+                        </>
+                      )}
+                      {item.dateEnd ? (
+                        <span className={styles.text}>
+                          {new Date().toLocaleString("en-US", {
+                            month: "long",
+                            year: "numeric",
+                          }) === DateServices.getDate(item.dateEnd, "short")
+                            ? "Present"
+                            : DateServices.getDate(item.dateEnd, "short")}
+                        </span>
+                      ) : (
+                        <span className={styles.text}>Present</span>
+                      )}
+                    </p>
+                  )}
+
+                  {item.obligations && (
+                    <p className={styles.info}>
+                      Obligations:{" "}
+                      <span className={styles.text}>{item.obligations}</span>
+                    </p>
+                  )}
                 </div>
               ))}
           </div>
@@ -277,12 +321,15 @@ const Preview = ({ active }) => {
                     Publication:{" "}
                     <span className={styles.text}>{item.publication}</span>
                   </p>
-                  <p className={styles.info}>
-                    Date:{" "}
-                    <span className={styles.text}>
-                      {DateServices.getDate(item.date, "short")}
-                    </span>
-                  </p>
+
+                  {item.date && (
+                    <p className={styles.info}>
+                      Date:{" "}
+                      <span className={styles.text}>
+                        {DateServices.getDate(item.date, "short")}
+                      </span>
+                    </p>
+                  )}
 
                   {!!item.publicationLink && (
                     <p className={styles.info}>
