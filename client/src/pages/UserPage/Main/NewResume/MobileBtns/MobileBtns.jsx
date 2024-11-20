@@ -40,16 +40,12 @@ const MobileBtns = () => {
 
   const handleDownloadPdf = () => {
     setSelectedExport(false);
-    // const content = pdfRef.current;
-    // console.log(pdfRef);
-
-    // const doc = new jsPDF();
-
-    // doc.html(content, {
-    //   callback: function (doc) {
-    //     doc.save("resume.pdf");
-    //   },
-    // });
+    const doc = new PdfCreator();
+    const docDefinition = doc.create(info, user);
+    const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+    pdfDocGenerator.getBlob((blob) => {
+      saveAs(blob, "resume.pdf");
+    });
   };
 
   const handleDownloadDoc = () => {
