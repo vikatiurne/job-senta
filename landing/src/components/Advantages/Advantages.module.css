@@ -60,8 +60,32 @@
   gap: 16px;
   text-align: center;
 }
+@media (max-width: 1081px) {
+  .container{
+    margin-bottom: 150px;
+  }
+  .title{
+    font-size: 50px;
+  }
+  .titleContainer::before{
+    width: 512px;
+  }
+}
+@media (max-width: 768px) {
 
-@media (max-width: 391px) {
+  .title{
+    font-size: 40px;
+  }
+  .titleContainer{
+    margin-bottom: 50px;
+  }
+  .titleContainer::before{
+    width: 413px;
+    top: 80px;
+  }
+ 
+}
+@media (max-width: 578px) {
   .container{
     margin-bottom: 93px;
   }
@@ -75,9 +99,7 @@
     font-size: 27px;
     line-height: 32px;
   }
-  .titleContainer {
-    margin-bottom: 50px;
-  }
+
   .titleContainer::before {
     width: 310px;
     top: 40px;

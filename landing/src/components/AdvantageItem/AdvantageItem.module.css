@@ -16,13 +16,28 @@
   line-height: 32px;
   font-weight: 400;
 }
-
+@media (max-width: 768px) {
+  .img {
+    max-width: 130px;
+  }
+  .title {
+    font-style: 22px;
+    line-height: 28px;
+  }
+  .text {
+    font-size: 16px;
+    line-height: 28px;
+  }
+ 
+}
 @media (max-width: 391px) {
   .img {
     max-width: 100px;
   }
   .title {
     margin-bottom: 8px;
+    font-size: 27px;
+    line-height: 32px;
   }
   .text {
     font-size: 12px;

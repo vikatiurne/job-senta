@@ -5,3 +5,9 @@
   grid-template-columns: 1fr 2fr;
   max-width: 1280px;
 }
+
+@media (max-width: 1081px) {
+  .headerContainer{
+    grid-template-columns: 1fr 4fr;
+  }
+}
