@@ -1,6 +1,8 @@
 Лендинг:
-фронт: директоория /landing 
+фронт: директория /landing 
        запуск - npm start
+Переменные окружения:
+REACT_APP_API_URL=http://localhost:5000
 back: директоория  /server
       запуск - npm start
 Переменные окружения:
