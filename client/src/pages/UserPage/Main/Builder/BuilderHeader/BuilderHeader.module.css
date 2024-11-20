@@ -1,12 +1,12 @@
 .header {
+  width: 100%;
   margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
   gap: 32px;
   align-items: center;
-  overflow: hidden;
   position: relative;
-  min-height: 80vh;
+
 }
 
 .title {
@@ -16,9 +16,12 @@
 
 .nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  gap: 16px
+  gap: 16px;
+  width: 100%;
+  margin-left: auto;
+
 }
 
 .menu,
@@ -27,6 +30,7 @@
   flex-shrink: 0;
   /* flex-grow: 0; */
 }
+
 
 .sectMenuDropDown,
 .sectNewResumeDropDown {
@@ -63,6 +67,12 @@
 
 
 @media(max-width:390px), (min-width:390px) {
+  .header {
+    gap: 16px;
+    flex-wrap: wrap;
+
+  }
+
   .title {
     font-size: 16px;
     line-height: 24px;
@@ -70,13 +80,14 @@
     font-family: var(--montserrat);
   }
 
-  .menu,
+  /* .menu,
   .newResume {
     order: 0;
-  }
+  } */
 
   .nav {
-    gap: 16px
+    gap: 16px;
+    width: 100%;
   }
 
   .sectMenuDropDown {
@@ -88,7 +99,17 @@
   }
 }
 
+@media(min-width:500px) {
+  .header {
+    flex-wrap: nowrap;
+  }
+}
+
 @media(min-width:1024px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
   .title {
     font-size: 24px;
     line-height: 48px;
@@ -98,24 +119,40 @@
 
   }
 
-  .menu,
-  .newResume {
-    order: 1;
-  }
-
-  .nav {
-    gap: 32px
-  }
-
   .sectMenuDropDown,
   .sectNewResumeDropDown {
+    padding: 6px;
     min-width: unset;
   }
 
+  .nav {
+    gap: 10px;
+    width: 100%;
+  }
+
 }
+
+
 
 @media(min-width:1360px) {
   .title {
     font-size: 32px;
   }
+
+  .sectMenuDropDown,
+  .sectNewResumeDropDown {
+    padding: 14px;
+  }
+}
+
+@media(min-width:1300px) {
+  .nav {
+    gap: 32px;
+  }
+
+  .header {
+    gap: 32px;
+    flex-wrap: nowrap;
+  }
+
 }

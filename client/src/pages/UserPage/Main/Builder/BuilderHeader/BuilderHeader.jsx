@@ -38,6 +38,9 @@ const BuilderHeader = () => {
     <div className={styles.header}>
       <h1 className={styles.title}>Resume&nbsp;Builder</h1>
       <div className={styles.nav}>
+
+        <SearchBox />
+
         <div className={styles.menu}>
 
           <Btn
@@ -96,7 +99,7 @@ const BuilderHeader = () => {
           </DropDown>
 
         </div>
-        <SearchBox />
+
       </div>
     </div>
   );
