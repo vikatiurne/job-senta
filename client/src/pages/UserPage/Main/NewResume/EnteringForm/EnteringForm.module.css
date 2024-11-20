@@ -26,6 +26,9 @@
     box-shadow: none;
     padding: 0;
   }
+  .title{
+    margin-bottom: 20px;
+  }
   .scroll {
     height: calc(100vh - 223px);
     padding: 0;

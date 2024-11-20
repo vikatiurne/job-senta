@@ -1,10 +1,12 @@
 .wrapper {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 33px;
 }
 @media (max-width: 1024px) {
   .wrapper {
+    margin: 0 auto;
     position: relative;
     grid-template-columns: 1fr;
     gap: 0;
