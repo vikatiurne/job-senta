@@ -17,7 +17,7 @@ const Navigation = () => {
   const location = useLocation()
   const isMediaQuery = useMedia("(max-width:1024px)")
   const isActive = (path) => location.pathname === path
-  console.log('isMediaQuery', isMediaQuery);
+
 
   return (
     <nav className={cn(style.userNav,

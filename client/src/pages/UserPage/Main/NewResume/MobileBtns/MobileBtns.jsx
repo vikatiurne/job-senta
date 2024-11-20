@@ -9,8 +9,7 @@ import DropDown from "../../../../../components/UI/DropDown/DropDown";
 import Popup from "../../../../../components/UI/Popup/Popup";
 import Preview from "../Preview/Preview";
 
-import { jsPDF } from "jspdf";
-import "jspdf/dist/polyfills.es.js";
+
 
 import styles from "./MobileBtns.module.css";
 
@@ -21,16 +20,7 @@ const MobileBtns = () => {
 
   const handleDownloadPdf = () => {
     setSelectedExport(false);
-    // const content = pdfRef.current;
-    // console.log(pdfRef);
 
-    // const doc = new jsPDF();
-
-    // doc.html(content, {
-    //   callback: function (doc) {
-    //     doc.save("resume.pdf");
-    //   },
-    // });
   };
   const handleDownloadDoc = () => {
     setSelectedExport(false);

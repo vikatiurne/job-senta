@@ -1,15 +1,19 @@
 .container {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+
 }
+
 @media (max-width: 1024px) {
-  .container {
+  /* .container {
     margin: 0 auto;
-  }
+
+  } */
 }
+
 @media (max-width: 675px) {
-  .container {
+  /* .container {
     max-width: 500px;
     width: 100%;
-  }
+  } */
 }
