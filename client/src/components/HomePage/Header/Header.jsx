@@ -1,10 +1,8 @@
-
-import logo from "../../../assets/Logo.png";
+import { useState } from "react";
+import NavBar from "../NavBar/NavBar";
+import logo from "../../../assets/user_page/home/logo.svg";
 
 import styles from "./Header.module.css";
-import NavBar from "../NavBar/NavBar";
-
-import { useState } from "react";
 
 const Header = () => {
   const [burgerActive, setBurgerActive] = useState(false);
@@ -13,7 +11,6 @@ const Header = () => {
     <div className={styles.headerContainer}>
       <img src={logo} alt="logo" />
       <NavBar burgerActive={burgerActive} setBurgerActive={setBurgerActive} />
-  
     </div>
   );
 };

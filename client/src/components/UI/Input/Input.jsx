@@ -6,7 +6,7 @@ import checkIcon from "../../../assets/checkIcon.svg";
 
 import styles from "./Input.module.css";
 
-const Input = ({ id, name, placeholder, img, error, touched }) => {
+const Input = ({ id, name, placeholder, img, error, touched, values }) => {
   const [isHideErrMsg, setIsHideErrMsg] = useState(false);
 
   useEffect(() => {
@@ -30,11 +30,13 @@ const Input = ({ id, name, placeholder, img, error, touched }) => {
           id={id}
           placeholder={placeholder}
           className={
-            !touched[name] || isHideErrMsg || !error[name]
+            !touched[name] || !error[name] || isHideErrMsg
+            ? values[name] !== ""
               ? error[name]
-                ? `${styles.inputField} ${styles.inputFieldErr}`
-                : `${styles.inputField} ${styles.inputFieldCorrect}`
-              : `${styles.inputField} ${styles.inputNotvisible}`
+                ? styles.inputFieldErr
+                : styles.inputFieldCorrect
+              : styles.inputField
+            : `${styles.inputField} ${styles.inputNotvisible}`
           }
         />
       </div>
