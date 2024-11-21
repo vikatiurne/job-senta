@@ -9,6 +9,9 @@
   color: var(--gray);
   width: 100%;
 }
+.datePicker::placeholder {
+  color: var(--gray-light);
+}
 .react-datepicker {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -16,21 +19,18 @@
   border-bottom-right-radius: 20px;
   padding: 8px 38px;
   font-family: var(--montserrat);
-  border: none;
   color: var(--dark-gray);
+  border: 2px solid var(--brown);
 }
-.react-datepicker-wrapper{
+.react-datepicker-wrapper {
   width: 100%;
 }
-.react-datepicker-popper {
-  border: 2px solid var(--brown);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+.popper {
+  transform: translate(0, 0) !important;
+  right: 0;
+  left: auto !important;
 }
 
-.react-datepicker__navigation {
-  display: none;
-}
 .react-datepicker__header {
   background-color: transparent;
   border-bottom: none;
@@ -49,6 +49,71 @@
   font-weight: 600;
   line-height: 24px;
   color: var(--dark-gray);
+  font-family: var(--montserrat);
+}
+.selectBox {
+  cursor: pointer;
+}
+.option,
+.active {
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-family: var(--montserrat);
+}
+.option:hover {
+  background-color: transparent !important;
+}
+.option {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 19px;
+  color: var(--gray-light);
+  transition: all 0.3s ease-in;
+}
+.active,
+.option:hover {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--dark-gray);
+}
+
+.options {
+  padding: 8px 10px;
+  position: absolute;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  height: 200px;
+  width: 317px;
+  top: 36px;
+  left: -38px;
+  right: 0;
+  background-color: #fff;
+  z-index: 1000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  overflow: auto;
+}
+
+.options::-webkit-scrollbar {
+  width: 4px;
+  height: 0;
+}
+.options::-webkit-scrollbar-track {
+  background: transparent;
+}
+.options::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+.options::-webkit-scrollbar-thumb:hover {
+  background: "#604B2B";
+}
+
+.options.show {
+  display: block;
+  opacity: 1;
 }
 .react-datepicker__day-names {
   font-weight: 500;
@@ -78,4 +143,10 @@
 .react-datepicker__day--today {
   background-color: transparent;
   color: var(--dark-gray);
+}
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  background-color: transparent;
 }

@@ -4,11 +4,15 @@ import { ReactComponent as Plus } from "../../../assets/user_page/builder/btn_pl
 import { ReactComponent as Minus } from "../../../assets/user_page/builder/createResume/minus.svg";
 import { ReactComponent as Check } from "../../../assets/user_page/builder/createResume/check.svg";
 
-import styles from "./InputsBlock.module.css";
 import Button from "../Button/Button";
 import InputDate from "../InputDate/InputDate";
 
+import styles from "./InputsBlock.module.css";
+
+
 const InputsBlock = ({ blockName, labelBlock, initial, errors, fields }) => {
+
+
   return (
     <FieldArray
       name={blockName}
@@ -44,7 +48,9 @@ const InputsBlock = ({ blockName, labelBlock, initial, errors, fields }) => {
                         <div
                           className={
                             item["type"] !== "textarea"
-                              ? styles.inputContainer
+                              ? item["type"] !== "date"
+                                ? styles.inputContainer
+                                : styles.dateContainer
                               : styles.textareaContainer
                           }
                         >
@@ -117,6 +123,7 @@ const InputsBlock = ({ blockName, labelBlock, initial, errors, fields }) => {
                               start={`${inputdate["name"]}` === "dateStart"}
                               end={`${inputdate["name"]}` === "dateEnd"}
                             />
+                            
                           </div>
                         ))}
                       </div>

@@ -7,9 +7,9 @@ const bcrypt = require("bcrypt");
 
 class authService {
 
-    async registration (email, name ,password){
+    async registration (email, name, lastName ,password){
         try {
-            if (!email|| !name || !password) {
+            if (!email|| !name || !password || !lastName) {
                 return ApiError.badRequest("Email and name and password is required");
             }
 
@@ -21,7 +21,7 @@ class authService {
 
             const passwordCrypto = await passwordService.cryptoPassword(password); // создание шифра пароля
 
-            const userData = User.create({email,name, password: passwordCrypto});
+            const userData = User.create({email,name,lastName, password: passwordCrypto});
 
             return userData;
 

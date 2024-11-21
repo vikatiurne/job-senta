@@ -1,0 +1,126 @@
+.exportBtns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 32px;
+}
+.export {
+  padding: 8px 28px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--white);
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 500;
+  font-family: var(--montserrat);
+  border-radius: 20px;
+  cursor: pointer;
+}
+.exportDoc {
+  background-color: var(--brown-light);
+  transition: all 0.3s ease-in;
+}
+.exportDoc:hover {
+  background-color: var(--brown);
+}
+.exportPdf {
+  background-color: var(--brown);
+  transition: all 0.3s ease-in;
+}
+.exportPdf:hover {
+  background-color: var(--brown-hover);
+}
+.mobileBtns {
+  display: none;
+}
+.exportMob {
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid var(--brown);
+  cursor: pointer;
+}
+.exportMob,
+.dropDownItem {
+  color: var(--brown);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  font-family: var(--montserrat);
+}
+.dropDownItem {
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.dropDownActive {
+  border-bottom-right-radius: 0;
+}
+.exportMob:hover {
+  border-color: var(--brown-hover);
+  color: var(--brown-hover);
+}
+.exportMob:hover svg {
+  fill: var(--brown-hover);
+}
+
+.exportDropDown {
+  padding: 16px 14px;
+  left: initial;
+  bottom: 2px;
+  width: 150px;
+  border: 2px solid var(--brown);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.eye {
+  cursor: pointer;
+}
+.eye:hover {
+  fill: var(--brown-hover);
+}
+.previewResume {
+  background-color: var(--white);
+  color: var(--dark-gray);
+  width: 100vw;
+  height: calc(100vh - 32px);
+  bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.previewResume * {
+  font-family: var(--montserrat);
+  text-transform: capitalize;
+}
+
+@media (max-width: 1400px) {
+  .export {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .export img {
+    width: 25px;
+  }
+}
+@media (max-width: 1024px) {
+  .exportBtns {
+    display: none;
+  }
+  .mobileBtns {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    position: absolute;
+    top: 34px;
+    right: 0;
+  }
+}
+@media (max-width: 675px) {
+  .mobileBtns {
+    gap: 8px;
+  }
+}

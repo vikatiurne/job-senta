@@ -4,7 +4,6 @@
     align-items: stretch;
     gap: 4px;
     height: 100%;
-    max-height: 60px;
 }
 
 .sectWidgetItem {
@@ -14,7 +13,6 @@
 }
 
 .sectWidgetBtn {
-
     font-family: var(--montserrat);
     cursor: pointer;
     display: flex;
@@ -95,14 +93,13 @@
     }
 }
 
-@media (min-width:1440px) {
+@media (min-width:1024px) {
 
 
     .sectWidgetBtn {
-        flex-direction: row;
         padding: 16px 0px;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 12px;
         line-height: 24px;
 
     }
@@ -111,4 +108,14 @@
         width: 24px;
         height: 24px;
     }
+}
+
+@media (min-width:1185px) {
+
+
+    .sectWidgetBtn {
+        font-size: 16px;
+        flex-direction: row;
+    }
+
 }

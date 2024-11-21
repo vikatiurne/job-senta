@@ -1,6 +1,8 @@
 .pageHome {
     width: 100%;
     display: grid;
+    overflow: hidden;
+    padding: 1px;
 }
 
 
@@ -33,7 +35,7 @@
     }
 }
 
-@media (min-width:1440px) {
+@media (min-width:1024px) {
     .pageHome {
         gap: 32px;
         grid-template-columns: 437px 1fr 320px;

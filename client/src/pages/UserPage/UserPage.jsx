@@ -6,7 +6,6 @@ import Main from './Main/Main.jsx';
 
 const UserPage = () => {
     return <>
-
         <div className={style.userPageWrap}>
             <Navigation />
             <Main />

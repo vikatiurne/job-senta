@@ -15,7 +15,8 @@ const TopResume = ({ className }) => {
 
     const [selectedResumes, setSelectedResumes] = useState(false)
     const handleSelectedResume = () => (setSelectedResumes(!selectedResumes))
-    const hasMediaQuery = useMedia("(max-width:1440px)")
+    const hasMediaQuery = useMedia("(max-width:1024px)")
+    const hasMediaQueryProgressBar = useMedia("(max-width:456px)")
     console.log('hasMediaQuery', hasMediaQuery);
 
     return (
@@ -96,7 +97,7 @@ const TopResume = ({ className }) => {
             </ScoreResumeCircle>
             <div className={style.sectResumeProgressBar}>
                 <ProgressBar
-                    width={hasMediaQuery ? 262 : 573}
+                    width={hasMediaQueryProgressBar ? 262 : 573}
                     height={16}
                     title='Resume Structure'
                     progressColor='#A6A482'
@@ -104,7 +105,7 @@ const TopResume = ({ className }) => {
                     progressValue={6}
                 />
                 <ProgressBar
-                    width={hasMediaQuery ? 262 : 573}
+                    width={hasMediaQueryProgressBar ? 262 : 573}
                     height={16}
                     title='Measurable Results'
                     progressColor='#685843'
@@ -112,7 +113,7 @@ const TopResume = ({ className }) => {
                     progressValue={2}
                 />
                 <ProgressBar
-                    width={hasMediaQuery ? 262 : 573}
+                    width={hasMediaQueryProgressBar ? 262 : 573}
                     height={16}
                     title='Resume Structure'
                     progressColor='#737084'

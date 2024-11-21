@@ -156,7 +156,7 @@
 @media(max-width: 390px), (min-width:390px) {
     .sectScoreResume {
         padding: 8px;
-
+        position: relative;
     }
 
     .sectScoreResumeList {
@@ -209,20 +209,26 @@
 
 
     .sectScoreResume .scoreMaxDropDown {
-        width: 194px;
-        transform: translateX(calc(-194px / 2 - 5px)) translateY(100%);
+        min-width: 194px;
+        width: 100%;
+        transform: translateY(99%);
         border-top-left-radius: 20px;
+        left: unset
     }
 
     .sectScoreResume .scoreMinDropDown {
-        width: 194px;
-
+        min-width: 194px;
+        width: 100%;
+        transform: translateY(99%);
         border-top-right-radius: 20px;
     }
 
+
+
 }
 
-@media (min-width:1440px) {
+
+@media (min-width:1024px) {
     .sectScoreResume {
         padding: 16px;
     }
@@ -276,8 +282,9 @@
 
     .sectScoreResume .scoreMaxDropDown {
         width: 100%;
-        transform: translateY(100%);
+        transform: translateY(99%);
         border-top-left-radius: 0px;
+        left: 0
     }
 
     .sectScoreResume .scoreMinDropDown {
