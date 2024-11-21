@@ -21,14 +21,13 @@
     max-width: 130px;
   }
   .title {
-    font-style: 22px;
+    font-size: 22px;
     line-height: 28px;
   }
   .text {
     font-size: 16px;
     line-height: 28px;
   }
- 
 }
 @media (max-width: 391px) {
   .img {

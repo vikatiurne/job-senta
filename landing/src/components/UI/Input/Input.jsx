@@ -6,7 +6,7 @@ import checkIcon from "../../../assets/icons/greencheckIcon.svg";
 
 import styles from "./Input.module.css";
 
-const Input = ({ id, name, placeholder, img, error, touched }) => {
+const Input = ({ id, name, placeholder, img, error, touched, values }) => {
   const [isHideErrMsg, setIsHideErrMsg] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,9 @@ const Input = ({ id, name, placeholder, img, error, touched }) => {
             className={styles.icon}
           />
         )}
-        {/* {console.log(name, ":", error[name])} */}
+        {console.log(!!values[name])}
+        {/* {console.log(error[name] )} */}
+        {/* {console.log(isHideErrMsg)} */}
         <Field
           autoComplete="off"
           name={name}
@@ -33,9 +35,11 @@ const Input = ({ id, name, placeholder, img, error, touched }) => {
           placeholder={placeholder}
           className={
             !touched[name] || !error[name] || isHideErrMsg
-              ? error[name]
-                ? `${styles.inputField} ${styles.inputFieldErr}`
-                : `${styles.inputField} ${styles.inputFieldCorrect}`
+              ? values[name] !== ""
+                ? error[name]
+                  ? styles.inputFieldErr
+                  : styles.inputFieldCorrect
+                : styles.inputField
               : `${styles.inputField} ${styles.inputNotvisible}`
           }
         />

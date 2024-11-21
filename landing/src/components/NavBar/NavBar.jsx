@@ -46,7 +46,7 @@ const NavBar = ({ burgerActive, setBurgerActive }) => {
           <a href="#join">Join us</a>
         </Button>
       </nav>
-
+   
       <div
         className={styles.burger}
         onClick={() => setBurgerActive(!burgerActive)}
