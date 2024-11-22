@@ -77,11 +77,11 @@
   .footerContant {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    text-align: center;
   }
 }
 @media (max-width: 750px) {
   .footerContant {
+    padding-bottom: 16px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -90,7 +90,7 @@
       "inputs inputs";
   }
 
-  .footerContantElement:nth-child(1) {
+  .footerContantElementLogo:nth-child(1) {
     grid-area: logo;
   }
 
@@ -104,5 +104,15 @@
 
   .footerContantElement:nth-child(4) {
     grid-area: inputs;
+  }
+  .footerContantElement {
+    padding: 16px 0;
+  }
+  .footerContantElementLogo {
+    padding-top: 24px;
+    padding-bottom: 0;
+  }
+  .creativityContainer{
+    padding-bottom: 24px;
   }
 }

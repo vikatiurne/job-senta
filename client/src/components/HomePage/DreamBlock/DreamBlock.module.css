@@ -32,6 +32,7 @@
     font-family: var(--open-sans);
     font-weight: 700;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .centeredLine {
