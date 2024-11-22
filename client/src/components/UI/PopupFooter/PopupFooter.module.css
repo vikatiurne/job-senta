@@ -1,0 +1,95 @@
+.modal {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 400;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  .modal.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modalBottom{
+    align-items: flex-end;
+  }
+  .modalContent {
+    text-align: left;
+    max-width: 395px;
+    width: 100%;
+    background-color: var(--brown);
+    color: var(--white);
+    transform: scale(0.5);
+    transition: 0.4s all;
+  }
+  
+  .modalContent.active {
+    transform: scale(1);
+  }
+  
+  .iconClose {
+    position: absolute;
+    right: 48px;
+    top: 48px;
+    font-size: 32px;
+  }
+  
+  .close,
+  .closeDark {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+  .closeDark{
+    top: 8px;
+    right: 24px;
+  }
+  .close:before,
+  .close:after, .closeDark::before,
+  .closeDark::after {
+    content: "";
+    position: absolute;
+    top: 21px;
+    left: 10px;
+    width: 26px;
+    height: 4px;
+    background: var(--white);
+  }
+  .closeDark::before,
+  .closeDark::after {
+    background-color: var(--dark-gray);
+  }
+  
+  .close:before,
+  .closeDark::before {
+    --webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  .close:after,
+  .closeDark::after {
+    --webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  
+  @media (max-width: 390px) {
+    .modalContent {
+      width: 85vw;
+    }
+    .close {
+      top: 17px;
+      right: 20px;
+    }
+  
+  }
+  

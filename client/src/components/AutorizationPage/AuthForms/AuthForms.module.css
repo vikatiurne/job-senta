@@ -25,19 +25,38 @@
   transition: all 0.3s ease-in;
   cursor: pointer;
 }
+.footerBtn {
+  display: block;
+  margin: 24px auto 0;
+  padding: 8px 60px;
+  border-radius: 20px;
+  border: var(--white) 2px solid;
+  background-color: transparent;
+  color: var(--white);
+  font-family: var(--montserrat);
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 600;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
 .authBtn:hover,
-.recoveryBtn:hover {
+.recoveryBtn:hover,
+.footerBtn:hover {
   background: var(--brown-hover);
   color: var(--white);
 }
 .authBtn:active,
-.recoveryBtn:active {
+.recoveryBtn:active,
+.footerBtn:active {
   background: var(--brown-focused);
   color: var(--white);
 }
 .authBtn:disabled,
-.recoveryBtn:disabled {
+.recoveryBtn:disabled,
+.footerBtn:disabled {
   background: var(--gray-disabled);
+  border-color: transparent;
 }
 
 .alernativText {
@@ -114,6 +133,31 @@
 
 .popup p:last-child {
   margin-top: 45px;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.footerPopup {
+  padding: 16px;
+}
+.footerPopupTitle {
+  margin-bottom: 16px;
+  font-size: 27px;
+  line-height: 32px;
+  font-family: var(--Open-Sans);
+  font-weight: 600;
+}
+.footerPopupSubTitle,.footerPopupSubTitleLeave {
+  margin-bottom: 26px;
+  font-family: var(--montserrat);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  max-width: 357px;
+  width: 100%;
+}
+.footerPopupSubTitleLeave{
   margin-bottom: 0;
   display: flex;
   flex-direction: column;
