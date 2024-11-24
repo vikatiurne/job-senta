@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./HeroBlock.module.css";
 import Button from "../../UI/Button/Button";
 import HeroIcon from "../../../assets/HeroIcon.png";
+import { Link } from "react-router-dom";
 
 export default function HeroBlock() {
   return (
@@ -17,7 +18,7 @@ export default function HeroBlock() {
               Create it in minutes and our AI will refine it to perfection.
             </p>
           </div>
-          <Button className={styles.heroContentButton}>Get started now</Button>
+         <Link to='/registration'><Button className={styles.heroContentButton}>Get started now</Button></Link> 
         </div>
         <div className={styles.img}>
           <img

@@ -8,7 +8,7 @@ const Header = () => {
   const [burgerActive, setBurgerActive] = useState(false);
 
   return (
-    <div className={styles.headerContainer}>
+    <div className={styles.headerContainer} id="topPage">
       <img src={logo} alt="logo" />
       <NavBar burgerActive={burgerActive} setBurgerActive={setBurgerActive} />
     </div>

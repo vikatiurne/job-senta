@@ -18,13 +18,13 @@ export default function Footer() {
     <div className={styles.footerContantContainer}>
       <div className={styles.footerContant}>
         <div className={styles.footerContantElementLogo}>
-          <Link to="/">
+          <a href="#topPage">
             <img
               src={footerLogo}
               alt="footerLogo"
               className={styles.footerElementImg}
             />
-          </Link>
+          </a>
           <div className={styles.footerElementMediaContainer}>
             <Link to="/" className={styles.footerElementMedia}>
               <Twitter className={styles.icon} />
