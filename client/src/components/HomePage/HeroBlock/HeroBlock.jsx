@@ -5,19 +5,21 @@ import HeroIcon from "../../../assets/HeroIcon.png";
 
 export default function HeroBlock() {
   return (
-    <div className={styles.heroContentContainer} id='Tools'>
+    <div className={styles.heroContentContainer} id="Tools">
       <div className={styles.heroContent}>
         <div className={styles.heroContentBlock}>
           <h2 className={styles.heroContentTitle}>
             Easily create a resume achieve success
           </h2>
           <div className={styles.heroContentSubTitle}>
-            Your resume is the key to the offer! Create it in minutes and our AI
-            will refine it to perfection.
+            <p className={styles.heroContentSubTitleText}>Your resume is the key to the offer!</p>
+            <p className={styles.heroContentSubTitleText}>
+              Create it in minutes and our AI will refine it to perfection.
+            </p>
           </div>
           <Button className={styles.heroContentButton}>Get started now</Button>
         </div>
-        <div className="">
+        <div className={styles.img}>
           <img
             src={HeroIcon}
             alt="HeroIcon"
