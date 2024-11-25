@@ -17,8 +17,8 @@ class LandingController {
 
       return res.status(200).json({ userData });
     } catch (err) {
-      next(ApiError.badRequest("Користувач з таким e-mail вже існує"));
-      //   next(err);
+      next(ApiError.badRequest("This Email is already in use"));
+
     }
   }
 
@@ -29,7 +29,7 @@ class LandingController {
       return res.status(200).json({ userData });
     } catch (err) {
       next(ApiError.badRequest(err.message));
-      //   next(err);
+
     }
   }
 }
