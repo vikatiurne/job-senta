@@ -6,29 +6,60 @@ const initialState = {
   isAuth: false,
 };
 
-export const fetchLogin = createAsyncThunk(
-  "auth/fetchLogin",
-  async ({ email, password }, { rejectWithValue }) => {
-    try {
-      const res = await AuthorizationServices.login(email, password);
-      console.log(res);
-      // return await AuthServices.login(email, password);
-    } catch (error) {
-      // return rejectWithValue(error.response.data);
-    }
-  }
-);
-
 export const fetchRegistration = createAsyncThunk(
   "auth/fetchRegistration",
   async ({ email, password, name, lastName }, { rejectWithValue }) => {
     try {
-      const res = await AuthorizationServices.registration(email, password, name,lastName);
-      console.log(res);
-    //   console.log(email, password, name, lastName);
-      // return await AuthServices.registration(email, password, name);
+      return await AuthorizationServices.registration(
+        email,
+        password,
+        name,
+        lastName
+      );
     } catch (error) {
-      // return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchLogin = createAsyncThunk(
+  "auth/fetchLogin",
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.login(email, password);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
+  return await AuthorizationServices.logout();
+});
+
+export const fetchAutoLogin = createAsyncThunk(
+  'auth/fetchAutoLogin',
+  async () => await AuthorizationServices.autoLogin()
+);
+
+export const fetchForgotPassword = createAsyncThunk(
+  'auth/fetchForgotPassword',
+  async ({ email }, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.forgotPassword(email);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchResetPassword = createAsyncThunk(
+  'auth/fetchResetPassword',
+  async ({ newPass, resetLink }, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.resetPassword(newPass, resetLink);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -47,7 +78,7 @@ const authSlice = createSlice({
         if (!!payload.data.user) {
           state.isAuth = true;
           state.user = payload.data.user;
-          // localStorage.setItem('token', payload.data.accessToken);
+          localStorage.setItem("token_jobseeker", payload.data.accessToken);
         } else {
           state.error = payload.data.message;
         }
@@ -63,84 +94,63 @@ const authSlice = createSlice({
         if (!!payload.data.user) {
           state.isAuth = true;
           state.user = payload.data.user;
-          localStorage.setItem("token", payload.data.accessToken);
+          localStorage.setItem("token_jobseeker", payload.data.accessToken);
         } else {
-            console.log(payload.data.errors)
+          console.log(payload.data.errors);
           // обрпаботать ошибку payload.data.errors
         }
       })
       .addCase(fetchRegistration.rejected, (state, { payload }) => {
         // обрпаботать ошибку payload.errors
-      });
-    // .addCase(fetchLogout.pending, (state) => {
-    //   state.status = 'loading';
-    // })
-    // .addCase(fetchLogout.fulfilled, (state) => {
-    //   localStorage.removeItem('token');
-    //   localStorage.removeItem('location');
-    //   state.status = 'success';
-    //   state.error = null;
-    //   state.isAuth = false;
-    //   state.isLogout = true;
-    //   state.user = {};
-    // })
-    // .addCase(fetchLogout.rejected, (state) => {
-    //   state.status = 'error';
-    // })
-    // .addCase(fetchAutoLogin.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.error = null;
-    // })
-    // .addCase(fetchAutoLogin.fulfilled, (state, { payload }) => {
-    //   state.status = 'success';
-    //   state.user = payload.data.user;
-    //   state.error = payload.message;
-    //   state.isAuth = true;
-    //   localStorage.setItem('token', payload.data.accessToken);
-    // })
-    // .addCase(fetchAutoLogin.rejected, (state) => {
-    //   state.status = 'error';
-    // })
-    // .addCase(fetchForgotPassword.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.error = null;
-    // })
-    // .addCase(fetchForgotPassword.fulfilled, (state, { payload }) => {
-    //   state.error = payload.data.message;
-    // })
-    // .addCase(fetchForgotPassword.rejected, (state, { payload }) => {
-    //   state.status = 'error';
-    //   state.msg = payload.message;
-    // })
-    // .addCase(fetchResetPassword.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.error = null;
-    // })
-    // .addCase(fetchResetPassword.fulfilled, (state, { payload }) => {
-    //   state.status = 'success';
-    //   state.msg = payload.data.message;
-    // })
-    // .addCase(fetchResetPassword.rejected, (state, { payload }) => {
-    //   state.status = 'error';
-    //   state.error = payload.message;
-    // })
-    // .addCase(fetchGetGoogleUser.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.error = null;
-    // })
-    // .addCase(fetchGetGoogleUser.fulfilled, (state, { payload }) => {
-    //   state.status = 'success';
-    //   state.user = payload.data.user;
-    //   localStorage.setItem('token', payload.data.accessToken);
-    //   state.isAuth = true;
-    //   state.prevLocation = localStorage.getItem('location');
-    //   localStorage.removeItem('location');
-    // })
-    // .addCase(fetchGetGoogleUser.rejected, (state, { payload }) => {
-    //   console.log(payload);
-    //   state.status = 'error';
-    //   // state.error = payload.message
-    // })
+      })
+    .addCase(fetchLogout.pending, (state) => {
+      state.status = 'loading';
+    })
+    .addCase(fetchLogout.fulfilled, (state) => {
+      localStorage.removeItem('token_jobseeker');
+      state.status = 'success';
+      state.error = null;
+      state.isAuth = false;
+      state.user = {};
+    })
+    .addCase(fetchLogout.rejected, (state) => {
+      state.status = 'error';
+    })
+    .addCase(fetchAutoLogin.pending, (state) => {
+      state.status = 'loading';
+      state.error = null;
+    })
+    .addCase(fetchAutoLogin.fulfilled, (state, { payload }) => {
+      state.status = 'success';
+      state.user = payload.data.user;
+      state.error = payload.message;
+      state.isAuth = true;
+      localStorage.setItem('token_jobseeker', payload.data.accessToken);
+    })
+    .addCase(fetchAutoLogin.rejected, (state) => {
+      state.status = 'error';
+    })
+    .addCase(fetchForgotPassword.pending, (state) => {
+      state.status = 'loading';
+      state.error = null;
+    })
+    .addCase(fetchForgotPassword.fulfilled, (state, { payload }) => {
+      state.error = payload.data.message;
+    })
+    .addCase(fetchForgotPassword.rejected, (state, { payload }) => {
+      state.status = 'error';
+    })
+    .addCase(fetchResetPassword.pending, (state) => {
+      state.status = 'loading';
+      state.error = null;
+    })
+    .addCase(fetchResetPassword.fulfilled, (state, { payload }) => {
+      state.status = 'success';
+    })
+    .addCase(fetchResetPassword.rejected, (state, { payload }) => {
+      state.status = 'error';
+      state.error = payload.message;
+    })
   },
 });
 
