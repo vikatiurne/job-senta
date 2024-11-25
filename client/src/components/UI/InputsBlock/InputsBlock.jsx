@@ -9,10 +9,7 @@ import InputDate from "../InputDate/InputDate";
 
 import styles from "./InputsBlock.module.css";
 
-
 const InputsBlock = ({ blockName, labelBlock, initial, errors, fields }) => {
-
-
   return (
     <FieldArray
       name={blockName}
@@ -69,6 +66,11 @@ const InputsBlock = ({ blockName, labelBlock, initial, errors, fields }) => {
                           )}
                           {item.type !== "date" ? (
                             <Field
+                              as={
+                                item["type"] === "textarea"
+                                  ? "textarea"
+                                  : "input"
+                              }
                               type={item["type"]}
                               name={`${blockName}.${j}.${item["name"]}`}
                               id={`${blockName}.${j}.${item["name"]}`}
@@ -123,7 +125,6 @@ const InputsBlock = ({ blockName, labelBlock, initial, errors, fields }) => {
                               start={`${inputdate["name"]}` === "dateStart"}
                               end={`${inputdate["name"]}` === "dateEnd"}
                             />
-                            
                           </div>
                         ))}
                       </div>
