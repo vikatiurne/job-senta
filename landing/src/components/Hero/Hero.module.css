@@ -57,10 +57,19 @@
     font-size: 24px;
   }
 }
+@media (max-width: 1081px) {
+  .container{
+    margin-bottom: 150px;
+  }
+  .title{
+    font-size: 50px;
+    line-height: 60px;
+  }
+}
 @media (max-width: 830px) {
   .title {
     font-size: 45px;
-    line-height: 62px;
+    line-height: 55px;
   }
   .text {
     font-size: 16px;
@@ -92,5 +101,10 @@
   .heroBtn {
     padding: 8px 91px;
     margin: 0 auto;
+  }
+}
+@media (max-width: 406px){
+  .heroBtn{
+    font-size: 20px;
   }
 }

@@ -1,6 +1,6 @@
-import styles from "./Popup.module.css";
+import styles from "./PopupFooter.module.css";
 
-const Popup = ({ active, setActive, children }) => {
+const PopupFooter = ({ active, setActive, children }) => {
   return (
     <div
       className={active ? `${styles.modal} ${styles.active}` : styles.modal}
@@ -22,4 +22,4 @@ const Popup = ({ active, setActive, children }) => {
   );
 };
 
-export default Popup;
+export default PopupFooter;

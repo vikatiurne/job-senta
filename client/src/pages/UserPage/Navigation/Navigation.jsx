@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import style from './Navigation.module.css'
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import cn from 'classnames'
+
 import { useMedia } from '../../../hoc/useMedia/useMedia.js'
 
 import { ReactComponent as Logo } from '../../../assets/user_page/home/logo.svg'
@@ -13,11 +12,23 @@ import { ReactComponent as Contact } from '../../../assets/user_page/home/contac
 import { ReactComponent as Settings } from '../../../assets/user_page/home/settings.svg'
 import { ReactComponent as Logout } from '../../../assets/user_page/home/logout.svg'
 
+import style from './Navigation.module.css'
+
 const Navigation = () => {
   const location = useLocation()
+  const { logout,user } = useAuth0();
   const isMediaQuery = useMedia("(max-width:1024px)")
   const isActive = (path) => location.pathname === path
 
+  console.log(user)
+  
+  const logoutHandler = () => {
+    if (!user) {
+      console.log('выход без OAuth0')
+    } else {
+      logout({ logoutParams: { returnTo: window.location.origin } })
+    }
+  }
 
   return (
     <nav className={cn(style.userNav,
@@ -85,6 +96,7 @@ const Navigation = () => {
           <Link
             className={style.userLink}
             to='/'
+            onClick={logoutHandler}
           >
             <Logout /> Logout
           </Link>

@@ -6,21 +6,17 @@ export const userGetLanding = async () => {
     const response = await $host.get(`api/landingUser`);
     return response.data;
   } catch (error) {
-      console.log("Error get user:", error.response.data.message);
-
-    // throw error;
+    console.log("Error get user:", error.response.data.message);
   }
 };
 
 export const postUserLanding = async (values) => {
   try {
-    const response = await $host.post(`api/landingReg`, {
+    await $host.post(`api/landingReg`, {
       name: values.name,
       email: values.email,
     });
-    // return response;
   } catch (error) {
     console.log("Error get user:", error.response.data.message);
-    // throw error;
   }
 };

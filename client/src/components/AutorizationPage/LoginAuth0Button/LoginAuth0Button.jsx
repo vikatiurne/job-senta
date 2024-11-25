@@ -19,7 +19,7 @@ const LoginAuth0Button = ({ btnName }) => {
   }, [btnName]);
 
   return (
-    <Button onClick={() => loginWithRedirect()}>
+    <Button onClick={() => loginWithRedirect()} className={styles.containerBtns}>
       {pathname === "/login" ? (
         <div className={styles.socialBtn}>
           <img src={src} alt={btnName} className={styles.socialLogo} />

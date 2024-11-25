@@ -1,5 +1,6 @@
 .container {
-  margin:0 auto 64px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
   text-align: center;
   max-width: 1248px;
   width: 100%;
@@ -35,7 +36,7 @@
   box-shadow: 0 0 10px 0 rgba(200, 177, 141, 0.6);
 }
 @media (max-width: 920px) {
-  .title{
+  .title {
     font-size: 45px;
     line-height: 52px;
   }
@@ -47,13 +48,19 @@
   .title {
     text-transform: uppercase;
     margin-bottom: 24px;
-    font-size: 26px;
-    line-height: 32px;
+    font-size: 32px;
+    line-height: 36px;
   }
-  .secondLine{
+  .secondLine {
     display: block;
   }
   .joinBtn {
     padding: 16px 115px;
+  }
+}
+@media (max-width: 390px) {
+  .title {
+    font-size: 26px;
+    line-height: 32px;
   }
 }

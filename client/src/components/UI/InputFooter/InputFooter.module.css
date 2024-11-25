@@ -1,0 +1,72 @@
+.inputWrapper {
+    position: relative;
+  border-bottom: 2px solid white;
+  height: 52px;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  
+}
+.inputContainer, .inputText{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    padding: 14px 16px 14px;
+}
+.inputContainer img {
+  width: 24px;
+}
+.inputContainer input, .inputText input {
+    background-color: transparent;
+    border: none;
+}
+.inputContainer input::placeholder, .inputText input::placeholder {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+}
+input:focus {
+  outline: none;
+}
+.icon {
+    height: 24px;
+  }
+  
+  .inputField,.inputFieldCorrect,.inputFieldErr {
+    padding: 0;
+    font-size: 12px;
+    line-height: 19px;
+    font-family: var(--montserrat);
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  .inputField {
+  color: var(--dark-gray);
+  }
+  .inputFieldCorrect {
+    color: var(--green);
+  }
+  .inputFieldErr{
+    color: var(--red);
+  }
+  
+  .inputNotvisible {
+    display: none;
+  }
+  
+  .errField {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    font-family: var(--montserrat);
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--red);
+  }
+  
+  .hideErrField {
+    display: none;
+  }

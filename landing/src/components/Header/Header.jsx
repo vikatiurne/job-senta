@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import NavBar from "../NavBar/NavBar";
-import logo from "../../assets/images/Logo.png";
+import logo from "../../assets/icons/jobsenta.svg";
 
 import styles from "./Header.module.css";
 

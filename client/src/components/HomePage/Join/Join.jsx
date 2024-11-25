@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../UI/Button/Button";
 
 import styles from "./Join.module.css";
@@ -10,7 +11,7 @@ const Join = () => {
           Do you want to stand <span className={styles.secondLine}>out among</span>
           <span className={styles.thirdLine}>candidates and get the best vacancies?</span>
         </h2>
-        <Button className={styles.joinBtn}>Join now</Button>
+        <Link to="/registration"><Button className={styles.joinBtn}>Join now</Button></Link>
       
     </div>
   );

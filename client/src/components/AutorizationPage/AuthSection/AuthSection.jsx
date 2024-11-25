@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import LoginAuth0Button from "../LoginAuth0Button/LoginAuth0Button";
 
@@ -12,7 +12,7 @@ const AuthSection = () => {
 
   const render = (
     <div className={styles.authContainer}>
-      <img src={logo} alt="logo" className={styles.logo} />
+     <Link to='/'><img src={logo} alt="logo" className={styles.logo} /></Link> 
       <h2>{textData[`${pathname}`]["title"]}</h2>
       <p className={styles.infoTitle}>{textData[`${pathname}`]["infoTitle"]}</p>
 

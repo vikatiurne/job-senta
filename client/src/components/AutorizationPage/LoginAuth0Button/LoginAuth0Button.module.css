@@ -33,11 +33,15 @@
 }
 
 @media (max-width: 620px) {
+  .containerBtns{
+    width: 100%;
+  }
   .socialBtn p {
     display: none;
   }
   .socialBtn {
-    padding: 16px 100px;
+   display: block;
+   text-align: center;
   }
   .socialLogo {
     margin: 0;

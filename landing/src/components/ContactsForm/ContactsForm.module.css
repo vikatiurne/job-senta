@@ -86,17 +86,34 @@
   flex-direction: column;
 }
 
+@media (max-width: 1081px) {
+  .formWrapper {
+    margin-bottom: 150px;
+  }
+  .formContainer h2 {
+    font-size: 50px;
+  }
+}
+@media (max-width: 768px) {
+  .formContainer h2 {
+    font-size: 40px;
+  }
+}
+@media (max-width: 580px) {
+  .inputs {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 390px) {
-  .formWrapper{
+  .formWrapper {
     margin-bottom: 100px;
   }
   .formContainer {
     padding-left: 0;
     padding-right: 0;
   }
-  .inputs {
-    flex-direction: column;
-  }
+
   .formContainer h2 {
     font-size: 27px;
   }

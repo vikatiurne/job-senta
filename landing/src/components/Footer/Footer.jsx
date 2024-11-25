@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import Container from '../../hoc/layout/Container/Container';
 import style from './Footer.module.css'
 import { ReactComponent as Twitter } from '../../assets/icons/IconsTwitterWhite.svg'
@@ -35,10 +33,10 @@ const Footer = () => {
                         <h2 className={style.footerNavItemTitle}>COMPANY</h2>
                         <ul className={style.footerItemList}>
                             <li>
-                                <a className={style.footerNavItemLink} href="#">Privacy Policy</a>
+                                <a className={style.footerNavItemLink} href="#join">Privacy Policy</a>
                             </li>
                             <li>
-                                <a className={style.footerNavItemLink} href="#">Terms of Service</a>
+                                <a className={style.footerNavItemLink} href="#join">Terms of Service</a>
                             </li>
                         </ul>
                     </li>
@@ -46,13 +44,13 @@ const Footer = () => {
                         <h2 className={style.footerNavItemTitle}>FOLLOW US</h2>
                         <ul className={style.footerItemListMessanger}>
                             <li>
-                                <a className={style.footerTwitterLink} href="#"><Twitter /></a>
+                                <a className={style.footerTwitterLink} href="#join"><Twitter /></a>
                             </li>
                             <li>
-                                <a className={style.footerInstagramLink} href="#"><Instagram /></a>
+                                <a className={style.footerInstagramLink} href="#join"><Instagram /></a>
                             </li>
                             <li>
-                                <a className={style.footerFacebookLink} href="#"><Facebook /></a>
+                                <a className={style.footerFacebookLink} href="#join"><Facebook /></a>
                             </li>
                         </ul>
                     </li>
@@ -68,6 +66,5 @@ const Footer = () => {
     );
 };
 
-Footer.propTypes = {};
 
 export default Footer;

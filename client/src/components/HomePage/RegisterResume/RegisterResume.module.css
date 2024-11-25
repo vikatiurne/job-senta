@@ -1,6 +1,5 @@
 .container {
   position: relative;
-  padding: 75px 0 0;
   margin: 0 auto 120px;
   max-width: 1248px;
   width: 100%;
@@ -57,20 +56,23 @@
   bottom: 0;
   right: 32px;
 }
-@media (max-width: 1180px) {
+@media (max-width: 1310px) {
   .container {
     padding-left: 24px;
     padding-right: 24px;
   }
+  .imgHero {
+    right: 60px;
+  }
+}
+@media (max-width: 1180px) {
   .info {
     max-width: 735px;
   }
   .info h2 {
     font-size: 45px;
   }
-  .imgHero {
-    right: 60px;
-  }
+
 }
 @media (max-width: 1040px) {
   .info {

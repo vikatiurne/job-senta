@@ -43,7 +43,7 @@ const ContactsForm = () => {
               resetForm();
             }}
           >
-            {({ touched, errors, isValid, dirty }) => (
+            {({ values, touched, errors, isValid, dirty }) => (
               <Form>
                 <div className={styles.inputs}>
                   <Input
@@ -55,6 +55,7 @@ const ContactsForm = () => {
                     img={userIcon}
                     error={errors}
                     touched={touched}
+                    values={values}
                   />
 
                   <Input
@@ -66,6 +67,7 @@ const ContactsForm = () => {
                     img={mailIcon}
                     error={errors}
                     touched={touched}
+                    values={values}
                   />
                 </div>
                 <Button

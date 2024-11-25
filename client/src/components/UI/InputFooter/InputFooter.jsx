@@ -4,10 +4,10 @@ import { Field } from "formik";
 import crossIcon from "../../../assets/crossIcon.svg";
 import checkIcon from "../../../assets/checkIcon.svg";
 
-import styles from "./Input.module.css";
+import styles from "./InputFooter.module.css";
 
-const Input = ({ id, name, placeholder, img, error, touched, values }) => {
-  const [isHideErrMsg, setIsHideErrMsg] = useState(false);
+const InputFooter = ({ id, name, placeholder, img, error, touched, values }) => {
+    const [isHideErrMsg, setIsHideErrMsg] = useState(false);
 
   useEffect(() => {
     error[name] ? setIsHideErrMsg(false) : setIsHideErrMsg(true);
@@ -15,14 +15,15 @@ const Input = ({ id, name, placeholder, img, error, touched, values }) => {
 
   return (
     <div className={styles.inputWrapper}>
-      <div className={styles.inputContainer}>
-        {!touched[name] ? (
+          <div className={img?styles.inputContainer:styles.inputText}>
+              
+        {img && (!touched[name] ? (
           <img src={img} alt={img} className={styles.icon} />
         ) : error[name] ? (
           <img src={crossIcon} alt="cross" />
         ) : (
           <img src={checkIcon} alt="check" />
-        )}
+        ))}
 
         <Field
           autoComplete="off"
@@ -52,4 +53,4 @@ const Input = ({ id, name, placeholder, img, error, touched, values }) => {
   );
 };
 
-export default Input;
+export default InputFooter;
