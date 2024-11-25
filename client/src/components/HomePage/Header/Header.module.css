@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     max-width: 1280px;
+    align-items: center;
   }
   
   @media (max-width: 1124px) {

@@ -3,7 +3,6 @@ import pdfFonts from "pdfmake/build/vfs_font";
 import DateServices from "../../../../../utils/DateServices";
 pdfMake.vfs = pdfFonts;
 
-
 pdfMake.fonts = {
   Montserrat: {
     normal: "Montserrat-VariableFont_wght.ttf",
@@ -234,8 +233,8 @@ export class PdfCreator {
             type: "rect",
             x: -20,
             y: 0,
-            w: 595, 
-            h: height, 
+            w: 595,
+            h: height,
             color: "#685843",
           },
         ],

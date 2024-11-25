@@ -10,7 +10,9 @@
   justify-content: flex-end;
   align-items: center;
 }
-
+.burgerContainer{
+  position: relative;
+}
 .navContainerBurger {
   display: flex;
   flex-direction: column-reverse;
@@ -122,6 +124,7 @@
     top: 32px;
     left: 24px;
   }
+
 }
 @media (min-width: 873px) {
   .navContainerBurger {

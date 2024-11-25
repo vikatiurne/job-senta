@@ -55,11 +55,13 @@
   background-image: url("../../../assets/userIcon_focus.svg");
 }
 
-@media (max-width: 390px) {
+@media (max-width: 873px) {
   .btnContainer {
     display: none;
   }
   .btnContainerShow {
     flex-direction: row-reverse;
+    padding-right: 24px;
+    justify-content: flex-start;
   }
 }
