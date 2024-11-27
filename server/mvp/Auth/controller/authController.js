@@ -11,20 +11,20 @@ class AuthController {
           ApiError.badRequest("Error validation result", errors.array())
         );
       }
-      const { email, lastName, name, password } = req.body;
-      const userData = await authService.registration(
+      const { email, lastName, username, password } = req.body;
+      const user = await authService.registration(
         email,
-        name,
+        username,
         lastName,
         password
       );
-      res.cookie("refresh_jobseeker", userData.refreshToken, {
+      res.cookie("refresh_jobseeker", user.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: true,
-        sameSite: "none",
+        SameSite: "Strict",
       });
-      return res.status(200).json({ userData });
+      return res.json(user);
     } catch (err) {
       next(ApiError.badRequest(err.message));
     }
@@ -33,24 +33,23 @@ class AuthController {
   async login(req, res, next) {
     try {
       const { email, password } = req.body;
-      const userData = await authService.login(email, password);
-      res.cookie("refresh_jobseeker", userData.refreshToken, {
+      const user = await authService.login(email, password);
+      res.cookie("refresh_jobseeker", user.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: true,
-        sameSite: "none",
+        SameSite: "Strict",
       });
-      return res.status(200).json({ userData });
+      return res.json(user);
     } catch (error) {
       next(ApiError.badRequest(error.message));
     }
-
   }
 
   async logout(req, res, next) {
     try {
-      const { refreshToken } = req.cookies;
-      const token = await authService.logout(refreshToken);
+      const { refresh_jobseeker } = req.cookies;
+      const token = await authService.logout(refresh_jobseeker);
       res.clearCookie("refresh_jobseeker", {
         secure: true,
         sameSite: "none",
@@ -63,15 +62,15 @@ class AuthController {
 
   async autoLogin(req, res, next) {
     try {
-      const { refreshToken } = req.cookies;
-      const userData = await authService.refresh(refreshToken);
-      res.cookie("refresh_jobseeker", userData.refreshToken, {
+      const { refresh_jobseeker } = req.cookies;
+      const user = await authService.refresh(refresh_jobseeker);
+      res.cookie("refresh_jobseeker", user.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: true,
-        sameSite: "none",
+        SameSite: "Strict",
       });
-      return res.json(userData);
+      return res.json(user);
     } catch (error) {
       next(ApiError.badRequest(error.message));
     }
@@ -80,8 +79,8 @@ class AuthController {
   async forgotPassword(req, res, next) {
     try {
       const { email } = req.body;
-      const userData = await authService.forgotPassword(email);
-      return res.json(userData);
+      const user = await authService.forgotPassword(email);
+      return res.json(user);
     } catch (error) {
       next(ApiError.badRequest(error.message));
     }
@@ -90,8 +89,8 @@ class AuthController {
   async resetPassword(req, res, next) {
     try {
       const { newPass, resetLink } = req.body;
-      const userData = await authService.resetPassword(newPass, resetLink);
-      return res.json(userData);
+      const user = await authService.resetPassword(newPass, resetLink);
+      return res.json(user);
     } catch (error) {
       next(ApiError.badRequest(error.message));
     }

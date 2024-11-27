@@ -18,7 +18,7 @@ class AuthService {
 
     const userData = await User.create({
       email,
-      name,
+      username,
       lastName,
       password: passwordCrypto,
     });
@@ -53,13 +53,22 @@ class AuthService {
     return { ...tokens, user: userDto };
   }
 
-  static async logout(refreshToken) {
+   async logout(refreshToken) {
     return await tokenService.removeToken(refreshToken);
   }
 
 
-  static async autoLogin(refreshToken) {
+  async refresh(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.unauthorizedError();
+    }
     const userData = await tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+
+    if (!tokenFromDb || !userData) {
+      throw ApiError.unauthorizedError();
+    }
+    
     const user = await User.findOne({ where: { email: userData.email } });
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
@@ -72,7 +81,7 @@ class AuthService {
     return { ...tokens, user: userDto };
   }
 
-  static async forgotPassword(email) {
+   async forgotPassword(email) {
     const user = await User.findOne({ where: { email } });
     if (!user) {
       throw ApiError.badRequest("User with this email not found");
@@ -89,7 +98,7 @@ class AuthService {
     };
   }
 
-  static async resetPassword(newPass, resetLink) {
+   async resetPassword(newPass, resetLink) {
     const userData = tokenService.validateResetToken(resetLink);
     let user = await User.findOne({ where: { resetLink } });
     if (!user || !userData) {

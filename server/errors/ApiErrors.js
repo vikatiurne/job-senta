@@ -4,6 +4,9 @@ class ApiErrors extends Error {
     this.status = status;
     this.message = message;
   }
+  static unauthorizedError() {
+    return new ApiErrors(401, "User is not authorized");
+  }
 
   static badRequest(message, errors = []) {
     return new ApiErrors(404, message, errors);

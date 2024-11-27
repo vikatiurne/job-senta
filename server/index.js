@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const router = require("./router/index");
 const sequelize = require("./dbAdmin");
 const middlewareErrors = require("./middlewares/error-middleware");
@@ -9,11 +10,13 @@ const PORT = process.env.PORT || 5001;
 
 const app = express();
 
-app.use(cors({
+app.use(
+  cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
     optionSuccessStatus: 200,
-}));
+  })
+);
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -21,6 +24,7 @@ app.use((req, res, next) => {
     next();
   });
 app.use(express.json());
+app.use(cookieParser(process.env.SECRET_KEY));
 app.use("/api", router);
 app.use(middlewareErrors);
 

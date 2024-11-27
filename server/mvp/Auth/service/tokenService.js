@@ -4,7 +4,7 @@ const {Token} = require('../../../models/models')
 module.exports = class TokenService {
  static generateTokens(payload) {
     const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
-      expiresIn: '15m',
+      expiresIn: '30m',
     });
     const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
       expiresIn: '30d',
@@ -58,10 +58,6 @@ module.exports = class TokenService {
   }
   static async findToken(refreshToken) {
     const tokenData = await Token.findOne({ where: { refreshToken } });
-    return tokenData;
-  }
-  static async findAccessToken(accessToken) {
-    const tokenData = await Token.findOne({ where: { accessToken } });
     return tokenData;
   }
 }
