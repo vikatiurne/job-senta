@@ -19,6 +19,7 @@ const LoginForm = () => {
   const { pathname } = useLocation();
 
   const submitFormHandler = (values) => {
+    //отправка формы на сервер сохранение в бд
     dispatch(
       fetchRegistration({
         email: values.email,
@@ -27,8 +28,6 @@ const LoginForm = () => {
         lastName: values.lastName,
       })
     );
-    //отправка формы на сервер сохранение в бд
-    console.log("Sucsess", values);
   };
 
   return (

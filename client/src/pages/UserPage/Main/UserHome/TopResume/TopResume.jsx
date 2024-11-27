@@ -17,7 +17,6 @@ const TopResume = ({ className }) => {
     const handleSelectedResume = () => (setSelectedResumes(!selectedResumes))
     const hasMediaQuery = useMedia("(max-width:1024px)")
     const hasMediaQueryProgressBar = useMedia("(max-width:456px)")
-    console.log('hasMediaQuery', hasMediaQuery);
 
     return (
         <section className={cn(style.sectResume, className)}>

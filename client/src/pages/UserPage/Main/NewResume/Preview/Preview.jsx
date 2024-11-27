@@ -12,9 +12,8 @@ const Preview = ({ active }) => {
   const isMediaQuery = useMedia("(max-width:1024px)");
 
   const info = useSelector((state) => state.createResume.info);
+  const userName = useSelector((state) => state.auth.user)
 
-  //имя вытаскивавем из БД
-  // const user ={name: "Darina Taranenko"};
   const { user } = useAuth0();
 
   return (
@@ -23,7 +22,7 @@ const Preview = ({ active }) => {
         active ? styles.previewVisible : null
       }`}
     >
-      <h4 className={styles.userName}>{user?.name}</h4>
+      <h4 className={styles.userName}>{user?.name || userName?.name}</h4>
       <Scroll
         height={!isMediaQuery ? "calc(100vh - 303px)" : "calc(100vh - 145px)"}
         classContent={styles.scroll}

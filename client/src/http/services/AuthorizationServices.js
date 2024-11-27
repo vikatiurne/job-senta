@@ -18,7 +18,7 @@ export default class AuthorizationServices {
     return $api.post("/api/auth/logout");
   }
   static async autoLogin() {
-    return await axios.get(`${process.env.REACT_APP_API_URL}api/auth/refresh`, {
+    return await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/refresh`, {
       withCredentials: true,
     });
   }
