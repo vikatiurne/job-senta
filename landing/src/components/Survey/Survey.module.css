@@ -1,0 +1,70 @@
+.sectionSurvey {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background-color: var(--darkbrown);
+
+}
+
+.sectionSurveyTitle {
+    font-family: var(--open-sans);
+    text-align: center;
+    color: var(--white);
+    max-width: 1019px;
+    margin: 0 auto;
+}
+
+.sectionSurveyLink {
+    display: block;
+    margin: 0 auto;
+
+    width: 100%;
+    font-family: var(--montserrat);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: var(--white);
+    background-color: var(--brown);
+    text-align: center;
+}
+
+.sectionSurveyLink:hover {
+    background-color: var(--brown-hover);
+}
+
+
+@media (max-width:390px),
+(min-width:390px) {
+
+    .sectionSurveyTitle {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 32px;
+        margin-bottom: 16px;
+    }
+
+    .sectionSurveyLink {
+        max-width: 342px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border-radius: 20px;
+    }
+}
+
+@media(min-width:980px) {
+
+    .sectionSurveyTitle {
+        text-transform: none;
+        font-weight: 800;
+        font-size: 60px;
+        line-height: 90px;
+        margin-bottom: 32px;
+    }
+
+    .sectionSurveyLink {
+        max-width: 312px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-radius: 40px;
+    }
+}

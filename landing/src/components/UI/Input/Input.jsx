@@ -25,7 +25,7 @@ const Input = ({ id, name, placeholder, img, error, touched, values }) => {
             className={styles.icon}
           />
         )}
-        {console.log(!!values[name])}
+        {/* {console.log(!!values[name])} */}
         {/* {console.log(error[name] )} */}
         {/* {console.log(isHideErrMsg)} */}
         <Field
