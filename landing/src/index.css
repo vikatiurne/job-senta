@@ -11,10 +11,14 @@
   --brown-focused: #c8b18d;
   --open-sans: "Open Sans", sans-serif;
   --montserrat: "Montserrat", sans-serif;
+  --darkbrown: #685843;
+
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
@@ -34,15 +38,18 @@ body {
   padding-inline-start: 0;
   padding-inline-end: 0;
 }
+
 button {
   border: none;
   background-color: transparent;
 }
+
 a {
   color: var(--brown);
   font-weight: 600;
   text-decoration: none;
 }
+
 li {
   list-style: none;
 }
