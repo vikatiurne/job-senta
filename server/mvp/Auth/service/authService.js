@@ -53,10 +53,36 @@ class AuthService {
     return { ...tokens, user: userDto };
   }
 
-   async logout(refreshToken) {
+  async findOrCreateUser(profile) {
+    console.log("FUNC ЗАПУЩЕНА", profile)
+
+    
+  }
+  // async findOrCreateUser(email, name, lastName) {
+  //   console.log("FUNC ЗАПУЩЕНА")
+
+  //   const user = await User.findOrCreate({ where: { email }, defaults: {
+  //     username: name,
+  //     lastName,
+  //     role: { default: "USER" },
+  //   }, });
+    
+    
+  //   const userDto = new UserDto(user);
+  //   // const tokens = tokenService.generateTokens({ ...userDto });
+  //   // await tokenService.saveToken(
+  //   //   userDto.id,
+  //   //   tokens.refreshToken,
+  //   //   tokens.accessToken
+  //   // );
+
+  //   // return { ...tokens, user: userDto };
+  //   return {  user: userDto };
+  // }
+
+  async logout(refreshToken) {
     return await tokenService.removeToken(refreshToken);
   }
-
 
   async refresh(refreshToken) {
     if (!refreshToken) {
@@ -68,7 +94,7 @@ class AuthService {
     if (!tokenFromDb || !userData) {
       throw ApiError.unauthorizedError();
     }
-    
+
     const user = await User.findOne({ where: { email: userData.email } });
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
@@ -81,7 +107,7 @@ class AuthService {
     return { ...tokens, user: userDto };
   }
 
-   async forgotPassword(email) {
+  async forgotPassword(email) {
     const user = await User.findOne({ where: { email } });
     if (!user) {
       throw ApiError.badRequest("User with this email not found");
@@ -98,7 +124,7 @@ class AuthService {
     };
   }
 
-   async resetPassword(newPass, resetLink) {
+  async resetPassword(newPass, resetLink) {
     const userData = tokenService.validateResetToken(resetLink);
     let user = await User.findOne({ where: { resetLink } });
     if (!user || !userData) {

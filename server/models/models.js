@@ -23,7 +23,7 @@ const Token = sequelize.define("token", {
   accessToken: { type: DataTypes.STRING(1254), allowNull: false },
 });
 
-User.hasOne(Token);
+User.hasOne(Token, { onDelete: "CASCADE" });
 Token.belongsTo(User);
 
 module.exports = {
