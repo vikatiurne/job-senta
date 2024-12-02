@@ -41,8 +41,7 @@ export const fetchLogout = createAsyncThunk("auth/fetchLogout", async () => {
 
 export const fetchAutoLogin = createAsyncThunk(
   "auth/fetchAutoLogin",
-  // async () => await AuthorizationServices.autoLogin()
-  async ( _, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       return await AuthorizationServices.autoLogin();
     } catch (error) {
@@ -73,12 +72,6 @@ export const fetchResetPassword = createAsyncThunk(
   }
 );
 
-export const fetchVerifyToken = createAsyncThunk(
-  "auth/fetchVerifyToken",
-  async () => {
-    return await AuthorizationServices.verifyToken();
-  }
-);
 
 const authSlice = createSlice({
   name: "auth",
@@ -152,17 +145,8 @@ const authSlice = createSlice({
         localStorage.setItem("_jobseeker", payload.data.user.accessToken);
       })
       .addCase(fetchAutoLogin.rejected, (state, { payload }) => {
-        state.error=payload.message
+        state.error = payload?.message;
         state.status = "error";
-      })
-      .addCase(fetchVerifyToken.pending, (state) => {
-        state.error = null;
-      })
-      .addCase(fetchVerifyToken.fulfilled, (state, { payload }) => {
-        state.isAuth = true;
-      })
-      .addCase(fetchVerifyToken.rejected, (state) => {
-        state.isAuth = false;
       })
       .addCase(fetchForgotPassword.pending, (state) => {
         state.status = "loading";

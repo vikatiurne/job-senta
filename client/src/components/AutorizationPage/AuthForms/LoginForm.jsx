@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation,} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
@@ -20,10 +20,7 @@ import {
 import styles from "./AuthForms.module.css";
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-
   const errLogin = useSelector((state) => state.auth.error);
-  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const [modalActive, setModalActive] = useState(false);
 
@@ -31,11 +28,6 @@ const LoginForm = () => {
     if (!!errLogin) setModalActive(true);
   }, [errLogin]);
 
-  useEffect(() => {
-    if (isAuth) {
-      navigate("/user/home");
-    }
-  }, [navigate,isAuth]);
 
   const dispatch = useDispatch();
   const { pathname } = useLocation();

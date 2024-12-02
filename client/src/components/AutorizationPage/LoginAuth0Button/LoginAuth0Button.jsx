@@ -10,16 +10,24 @@ import styles from "./LoginAuth0Button.module.css";
 
 const LoginAuth0Button = ({ btnName }) => {
   const [src, setSrc] = useState("");
-  const { loginWithRedirect } = useAuth0();
-  const {pathname} = useLocation();
+  const {  user } = useAuth0();
+  const { pathname } = useLocation();
+
+  console.log(user);
 
   useEffect(() => {
     const img = btnName === "Google" ? imgBtnGoogle : imgBtnLinkedIn;
     setSrc(img);
   }, [btnName]);
 
+  const handleLogin = () => {
+    btnName === "Google"
+      ? (window.location.href = "http://localhost:5000/api/oauth/google")
+      : (window.location.href = "http://localhost:5000/api/oauth/linkedin");
+  };
+
   return (
-    <Button onClick={() => loginWithRedirect()} className={styles.containerBtns}>
+    <Button onClick={handleLogin} className={styles.containerBtns}>
       {pathname === "/login" ? (
         <div className={styles.socialBtn}>
           <img src={src} alt={btnName} className={styles.socialLogo} />

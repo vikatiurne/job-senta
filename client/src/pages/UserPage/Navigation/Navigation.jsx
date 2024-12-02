@@ -24,8 +24,8 @@ const Navigation = () => {
   const isActive = (path) => location.pathname === path;
 
   const logoutHandler = () => {
-    if (!!user) logout({ logoutParams: { returnTo: window.location.origin } });
-    dispatch(fetchLogout());
+   logout({ logoutParams: { returnTo: window.location.origin } });
+    // dispatch(fetchLogout());
   };
 
   return (

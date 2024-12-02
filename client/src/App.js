@@ -21,7 +21,7 @@ function App() {
     // isLoading,
     // user,
     // // Auth methods:
-    // getAccessTokenSilently,
+    getAccessTokenSilently,
     // getAccessTokenWithPopup,
     // getIdTokenClaims,
     // loginWithRedirect,
