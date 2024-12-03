@@ -5,20 +5,24 @@ const initialState = {
   user: {},
   isAuth: false,
   isRemember: false,
+  error: null,
 };
 
 export const fetchRegistration = createAsyncThunk(
   "auth/fetchRegistration",
-  async ({ email, password, name, lastName }, { rejectWithValue }) => {
+  async ({ email, password, username, lastName }, { rejectWithValue }) => {
     try {
       return await AuthorizationServices.registration(
         email,
         password,
-        name,
+        username,
         lastName
       );
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue({
+        title: "The server is unavailable. Please try again later",
+        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!",
+      });
     }
   }
 );
@@ -28,6 +32,18 @@ export const fetchLogin = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       return await AuthorizationServices.login(email, password);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchSocialAuth = createAsyncThunk(
+  "auth/fetchSocialAuth",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.socialAuth();
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data);
@@ -72,7 +88,6 @@ export const fetchResetPassword = createAsyncThunk(
   }
 );
 
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -87,18 +102,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchRegistration.fulfilled, (state, { payload }) => {
-        if (!!payload.data.user) {
-          // state.isAuth = true;
-          localStorage.setItem("_jobseeker", payload.data.accessToken);
-          state.user = payload.data.user;
-        } else {
-          console.log(payload.data.errors);
-          // обработать ошибку payload.data.errors
-        }
+        localStorage.setItem("_jobseeker", payload.data.accessToken);
+        state.user = payload.data.user;
+        state.error = payload.data?.message;
       })
       .addCase(fetchRegistration.rejected, (state, { payload }) => {
-        console.log(payload);
-        // обрпаботать ошибку payload.errors
+        state.error = payload;
       })
       .addCase(fetchLogin.pending, (state) => {
         state.error = null;
@@ -106,17 +115,32 @@ const authSlice = createSlice({
       .addCase(fetchLogin.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.status = "success";
-        if (!!payload.data.user) {
-          state.isAuth = true;
-          state.user = payload.data.user;
-          state.isRemember
-            ? localStorage.setItem("_jobseeker", payload.data.accessToken)
-            : sessionStorage.setItem("_jobseeker", payload.data.accessToken);
-        } else {
-          state.error = payload.data.message;
-        }
+        state.isRemember
+          ? localStorage.setItem("_jobseeker", payload.data.accessToken)
+          : sessionStorage.setItem("_jobseeker", payload.data.accessToken);
+        state.user = payload.data;
+        state.error = payload.data?.message;
       })
       .addCase(fetchLogin.rejected, (state, { payload }) => {
+        console.log(payload);
+        state.status = "error";
+        state.error = payload.message;
+      })
+      .addCase(fetchSocialAuth.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(fetchSocialAuth.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        // state.status = "success";
+        // if (!!payload.data) {
+        //   state.isAuth = true;
+        //   state.user = payload.data;
+        //   localStorage.setItem("_jobseeker", payload.data.accessToken)
+        // } else {
+        //   state.error = payload.data.message;
+        // }
+      })
+      .addCase(fetchSocialAuth.rejected, (state, { payload }) => {
         console.log(payload);
         state.status = "error";
         state.error = payload.message;
@@ -135,17 +159,17 @@ const authSlice = createSlice({
       })
       .addCase(fetchAutoLogin.pending, (state) => {
         state.status = "loading";
-        state.error = null;
+        // state.error = null;
       })
       .addCase(fetchAutoLogin.fulfilled, (state, { payload }) => {
         state.status = "success";
         state.user = payload.data.user;
-        state.error = payload.message;
+        // state.error = payload.message;
         state.isAuth = true;
         localStorage.setItem("_jobseeker", payload.data.user.accessToken);
       })
       .addCase(fetchAutoLogin.rejected, (state, { payload }) => {
-        state.error = payload?.message;
+        // state.error = payload?.message;
         state.status = "error";
       })
       .addCase(fetchForgotPassword.pending, (state) => {

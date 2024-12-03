@@ -1,5 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
 
@@ -13,10 +13,21 @@ import { textData } from "../../../utils/textData";
 
 import styles from "./AuthForms.module.css";
 import { fetchRegistration } from "../../../pages/Autorization/AuthSlice";
+import Popup from "../../UI/Popup/Popup";
+import { useEffect, useState } from "react";
 
 const LoginForm = () => {
+  const error = useSelector((state) => state.auth.error);
+  const [modalActive, setModalActive] = useState(!!error);
+  console.log("modal", modalActive);
+  console.log("er", !!error);
+
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    setModalActive(!!error);
+  }, [error]);
 
   const submitFormHandler = (values) => {
     //отправка формы на сервер сохранение в бд
@@ -24,7 +35,7 @@ const LoginForm = () => {
       fetchRegistration({
         email: values.email,
         password: values.password,
-        name: values.name,
+        username: values.name,
         lastName: values.lastName,
       })
     );
@@ -38,7 +49,6 @@ const LoginForm = () => {
       validateOnChange={false}
       onSubmit={(values, { resetForm }) => {
         submitFormHandler(values);
-        resetForm();
       }}
     >
       {({ errors, values, touched, isValid, dirty }) => (
@@ -108,6 +118,21 @@ const LoginForm = () => {
             <p>Do you have an account?</p>
             <Link to="../login">{textData[`${pathname}`]["linkBtn"]}</Link>
           </div>
+
+          {modalActive &&
+            (console.log("popap"),
+            (
+              <Popup active={modalActive} setActive={setModalActive}>
+                <div className={styles.popup}>
+                  <h4>{error?.title}</h4>
+                  <p>{error?.text}</p>
+                  <p>Thank you for choosing us - we work for you!</p>
+                  <p>
+                    Best regards,<span>Jobseeker!</span>
+                  </p>
+                </div>
+              </Popup>
+            ))}
         </Form>
       )}
     </Formik>

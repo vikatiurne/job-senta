@@ -2,11 +2,11 @@ import axios from "axios";
 import $api from "../../http/axios";
 
 export default class AuthorizationServices {
-  static async registration(email, password, name, lastName) {
+  static async registration(email, password, username, lastName) {
     return await $api.post("api/auth/registration", {
       email,
       password,
-      name,
+      username,
       lastName,
     });
   }
@@ -31,5 +31,9 @@ export default class AuthorizationServices {
   }
   static async resetPassword(newPass, resetLink) {
     return await $api.put("/api/auth/reset-password", { newPass, resetLink });
+  }
+
+  static async socialAuth() {
+    return $api.get('/api/oauth/social/user')
   }
 }

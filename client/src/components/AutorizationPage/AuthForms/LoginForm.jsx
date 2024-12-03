@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation,} from "react-router-dom";
+import { Link, useLocation, useNavigate,} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
@@ -20,13 +20,19 @@ import {
 import styles from "./AuthForms.module.css";
 
 const LoginForm = () => {
-  const errLogin = useSelector((state) => state.auth.error);
+  const error = useSelector((state) => state.auth.error);
+  const status = useSelector((state) => state.auth.status);
+  const [modalActive, setModalActive] = useState(!!error);
 
-  const [modalActive, setModalActive] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
-    if (!!errLogin) setModalActive(true);
-  }, [errLogin]);
+    setModalActive(!!error);
+  }, [error]);
+
+  useEffect(() => {
+    status==="success" && navigate("/user/home");
+  }, [status]);
 
 
   const dispatch = useDispatch();
@@ -44,7 +50,6 @@ const LoginForm = () => {
     dispatch(setRememberMe(values.toggle));
   };
 
-  const handleLogin = () => {};
 
   return (
     <Formik
@@ -95,7 +100,6 @@ const LoginForm = () => {
             type="submit"
             className={styles.authBtn}
             disabled={!isValid || !dirty}
-            onClick={handleLogin}
           >
             {textData[`${pathname}`]["sendBtn"]}
           </Button>
@@ -108,14 +112,11 @@ const LoginForm = () => {
           </div>
 
           {modalActive && (
-            <Popup active={modalActive} setActive={() => setModalActive()}>
+            <Popup active={modalActive} setActive={setModalActive}>
               <div className={styles.popup}>
-                <h4>{errLogin}</h4>
+                <h4>{error?.title}</h4>
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maxime enim animi, assumenda vero nihil quisquam minus quo
-                  iure officiis neque cumque at atque quibusdam facere nesciunt
-                  laborum asperiores fuga similique!
+                 {error?.text}
                 </p>
                 <p>Thank you for choosing us - we work for you!</p>
                 <p>

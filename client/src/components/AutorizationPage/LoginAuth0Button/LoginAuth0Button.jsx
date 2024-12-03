@@ -7,10 +7,13 @@ import imgBtnGoogle from "../../../assets/Google.png";
 import imgBtnLinkedIn from "../../../assets/LinkedIn.png";
 
 import styles from "./LoginAuth0Button.module.css";
+import { useDispatch } from "react-redux";
+import { fetchSocialAuth } from "../../../pages/Autorization/AuthSlice";
 
 const LoginAuth0Button = ({ btnName }) => {
+  const dispatch = useDispatch();
   const [src, setSrc] = useState("");
-  const {  user } = useAuth0();
+  const { user } = useAuth0();
   const { pathname } = useLocation();
 
   console.log(user);
@@ -21,9 +24,7 @@ const LoginAuth0Button = ({ btnName }) => {
   }, [btnName]);
 
   const handleLogin = () => {
-    btnName === "Google"
-      ? (window.location.href = "http://localhost:5000/api/oauth/google")
-      : (window.location.href = "http://localhost:5000/api/oauth/linkedin");
+    window.location.href = `${process.env.REACT_APP_API_URL}/api/oauth/${btnName.toLowerCase()}`;
   };
 
   return (

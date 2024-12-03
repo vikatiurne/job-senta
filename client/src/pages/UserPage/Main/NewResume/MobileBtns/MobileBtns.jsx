@@ -32,9 +32,7 @@ const MobileBtns = () => {
     setEmptyResume(!Object.keys(info).length);
   }, [info]);
 
-  //имя вытаскивавем из БД
-  // const user = "Darina Taranenko";
-  const { user } = useAuth0();
+  const user = useSelector((state) => state.auth.user.username)
 
   const handleSelectedExport = () => setSelectedExport((prev) => !prev);
 
