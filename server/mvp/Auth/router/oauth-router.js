@@ -5,7 +5,9 @@ const axios = require("axios");
 const router = new Router();
 
 // google
-router.get("/google", passport.authenticate("google"));
+router.get("/google", (req, res, next) => {
+  passport.authenticate("google")(req, res, next);
+});
 router.get("/google/callback", (req, res, next) => {
   passport.authenticate("google", (err, user, info) => {
     if (err) {
@@ -14,17 +16,23 @@ router.get("/google/callback", (req, res, next) => {
     if (!user) {
       return res.redirect("/error");
     }
+
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
+
+      req.session.user = user;
+
       return res.redirect(`${process.env.CLIENT_URL}/user/home`);
     });
   })(req, res, next);
 });
 
 // linkedin
-router.get("/linkedin", passport.authenticate("linkedin"));
+router.get("/linkedin", (req, res, next) => {
+  passport.authenticate("linkedin")(req, res, next);
+});
 router.get("/linkedin/callback", (req, res, next) => {
   passport.authenticate(
     "linkedin",
@@ -40,10 +48,20 @@ router.get("/linkedin/callback", (req, res, next) => {
         if (err) {
           return next(err);
         }
+        req.session.user = user;
         return res.redirect(`${process.env.CLIENT_URL}/user/home`);
       });
     }
   )(req, res, next);
+});
+
+// получение юзера
+router.get("/social/user", (req, res) => {
+  if (req.session.user) {
+    return res.json(req.session.user);
+  } else {
+    return res.status(401).json({ message: "User not authenticated" });
+  }
 });
 
 module.exports = router;

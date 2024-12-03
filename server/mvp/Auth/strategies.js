@@ -7,6 +7,7 @@ const passwordService = require("./service/passwordService");
 const TokenService = require("./service/tokenService");
 const { User } = require("../../models/models");
 const UserDto = require("../dtos/user-dto");
+const authService = require("./service/authService");
 
 // проверка соединения с бд
 const pool = new Pool({
@@ -34,37 +35,12 @@ passport.use(
     },
     async (accessToken, refreshToken, extraParams, params, profile, done) => {
       try {
-        let userData = await User.findOne({
-          where: { email: profile.emails[0].value },
-        });
-
-        if (!userData) {
-          const randomPassword = passwordService.cryptoPassword(
-            profile._json.name
-          );
-
-          userData = await User.create({
-            username: profile._json.given_name || profile._json.nickname,
-            lastName: profile._json.family_name || profile._json.nickname,
-            email: profile.emails[0].value,
-            password: randomPassword,
-          });
-          const userDto = new UserDto(userData);
-          if (params && params.access_token) {
-            const { access_token } = params;
-            await TokenService.saveToken(
-              userDto.id,
-              refreshToken,
-              access_token
-            );
-          } else {
-            return done(new Error("Access token not found in params"));
-          }
-          console.log("New user created:", userDto);
-        } else {
-          console.log("Existing user found:", userData);
-        }
-
+        const userData = await authService.socialAuth(
+          refreshToken,
+          params,
+          profile,
+          "google"
+        );
         return done(null, userData);
       } catch (err) {
         console.error("Error creating or finding user:", err);
@@ -73,7 +49,6 @@ passport.use(
     }
   )
 );
-
 
 passport.use(
   new LinkedInStrategy(
@@ -88,38 +63,34 @@ passport.use(
     },
     async (accessToken, refreshToken, extraParams, params, profile, done) => {
       try {
-        console.log("EMAIL",profile)
-        let userData = await User.findOne({
-          where: { email: profile.email },
-        });
+        const userData = await authService.socialAuth(
+          refreshToken,
+          params,
+          profile,
+          "linkedin"
+        );
+        // const { access_token } = params;
+        // const randomPassword = passwordService.cryptoPassword(
+        //   profile._json.name
+        // );
 
-        if (!userData) {
-          const randomPassword = passwordService.cryptoPassword(
-            profile._json.name
-          );
+        // const [user] = await User.findOrCreate({
+        //   where: { email: profile.email },
+        //   defaults: {
+        //     username: profile._json.given_name || profile._json.name,
+        //     lastName: profile._json.family_name || profile._json.name,
+        //     email: profile._json.email,
+        //     password: randomPassword,
+        //   },
+        // });
+        // const userDto = new UserDto(user);
+        // const userData = {
+        //   ...userDto,
+        //   accessToken: access_token,
+        //   refreshToken,
+        // };
 
-          userData = await User.create({
-            username: profile._json.given_name || profile._json.name,
-            lastName: profile._json.family_name || profile._json.name,
-            email: profile._json.email,
-            password: randomPassword,
-          });
-          const userDto = new UserDto(userData);
-          if (params && params.access_token) {
-            const { access_token } = params;
-            console.log('ACCESS:',access_token)
-            await TokenService.saveToken(
-              userDto.id,
-              refreshToken,
-              access_token
-            );
-          } else {
-            return done(new Error("Access token not found in params"));
-          }
-          console.log("New user created:", userDto);
-        } else {
-          console.log("Existing user found:", userData);
-        }
+        // await TokenService.saveToken(userDto.id, refreshToken, access_token);
 
         return done(null, userData);
       } catch (err) {
@@ -127,7 +98,6 @@ passport.use(
         return done(err, null);
       }
     }
-    
   )
 );
 

@@ -8,11 +8,14 @@ const passwordService = require("./passwordService.js");
 const tokenService = require("./tokenService.js");
 
 class AuthService {
-  async registration(email, name, lastName, password) {
+  async registration(email, username, lastName, password) {
     const candidate = await User.findOne({ where: { email } });
 
     if (candidate) {
-      return ApiError.badRequest("This Email is already in use");
+      return ApiError.badRequest({
+        title: "This Email is already in use",
+        text: "The email address you entered is already in use. Please go to Sing in where you can enter your personal account and reset your password if necessary. Or enter another email.",
+      });
     }
     const passwordCrypto = await passwordService.cryptoPassword(password); // создание шифра пароля
 
@@ -30,17 +33,17 @@ class AuthService {
       tokens.accessToken
     );
 
-    return { ...tokens, user: userDto };
+    return { ...userDto, ...tokens };
   }
 
   async login(email, password) {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      throw ApiError.badRequest("User with this email not found");
+      throw ApiError.badRequest({title: "User with this email not found", text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!"});
     }
     const isPassEquals = await bcrypt.compare(password, user.password);
     if (!isPassEquals) {
-      throw ApiError.badRequest("Invalid password entry");
+      throw ApiError.badRequest({title:"Invalid password entry", text:"СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!" });
     }
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
@@ -50,35 +53,47 @@ class AuthService {
       tokens.accessToken
     );
 
-    return { ...tokens, user: userDto };
+    return { ...userDto, ...tokens };
   }
 
   async findOrCreateUser(profile) {
-    console.log("FUNC ЗАПУЩЕНА", profile)
-
-    
+    console.log("FUNC ЗАПУЩЕНА", profile);
   }
-  // async findOrCreateUser(email, name, lastName) {
-  //   console.log("FUNC ЗАПУЩЕНА")
+  async socialAuth(refreshToken, params, profile, sosialName) {
+    let username, lastName, email;
 
-  //   const user = await User.findOrCreate({ where: { email }, defaults: {
-  //     username: name,
-  //     lastName,
-  //     role: { default: "USER" },
-  //   }, });
-    
-    
-  //   const userDto = new UserDto(user);
-  //   // const tokens = tokenService.generateTokens({ ...userDto });
-  //   // await tokenService.saveToken(
-  //   //   userDto.id,
-  //   //   tokens.refreshToken,
-  //   //   tokens.accessToken
-  //   // );
+    if (sosialName === "google") {
+      username = profile._json.given_name || profile._json.nickname;
+      lastName = profile._json.family_name || profile._json.nickname;
+      email = profile.emails[0].value;
+    } else {
+      username = profile._json.given_name || profile._json.name;
+      lastName = profile._json.family_name || profile._json.name;
+      email = profile.email;
+    }
+    const { access_token } = params;
+    const randomPassword = passwordService.cryptoPassword(profile._json.name);
 
-  //   // return { ...tokens, user: userDto };
-  //   return {  user: userDto };
-  // }
+    const [user] = await User.findOrCreate({
+      where: { email },
+      defaults: {
+        username,
+        lastName,
+        email,
+        password: randomPassword,
+      },
+    });
+    const userDto = new UserDto(user);
+    const userData = {
+      ...userDto,
+      accessToken: access_token,
+      refreshToken,
+    };
+
+    await tokenService.saveToken(userDto.id, refreshToken, access_token);
+
+    return userData;
+  }
 
   async logout(refreshToken) {
     return await tokenService.removeToken(refreshToken);
@@ -104,13 +119,13 @@ class AuthService {
       tokens.accessToken
     );
 
-    return { ...tokens, user: userDto };
+    return { ...userDto, ...tokens };
   }
 
   async forgotPassword(email) {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      throw ApiError.badRequest("User with this email not found");
+      throw ApiError.badRequest({title:"User with this email not found", text:"СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!"});
     }
     const token = tokenService.generateResetToken({ id: user.id });
     await mailService.sendResetPasswordMail(
@@ -128,7 +143,7 @@ class AuthService {
     const userData = tokenService.validateResetToken(resetLink);
     let user = await User.findOne({ where: { resetLink } });
     if (!user || !userData) {
-      throw ApiError.badRequest("User not found");
+      throw ApiError.badRequest({title:"User not found", text:"СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!"});
     }
     const hashPassword = await passwordService.cryptoPassword(newPass);
     const obj = {
