@@ -14,6 +14,7 @@ const User = sequelize.define("user", {
   email: { type: DataTypes.STRING, unique: true },
   password: { type: DataTypes.STRING, unique: false },
   role: { type: DataTypes.JSON, defaultValue: "USER" },
+  resetLink: { type: DataTypes.STRING, defaultValue: "" },
 });
 
 const Token = sequelize.define("token", {

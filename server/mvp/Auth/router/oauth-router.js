@@ -23,7 +23,12 @@ router.get("/google/callback", (req, res, next) => {
       }
 
       req.session.user = user;
-
+      res.cookie("refresh_jobseeker", user.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        SameSite: "Strict",
+      });
       return res.redirect(`${process.env.CLIENT_URL}/user/home`);
     });
   })(req, res, next);
@@ -49,6 +54,12 @@ router.get("/linkedin/callback", (req, res, next) => {
           return next(err);
         }
         req.session.user = user;
+        res.cookie("refresh_jobseeker", user.refreshToken, {
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+          httpOnly: true,
+          secure: true,
+          SameSite: "Strict",
+        });
         return res.redirect(`${process.env.CLIENT_URL}/user/home`);
       });
     }

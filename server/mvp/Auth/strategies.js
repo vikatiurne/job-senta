@@ -3,10 +3,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
 const { Pool } = require("pg");
 
-const passwordService = require("./service/passwordService");
-const TokenService = require("./service/tokenService");
 const { User } = require("../../models/models");
-const UserDto = require("../dtos/user-dto");
 const authService = require("./service/authService");
 
 // проверка соединения с бд
@@ -69,30 +66,7 @@ passport.use(
           profile,
           "linkedin"
         );
-        // const { access_token } = params;
-        // const randomPassword = passwordService.cryptoPassword(
-        //   profile._json.name
-        // );
-
-        // const [user] = await User.findOrCreate({
-        //   where: { email: profile.email },
-        //   defaults: {
-        //     username: profile._json.given_name || profile._json.name,
-        //     lastName: profile._json.family_name || profile._json.name,
-        //     email: profile._json.email,
-        //     password: randomPassword,
-        //   },
-        // });
-        // const userDto = new UserDto(user);
-        // const userData = {
-        //   ...userDto,
-        //   accessToken: access_token,
-        //   refreshToken,
-        // };
-
-        // await TokenService.saveToken(userDto.id, refreshToken, access_token);
-
-        return done(null, userData);
+        return await done(null, userData);
       } catch (err) {
         console.error("Error creating or finding user:", err);
         return done(err, null);

@@ -50,6 +50,7 @@ class AuthController {
     try {
       const { refresh_jobseeker } = req.cookies;
       const token = await authService.logout(refresh_jobseeker);
+      res.clearCookie("connect.sid", { secure: false, httpOnly: true });
       res.clearCookie("refresh_jobseeker", {
         secure: true,
         sameSite: "none",
