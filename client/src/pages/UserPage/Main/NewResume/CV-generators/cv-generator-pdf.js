@@ -41,7 +41,7 @@ export class PdfCreator {
           alignment: "center",
         },
         {
-          text: user?.name,
+          text: `${user?.username} ${user?.lastName}`,
           fontSize: 27,
           alignment: "center",
           font: "OpenSans",

@@ -1,10 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import cn from "classnames";
 
 import { useMedia } from "../../../hoc/useMedia/useMedia.js";
-import { fetchLogout } from "../../Autorization/AuthSlice.js";
+import { fetchLogout, resetAuthState } from "../../Autorization/AuthSlice.js";
 
 import { ReactComponent as Logo } from "../../../assets/user_page/home/logo.svg";
 import { ReactComponent as Home } from "../../../assets/user_page/home/home.svg";
@@ -18,14 +17,15 @@ import style from "./Navigation.module.css";
 
 const Navigation = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const { logout, user } = useAuth0();
+
   const isMediaQuery = useMedia("(max-width:1024px)");
+
+  const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
   const logoutHandler = () => {
-   logout({ logoutParams: { returnTo: window.location.origin } });
-    // dispatch(fetchLogout());
+    dispatch(fetchLogout())
+    dispatch(resetAuthState())
   };
 
   return (

@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
 
 import Scroll from "../../../../../components/UI/Scroll/Scroll";
 

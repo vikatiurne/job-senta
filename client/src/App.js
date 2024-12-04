@@ -1,52 +1,43 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
 
-// import AnimatedRoutes from "./components/AnimatedRoutes/AnimatedRoutes";
 import RootRouter from "./router/Router.jsx";
-import { fetchAutoLogin } from "./pages/Autorization/AuthSlice.js";
+import {
+  fetchAutoLogin,
+  resetAuthState,
+} from "./pages/Autorization/AuthSlice.js";
 
 function App() {
-  const dispatch = useDispatch()
-  
+  const {methodAuth}=useSelector(state=>state.auth)
+  const dispatch = useDispatch();
+
+  // обнуление stote после закрытия браузера
   useEffect(() => {
-    const token = localStorage.getItem("_jobseeker");
-    if (!!token) dispatch(fetchAutoLogin());
+    const userData = localStorage.getItem("_jobseeker_auth_state");
+
+    if (!userData) {  
+      dispatch(resetAuthState());  
+    } 
+      const handleBeforeUnload = () => {
+        dispatch(resetAuthState());
+      };
+      
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+      }
+    
   }, [dispatch]);
 
-  const {
-    // Auth state:
-    // error,
-    isAuthenticated,
-    // isLoading,
-    // user,
-    // // Auth methods:
-    getAccessTokenSilently,
-    // getAccessTokenWithPopup,
-    // getIdTokenClaims,
-    // loginWithRedirect,
-    // loginWithPopup,
-    // logout,
-  } = useAuth0();
-  console.log('user Auth0:',isAuthenticated)
+  useEffect(() => {
+    const token = localStorage.getItem("_jobseeker");
+    if (!!token && methodAuth==='app') {
+      dispatch(fetchAutoLogin());
+    }
+  }, [dispatch,methodAuth]);
 
-//   const fetchToken = async () => {  
-//     try {  
-//         const accessToken = await getAccessTokenSilently();  
-//         console.log(accessToken);  
-//     } catch (error) {  
-//         console.error('Ошибка при получении токена', error);  
-//     }  
-// };  
-//   console.log(fetchToken())
-
-  return (
-
-    // <AnimatedRoutes />
-    <RootRouter />
-
-
-  );
+  return <RootRouter />;
 }
 
 export default App;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate,} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
@@ -14,33 +14,35 @@ import { textData } from "../../../utils/textData";
 
 import {
   fetchLogin,
+  resetAuthState,
   setRememberMe,
 } from "../../../pages/Autorization/AuthSlice";
 
 import styles from "./AuthForms.module.css";
 
 const LoginForm = () => {
-  const error = useSelector((state) => state.auth.error);
-  const status = useSelector((state) => state.auth.status);
+  const { error, user } = useSelector((state) => state.auth);
   const [modalActive, setModalActive] = useState(!!error);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     setModalActive(!!error);
   }, [error]);
 
   useEffect(() => {
-    status==="success" && navigate("/user/home");
-  }, [status]);
-
+    if (!!user) {
+      const localToken = localStorage.getItem("_jobseeker");
+      const sessionToken = sessionStorage.getItem("_jobseeker");
+      if (sessionToken || localToken) navigate("/user/home");
+    }
+  }, [navigate, user]);
 
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
   const submitFormHandler = (values) => {
     console.log(values);
-    //login
     dispatch(
       fetchLogin({
         email: values.email,
@@ -49,7 +51,6 @@ const LoginForm = () => {
     );
     dispatch(setRememberMe(values.toggle));
   };
-
 
   return (
     <Formik
@@ -112,12 +113,16 @@ const LoginForm = () => {
           </div>
 
           {modalActive && (
-            <Popup active={modalActive} setActive={setModalActive}>
+            <Popup
+              active={modalActive}
+              setActive={() => {
+                setModalActive();
+                dispatch(resetAuthState());
+              }}
+            >
               <div className={styles.popup}>
                 <h4>{error?.title}</h4>
-                <p>
-                 {error?.text}
-                </p>
+                <p>{error?.text}</p>
                 <p>Thank you for choosing us - we work for you!</p>
                 <p>
                   Best regards,<span>Jobseeker!</span>

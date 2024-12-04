@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import { useEffect } from "react";
+// import { useDispatch } from "react-redux";
 
 import DreamBlock from "../../components/HomePage/DreamBlock/DreamBlock";
 import Footer from "../../components/HomePage/Footer/Footer";
@@ -11,10 +11,10 @@ import AboutUs from "../../components/HomePage/AboutUs/AboutUs";
 import Join from "../../components/HomePage/Join/Join";
 import OurService from "../../components/HomePage/OurService/OurService";
 
-import { fetchAutoLogin } from "../Autorization/AuthSlice";
+// import { fetchAutoLogin } from "../Autorization/AuthSlice";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   
 

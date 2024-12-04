@@ -78,7 +78,7 @@ export class DocumentCreator {
               heading: HeadingLevel.TITLE,
               children: [
                 new TextRun({
-                  text: user?.name,
+                  text: `${user?.username} ${user?.lastName}`,
                   font: "Open Sans",
                   size: 54,
                   bold: true,

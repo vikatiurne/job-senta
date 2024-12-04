@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { saveAs } from "file-saver";
+import { Packer } from "docx";
+import pdfMake from "pdfmake/build/pdfmake";
 
 import exportImg from "../../../../../assets/user_page/builder/createResume/export.svg";
 import { ReactComponent as Export } from "../../../../../assets/user_page/builder/mobile/export.svg";
@@ -9,17 +13,11 @@ import DropDown from "../../../../../components/UI/DropDown/DropDown";
 import Popup from "../../../../../components/UI/Popup/Popup";
 import Preview from "../Preview/Preview";
 
-import { saveAs } from "file-saver";
-import { Packer } from "docx";
-
-import pdfMake from "pdfmake/build/pdfmake";
-
+import { PdfCreator } from "../CV-generators/cv-generator-pdf";
 
 import styles from "./MobileBtns.module.css";
 import { DocumentCreator } from "../CV-generators/cv-generator-docx";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector } from "react-redux";
-import { PdfCreator } from "../CV-generators/cv-generator-pdf";
+
 
 const MobileBtns = () => {
   const [selectedExport, setSelectedExport] = useState(false);
@@ -32,7 +30,7 @@ const MobileBtns = () => {
     setEmptyResume(!Object.keys(info).length);
   }, [info]);
 
-  const user = useSelector((state) => state.auth.user.username)
+  const user = useSelector((state) => state.auth.user)
 
   const handleSelectedExport = () => setSelectedExport((prev) => !prev);
 

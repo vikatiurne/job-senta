@@ -1,29 +1,30 @@
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 
 import Button from "../../UI/Button/Button";
 import imgBtnGoogle from "../../../assets/Google.png";
 import imgBtnLinkedIn from "../../../assets/LinkedIn.png";
 
+import { setMethodAuth } from "../../../pages/Autorization/AuthSlice";
+
 import styles from "./LoginAuth0Button.module.css";
-import { useDispatch } from "react-redux";
-import { fetchSocialAuth } from "../../../pages/Autorization/AuthSlice";
 
 const LoginAuth0Button = ({ btnName }) => {
   const dispatch = useDispatch();
   const [src, setSrc] = useState("");
-  const { user } = useAuth0();
+
   const { pathname } = useLocation();
 
-  console.log(user);
 
   useEffect(() => {
     const img = btnName === "Google" ? imgBtnGoogle : imgBtnLinkedIn;
     setSrc(img);
   }, [btnName]);
 
+
   const handleLogin = () => {
+    dispatch(setMethodAuth('social'))
     window.location.href = `${process.env.REACT_APP_API_URL}/api/oauth/${btnName.toLowerCase()}`;
   };
 

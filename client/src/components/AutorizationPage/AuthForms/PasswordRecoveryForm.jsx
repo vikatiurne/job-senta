@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
 
@@ -10,21 +11,27 @@ import Popup from "../../UI/Popup/Popup";
 import emailIcon from "../../../assets/emailIcon.png";
 import { textData } from "../../../utils/textData";
 
+import { fetchForgotPassword } from "../../../pages/Autorization/AuthSlice";
+
 import styles from "./AuthForms.module.css";
 
 const PasswordRecoveryForm = () => {
   const [modalActive, setModalActive] = useState(false);
-  const { pathname } = useLocation();
+
+  const { msg } = useSelector((state) => state.auth);
+  
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const submitFormHandler = (values) => {
     console.log("Sucsess", values);
+    dispatch(fetchForgotPassword(values));
     setModalActive(true);
   };
 
   const handleModalClose = () => {
-    setModalActive()
-    navigate("/login");
+    setModalActive();
+    navigate("/");
   };
 
   return (
@@ -35,7 +42,6 @@ const PasswordRecoveryForm = () => {
       validateOnChange={false}
       onSubmit={(values, { resetForm }) => {
         submitFormHandler(values);
-        resetForm();
       }}
     >
       {({ errors, values, touched, isValid, dirty }) => (
@@ -55,7 +61,7 @@ const PasswordRecoveryForm = () => {
             className={styles.authBtn}
             disabled={!isValid || !dirty}
           >
-            {textData[`${pathname}`]["sendBtn"]}
+            {textData["/forgot-password"]["sendBtn"]}
           </Button>
 
           <div className={styles.alernativText}>
@@ -64,12 +70,8 @@ const PasswordRecoveryForm = () => {
           {modalActive && (
             <Popup active={modalActive} setActive={handleModalClose}>
               <div className={styles.popup}>
-                <h4>Please check your email</h4>
-                <p>
-                  We have just sent an email with the next steps to reset your
-                  password. The message should arrive within 5 minutes. If it's
-                  not there, please check your spam folder or try again.
-                </p>
+                <h4>{msg?.title}</h4>
+                <p>{msg?.text}</p>
                 <p>Thank you for choosing us - we work for you!</p>
                 <p>
                   Best regards,<span>Jobseeker!</span>

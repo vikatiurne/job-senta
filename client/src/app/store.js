@@ -12,3 +12,7 @@ export const store = configureStore({
       serializableCheck: false,
     }),
 });
+
+store.subscribe(() => {
+  localStorage.setItem('_jobseeker_auth_state', JSON.stringify(store.getState().auth));
+});

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import style from './TopResume.module.css'
 import cn from 'classnames'
+
 import DropDown from '../../../../../components/UI/DropDown/DropDown';
 import ScoreResumeCircle from './ScoreResumeCircle/ScoreResumeCircle';
 import ProgressBar from './ProgressBar/ProgressBar';
 import Scroll from '../../../../../components/UI/Scroll/Scroll';
+
 import { ReactComponent as DropDownIcon } from '../../../../../assets/user_page/home/dropdown.svg'
 import { ReactComponent as Star } from '../../../../../assets/user_page/home/star.svg'
 import { ReactComponent as StarBorder } from '../../../../../assets/user_page/home/starborder.svg'
+
 import { useMedia } from '../../../../../hoc/useMedia/useMedia.js'
+
+import style from './TopResume.module.css'
 
 const TopResume = ({ className }) => {
 
@@ -127,6 +130,5 @@ const TopResume = ({ className }) => {
     );
 };
 
-TopResume.propTypes = {};
 
 export default TopResume;

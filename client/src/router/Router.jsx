@@ -7,9 +7,8 @@ import Registration from "../pages/Autorization/Registartion/Registration.jsx";
 import PasswordRecovery from "../pages/Autorization/PasswordRecovery/PasswordRecovery.jsx";
 import NewPassword from "../pages/Autorization/NewPassword/NewPassword.jsx";
 import UserPage from "../pages/UserPage/UserPage.jsx";
-import PrivateRoute from "../pages/UserPage/UserRoutes/PrivateRoute.jsx";
 
-export default () => {
+const Router = () => {
   const location = useLocation();
   return (
     <AnimatePresence>
@@ -18,17 +17,11 @@ export default () => {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/forgot-password" element={<PasswordRecovery />} />
-        <Route path="/recovery-password" element={<NewPassword />} />
+        <Route path="/recovery-password/:link" element={<NewPassword />} />
         <Route path="/user/*" element={<UserPage />} />
-        {/* <Route
-          path="/user/*"
-          element={
-            <PrivateRoute>
-              <UserPage />
-            </PrivateRoute>
-          }
-        /> */}
       </Routes>
     </AnimatePresence>
   );
 };
+
+export default Router;

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import {  Link, useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
 
@@ -11,14 +12,19 @@ import passIcon from "../../../assets/passIcon.png";
 import { textData } from "../../../utils/textData";
 
 import styles from "./AuthForms.module.css";
+import { fetchResetPassword } from "../../../pages/Autorization/AuthSlice";
 
 const NewPasswordForm = () => {
   const [modalActive, setModalActive] = useState(false);
-  const { pathname } = useLocation();
+  const { msg } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const { link } = useParams();
 
   const submitFormHandler = (values) => {
     //отправка нового пароля на сервер, обновление данных в бд
     console.log("Sucsess", values);
+    dispatch(fetchResetPassword({ newPass: values.password, resetLink: link }));
     setModalActive(true);
   };
 
@@ -60,20 +66,20 @@ const NewPasswordForm = () => {
             className={styles.recoveryBtn}
             disabled={!isValid || !dirty}
           >
-            {textData[`${pathname}`]["sendBtn"]}
+            {textData["/recovery-password"]["sendBtn"]}
           </Button>
           {/* </Link> */}
           <div className={styles.alernativText}>
             <Link to="../login">Back to sing in</Link>
           </div>
           {modalActive && (
-            <Popup active={modalActive} setActive={setModalActive}>
+            <Popup active={modalActive} setActive={() => {
+              setModalActive()
+              navigate("/login")
+            }}>
               <div className={styles.popup}>
-                <h4>Congratulations!</h4>
-                <p>
-                  Your password has been successfully changed! Now you can enter
-                  your personal account using new data.
-                </p>
+                <h4>{msg?.title}</h4>
+                <p>{msg?.text}</p>
                 <p>Thank you for choosing us - we work for you!</p>
                 <p>
                   Best regards,<span>Jobseeker!</span>

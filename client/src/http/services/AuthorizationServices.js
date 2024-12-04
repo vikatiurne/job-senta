@@ -30,7 +30,7 @@ export default class AuthorizationServices {
     return await $api.put("/api/auth/forgot-password", { email });
   }
   static async resetPassword(newPass, resetLink) {
-    return await $api.put("/api/auth/reset-password", { newPass, resetLink });
+    return await $api.put("/api/auth/recovery-password", { newPass, resetLink });
   }
 
   static async socialAuth() {
