@@ -27,10 +27,24 @@ export default class AuthorizationServices {
   }
 
   static async forgotPassword(email) {
-    return await $api.put("/api/auth/forgot-password", { email });
+    try {
+      return await $api.put("/api/auth/forgot-password", { email });
+      
+    } catch (error) {
+      console.log(error)
+      if (error instanceof TypeError && error.message === 'NetworkError when attempting to fetch resource.') {  
+        throw new Error('NetworkError'); 
+      }  
+      throw error;  
+    }
   }
   static async resetPassword(newPass, resetLink) {
-    return await $api.put("/api/auth/recovery-password", { newPass, resetLink });
+    try {
+      
+      return await $api.put("/api/auth/recovery-password", { newPass, resetLink });
+    } catch (error) {
+      return error
+    }
   }
 
   static async socialAuth() {

@@ -88,7 +88,10 @@ export const fetchForgotPassword = createAsyncThunk(
     try {
       return await AuthorizationServices.forgotPassword(email);
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue({
+        title: "Unknown Error",
+        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!",
+      });
     }
   }
 );
@@ -99,7 +102,10 @@ export const fetchResetPassword = createAsyncThunk(
     try {
       return await AuthorizationServices.resetPassword(newPass, resetLink);
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue({
+        title: "Unknown Error",
+        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!",
+      });
     }
   }
 );
@@ -135,17 +141,21 @@ const authSlice = createSlice({
     builder
       .addCase(fetchRegistration.pending, (state) => {
         state.error = null;
+        state.status = "loading";
       })
       .addCase(fetchRegistration.fulfilled, (state, { payload }) => {
         localStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data.user;
         state.error = payload.data?.message;
+        state.status = "success";
       })
       .addCase(fetchRegistration.rejected, (state, { payload }) => {
         state.error = payload;
+        state.status = "error";
       })
       .addCase(fetchLogin.pending, (state) => {
         state.error = null;
+        state.status = "loading";
       })
       .addCase(fetchLogin.fulfilled, (state, { payload }) => {
         console.log(payload);
@@ -161,9 +171,11 @@ const authSlice = createSlice({
       .addCase(fetchLogin.rejected, (state, { payload }) => {
         console.log(payload);
         state.error = payload?.message;
+        state.status = "error";
       })
       .addCase(fetchSocialAuth.pending, (state) => {
         state.error = null;
+        state.status = "loading";
       })
       .addCase(fetchSocialAuth.fulfilled, (state, { payload }) => {
         console.log(payload);
@@ -174,9 +186,11 @@ const authSlice = createSlice({
       })
       .addCase(fetchSocialAuth.rejected, (state, { payload }) => {
         state.error = payload;
+        state.status = "error";
       })
       .addCase(fetchLogout.pending, (state) => {
         state.error = null;
+        state.status = "loading";
       })
       .addCase(fetchLogout.fulfilled, (state) => {
         localStorage.removeItem("_jobseeker_auth_state");
@@ -185,44 +199,54 @@ const authSlice = createSlice({
         state.isAuth = false;
         state.user = {};
         state.error = null;
+        state.status = "success";
       })
       .addCase(fetchLogout.rejected, (state, { payload }) => {
         console.log(payload);
-        // state.error = payload.message;
+        state.status = "error";
+        state.error = payload;
       })
       .addCase(fetchAutoLogin.pending, (state) => {
         state.error = null;
+        state.status = "loading";
       })
       .addCase(fetchAutoLogin.fulfilled, (state, { payload }) => {
         state.isAuth = true;
         state.user = payload.data;
+        state.status = "success";
         localStorage.setItem("_jobseeker", payload.data.accessToken);
-        // state.error = payload.message;
       })
       .addCase(fetchAutoLogin.rejected, (state, { payload }) => {
         state.error = payload;
+        state.status = "error";
       })
       .addCase(fetchForgotPassword.pending, (state) => {
         state.msg = null;
+        state.status = "loading";
       })
       .addCase(fetchForgotPassword.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.msg = payload.data;
+        state.status = "success";
       })
       .addCase(fetchForgotPassword.rejected, (state, { payload }) => {
         console.log(payload);
         state.msg = payload;
+        state.status = "error";
       })
       .addCase(fetchResetPassword.pending, (state) => {
         state.msg = null;
+        state.status = "loading";
       })
       .addCase(fetchResetPassword.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.msg = payload.data;
+        state.status = "success";
       })
       .addCase(fetchResetPassword.rejected, (state, { payload }) => {
         console.log(payload);
         state.msg = payload;
+        state.status = "error";
       });
   },
 });

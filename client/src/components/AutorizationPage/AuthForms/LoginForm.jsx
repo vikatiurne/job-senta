@@ -7,6 +7,8 @@ import { initialValues, schemas } from "./helper";
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 import Popup from "../../UI/Popup/Popup";
+import Loader from "../../UI/Loader/Loader";
+import PopupContent from "../PopupContent/PopupContent";
 
 import emailIcon from "../../../assets/emailIcon.png";
 import passIcon from "../../../assets/passIcon.png";
@@ -21,13 +23,15 @@ import {
 import styles from "./AuthForms.module.css";
 
 const LoginForm = () => {
-  const { error, user } = useSelector((state) => state.auth);
+  const { error, user, status } = useSelector((state) => state.auth);
   const [modalActive, setModalActive] = useState(!!error);
+
+  console.log(error!==null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    setModalActive(!!error);
+    if (error!==null) setModalActive(true);
   }, [error]);
 
   useEffect(() => {
@@ -42,7 +46,6 @@ const LoginForm = () => {
   const { pathname } = useLocation();
 
   const submitFormHandler = (values) => {
-    console.log(values);
     dispatch(
       fetchLogin({
         email: values.email,
@@ -96,7 +99,7 @@ const LoginForm = () => {
             </label>
             <Link to="../forgot-password">Forgot your password?</Link>
           </div>
-          {/* <Link to="/"> */}
+
           <Button
             type="submit"
             className={styles.authBtn}
@@ -104,7 +107,7 @@ const LoginForm = () => {
           >
             {textData[`${pathname}`]["sendBtn"]}
           </Button>
-          {/* </Link> */}
+
           <div className={styles.alernativText}>
             <p>Do you have an account?</p>
             <Link to="../registration">
@@ -120,14 +123,11 @@ const LoginForm = () => {
                 dispatch(resetAuthState());
               }}
             >
-              <div className={styles.popup}>
-                <h4>{error?.title}</h4>
-                <p>{error?.text}</p>
-                <p>Thank you for choosing us - we work for you!</p>
-                <p>
-                  Best regards,<span>Jobseeker!</span>
-                </p>
-              </div>
+              {status === "loading" ? (
+                <Loader loading />
+              ) : (
+                status === "error" && <PopupContent msg={error} />
+              )}
             </Popup>
           )}
         </Form>
