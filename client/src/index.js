@@ -22,7 +22,7 @@ root.render(
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
       audience={process.env.REACT_APP_AUTH0_AUDIENCE}
       authorizationParams={{
-        redirect_uri: `${process.env.REACT_APP_URL}/user/home`,
+        redirect_uri: `${process.env.REACT_APP_API_URL}/auth/login/callback`,
       }}
     >
       <ModalProvider>

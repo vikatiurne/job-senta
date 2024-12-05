@@ -1,14 +1,15 @@
 import axios from "axios";
 
-
 const $api = axios.create({
-    withCredentials: true, //автоматич запись cookie к каждому запросу
+  withCredentials: true, //автоматич запись cookie к каждому запросу
   baseURL: process.env.REACT_APP_API_URL,
 });
 
 // автозапись access token в headers запроса
 $api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  config.headers.Authorization = `Bearer ${localStorage.getItem(
+    "_jobseeker"
+  )}`;
   return config;
 });
 
@@ -27,11 +28,11 @@ $api.interceptors.response.use(
       originalRequest._isRetry = true;
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/user/refresh`,
+          `${process.env.REACT_APP_API_URL}/api/auth/refresh`,
           { withCredentials: true }
         );
 
-        localStorage.setItem("token", response.data.accessToken);
+        localStorage.setItem("_jobseeker", response.data.accessToken);
         return $api.request(originalRequest);
       } catch (error) {
         console.error(error);

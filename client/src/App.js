@@ -1,33 +1,43 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-// import AnimatedRoutes from "./components/AnimatedRoutes/AnimatedRoutes";
 import RootRouter from "./router/Router.jsx";
+import {
+  fetchAutoLogin,
+  resetAuthState,
+} from "./pages/Autorization/AuthSlice.js";
 
 function App() {
-  const {
-    // Auth state:
-    // error,
-    // isAuthenticated,
-    // isLoading,
-    user,
-    // // Auth methods:
-    // getAccessTokenSilently,
-    // getAccessTokenWithPopup,
-    // getIdTokenClaims,
-    // loginWithRedirect,
-    // loginWithPopup,
-    // logout,
-  } = useAuth0();
-  console.log('user Auth0:',user)
+  const {methodAuth}=useSelector(state=>state.auth)
+  const dispatch = useDispatch();
 
-  // console.log(getAccessTokenSilently({detailedResponse: true}))
-  return (
+  // обнуление stote после закрытия браузера
+  useEffect(() => {
+    const userData = localStorage.getItem("_jobseeker_auth_state");
 
-    // <AnimatedRoutes />
-    <RootRouter />
+    if (!userData) {  
+      dispatch(resetAuthState());  
+    } 
+      const handleBeforeUnload = () => {
+        dispatch(resetAuthState());
+      };
+      
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+      }
+    
+  }, [dispatch]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("_jobseeker");
+    if (!!token && methodAuth==='app') {
+      dispatch(fetchAutoLogin());
+    }
+  }, [dispatch,methodAuth]);
 
-  );
+  return <RootRouter />;
 }
 
 export default App;

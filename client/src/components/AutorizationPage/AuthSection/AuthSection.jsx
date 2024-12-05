@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import LoginAuth0Button from "../LoginAuth0Button/LoginAuth0Button";
 
@@ -7,28 +7,32 @@ import { textData } from "../../../utils/textData";
 
 import styles from "./AuthSection.module.css";
 
-const AuthSection = () => {
-  const { pathname } = useLocation();
+
+const AuthSection = ({path}) => {
 
   const render = (
-    <div className={styles.authContainer}>
-     <Link to='/'><img src={logo} alt="logo" className={styles.logo} /></Link> 
-      <h2>{textData[`${pathname}`]["title"]}</h2>
-      <p className={styles.infoTitle}>{textData[`${pathname}`]["infoTitle"]}</p>
+      <div className={styles.authContainer}>
+        <Link to="/">
+          <img src={logo} alt="logo" className={styles.logo} />
+        </Link>
+        <h2>{textData[`${path}`]["title"]}</h2>
+        <p className={styles.infoTitle}>
+          {textData[`${path}`]["infoTitle"]}
+        </p>
 
-      {(pathname === "/login" || pathname === "/registration") && (
-        <>
-          <div className={styles.socialBtns}>
-            <LoginAuth0Button btnName="Google" />
-            <LoginAuth0Button btnName="LinkedIn" />
-          </div>
-          <p className={styles.toggleAuth}>
-            {textData[`${pathname}`]["choiceInfo"]}
-          </p>
-        </>
-      )}
-      {textData[`${pathname}`]["component"]}
-    </div>
+        {(path === "/login" || path === "/registration") && (
+          <>
+            <div className={styles.socialBtns}>
+              <LoginAuth0Button btnName="Google" />
+              <LoginAuth0Button btnName="LinkedIn" />
+            </div>
+            <p className={styles.toggleAuth}>
+              {textData[`${path}`]["choiceInfo"]}
+            </p>
+          </>
+        )}
+        {textData[`${path}`]["component"]}
+      </div>
   );
   return render;
 };

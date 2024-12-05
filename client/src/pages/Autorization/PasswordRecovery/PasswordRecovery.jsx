@@ -21,7 +21,7 @@ const PasswordRecovery = () => {
     >
       <div className={styles.greetingsWrapper}>
         <div className={styles.greetingsContainer}>
-          <WelcomeSection />
+          <WelcomeSection path={"/forgot-password"}/>
           <Link to={textData[`${pathname}`]["link"]}>
             <Button className={styles.singinBtn}>
               {textData[`${pathname}`]["linkBtn"]}
@@ -29,7 +29,7 @@ const PasswordRecovery = () => {
           </Link>
         </div>
       </div>
-      <AuthSection />
+      <AuthSection path={"/forgot-password"}/>
     </motion.div>
   );
 };

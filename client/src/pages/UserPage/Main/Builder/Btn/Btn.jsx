@@ -8,7 +8,6 @@ import { useMedia } from '../../../../../hoc/useMedia/useMedia.js'
 const MenuBtn = ({ type, onClick, dropDownActive }) => {
 
   const isMediaQuery = useMedia("(min-width:1024px)")
-  console.log('isMediaQuery btn', isMediaQuery);
 
   return (
     <Button

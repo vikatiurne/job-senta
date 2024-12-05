@@ -21,7 +21,7 @@ const Registration = () => {
     >
       <div className={styles.greetingsWrapper}>
         <div className={styles.greetingsContainer}>
-          <WelcomeSection />
+          <WelcomeSection path={"/registration" } />
           <Link to={textData[`${pathname}`]["link"]}>
             <Button className={styles.singinBtn}>
               {textData[`${pathname}`]["linkBtn"]}
@@ -29,7 +29,7 @@ const Registration = () => {
           </Link>
         </div>
       </div>
-      <AuthSection />
+      <AuthSection path={"/registration" }/>
     </motion.div>
   );
 };

@@ -4,145 +4,253 @@ import AuthorizationServices from "../../http/services/AuthorizationServices";
 const initialState = {
   user: {},
   isAuth: false,
+  isRemember: false,
+  error: null,
+  methodAuth: null,
+  status: "idle",
+  msg: null,
 };
+
+export const fetchRegistration = createAsyncThunk(
+  "auth/fetchRegistration",
+  async ({ email, password, username, lastName }, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.registration(
+        email,
+        password,
+        username,
+        lastName
+      );
+    } catch (error) {
+      return rejectWithValue({
+        title: "The server is unavailable. Please try again later",
+        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!",
+      });
+    }
+  }
+);
 
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const res = await AuthorizationServices.login(email, password);
-      console.log(res);
-      // return await AuthServices.login(email, password);
+      return await AuthorizationServices.login(email, password);
     } catch (error) {
-      // return rejectWithValue(error.response.data);
+      console.log(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
-export const fetchRegistration = createAsyncThunk(
-  "auth/fetchRegistration",
-  async ({ email, password, name, lastName }, { rejectWithValue }) => {
+export const fetchSocialAuth = createAsyncThunk(
+  "auth/fetchSocialAuth",
+  async (_, { rejectWithValue }) => {
     try {
-      const res = await AuthorizationServices.registration(email, password, name,lastName);
-      console.log(res);
-    //   console.log(email, password, name, lastName);
-      // return await AuthServices.registration(email, password, name);
+      return await AuthorizationServices.socialAuth();
     } catch (error) {
-      // return rejectWithValue(error.response.data);
+      console.log(error);
+      return rejectWithValue({
+        title: "The server is unavailable. Please try again later",
+        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!",
+      });
     }
   }
 );
+
+export const fetchLogout = createAsyncThunk(
+  "auth/fetchLogout",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.logout();
+    } catch (error) {
+      return rejectWithValue({
+        title: "The server is unavailable. Please try again later",
+        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!",
+      });
+    }
+  }
+);
+
+export const fetchAutoLogin = createAsyncThunk(
+  "auth/fetchAutoLogin",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.autoLogin();
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchForgotPassword = createAsyncThunk(
+  "auth/fetchForgotPassword",
+  async ({ email }, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.forgotPassword(email);
+    } catch (error) {
+      return rejectWithValue({
+        title: "Unknown Error",
+        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!",
+      });
+    }
+  }
+);
+
+export const fetchResetPassword = createAsyncThunk(
+  "auth/fetchResetPassword",
+  async ({ newPass, resetLink }, { rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.resetPassword(newPass, resetLink);
+    } catch (error) {
+      return rejectWithValue({
+        title: "Unknown Error",
+        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!",
+      });
+    }
+  }
+);
+
+const loadStateFromLocalStorage = () => {
+  const savedState = localStorage.getItem("_jobseeker_auth_state");
+  return savedState ? JSON.parse(savedState) : initialState;
+};
 
 const authSlice = createSlice({
   name: "auth",
-  initialState,
-
+  initialState: loadStateFromLocalStorage(),
+  reducers: {
+    setRememberMe: (state, { payload }) => {
+      state.isRemember = payload;
+    },
+    setMethodAuth: (state, { payload }) => {
+      state.methodAuth = payload;
+      state.isAuth = true;
+    },
+    resetAuthState: (state) => {
+      console.log("Resetting auth state");
+      state.user = {};
+      state.isAuth = false;
+      state.isRemember = false;
+      state.error = null;
+      state.methodAuth = null;
+      state.status = "idle";
+      state.msg = null;
+    },
+  },
   extraReducers(builder) {
     builder
-      .addCase(fetchLogin.pending, (state) => {
-        state.error = null;
-      })
-      .addCase(fetchLogin.fulfilled, (state, { payload }) => {
-        state.status = "success";
-        if (!!payload.data.user) {
-          state.isAuth = true;
-          state.user = payload.data.user;
-          // localStorage.setItem('token', payload.data.accessToken);
-        } else {
-          state.error = payload.data.message;
-        }
-      })
-      .addCase(fetchLogin.rejected, (state, { payload }) => {
-        state.status = "error";
-        state.error = payload.message;
-      })
       .addCase(fetchRegistration.pending, (state) => {
         state.error = null;
+        state.status = "loading";
       })
       .addCase(fetchRegistration.fulfilled, (state, { payload }) => {
-        if (!!payload.data.user) {
-          state.isAuth = true;
-          state.user = payload.data.user;
-          localStorage.setItem("token", payload.data.accessToken);
-        } else {
-            console.log(payload.data.errors)
-          // обрпаботать ошибку payload.data.errors
-        }
+        localStorage.setItem("_jobseeker", payload.data.accessToken);
+        state.user = payload.data.user;
+        state.error = payload.data?.message;
+        state.status = "success";
       })
       .addCase(fetchRegistration.rejected, (state, { payload }) => {
-        // обрпаботать ошибку payload.errors
+        state.error = payload;
+        state.status = "error";
+      })
+      .addCase(fetchLogin.pending, (state) => {
+        state.error = null;
+        state.status = "loading";
+      })
+      .addCase(fetchLogin.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.status = "success";
+        state.isAuth = true;
+        state.methodAuth = "app";
+        state.isRemember
+          ? localStorage.setItem("_jobseeker", payload.data.accessToken)
+          : sessionStorage.setItem("_jobseeker", payload.data.accessToken);
+        state.user = payload.data;
+        state.error = payload.data?.message;
+      })
+      .addCase(fetchLogin.rejected, (state, { payload }) => {
+        console.log(payload);
+        state.error = payload?.message;
+        state.status = "error";
+      })
+      .addCase(fetchSocialAuth.pending, (state) => {
+        state.error = null;
+        state.status = "loading";
+      })
+      .addCase(fetchSocialAuth.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.status = "success";
+        localStorage.setItem("_jobseeker", payload.data.accessToken);
+        state.user = payload.data;
+        state.error = payload.data?.message;
+      })
+      .addCase(fetchSocialAuth.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.status = "error";
+      })
+      .addCase(fetchLogout.pending, (state) => {
+        state.error = null;
+        state.status = "loading";
+      })
+      .addCase(fetchLogout.fulfilled, (state) => {
+        localStorage.removeItem("_jobseeker_auth_state");
+        localStorage.removeItem("_jobseeker");
+        sessionStorage.removeItem("_jobseeker");
+        state.isAuth = false;
+        state.user = {};
+        state.error = null;
+        state.status = "success";
+      })
+      .addCase(fetchLogout.rejected, (state, { payload }) => {
+        console.log(payload);
+        state.status = "error";
+        state.error = payload;
+      })
+      .addCase(fetchAutoLogin.pending, (state) => {
+        state.error = null;
+        state.status = "loading";
+      })
+      .addCase(fetchAutoLogin.fulfilled, (state, { payload }) => {
+        state.isAuth = true;
+        state.user = payload.data;
+        state.status = "success";
+        localStorage.setItem("_jobseeker", payload.data.accessToken);
+      })
+      .addCase(fetchAutoLogin.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.status = "error";
+      })
+      .addCase(fetchForgotPassword.pending, (state) => {
+        state.msg = null;
+        state.status = "loading";
+      })
+      .addCase(fetchForgotPassword.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.msg = payload.data;
+        state.status = "success";
+      })
+      .addCase(fetchForgotPassword.rejected, (state, { payload }) => {
+        console.log(payload);
+        state.msg = payload;
+        state.status = "error";
+      })
+      .addCase(fetchResetPassword.pending, (state) => {
+        state.msg = null;
+        state.status = "loading";
+      })
+      .addCase(fetchResetPassword.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.msg = payload.data;
+        state.status = "success";
+      })
+      .addCase(fetchResetPassword.rejected, (state, { payload }) => {
+        console.log(payload);
+        state.msg = payload;
+        state.status = "error";
       });
-    // .addCase(fetchLogout.pending, (state) => {
-    //   state.status = 'loading';
-    // })
-    // .addCase(fetchLogout.fulfilled, (state) => {
-    //   localStorage.removeItem('token');
-    //   localStorage.removeItem('location');
-    //   state.status = 'success';
-    //   state.error = null;
-    //   state.isAuth = false;
-    //   state.isLogout = true;
-    //   state.user = {};
-    // })
-    // .addCase(fetchLogout.rejected, (state) => {
-    //   state.status = 'error';
-    // })
-    // .addCase(fetchAutoLogin.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.error = null;
-    // })
-    // .addCase(fetchAutoLogin.fulfilled, (state, { payload }) => {
-    //   state.status = 'success';
-    //   state.user = payload.data.user;
-    //   state.error = payload.message;
-    //   state.isAuth = true;
-    //   localStorage.setItem('token', payload.data.accessToken);
-    // })
-    // .addCase(fetchAutoLogin.rejected, (state) => {
-    //   state.status = 'error';
-    // })
-    // .addCase(fetchForgotPassword.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.error = null;
-    // })
-    // .addCase(fetchForgotPassword.fulfilled, (state, { payload }) => {
-    //   state.error = payload.data.message;
-    // })
-    // .addCase(fetchForgotPassword.rejected, (state, { payload }) => {
-    //   state.status = 'error';
-    //   state.msg = payload.message;
-    // })
-    // .addCase(fetchResetPassword.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.error = null;
-    // })
-    // .addCase(fetchResetPassword.fulfilled, (state, { payload }) => {
-    //   state.status = 'success';
-    //   state.msg = payload.data.message;
-    // })
-    // .addCase(fetchResetPassword.rejected, (state, { payload }) => {
-    //   state.status = 'error';
-    //   state.error = payload.message;
-    // })
-    // .addCase(fetchGetGoogleUser.pending, (state) => {
-    //   state.status = 'loading';
-    //   state.error = null;
-    // })
-    // .addCase(fetchGetGoogleUser.fulfilled, (state, { payload }) => {
-    //   state.status = 'success';
-    //   state.user = payload.data.user;
-    //   localStorage.setItem('token', payload.data.accessToken);
-    //   state.isAuth = true;
-    //   state.prevLocation = localStorage.getItem('location');
-    //   localStorage.removeItem('location');
-    // })
-    // .addCase(fetchGetGoogleUser.rejected, (state, { payload }) => {
-    //   console.log(payload);
-    //   state.status = 'error';
-    //   // state.error = payload.message
-    // })
   },
 });
 
-export const { getLocation } = authSlice.actions;
+export const { setRememberMe, setMethodAuth, resetAuthState } =
+  authSlice.actions;
 export default authSlice.reducer;
