@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const path = require('path')
+const path = require("path");
 const passport = require("passport");
 
 const router = require("./router/index");
@@ -33,7 +33,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/static', express.static(path.join(__dirname, 'static')));
+app.use("/static", express.static(path.join(__dirname, "static")));
 app.use("/api", router);
 app.use(middlewareErrors);
 
