@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
@@ -19,10 +19,10 @@ import { useEffect, useState } from "react";
 const LoginForm = () => {
   const error = useSelector((state) => state.auth.error);
   const [modalActive, setModalActive] = useState(!!error);
-  console.log("modal", modalActive);
-  console.log("er", !!error);
+
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const LoginForm = () => {
         lastName: values.lastName,
       })
     );
+    if(!error)navigate('/login')
   };
 
   return (

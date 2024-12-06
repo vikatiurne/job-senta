@@ -26,8 +26,10 @@ const LoginForm = () => {
   const { error, status } = useSelector((state) => state.auth);
   const [modalActive, setModalActive] = useState(!!error);
 
+  console.log(error)
+
   useEffect(() => {
-    if (error !== null) setModalActive(true);
+    if (!!error) setModalActive(true);
   }, [error]);
 
   const dispatch = useDispatch();

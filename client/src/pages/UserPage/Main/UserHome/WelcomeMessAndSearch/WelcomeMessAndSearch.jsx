@@ -5,12 +5,12 @@ import Search from "./Search/Search.jsx";
 import { useSelector } from "react-redux";
 
 const WelcomeMessAndSearch = ({ className }) => {
-  const {username} = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <section className={cn(style.sectWelcome, className)}>
       <h1 className={style.sectWelcomeTitle}>
-        Welcome back, {username}!
+        Welcome back, {user?.username}!
       </h1>
       <Search />
     </section>
