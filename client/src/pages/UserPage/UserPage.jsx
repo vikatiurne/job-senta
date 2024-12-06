@@ -20,11 +20,11 @@ const UserPage = () => {
     if (isAuth && methodAuth === "social") dispatch(fetchSocialAuth());
   }, [isAuth, methodAuth, dispatch]);
 
-  useEffect(() => {
-    const localToken = localStorage.getItem("_jobseeker");
-    const sessionToken = sessionStorage.getItem("_jobseeker");
-    !sessionToken && !localToken ? navigate("/") : navigate("/user/home");
-  }, [navigate, user]);
+  // useEffect(() => {
+  //   const localToken = localStorage.getItem("_jobseeker");
+  //   const sessionToken = sessionStorage.getItem("_jobseeker");
+  //   !sessionToken && !localToken ? navigate("/") : navigate("/user/home");
+  // }, [navigate, user]);
 
   return (
     <div className={style.userPageWrap}>

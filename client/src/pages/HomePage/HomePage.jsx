@@ -11,19 +11,9 @@ import AboutUs from "../../components/HomePage/AboutUs/AboutUs";
 import Join from "../../components/HomePage/Join/Join";
 import OurService from "../../components/HomePage/OurService/OurService";
 
-// import { fetchAutoLogin } from "../Autorization/AuthSlice";
 
 const HomePage = () => {
-  // const dispatch = useDispatch();
-
   
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   console.log(!token);
-  //   if (!!token) dispatch(fetchAutoLogin());
-  // }, [dispatch]);
-
   return (
     <>
       <Container>

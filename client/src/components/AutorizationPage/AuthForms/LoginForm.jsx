@@ -26,19 +26,17 @@ const LoginForm = () => {
   const { error, user, status } = useSelector((state) => state.auth);
   const [modalActive, setModalActive] = useState(!!error);
 
-  console.log(error!==null);
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (error!==null) setModalActive(true);
+    if (error !== null) setModalActive(true);
   }, [error]);
 
   useEffect(() => {
     if (!!user) {
-      const localToken = localStorage.getItem("_jobseeker");
-      const sessionToken = sessionStorage.getItem("_jobseeker");
-      if (sessionToken || localToken) navigate("/user/home");
+    const localToken = localStorage.getItem("_jobseeker");
+    const sessionToken = sessionStorage.getItem("_jobseeker");
+    if (sessionToken || localToken) navigate("/user/home");
     }
   }, [navigate, user]);
 
