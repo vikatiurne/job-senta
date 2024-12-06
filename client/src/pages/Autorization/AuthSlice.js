@@ -127,7 +127,6 @@ const authSlice = createSlice({
       state.isAuth = true;
     },
     resetAuthState: (state) => {
-      console.log("Resetting auth state");
       if (!state.isRemember && state.methodAuth === "app") {
         state.user = {};
         state.isAuth = false;
@@ -188,7 +187,6 @@ const authSlice = createSlice({
       })
       .addCase(fetchSocialAuth.rejected, (state, { payload }) => {
         state.error = payload;
-        state.status = "error";
       })
       .addCase(fetchLogout.pending, (state) => {
         state.error = null;
@@ -201,7 +199,7 @@ const authSlice = createSlice({
         state.isAuth = false;
         state.user = {};
         state.error = null;
-        state.status = "success";
+        state.status = "idle";
       })
       .addCase(fetchLogout.rejected, (state, { payload }) => {
         console.log(payload);

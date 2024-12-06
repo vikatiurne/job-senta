@@ -11,9 +11,10 @@ import style from "./UserPage.module.css";
 const UserPage = () => {
   const dispatch = useDispatch();
   const { methodAuth, isAuth, } = useSelector((state) => state.auth);
+  console.log(methodAuth=== "social")
 
   useEffect(() => {
-    if (isAuth && methodAuth === "social") dispatch(fetchSocialAuth());
+    if (methodAuth === "social") dispatch(fetchSocialAuth());
   }, [isAuth, methodAuth, dispatch]);
 
     return (

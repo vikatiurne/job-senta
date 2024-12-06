@@ -81,7 +81,7 @@ const NewPasswordForm = () => {
               }}
             >
               {status === "loading" ? (
-                <Loader loading />
+                <Loader loading color="#f7f7f7" />
               ) : (
                 <PopupContent msg={msg} />
               )}

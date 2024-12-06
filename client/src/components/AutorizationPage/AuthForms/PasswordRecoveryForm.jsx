@@ -72,7 +72,7 @@ const PasswordRecoveryForm = () => {
           {modalActive && (
             <Popup active={modalActive} setActive={handleModalClose}>
               {status === "loading" ? (
-                <Loader loading />
+                <Loader loading color="#f7f7f7" />
               ) : (
                 <PopupContent msg={msg} />
               )}

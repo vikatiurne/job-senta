@@ -104,7 +104,6 @@ const LoginForm = () => {
             />
           </div>
 
-          {/* <Link to="/"> */}
           <Button
             type="submit"
             className={styles.authBtn}
@@ -112,7 +111,6 @@ const LoginForm = () => {
           >
             {textData[`${pathname}`]["sendBtn"]}
           </Button>
-          {/* </Link> */}
 
           <div className={styles.alernativText}>
             <p>Do you have an account?</p>
@@ -120,7 +118,6 @@ const LoginForm = () => {
           </div>
 
           {modalActive &&
-            (console.log("popap"),
             (
               <Popup active={modalActive} setActive={setModalActive}>
                 <div className={styles.popup}>
@@ -132,7 +129,7 @@ const LoginForm = () => {
                   </p>
                 </div>
               </Popup>
-            ))}
+            )}
         </Form>
       )}
     </Formik>

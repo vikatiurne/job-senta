@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 import DreamBlock from "../../components/HomePage/DreamBlock/DreamBlock";
 import Footer from "../../components/HomePage/Footer/Footer";
 import RegisterResume from "../../components/HomePage/RegisterResume/RegisterResume";
@@ -7,11 +9,14 @@ import Container from "../../hoc/layout/container/layout/container/Container";
 import AboutUs from "../../components/HomePage/AboutUs/AboutUs";
 import Join from "../../components/HomePage/Join/Join";
 import OurService from "../../components/HomePage/OurService/OurService";
-
+import Loader from "../../components/UI/Loader/Loader";
 
 const HomePage = () => {
- 
-  return (
+  const { status } = useSelector((state) => state.auth);
+
+  return status === "loading" ? (
+    <Loader loading color="#958060" />
+  ) : (
     <>
       <Container>
         <Header />

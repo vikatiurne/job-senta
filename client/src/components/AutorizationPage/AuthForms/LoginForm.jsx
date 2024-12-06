@@ -112,7 +112,7 @@ const LoginForm = () => {
               }}
             >
               {status === "loading" ? (
-                <Loader loading />
+                <Loader loading color="#f7f7f7" />
               ) : (
                 status === "error" && <PopupContent msg={error} />
               )}
