@@ -3,10 +3,10 @@ import { Navigate } from "react-router-dom";
 
 
 
-const PrivateRoute = ({ children }) => {
+const ProtectedRouter = ({ children }) => {
   
-  const isAuth = useSelector((state) => state.auth.isAuth);
+  const {isAuth} = useSelector((state) => state.auth);
   return isAuth ? children : <Navigate to="/" />;
 };
 
-export default PrivateRoute;
+export default ProtectedRouter;

@@ -1,6 +1,3 @@
-// import { useEffect } from "react";
-// import { useDispatch } from "react-redux";
-
 import DreamBlock from "../../components/HomePage/DreamBlock/DreamBlock";
 import Footer from "../../components/HomePage/Footer/Footer";
 import RegisterResume from "../../components/HomePage/RegisterResume/RegisterResume";
@@ -13,7 +10,7 @@ import OurService from "../../components/HomePage/OurService/OurService";
 
 
 const HomePage = () => {
-  
+ 
   return (
     <>
       <Container>

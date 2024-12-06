@@ -11,23 +11,29 @@ function App() {
   const { methodAuth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+
+
+
   // обнуление stote после закрытия браузера
   useEffect(() => {
+    
+ 
     const userData = localStorage.getItem("_jobseeker_auth_state");
-    console.log("USERDATA APP:", userData);
-    if (!userData) {
-      console.log("обнуление стєйт в апп");
-      dispatch(resetAuthState());
-    }
-    const handleBeforeUnload = () => {
-      dispatch(resetAuthState());
-    };
+    console.log("USER:", userData)
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
+    if (!userData) {  
+      dispatch(resetAuthState());  
+    } 
+      const handleBeforeUnload = () => {
+        dispatch(resetAuthState());
+      };
+      
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+      }
+    
   }, [dispatch]);
 
   useEffect(() => {
