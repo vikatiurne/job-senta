@@ -12,6 +12,7 @@ const Survey = () => {
                 <a className={style.sectionSurveyLink}
                     href='https://docs.google.com/forms/d/e/1FAIpQLScHDtwnJ1OOcczeNRgrseQJUmJ2quQHiLWtLaffk-g7Kw_WDw/viewform'
                     target='_blank'
+                    rel="noopener noreferrer"
                 >
                     Take a survey
                 </a>
