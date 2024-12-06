@@ -11,7 +11,6 @@ function App() {
   const { methodAuth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-
   // обнуление stote после закрытия браузера
   useEffect(() => {
     const userData = localStorage.getItem("_jobseeker_auth_state");

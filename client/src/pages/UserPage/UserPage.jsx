@@ -12,9 +12,7 @@ import style from "./UserPage.module.css";
 const UserPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { methodAuth, isAuth, user} = useSelector(
-    (state) => state.auth
-  );
+  const { methodAuth, isAuth, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (isAuth && methodAuth === "social") dispatch(fetchSocialAuth());
