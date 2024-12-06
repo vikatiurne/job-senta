@@ -5,9 +5,7 @@ import Builder from "../Main/Builder/Builder.jsx";
 import BuilderLayout from "../../../hoc/layout/builderLayout/BuilderLayout.jsx";
 import NewResume from "../Main/NewResume/NewResume.jsx";
 
-
 const UserRoutes = () => {
-
   return (
     <Routes>
       <Route path="home" element={<UserHome />} />

@@ -7,18 +7,62 @@ import Registration from "../pages/Autorization/Registartion/Registration.jsx";
 import PasswordRecovery from "../pages/Autorization/PasswordRecovery/PasswordRecovery.jsx";
 import NewPassword from "../pages/Autorization/NewPassword/NewPassword.jsx";
 import UserPage from "../pages/UserPage/UserPage.jsx";
+import UnprotectedRouter from "./hoc/UnprotectedRouter.jsx";
+import ProtectedRouter from "./hoc/ProtectedRoute.jsx";
 
 const Router = () => {
   const location = useLocation();
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
-        <Route index element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/forgot-password" element={<PasswordRecovery />} />
-        <Route path="/recovery-password/:link" element={<NewPassword />} />
-        <Route path="/user/*" element={<UserPage />} />
+        <Route
+          index
+          element={
+            <UnprotectedRouter>
+              <HomePage />
+            </UnprotectedRouter>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <UnprotectedRouter>
+              <Login />
+            </UnprotectedRouter>
+          }
+        />
+        <Route
+          path="/registration"
+          element={
+            <UnprotectedRouter>
+              <Registration />
+            </UnprotectedRouter>
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <UnprotectedRouter>
+              <PasswordRecovery />
+            </UnprotectedRouter>
+          }
+        />
+        <Route
+          path="/recovery-password/:link"
+          element={
+            <UnprotectedRouter>
+              <NewPassword />
+            </UnprotectedRouter>
+          }
+        />
+        <Route
+          path="/user/*"
+          element={
+            <ProtectedRouter>
+              <UserPage />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );

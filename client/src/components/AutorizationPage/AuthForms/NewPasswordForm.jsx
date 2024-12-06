@@ -61,7 +61,6 @@ const NewPasswordForm = () => {
             touched={touched}
           />
 
-          {/* <Link to="/"> */}
           <Button
             type="submit"
             className={styles.recoveryBtn}
@@ -69,7 +68,7 @@ const NewPasswordForm = () => {
           >
             {textData["/recovery-password"]["sendBtn"]}
           </Button>
-          {/* </Link> */}
+   
           <div className={styles.alernativText}>
             <Link to="../login">Back to sing in</Link>
           </div>

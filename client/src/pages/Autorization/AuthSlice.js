@@ -128,13 +128,15 @@ const authSlice = createSlice({
     },
     resetAuthState: (state) => {
       console.log("Resetting auth state");
-      state.user = {};
-      state.isAuth = false;
-      state.isRemember = false;
-      state.error = null;
-      state.methodAuth = null;
-      state.status = "idle";
-      state.msg = null;
+      if (!state.isRemember && state.methodAuth === "app") {
+        state.user = {};
+        state.isAuth = false;
+        state.isRemember = false;
+        state.error = null;
+        state.methodAuth = null;
+        state.status = "idle";
+        state.msg = null;
+      }
     },
   },
   extraReducers(builder) {
