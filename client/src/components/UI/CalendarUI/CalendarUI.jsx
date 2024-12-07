@@ -14,7 +14,7 @@ const CalendarUI = (props) => {
   return (
     <>
       <Scroll
-        height='175px'>
+        height='198px'>
         <Calendar
           next2Label={null}
           prev2Label={null}
