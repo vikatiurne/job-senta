@@ -1,9 +1,9 @@
-const nodemailer = require("nodemailer");
-const authService = require("./authService");
+const nodemailer = require('nodemailer');
+const authService = require('./authService');
 
 module.exports = class MailService {
   static transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: 'gmail',
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
     secure: true,
@@ -103,23 +103,23 @@ module.exports = class MailService {
     const mailOptions = {
       from: process.env.SMTP_USER,
       to,
-      subject: "Changing the password on Jobsenta",
+      subject: 'Changing the password on Jobsenta',
       html: htmlContent,
       attachments: [
         {
-          filename: "shield.png",
-          path: "static/shield.png",
-          cid: "loock",
+          filename: 'shield.png',
+          path: 'static/shield.png',
+          cid: 'loock',
         },
       ],
     };
 
     try {
       await this.transporter.sendMail(mailOptions);
-      console.log("Email sent successfully");
+      console.log('Email sent successfully');
     } catch (error) {
-      console.error("Error sending email:", error);
-      throw new Error("Failed to send email");
+      console.error('Error sending email:', error);
+      throw new Error('Failed to send email');
     }
   }
 };
