@@ -1,19 +1,19 @@
-import { Link } from "react-router-dom";
-import {useDispatch} from 'react-redux'
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import footerLogo from "../../../assets/logo_white.svg";
-import { ReactComponent as Twitter } from "../../../assets/IconsTwitter.svg";
-import { ReactComponent as Instagrm } from "../../../assets/IconsInstagrm.svg";
-import { ReactComponent as Facebook } from "../../../assets/IconsFacebook.svg";
+import footerLogo from '../../../assets/logo_white.svg';
+import { ReactComponent as Twitter } from '../../../assets/IconsTwitter.svg';
+import { ReactComponent as Instagrm } from '../../../assets/IconsInstagrm.svg';
+import { ReactComponent as Facebook } from '../../../assets/IconsFacebook.svg';
 
-import QuestionForm from "../../AutorizationPage/AuthForms/QuestionForm";
+import QuestionForm from '../../AutorizationPage/AuthForms/QuestionForm';
 
-import styles from "./Footer.module.css";
-import { setPage } from "../../../pages/HomePage/LogoutSlice";
+import styles from './Footer.module.css';
+import { setPage } from '../../../pages/HomePage/HomePageSlice';
 
 export default function Footer() {
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.footerContantContainer}>
       <div className={styles.footerContant}>
@@ -40,10 +40,18 @@ export default function Footer() {
         <div className={styles.footerContantElement}>
           <h2 className={styles.footerContantTitle}>Resource</h2>
           <div className={styles.linkContainer}>
-            <a href="#service" className={styles.link} onClick={()=>dispatch(setPage('builder'))}>
+            <a
+              href="#service"
+              className={styles.link}
+              onClick={() => dispatch(setPage('builder'))}
+            >
               Resume builder
             </a>
-            <a href="#service" className={styles.link} onClick={() => dispatch(setPage('analyzer'))}>
+            <a
+              href="#service"
+              className={styles.link}
+              onClick={() => dispatch(setPage('analyzer'))}
+            >
               Resume analyzer
             </a>
             <Link to="/registration" className={styles.link}>

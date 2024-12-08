@@ -146,6 +146,7 @@
   line-height: 32px;
   font-family: var(--Open-Sans);
   font-weight: 600;
+  text-transform: uppercase;
 }
 .footerPopupSubTitle,
 .footerPopupSubTitleLeave {

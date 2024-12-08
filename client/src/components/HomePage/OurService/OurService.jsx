@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Button from "../../UI/Button/Button.jsx";
+import Button from '../../UI/Button/Button.jsx';
 
-import { ReactComponent as File } from "../../../assets/file.svg";
-import { ReactComponent as Ai } from "../../../assets/ai.svg";
-import { ReactComponent as FileAi } from "../../../assets/fileAi.svg";
-import { ReactComponent as Plus } from "../../../assets/plus.svg";
-import { ReactComponent as Minus } from "../../../assets/minus.svg";
-import ResumeFirst from "../../../assets/exampe-resume-1.png";
-import ResumeSecond from "../../../assets/exampe-resume-2.png";
-import ResumeThree from "../../../assets/exampe-resume-3.png";
+import { ReactComponent as File } from '../../../assets/file.svg';
+import { ReactComponent as Ai } from '../../../assets/ai.svg';
+import { ReactComponent as FileAi } from '../../../assets/fileAi.svg';
+import { ReactComponent as Plus } from '../../../assets/plus.svg';
+import { ReactComponent as Minus } from '../../../assets/minus.svg';
+import ResumeFirst from '../../../assets/exampe-resume-1.png';
+import ResumeSecond from '../../../assets/exampe-resume-2.png';
+import ResumeThree from '../../../assets/exampe-resume-3.png';
 
-import { setPage } from "../../../pages/HomePage/LogoutSlice.js";
-import { useMedia } from "../../../hoc/useMedia/useMedia.js";
+import { setPage } from '../../../pages/HomePage/HomePageSlice.js';
+import { useMedia } from '../../../hoc/useMedia/useMedia.js';
 
-import style from "./OurService.module.css";
-import cn from "classnames";
+import style from './OurService.module.css';
+import cn from 'classnames';
 
 const OurService = () => {
   const content = useSelector((state) => state.homePage.resourcePage);
 
-  const resumeBuilder = "builder";
-  const analyzerAi = "analyzer";
+  const resumeBuilder = 'builder';
+  const analyzerAi = 'analyzer';
 
-  const isMediaQuery = useMedia("(max-width:480px)")
+  const isMediaQuery = useMedia('(max-width:480px)');
 
   const [activeContent, setActiveContent] = useState(content);
 
@@ -42,7 +42,11 @@ const OurService = () => {
     <section
       className={style.sectionOurService}
       id="service"
-      style={isMediaQuery?{ marginBottom: activeContent === "builder" ? "40px" : "100px" }:{ marginBottom: "125px" }}
+      style={
+        isMediaQuery
+          ? { marginBottom: activeContent === 'builder' ? '40px' : '100px' }
+          : { marginBottom: '125px' }
+      }
     >
       <h1 className={style.sectionOurServiceTitile}>
         How is our service useful?
@@ -118,7 +122,7 @@ const OurService = () => {
                 />
               </div>
               <h3 className={style.sectionOurServiceAnalysisTitle}>
-                <FileAi /> Summary analysis:{" "}
+                <FileAi /> Summary analysis:{' '}
               </h3>
               <div className={style.sectionOurServiceAnalysisPlus}>
                 <div>
