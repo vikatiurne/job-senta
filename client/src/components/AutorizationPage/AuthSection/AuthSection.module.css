@@ -62,6 +62,11 @@
   color: var(--gray);
 }
 
+@media (max-width:1100px) {
+  .authContainer{
+    margin-top: 80px;
+  }
+}
 @media (max-width: 640px) {
   .toggleAuth {
     text-align: center;
@@ -81,6 +86,7 @@
 
 @media (max-width: 390px) {
   .authContainer {
+    margin-top: 0;
     padding: 24px;
     text-align: left;
   }
