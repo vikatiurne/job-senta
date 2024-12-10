@@ -122,8 +122,20 @@ User.hasMany(Resume, {
 });
 Resume.belongsTo(User);
 
+Resume.hasOne(Target, { onDelete: "CASCADE" });
+Target.belongsTo(Resume);
+
+Resume.hasOne(ProfSummaries, { onDelete: "CASCADE" });
+ProfSummaries.belongsTo(Resume);
+
+Resume.hasOne(Skill, { onDelete: "CASCADE" });
+Skill.belongsTo(Resume);
+
+Resume.hasOne(Interest, { onDelete: "CASCADE" });
+Interest.belongsTo(Resume);
+
 Resume.hasOne(Contact, { onDelete: "CASCADE" });
-Contact.belongsToMany(Resume);
+Contact.belongsTo(Resume);
 
 Resume.hasMany(Project, { onDelete: "CASCADE" });
 Project.belongsTo(Resume);
@@ -154,6 +166,10 @@ module.exports = {
   User,
   Token,
   Resume,
+  Target,
+  ProfSummaries,
+  Skill,
+  Interest,
   Contact,
   Project,
   Work,
