@@ -79,9 +79,8 @@ class AuthService {
       lastName = profile._json.family_name || profile._json.name;
       email = profile.email;
     }
-    const { access_token } = params;
+    // const { access_token } = params;
     const randomPassword = passwordService.cryptoPassword(profile._json.name);
-
     const [user] = await User.findOrCreate({
       where: { email },
       defaults: {
@@ -92,13 +91,13 @@ class AuthService {
       },
     });
     const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
     const userData = {
       ...userDto,
-      accessToken: access_token,
-      refreshToken,
+      accessToken: tokens.accessToken,
+      refreshToken:tokens.refreshToken,
     };
-
-    await tokenService.saveToken(userDto.id, refreshToken, access_token);
+    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokens.accessToken);
     return userData;
   }
 
@@ -111,6 +110,7 @@ class AuthService {
       throw ApiError.unauthorizedError();
     }
     const userData = await tokenService.validateRefreshToken(refreshToken);
+    console.log("USERDATA",userData)
     const tokenFromDb = await tokenService.findToken(refreshToken);
 
     if (!tokenFromDb || !userData) {
@@ -153,6 +153,7 @@ class AuthService {
   async resetPassword(newPass, resetLink) {
     const userData = tokenService.validateResetToken(resetLink);
     let user = await User.findOne({ where: { resetLink } });
+    console.log("USER:",user, userData)
     if (!user || !userData) {
       throw ApiError.badRequest({
         title: 'User not found',
@@ -166,6 +167,13 @@ class AuthService {
     };
     user = _.extend(user, obj);
     await user.save();
+    const userDto = new UserDto(userData)
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(
+      userDto.id,
+      tokens.refreshToken,
+      tokens.accessToken
+    );
     return {
       title: 'CONGRATULATIONS!',
       text: 'Your password has been successfully changed! Now you can enter your personal account using new data.',

@@ -27,32 +27,15 @@ const Token = sequelize.define("token", {
 const Resume = sequelize.define("resume", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   info: { type: DataTypes.JSON, allowNull: true },
-  ifFavorite: { type: DataTypes.BOOLEAN, defaultValue: "false" },
-  ifArchive: { type: DataTypes.BOOLEAN, defaultValue: "false" },
-});
-
-const Target = sequelize.define("target", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   target: { type: DataTypes.STRING, unique: false },
-});
-const ProfSummaries = sequelize.define("profSummaries", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  profSummaries: { type: DataTypes.STRING, unique: false },
-});
-const Skill = sequelize.define("skill", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  skills: { type: DataTypes.ARRAY(DataTypes.STRING) },
-});
-const Interest = sequelize.define("interest", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  interests: { type: DataTypes.STRING, unique: false },
-});
-
-const Contact = sequelize.define("contact", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   email: { type: DataTypes.STRING, unique: false },
   phone: { type: DataTypes.STRING, allowNull: false },
   linkedin: { type: DataTypes.STRING, unique: false },
+  profSummaries: { type: DataTypes.STRING, unique: false },
+  skills: { type: DataTypes.ARRAY(DataTypes.STRING) },
+  interests: { type: DataTypes.STRING, unique: false },
+  ifFavorite: { type: DataTypes.BOOLEAN, defaultValue: "false" },
+  ifArchive: { type: DataTypes.BOOLEAN, defaultValue: "false" },
 });
 
 const Project = sequelize.define("project", {
@@ -110,67 +93,45 @@ const AiAnalyse = sequelize.define("aiAnalise", {
   score: { type: DataTypes.STRING },
   cons: { type: DataTypes.STRING },
   recommended: { type: DataTypes.STRING },
-});
+})
 
 User.hasOne(Token, { onDelete: "CASCADE" });
 Token.belongsTo(User);
 
-User.hasMany(Resume, {
-  as: "resumes",
-  onDelete: "CASCADE",
-  foreignKey: "userId",
-});
-Resume.belongsTo(User);
+User.hasMany(Resume, { as: 'resumes', onDelete: 'CASCADE', foreignKey: 'userId' })
+Resume.belongsTo(User)
 
-Resume.hasOne(Target, { onDelete: "CASCADE" });
-Target.belongsTo(Resume);
+Resume.hasMany(Project, { onDelete: "CASCADE" })
+Project.belongsTo(Resume)
 
-Resume.hasOne(ProfSummaries, { onDelete: "CASCADE" });
-ProfSummaries.belongsTo(Resume);
+Resume.hasMany(Work, { onDelete: "CASCADE" })
+Work.belongsTo(Resume)
 
-Resume.hasOne(Skill, { onDelete: "CASCADE" });
-Skill.belongsTo(Resume);
+Resume.hasMany(Education, { onDelete: "CASCADE" })
+Education.belongsTo(Resume)
 
-Resume.hasOne(Interest, { onDelete: "CASCADE" });
-Interest.belongsTo(Resume);
+Resume.hasMany(Certificate,{ onDelete: "CASCADE" })
+Certificate.belongsTo(Resume)
 
-Resume.hasOne(Contact, { onDelete: "CASCADE" });
-Contact.belongsTo(Resume);
+Resume.hasMany(Adward,{ onDelete: "CASCADE" })
+Adward.belongsTo(Resume)
 
-Resume.hasMany(Project, { onDelete: "CASCADE" });
-Project.belongsTo(Resume);
+Resume.hasMany(Volunteering,{ onDelete: "CASCADE" })
+Volunteering.belongsTo(Resume)
 
-Resume.hasMany(Work, { onDelete: "CASCADE" });
-Work.belongsTo(Resume);
+Resume.hasMany(Publication,{ onDelete: "CASCADE" })
+Publication.belongsTo(Resume)
 
-Resume.hasMany(Education, { onDelete: "CASCADE" });
-Education.belongsTo(Resume);
+Resume.hasOne(AiAnalyse,{ onDelete: "CASCADE" })
+AiAnalyse.belongsTo(Resume)
 
-Resume.hasMany(Certificate, { onDelete: "CASCADE" });
-Certificate.belongsTo(Resume);
 
-Resume.hasMany(Adward, { onDelete: "CASCADE" });
-Adward.belongsTo(Resume);
-
-Resume.hasMany(Volunteering, { onDelete: "CASCADE" });
-Volunteering.belongsTo(Resume);
-
-Resume.hasMany(Publication, { onDelete: "CASCADE" });
-Publication.belongsTo(Resume);
-
-Resume.hasOne(AiAnalyse, { onDelete: "CASCADE" });
-AiAnalyse.belongsTo(Resume);
 
 module.exports = {
   UserLanding,
   User,
   Token,
   Resume,
-  Target,
-  ProfSummaries,
-  Skill,
-  Interest,
-  Contact,
   Project,
   Work,
   Education,
@@ -178,5 +139,5 @@ module.exports = {
   Adward,
   Volunteering,
   Publication,
-  AiAnalyse,
+  AiAnalyse
 };
