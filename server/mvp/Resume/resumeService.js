@@ -79,6 +79,7 @@ class ResumeService {
   }
 
   async getAll(userId, page, limit, sort) {
+    
     page = page || 1;
     limit = limit || 10;
     let offset = (page - 1) * limit;
@@ -116,18 +117,14 @@ class ResumeService {
       subQuery: false,
     };
 
-    await Resume.findAndCountAll({
+    const resumes = await Resume.findAndCountAll({
       where: { userId },
       ...queries,
-      include: [
-        {
-          model: Resume,
-          attributes: ["target", "ifFavorite", "createdAt", "updatedAt"],
-          separate: true,
-        },
-      ],
+      attributes: ["target", "ifFavorite", "createdAt", "updatedAt"],
       distinct: true,
     });
+
+    return resumes
   }
 }
 
