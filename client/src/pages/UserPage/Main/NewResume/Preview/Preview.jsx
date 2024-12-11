@@ -9,7 +9,7 @@ import styles from "./Preview.module.css";
 
 const Preview = ({ active }) => {
   const isMediaQuery = useMedia("(max-width:1024px)");
-  const info = useSelector((state) => state.createResume.info);
+  const info = useSelector((state) => state.resume.info);
   const userName = useSelector((state) => state.auth.user)
 
 

@@ -128,6 +128,8 @@ const authSlice = createSlice({
     },
     resetAuthState: (state) => {
       if (!state.isRemember && state.methodAuth === 'app') {
+        localStorage.removeItem('_jobseeker');
+        sessionStorage.removeItem('_jobseeker');
         state.user = {};
         state.isAuth = false;
         state.isRemember = false;
