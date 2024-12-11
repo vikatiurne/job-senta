@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { createResumeReducer, homePageReducer, authReducer } from "../pages";
+import { resumeReducer, homePageReducer, authReducer } from "../pages";
 
 export const store = configureStore({
   reducer: {
-    createResume: createResumeReducer,
+    resume: resumeReducer,
     homePage: homePageReducer,
     auth: authReducer,
   },

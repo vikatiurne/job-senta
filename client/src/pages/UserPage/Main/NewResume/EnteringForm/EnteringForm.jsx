@@ -9,7 +9,7 @@ import arrow from "../../../../../assets/user_page/builder/arrow-outlined.svg";
 
 import { initialValues, schemas } from "../helper";
 import { useMedia } from "../../../../../hoc/useMedia/useMedia";
-import { setInfo } from "../NewResumeSlice";
+import { fetchCreateResume, setInfo } from "../NewResumeSlice";
 
 import 
  { Target,
@@ -35,6 +35,7 @@ const EnteringForm = () => {
   const submitFormHandler = (values) => {
     //отправка формы на сервер сохранение в бд
     console.log("Sucsess", values);
+    dispatch(fetchCreateResume(values))
   };
 
   return (

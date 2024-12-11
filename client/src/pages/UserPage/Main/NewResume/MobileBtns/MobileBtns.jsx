@@ -24,7 +24,7 @@ const MobileBtns = () => {
   const [preview, setPreview] = useState(false);
   const [emptyResume, setEmptyResume] = useState(true);
 
-  const info = useSelector((state) => state.createResume.info);
+  const info = useSelector((state) => state.resume.info);
 
   useEffect(() => {
     setEmptyResume(!Object.keys(info).length);
