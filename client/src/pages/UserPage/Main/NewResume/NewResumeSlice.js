@@ -3,7 +3,12 @@ import ResumeServices from "../../../../http/services/ResumeServices";
 
 const initialState = {
   info: {},
+  resumes:[],
   status: "idle",
+  limit: 10,
+  page: 1,
+  sort: ""
+
 };
 
 export const fetchCreateResume = createAsyncThunk(
@@ -21,11 +26,9 @@ export const fetchCreateResume = createAsyncThunk(
 );
 export const fetchGetAllResume = createAsyncThunk(
   'resume/fetchGetAllResume',
-  async ({userId, page, limit, sort}, { rejectWithValue }) => {
+  async ({ page, limit, sort }, { rejectWithValue }) => {
     try {
-      const res = await ResumeServices.getAllResume(userId, page, limit, sort);
-      console.log(res)
-      // return await ResumeServices.createResume(values);
+      return await ResumeServices.getAllResume(page, limit, sort);
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data);
@@ -42,6 +45,11 @@ const resumeReducer = createSlice({
         state.info = payload;
       },
     },
+    setSort: {
+      reducer(state, { payload }) {
+        state.sort = payload;
+      },
+    },
   },
   extraReducers(builder) {
     builder
@@ -54,8 +62,19 @@ const resumeReducer = createSlice({
       .addCase(fetchCreateResume.rejected, (state, { payload }) => {
       state.status = "error"
     })
+      .addCase(fetchGetAllResume.pending, (state, { payload }) => {
+      state.status = "loading"
+    })
+      .addCase(fetchGetAllResume.fulfilled, (state, { payload }) => {
+        console.log(payload)
+        state.status = "success"
+        state.resumes = payload.data.rows
+    })
+      .addCase(fetchGetAllResume.rejected, (state, { payload }) => {
+      state.status = "error"
+    })
   }
 });
 
-export const { setInfo } = resumeReducer.actions;
+export const { setInfo, setSort } = resumeReducer.actions;
 export default resumeReducer.reducer;
