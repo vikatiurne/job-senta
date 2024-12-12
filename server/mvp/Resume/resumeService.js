@@ -120,11 +120,18 @@ class ResumeService {
     const resumes = await Resume.findAndCountAll({
       where: { userId },
       ...queries,
-      attributes: ["target", "ifFavorite", "createdAt", "updatedAt"],
+      attributes: ["id","target", "ifFavorite", "createdAt", "updatedAt"],
       distinct: true,
     });
 
     return resumes
+  }
+
+  async getOne(id) {
+    const resume = await Resume.findOne({
+      where: { id },
+    });
+    return resume.info
   }
 }
 

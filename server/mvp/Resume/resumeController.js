@@ -15,11 +15,21 @@ class ResumeController {
 
   async getAll(req, res, next) {
     const { id } = req.user;
-      const { page, limit, sort } = req.query;
+    const { page, limit, sort } = req.query;
 
     try {
       const resumes = await resumeService.getAll(id, page, limit, sort);
       return res.json(resumes);
+    } catch (error) {
+      next(ApiErrors.badRequest(error.message));
+    }
+  }
+
+  async getOne(req, res,next) {
+    const { id } = req.params;
+    try {
+      const resume = await resumeService.getOne(id);
+      return res.json(resume);
     } catch (error) {
       next(ApiErrors.badRequest(error.message));
     }

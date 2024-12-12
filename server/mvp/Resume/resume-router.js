@@ -6,5 +6,6 @@ const router = new Router();
 
 router.post('/create', authMiddleware, resumeController.create)
 router.get('/getAll', authMiddleware, resumeController.getAll)
+router.get('/getOne/:id', resumeController.getOne)
 
 module.exports = router;
