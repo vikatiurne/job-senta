@@ -9,4 +9,7 @@ export default class ResumeServices {
         params: { page, limit, sort },
       });
   }
+  static async getOneResume(resumeId) {
+    return await $api.get(`api/resumes/getOne/${resumeId}`);
+  }
 }

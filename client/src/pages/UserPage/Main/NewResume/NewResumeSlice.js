@@ -35,6 +35,19 @@ export const fetchGetAllResume = createAsyncThunk(
     }
   }
 );
+export const fetchGetOneResume = createAsyncThunk(
+  'resume/fetchGetOneResume',
+  async ( resumeId , { rejectWithValue }) => {
+    try {
+      const res = await ResumeServices.getOneResume(resumeId);
+      console.log(res)
+      // return await ResumeServices.getOneResume(resumeId);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const resumeReducer = createSlice({
   name: "resume",
@@ -71,6 +84,16 @@ const resumeReducer = createSlice({
         state.resumes = payload.data.rows
     })
       .addCase(fetchGetAllResume.rejected, (state, { payload }) => {
+      state.status = "error"
+    })
+      .addCase(fetchGetOneResume.pending, (state, { payload }) => {
+      state.status = "loading"
+    })
+      .addCase(fetchGetOneResume.fulfilled, (state, { payload }) => {
+        // console.log(payload)
+        state.status = "success"
+    })
+      .addCase(fetchGetOneResume.rejected, (state, { payload }) => {
       state.status = "error"
     })
   }

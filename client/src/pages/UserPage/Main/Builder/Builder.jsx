@@ -13,7 +13,7 @@ import { ReactComponent as Edit } from "../../../../assets/user_page/builder/Act
 import { ReactComponent as Clone } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/bx_duplicate.svg";
 
 import styles from "./Builder.module.css";
-import { fetchGetAllResume } from "../NewResume/NewResumeSlice";
+import { fetchGetAllResume, fetchGetOneResume } from "../NewResume/NewResumeSlice";
 import DateServices from "../../../../utils/DateServices";
 
 export default function Builder() {
@@ -45,6 +45,9 @@ export default function Builder() {
     !!e.target.value ? setLimit(Number(e.target.value)) : setLimit(10);
   };
 
+  const clickResumeHandler = (id) => {
+    dispatch(fetchGetOneResume(id))
+  }
   const render = (
     <>
       <div
@@ -77,7 +80,7 @@ export default function Builder() {
           }}
         >
           <input type="checkbox" name="" id="" className={styles.checkBox} />
-          <p>{item.target}</p>
+          <p onClick = {()=>clickResumeHandler(item.id)}>{item.target}</p>
           <p>{DateServices.getDate(item.createdAt,"long") }</p>
           <p>{DateServices.getDate(item.updatedAt, "long")}</p>
         </div>
