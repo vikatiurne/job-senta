@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../../../../components/UI/Button/Button";
@@ -13,17 +13,22 @@ import { ReactComponent as Edit } from "../../../../assets/user_page/builder/Act
 import { ReactComponent as Clone } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/bx_duplicate.svg";
 
 import styles from "./Builder.module.css";
-import { fetchGetAllResume, fetchGetOneResume } from "../NewResume/NewResumeSlice";
+import {
+  fetchGetAllResume,
+  fetchGetOneResume,
+} from "../NewResume/NewResumeSlice";
 import DateServices from "../../../../utils/DateServices";
 
 export default function Builder() {
   const [limit, setLimit] = useState(10);
 
   // вытаскиваем из стора тип сортировки
-  const { sort } = useSelector((state) => state.resume);
-  const { resumes } = useSelector((state) => state.resume);
+  const { sort, resumes } = useSelector(
+    (state) => state.resume
+  );
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // при загрузке страницы делаем запрос на получение всех резюмешек из бд
   useEffect(() => {
@@ -46,8 +51,11 @@ export default function Builder() {
   };
 
   const clickResumeHandler = (id) => {
-    dispatch(fetchGetOneResume(id))
-  }
+    dispatch(fetchGetOneResume(id));
+    navigate(`edit/${id}`)
+  };
+
+  
   const render = (
     <>
       <div
@@ -80,8 +88,8 @@ export default function Builder() {
           }}
         >
           <input type="checkbox" name="" id="" className={styles.checkBox} />
-          <p onClick = {()=>clickResumeHandler(item.id)}>{item.target}</p>
-          <p>{DateServices.getDate(item.createdAt,"long") }</p>
+          <p onClick={() => clickResumeHandler(item.id)}>{item.target}</p>
+          <p>{DateServices.getDate(item.createdAt, "long")}</p>
           <p>{DateServices.getDate(item.updatedAt, "long")}</p>
         </div>
       ))}

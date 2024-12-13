@@ -13,7 +13,9 @@ const UserRoutes = () => {
           <Route path="builder" element={<BuilderLayout />}>
             <Route index element={<Builder />} />
             <Route path="archived" element={<ArhivResume/>} />
-            <Route path="create" element={<NewResume />} />
+          <Route path="create" element={<NewResume />} />
+          <Route path="edit/:id" element={<NewResume />} />
+          
           </Route>
             {/* <Route path="analyse" element={<Analyse/>}/>
               <Route path='contact' />
