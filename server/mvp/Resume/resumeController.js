@@ -34,6 +34,21 @@ class ResumeController {
       next(ApiErrors.badRequest(error.message));
     }
   }
+
+  async update(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { info } = req.body;
+      const updatedCategory = await Category.update(
+        { name: categoryName },
+        { where: { id } }
+      );
+      return res.json(updatedCategory);
+    } catch (error) {
+      next(ApiError.badRequest(error.message));
+    }
+  }
+  
 }
 
 module.exports = new ResumeController();

@@ -133,6 +133,15 @@ class ResumeService {
     });
     return resume.info
   }
+
+  async update(id, info) {
+    const updatedResume = await Resume.update(
+      { info: info },
+      { where: { id } }
+    );
+    
+    return updatedResume
+  }
 }
 
 module.exports = new ResumeService();
