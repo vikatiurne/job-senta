@@ -28,6 +28,7 @@ import {
 } from "./FormComponents/index";
 
 import styles from "./EnteringForm.module.css";
+import ControlBtns from "./ControlBtns/ControlBtns";
 
 const EnteringForm = () => {
   const [initialFormValues, setInitialFormValues] = useState(
@@ -70,10 +71,10 @@ const EnteringForm = () => {
     >
       {({ values, touched, errors, field }) => (
         <Form className={styles.form} onBlur={() => dispatch(setInfo(values))}>
-          <Button type="submit" className={styles.back}>
+          {/* <Button type="submit" className={styles.back}>
             <img src={arrow} alt="arrow" />
             <p>Back</p>
-          </Button>
+          </Button> */}
           <div className={styles.enteringContainer}>
             <h4 className={styles.title}>Entering information</h4>
 
@@ -101,6 +102,7 @@ const EnteringForm = () => {
                 touched={touched}
                 errors={errors}
               />
+              <ControlBtns/>
             </Scroll>
           </div>
         </Form>

@@ -12,4 +12,7 @@ export default class ResumeServices {
   static async getOneResume(resumeId) {
     return await $api.get(`api/resumes/getOne/${resumeId}`);
   }
+  static async updateResume(resumeId,info) {
+    return await $api.get(`api/resumes/update/${resumeId}`, {info});
+  }
 }
