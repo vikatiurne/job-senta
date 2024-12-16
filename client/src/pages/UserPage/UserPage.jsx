@@ -12,6 +12,7 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const { methodAuth, isAuth, } = useSelector((state) => state.auth);
 
+
   useEffect(() => {
     if (methodAuth === "social") dispatch(fetchSocialAuth());
   }, [isAuth, methodAuth, dispatch]);

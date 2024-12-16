@@ -41,6 +41,7 @@
   align-items: center;
   border-radius: 20px;
   border: 2px solid var(--brown);
+  background-color: var(--white);
   cursor: pointer;
 }
 .exportMob,

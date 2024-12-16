@@ -1,0 +1,38 @@
+.btnsContainer{
+    margin-bottom: 24px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+.delete, .save{
+    padding: 8px 45px;
+    border-radius: 20px;
+    font-family: var(--montserrat);
+    font-size: 22px;
+    line-height: 32px;
+}
+.delete{
+    color: var(--brown);
+    border: 1px solid var(--brown);
+    transition: all 0.3s ease-in;
+}
+.delete:hover{
+    color: var(--brown-hover);
+    border-color: var(--brown-hover);
+}
+.delete:focus{
+    color: var(--brown-focused);
+    border-color: var(--brown-focused);
+}
+.save{
+    color: var(--green);
+    border: 1px solid var(--green);
+}
+.save:hover{
+    color: var(--green-hover);
+    border: 1px solid var(--green-hover);
+}
+.save:focus{
+    color: var(--light-green);
+    border: 1px solid var(--light-green);
+}

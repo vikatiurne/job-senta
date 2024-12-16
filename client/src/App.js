@@ -1,11 +1,12 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import RootRouter from "./router/Router.jsx";
+import RootRouter from './router/Router.jsx';
 import {
   fetchAutoLogin,
+  fetchSocialAuth,
   resetAuthState,
-} from "./pages/Autorization/AuthSlice.js";
+} from './pages/Autorization/AuthSlice.js';
 
 function App() {
   const { methodAuth } = useSelector((state) => state.auth);
@@ -13,7 +14,7 @@ function App() {
 
   // обнуление stote после закрытия браузера
   useEffect(() => {
-    const userData = localStorage.getItem("_jobseeker_auth_state");
+    const userData = localStorage.getItem('_jobseeker_auth_state');
     if (!userData) {
       dispatch(resetAuthState());
     }
@@ -21,16 +22,16 @@ function App() {
       dispatch(resetAuthState());
     };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [dispatch]);
 
   useEffect(() => {
-    const token = localStorage.getItem("_jobseeker");
-    if (!!token && methodAuth === "app") {
+    const token = localStorage.getItem('_jobseeker');
+    if (!!token && methodAuth === 'app') {
       dispatch(fetchAutoLogin());
     }
   }, [dispatch, methodAuth]);

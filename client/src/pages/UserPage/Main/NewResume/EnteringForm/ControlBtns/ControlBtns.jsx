@@ -1,11 +1,13 @@
 import React from 'react'
 import Button from '../../../../../../components/UI/Button/Button'
 
-const ControlBtns = () => {
+import styles from "./ControlBtns.module.css"
+
+const ControlBtns = ({type, reset}) => {
   return (
-    <div>
-        <Button>Delete</Button>
-        <Button>Save</Button>
+    <div className={styles.btnsContainer}>
+        <Button type="button" className={styles.delete} onClick={reset}>Delete</Button>
+        <Button className={styles.save}>Save</Button>
     </div>
   )
 }

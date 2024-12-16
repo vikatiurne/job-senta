@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Button from "../../../../components/UI/Button/Button";
-import BuilderDropDown from "../Builder/BuilderDropDown/BuilderDropDown";
-import ScoreResumeCircle from "../UserHome/TopResume/ScoreResumeCircle/ScoreResumeCircle";
+import Button from '../../../../components/UI/Button/Button';
+import BuilderDropDown from '../Builder/BuilderDropDown/BuilderDropDown';
+import ScoreResumeCircle from '../UserHome/TopResume/ScoreResumeCircle/ScoreResumeCircle';
 
-import { ReactComponent as Remove } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/pajamas_remove-all.svg";
-import { ReactComponent as Block } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/majesticons_lock-line.svg";
-import { ReactComponent as Edit } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg";
-import { ReactComponent as Clone } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/bx_duplicate.svg";
+import { ReactComponent as Remove } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/pajamas_remove-all.svg';
+import { ReactComponent as Block } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/majesticons_lock-line.svg';
+import { ReactComponent as Edit } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg';
+import { ReactComponent as Clone } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/bx_duplicate.svg';
 
-import styles from "./Builder.module.css";
+import styles from './Builder.module.css';
 import {
   fetchGetAllResume,
   fetchGetOneResume,
-} from "../NewResume/NewResumeSlice";
-import DateServices from "../../../../utils/DateServices";
+} from '../NewResume/NewResumeSlice';
+import DateServices from '../../../../utils/DateServices';
+import Loader from '../../../../components/UI/Loader/Loader';
 
 export default function Builder() {
   const [limit, setLimit] = useState(10);
 
   // вытаскиваем из стора тип сортировки
-  const { sort, resumes } = useSelector(
-    (state) => state.resume
-  );
+  const { sort, resumes, getallstatus } = useSelector((state) => state.resume);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,14 +35,14 @@ export default function Builder() {
   }, [dispatch, limit, sort]);
 
   const filter = [
-    { title: "All resumes", value: "" },
-    { title: "From A to Z", value: "target_A-Z" },
-    { title: "From Z to A", value: "target_Z-A" },
-    { title: "up Created", value: "createdAt_ASC" },
-    { title: "down Created", value: "createdAt_DESC" },
-    { title: "up Last edit", value: "updatedAt_ASC" },
-    { title: "down Last edit", value: "updatedAt_DESC" },
-    { title: "Favorite", value: "favorite" },
+    { title: 'All resumes', value: '' },
+    { title: 'From A to Z', value: 'target_A-Z' },
+    { title: 'From Z to A', value: 'target_Z-A' },
+    { title: 'up Created', value: 'createdAt_ASC' },
+    { title: 'down Created', value: 'createdAt_DESC' },
+    { title: 'up Last edit', value: 'updatedAt_ASC' },
+    { title: 'down Last edit', value: 'updatedAt_DESC' },
+    { title: 'Favorite', value: 'favorite' },
   ];
 
   const limitHandler = (e) => {
@@ -52,25 +51,24 @@ export default function Builder() {
 
   const clickResumeHandler = (id) => {
     dispatch(fetchGetOneResume(id));
-    navigate(`edit/${id}`)
+    navigate(`edit/${id}`);
   };
 
-  
   const render = (
     <>
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "24px",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '24px',
+          alignItems: 'center',
         }}
       >
         <input type="checkbox" name="" id="" className={styles.checkBox} />
         <p>Resume Title</p>
         <p>Creation date</p>
         <p>Edit date</p>
-        <BuilderDropDown title={"Filter"} childrenText={filter} />
+        <BuilderDropDown title={'Filter'} childrenText={filter} />
       </div>
       <div className={styles.limit}>
         <p>Show:</p>
@@ -81,21 +79,21 @@ export default function Builder() {
         <div
           key={uuidv4()}
           style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "24px",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '24px',
+            alignItems: 'center',
           }}
         >
           <input type="checkbox" name="" id="" className={styles.checkBox} />
           <p onClick={() => clickResumeHandler(item.id)}>{item.target}</p>
-          <p>{DateServices.getDate(item.createdAt, "long")}</p>
-          <p>{DateServices.getDate(item.updatedAt, "long")}</p>
+          <p>{DateServices.getDate(item.createdAt, 'long')}</p>
+          <p>{DateServices.getDate(item.updatedAt, 'long')}</p>
         </div>
       ))}
     </>
   );
-  return render;
+  return getallstatus === 'loading' ? <Loader /> : render;
   // <div className={styles.container}>
   //   <div className={styles.bilderContantContainerNav}>
   //       <Link to={''} className={styles.bilderNavLinkEl}>

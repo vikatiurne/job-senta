@@ -1,3 +1,4 @@
+const { where } = require("../../dbAdmin");
 const {
   Resume,
   Project,
@@ -7,6 +8,7 @@ const {
   Adward,
   Volunteering,
   Publication,
+  AiAnalyse,
 } = require("../../models/models");
 
 class ResumeService {
@@ -19,6 +21,11 @@ class ResumeService {
       await resume[associateMethod](models);
     }
   }
+
+  async updateRelatedTables(resumeId, model){
+    await model.update({where:{resumeId}})
+  }
+
 
   async create(userId, resumeData) {
     const resume = await Resume.create({
@@ -139,7 +146,21 @@ class ResumeService {
       { info: info },
       { where: { id } }
     );
-    
+    await this.updateRelatedTables(Project,id)
+    await this.updateRelatedTables(Work,id)
+    await this.updateRelatedTables(Education,id)
+    await this.updateRelatedTables(Certificate,id)
+    await this.updateRelatedTables(Adward,id)
+    await this.updateRelatedTables(Volunteering,id)
+    await this.updateRelatedTables(Publication,id)
+    // await Project.update({where:{resumeId:id}})
+    // await Work.update({where:{resumeId:id}})
+    // await Education.update({where:{resumeId:id}})
+    // await Certificate.update({where:{resumeId:id}})
+    // await Adward.update({where:{resumeId:id}})
+    // await Volunteering.update({where:{resumeId:id}})
+    // await Publication.update({where:{resumeId:id}})
+    console.log("updatedResume:", updatedResume)
     return updatedResume
   }
 }

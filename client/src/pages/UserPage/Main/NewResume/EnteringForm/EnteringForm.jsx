@@ -69,12 +69,8 @@ const EnteringForm = () => {
         dispatch(setInfo({}));
       }}
     >
-      {({ values, touched, errors, field }) => (
+      {({ values, touched, errors, field, resetForm }) => (
         <Form className={styles.form} onBlur={() => dispatch(setInfo(values))}>
-          {/* <Button type="submit" className={styles.back}>
-            <img src={arrow} alt="arrow" />
-            <p>Back</p>
-          </Button> */}
           <div className={styles.enteringContainer}>
             <h4 className={styles.title}>Entering information</h4>
 
@@ -102,7 +98,7 @@ const EnteringForm = () => {
                 touched={touched}
                 errors={errors}
               />
-              <ControlBtns/>
+              <ControlBtns reset={resetForm}/>
             </Scroll>
           </div>
         </Form>

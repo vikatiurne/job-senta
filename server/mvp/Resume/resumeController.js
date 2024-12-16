@@ -39,13 +39,10 @@ class ResumeController {
     try {
       const { id } = req.params;
       const { info } = req.body;
-      const updatedCategory = await Category.update(
-        { name: categoryName },
-        { where: { id } }
-      );
-      return res.json(updatedCategory);
+      const updatedResume = await resumeService.update(id,info)
+      return res.json(updatedResume);
     } catch (error) {
-      next(ApiError.badRequest(error.message));
+      next(ApiErrors.badRequest(error.message));
     }
   }
   

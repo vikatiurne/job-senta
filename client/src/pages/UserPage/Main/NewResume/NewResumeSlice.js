@@ -5,6 +5,7 @@ const initialState = {
   info: {},
   resumes: [{}],
   isEdit: false,
+  status: "idle",
   getonestatus: "idle",
   getallstatus: "idle",
   limit: 10,
