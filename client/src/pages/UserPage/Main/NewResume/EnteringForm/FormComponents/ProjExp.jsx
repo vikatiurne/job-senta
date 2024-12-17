@@ -10,11 +10,11 @@ const ProjExp = ({ errors }) => {
       blockName="projExp"
       labelBlock="Project Experience"
       errors={errors}
-      // initial={{
-      //   name: "",
-      //   role: "",
-      //   link: "",
-      // }}
+      initial={{
+        name: "",
+        role: "",
+        link: "",
+      }}
       fields={[
         {
           name: "name",

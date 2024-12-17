@@ -17,9 +17,7 @@ export const fetchCreateResume = createAsyncThunk(
   "resume/fetchCreateResume",
   async (values, { rejectWithValue }) => {
     try {
-      const res = await ResumeServices.createResume(values);
-      console.log(res);
-      // return await ResumeServices.createResume(values);
+      return await ResumeServices.createResume(values);
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data);
@@ -42,6 +40,40 @@ export const fetchGetOneResume = createAsyncThunk(
   async (resumeId, { rejectWithValue }) => {
     try {
       return await ResumeServices.getOneResume(resumeId);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const fetchUpdateResume = createAsyncThunk(
+  "resume/fetchUpdateResume",
+  async ({ resumeId, values }, { rejectWithValue }) => {
+    try {
+      return await ResumeServices.updateResume(resumeId, values);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const fetchDeleteOneResume = createAsyncThunk(
+  "resume/fetchDeleteOneResume",
+  async (resumeId, { rejectWithValue }) => {
+    try {
+      return await ResumeServices.deleteOneResume(resumeId);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const fetchDeleteSeveralResume = createAsyncThunk(
+  "resume/fetchDeleteSeveralResume",
+  async (resumeIds, { rejectWithValue }) => {
+    console.log(resumeIds)
+    try {
+      return await ResumeServices.deleteSeveralResume(resumeIds);
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data);
@@ -77,6 +109,8 @@ const resumeReducer = createSlice({
       })
       .addCase(fetchGetAllResume.pending, (state, { payload }) => {
         state.getallstatus = "loading";
+        state.isEdit = false
+        localStorage.removeItem("_jobseeker_resume_isedit");
       })
       .addCase(fetchGetAllResume.fulfilled, (state, { payload }) => {
         console.log(payload);
@@ -93,12 +127,47 @@ const resumeReducer = createSlice({
         console.log(payload);
         state.getonestatus = "success";
         state.info = payload.data;
-        localStorage.setItem("_jobseeker_resume_isedit", true)
+        localStorage.setItem("_jobseeker_resume_isedit", true);
         state.isEdit = true;
       })
       .addCase(fetchGetOneResume.rejected, (state, { payload }) => {
         state.getonestatus = "error";
-      });
+      })
+      .addCase(fetchUpdateResume.pending, (state, { payload }) => {
+        state.getonestatus = "loading";
+      })
+      .addCase(fetchUpdateResume.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.getonestatus = "success";
+        state.info = payload.data;
+        localStorage.removeItem("_jobseeker_resume_isedit");
+        state.isEdit = false;
+      })
+      .addCase(fetchUpdateResume.rejected, (state, { payload }) => {
+        state.getonestatus = "error";
+      })
+      .addCase(fetchDeleteOneResume.pending, (state, { payload }) => {
+        // state.getonestatus = "loading";
+      })
+      .addCase(fetchDeleteOneResume.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        // state.getonestatus = "success";
+        state.info = payload.data;
+      })
+      .addCase(fetchDeleteOneResume.rejected, (state, { payload }) => {
+        // state.getonestatus = "error";
+      })
+      .addCase(fetchDeleteSeveralResume.pending, (state, { payload }) => {
+        // state.getonestatus = "loading";
+      })
+      .addCase(fetchDeleteSeveralResume.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        // state.getonestatus = "success";
+        state.info = payload.data;
+      })
+      .addCase(fetchDeleteSeveralResume.rejected, (state, { payload }) => {
+        // state.getonestatus = "error";
+      })
   },
 });
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../../../../../components/UI/Button/Button";
@@ -11,7 +11,11 @@ import arrow from "../../../../../assets/user_page/builder/arrow-outlined.svg";
 
 import { initialValues, schemas } from "../helper";
 import { useMedia } from "../../../../../hoc/useMedia/useMedia";
-import { fetchCreateResume, setInfo } from "../NewResumeSlice";
+import {
+  fetchCreateResume,
+  fetchUpdateResume,
+  setInfo,
+} from "../NewResumeSlice";
 
 import {
   Target,
@@ -29,6 +33,7 @@ import {
 
 import styles from "./EnteringForm.module.css";
 import ControlBtns from "./ControlBtns/ControlBtns";
+import DateServices from "../../../../../utils/DateServices";
 
 const EnteringForm = () => {
   const [initialFormValues, setInitialFormValues] = useState(
@@ -39,6 +44,7 @@ const EnteringForm = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const isMediaQuery = useMedia("(max-width:1024px)");
 
   useEffect(() => {
@@ -51,7 +57,9 @@ const EnteringForm = () => {
     if (!isEdit) {
       dispatch(fetchCreateResume(values));
     } else {
-     console.log('update');
+      const pathArr = pathname.split("/");
+      const resumeId = pathArr[pathArr.length - 1];
+      dispatch(fetchUpdateResume({ resumeId, values }));
     }
   };
 
@@ -62,8 +70,9 @@ const EnteringForm = () => {
       initialValues={initialFormValues}
       validationSchema={schemas.entering}
       enableReinitialize
-      onSubmit={(values, { resetForm }) => {
-        submitFormHandler(values);
+      onSubmit={async (values, { resetForm }) => {
+        const data = await DateServices.transformDateValues(values);
+        submitFormHandler(data);
         resetForm();
         navigate("/user/builder");
         dispatch(setInfo({}));
@@ -98,7 +107,7 @@ const EnteringForm = () => {
                 touched={touched}
                 errors={errors}
               />
-              <ControlBtns reset={resetForm}/>
+              <ControlBtns reset={resetForm} />
             </Scroll>
           </div>
         </Form>

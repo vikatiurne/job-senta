@@ -14,7 +14,7 @@ const Awards = ({errors}) => {
       nameAward: "",
       institutionAward: "",
       merit: "",
-      date: "",
+      date: null,
     }}
     errors={errors}
     fields={[

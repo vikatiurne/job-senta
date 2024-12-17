@@ -78,8 +78,8 @@ export const initialValues = {
       {
         companyName: "",
         position: "",
-        dateStart: "",
-        dateEnd: "",
+        dateStart: null,
+        dateEnd: null,
         responsibilities: "",
       },
     ],
@@ -87,16 +87,16 @@ export const initialValues = {
       {
         educName: "",
         specialty: "",
-        dateStart: "",
-        dateEnd: "",
+        dateStart: null,
+        dateEnd: null,
       },
     ],
     certif: [
       {
         certificateName: "",
         institution: "",
-        dateStart: "",
-        dateEnd: "",
+        dateStart: null,
+        dateEnd: null,
       },
     ],
     award: [
@@ -104,22 +104,22 @@ export const initialValues = {
         nameAward: "",
         institutionAward: "",
         merit: "",
-        date: "",
+        date: null,
       },
     ],
     voluntering: [
       {
         voluntering: "",
         obligations: "",
-        dateStart: "",
-        dateEnd: "",
+        dateStart: null,
+        dateEnd: null,
       },
     ],
     publ: [
       {
         publication: "",
         publicationLink: "",
-        date: "",
+        date: null,
       },
     ],
     skills: [],

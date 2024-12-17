@@ -12,7 +12,7 @@ const Publications = ({errors}) => {
     initial={{
       publication: "",
       publicationLink: "",
-      date: "",
+      date: null,
     }}
     errors={errors}
     fields={[

@@ -1,30 +1,34 @@
-import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import Button from '../../../../components/UI/Button/Button';
-import BuilderDropDown from '../Builder/BuilderDropDown/BuilderDropDown';
-import ScoreResumeCircle from '../UserHome/TopResume/ScoreResumeCircle/ScoreResumeCircle';
+import Button from "../../../../components/UI/Button/Button";
+import BuilderDropDown from "../Builder/BuilderDropDown/BuilderDropDown";
+import ScoreResumeCircle from "../UserHome/TopResume/ScoreResumeCircle/ScoreResumeCircle";
 
-import { ReactComponent as Remove } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/pajamas_remove-all.svg';
-import { ReactComponent as Block } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/majesticons_lock-line.svg';
-import { ReactComponent as Edit } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg';
-import { ReactComponent as Clone } from '../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/bx_duplicate.svg';
+import { ReactComponent as Remove } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/pajamas_remove-all.svg";
+import { ReactComponent as Block } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/majesticons_lock-line.svg";
+import { ReactComponent as Edit } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg";
+import { ReactComponent as Clone } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/bx_duplicate.svg";
 
-import styles from './Builder.module.css';
+import styles from "./Builder.module.css";
 import {
+  fetchDeleteOneResume,
+  fetchDeleteSeveralResume,
   fetchGetAllResume,
   fetchGetOneResume,
-} from '../NewResume/NewResumeSlice';
-import DateServices from '../../../../utils/DateServices';
-import Loader from '../../../../components/UI/Loader/Loader';
+} from "../NewResume/NewResumeSlice";
+import DateServices from "../../../../utils/DateServices";
+import Loader from "../../../../components/UI/Loader/Loader";
 
 export default function Builder() {
   const [limit, setLimit] = useState(10);
+  const [checkedItems, setCheckedItems] = useState({});
+  console.log(checkedItems)
 
   // вытаскиваем из стора тип сортировки
-  const { sort, resumes, getallstatus } = useSelector((state) => state.resume);
+  const { sort, resumes, getallstatus,info } = useSelector((state) => state.resume);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,17 +36,17 @@ export default function Builder() {
   // при загрузке страницы делаем запрос на получение всех резюмешек из бд
   useEffect(() => {
     dispatch(fetchGetAllResume({ page: 1, limit, sort }));
-  }, [dispatch, limit, sort]);
+  }, [dispatch, limit, sort, info]);
 
   const filter = [
-    { title: 'All resumes', value: '' },
-    { title: 'From A to Z', value: 'target_A-Z' },
-    { title: 'From Z to A', value: 'target_Z-A' },
-    { title: 'up Created', value: 'createdAt_ASC' },
-    { title: 'down Created', value: 'createdAt_DESC' },
-    { title: 'up Last edit', value: 'updatedAt_ASC' },
-    { title: 'down Last edit', value: 'updatedAt_DESC' },
-    { title: 'Favorite', value: 'favorite' },
+    { title: "All resumes", value: "" },
+    { title: "From A to Z", value: "target_A-Z" },
+    { title: "From Z to A", value: "target_Z-A" },
+    { title: "up Created", value: "createdAt_ASC" },
+    { title: "down Created", value: "createdAt_DESC" },
+    { title: "up Last edit", value: "updatedAt_ASC" },
+    { title: "down Last edit", value: "updatedAt_DESC" },
+    { title: "Favorite", value: "favorite" },
   ];
 
   const limitHandler = (e) => {
@@ -54,21 +58,44 @@ export default function Builder() {
     navigate(`edit/${id}`);
   };
 
+  const checkedCheckboxHandler = (event) => {
+    const { id, checked } = event.target;
+    setCheckedItems((prevState) => ({
+      ...prevState,
+      [id]: checked,
+    }));
+  };
+
+  const handleDelete = () => {
+    const idsToDelete = Object.keys(checkedItems).filter(
+      (key) => checkedItems[key]
+    );
+    console.log(idsToDelete);
+    if (idsToDelete.length > 0) {
+      idsToDelete.length === 1
+        ? dispatch(fetchDeleteOneResume(idsToDelete[0]))
+        : dispatch(fetchDeleteSeveralResume(idsToDelete))
+          setCheckedItems({});
+    } else {
+      //сделать неактивной кнопку del
+    }
+  };
+
   const render = (
     <>
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '24px',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "row",
+          gap: "24px",
+          alignItems: "center",
         }}
       >
         <input type="checkbox" name="" id="" className={styles.checkBox} />
         <p>Resume Title</p>
         <p>Creation date</p>
         <p>Edit date</p>
-        <BuilderDropDown title={'Filter'} childrenText={filter} />
+        <BuilderDropDown title={"Filter"} childrenText={filter} />
       </div>
       <div className={styles.limit}>
         <p>Show:</p>
@@ -79,21 +106,29 @@ export default function Builder() {
         <div
           key={uuidv4()}
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '24px',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "row",
+            gap: "24px",
+            alignItems: "center",
           }}
         >
-          <input type="checkbox" name="" id="" className={styles.checkBox} />
+          <input
+            type="checkbox"
+            name=""
+            id={item.id}
+            className={styles.checkBox}
+            checked={!!checkedItems[item.id]}
+            onChange={checkedCheckboxHandler}
+          />
           <p onClick={() => clickResumeHandler(item.id)}>{item.target}</p>
-          <p>{DateServices.getDate(item.createdAt, 'long')}</p>
-          <p>{DateServices.getDate(item.updatedAt, 'long')}</p>
+          <p>{DateServices.getDate(item.createdAt, "long")}</p>
+          <p>{DateServices.getDate(item.updatedAt, "long")}</p>
         </div>
       ))}
+      <div onClick={handleDelete}>Delete</div>
     </>
   );
-  return getallstatus === 'loading' ? <Loader /> : render;
+  return getallstatus === "loading" ? <Loader /> : render;
   // <div className={styles.container}>
   //   <div className={styles.bilderContantContainerNav}>
   //       <Link to={''} className={styles.bilderNavLinkEl}>

@@ -12,8 +12,8 @@ const Voluntiring = ({errors}) => {
     initial={{
       voluntering: "",
       obligations: "",
-      dateStart: "",
-      dateEnd: "",
+      dateStart: null,
+      dateEnd: null,
     }}
     errors={errors}
     fields={[

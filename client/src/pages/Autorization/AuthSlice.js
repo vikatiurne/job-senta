@@ -127,9 +127,9 @@ const authSlice = createSlice({
       state.isAuth = true;
     },
     resetAuthState: (state) => {
-      if (!state.isRemember && state.methodAuth === 'app') {
-        localStorage.removeItem('_jobseeker');
-        sessionStorage.removeItem('_jobseeker');
+      if (!state.isRemember && state.methodAuth === "app") {
+        localStorage.removeItem("_jobseeker");
+        sessionStorage.removeItem("_jobseeker");
         state.user = {};
         state.isAuth = false;
         state.isRemember = false;
@@ -185,6 +185,8 @@ const authSlice = createSlice({
         state.status = "success";
         localStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data;
+        state.methodAuth = "app";
+        state.isRemember = true
         state.error = payload?.data.message;
       })
       .addCase(fetchSocialAuth.rejected, (state, { payload }) => {

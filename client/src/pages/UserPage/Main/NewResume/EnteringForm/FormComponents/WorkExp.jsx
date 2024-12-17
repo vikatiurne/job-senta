@@ -12,8 +12,8 @@ const WorkExp = ({errors}) => {
     initial={{
       companyName: "",
       position: "",
-      dateStart: "",
-      dateEnd: "",
+      dateStart: null,
+      dateEnd: null,
       responsibilities: "",
     }}
     errors={errors}
