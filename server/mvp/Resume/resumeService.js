@@ -1,4 +1,3 @@
-const { where } = require("../../dbAdmin");
 const {
   Resume,
   Project,
@@ -12,20 +11,133 @@ const {
 } = require("../../models/models");
 
 class ResumeService {
-  async createRelatedTables(data, model, resume, associateMethod) {
-    if (data && Array.isArray(data)) {
+  checkNotNullFielsd(data) {
+    const filterFields = (item) => {
+      if (Array.isArray(item)) {
+        return item.map(filterFields).filter((element) => {
+          return (
+            (typeof element === "object" &&
+              element !== null &&
+              Object.keys(element).length > 0) ||
+            typeof element !== "object"
+          );
+        });
+      } else if (typeof item === "object" && item !== null) {
+        return Object.fromEntries(
+          Object.entries(item)
+            .filter(
+              ([key, value]) =>
+                value !== null &&
+                value !== "" &&
+                !(Array.isArray(value) && value.length === 0)
+            )
+            .map(([key, value]) => [key, filterFields(value)])
+        );
+      }
+      return item !== null && item !== "" ? item : null;
+    };
+    const filteredData = filterFields(data);
+    return filteredData;
+  }
+
+  existsInDataArray(dataArray, entry, modelName) {
+    switch (modelName) {
+      case "Project":
+        return dataArray.some(
+          (data) =>
+            data.name === entry.name &&
+            data.role === entry.role &&
+            data.link === entry.link &&
+            data.resumeId === entry.resumeId
+        );
+      case "Work":
+        return dataArray.some(
+          (data) =>
+            data.companyName === entry.companyName &&
+            data.position === entry.position &&
+            data.dateStart === entry.dateStart &&
+            data.dateEnd === entry.dateEnd &&
+            data.resumeId === entry.resumeId
+        );
+      case "Education":
+        return dataArray.some(
+          (data) =>
+            data.educName === entry.educName &&
+            data.specialty === entry.specialty &&
+            data.dateStart === entry.dateStart &&
+            data.dateEnd === entry.dateEnd &&
+            data.resumeId === entry.resumeId
+        );
+      case "Certificate":
+        return dataArray.some(
+          (data) =>
+            data.certificateName === entry.certificateName &&
+            data.institution === entry.institution &&
+            data.dateStart === entry.dateStart &&
+            data.dateEnd === entry.dateEnd &&
+            data.resumeId === entry.resumeId
+        );
+      case "Adward":
+        return dataArray.some(
+          (data) =>
+            data.nameAward === entry.nameAward &&
+            data.institutionAward === entry.institutionAward &&
+            data.date === entry.date &&
+            data.resumeId === entry.resumeId
+        );
+      case "Volunteering":
+        return dataArray.some(
+          (data) =>
+            data.voluntering === entry.voluntering &&
+            data.dateStart === entry.dateStart &&
+            data.dateEnd === entry.dateEnd &&
+            data.resumeId === entry.resumeId
+        );
+      case "Publication":
+        return dataArray.some(
+          (data) =>
+            data.publication === entry.publication &&
+            data.date === entry.date &&
+            data.publicationLink === entry.publicationLink &&
+            data.resumeId === entry.resumeId
+        );
+      default:
+        return false;
+    }
+  }
+
+  async createRelatedTables(resume, data, model, associateMethod) {
+    const filteredData = await this.checkNotNullFielsd(data);
+
+    if (Array.isArray(filteredData) && filteredData.length > 0) {
       const models = await model.bulkCreate(
-        data.map((item) => ({ ...item })),
+        filteredData.map((item) => ({ ...item })),
         { returning: true }
       );
       await resume[associateMethod](models);
     }
   }
 
-  async updateRelatedTables(resumeId, model){
-    await model.update({where:{resumeId}})
+  async updateRelatedTables(model, resumeId, dataArray) {
+    if (Array.isArray(dataArray) && dataArray.length > 0) {
+      for (const data of dataArray) {
+        const existingEntry = await model.findOne({ where: { resumeId } });
+        if (existingEntry) {
+          await existingEntry.update(data);
+        } else {
+          await model.create({ resumeId, ...data });
+        }
+      }
+    } else {
+      const existingEntries = await model.findAll({ where: { resumeId } });
+      for (const entry of existingEntries) {
+        const existsInData = this.existsInDataArray(dataArray, entry, model);
+        if (!existsInData) {
+          await entry.destroy();
+        }
+      }
+    }
   }
-
 
   async create(userId, resumeData) {
     const resume = await Resume.create({
@@ -39,54 +151,56 @@ class ResumeService {
       interests: resumeData.interests,
       userId,
     });
-    await this.createRelatedTables(
-      resume,
-      resumeData.projExp,
-      Project,
-      "addProjects"
-    );
-    await this.createRelatedTables(
-      resume,
-      resumeData.workExp,
-      Work,
-      "addWorks"
-    );
-    await this.createRelatedTables(
-      resume,
-      resumeData.educ,
-      Education,
-      "addEducations"
-    );
-    await this.createRelatedTables(
-      resume,
-      resumeData.certif,
-      Certificate,
-      "addCertificates"
-    );
-    await this.createRelatedTables(
-      resume,
-      resumeData.award,
-      Adward,
-      "addAdwards"
-    );
-    await this.createRelatedTables(
-      resume,
-      resumeData.voluntering,
-      Volunteering,
-      "addVolunteerings"
-    );
-    await this.createRelatedTables(
-      resume,
-      resumeData.publ,
-      Publication,
-      "addPublications"
-    );
+
+    const relatedTables = [
+      {
+        data: resumeData.projExp,
+        model: Project,
+        associateMethod: "addProjects",
+      },
+      { data: resumeData.workExp, model: Work, associateMethod: "addWorks" },
+      {
+        data: resumeData.educ,
+        model: Education,
+        associateMethod: "addEducations",
+      },
+      {
+        data: resumeData.certif,
+        model: Certificate,
+        associateMethod: "addCertificates",
+      },
+      { data: resumeData.award, model: Adward, associateMethod: "addAdwards" },
+      {
+        data: resumeData.voluntering,
+        model: Volunteering,
+        associateMethod: "addVolunteerings",
+      },
+      {
+        data: resumeData.publ,
+        model: Publication,
+        associateMethod: "addPublications",
+      },
+    ];
+
+    for (const { data, model, associateMethod } of relatedTables) {
+      if (
+        data &&
+        Array.isArray(data) &&
+        data.length > 0 &&
+        data.some((item) =>
+          Object.keys(item).some(
+            (key) => item[key] !== null && item[key] !== ""
+          )
+        )
+      ) {
+        await this.createRelatedTables(resume, data, model, associateMethod);
+      }
+    }
 
     return resume;
   }
 
   async getAll(userId, page, limit, sort) {
-    
     page = page || 1;
     limit = limit || 10;
     let offset = (page - 1) * limit;
@@ -127,41 +241,59 @@ class ResumeService {
     const resumes = await Resume.findAndCountAll({
       where: { userId },
       ...queries,
-      attributes: ["id","target", "ifFavorite", "createdAt", "updatedAt"],
+      attributes: ["id", "target", "ifFavorite", "createdAt", "updatedAt"],
       distinct: true,
     });
 
-    return resumes
+    return resumes;
   }
 
   async getOne(id) {
     const resume = await Resume.findOne({
       where: { id },
     });
-    return resume.info
+    return resume.info;
   }
 
   async update(id, info) {
-    const updatedResume = await Resume.update(
-      { info: info },
+    await Resume.update(
+      {
+        info,
+        target: info?.desiredPosition,
+        email: info?.email,
+        phone: info?.phone,
+        linkedin: info?.LinkedIn,
+        profSummaries: info?.professionalSummary,
+        skills: info?.skills,
+        interests: info?.interests,
+        ifFavorite: info?.ifFavorite,
+        ifArchive: info?.ifArchive,
+      },
       { where: { id } }
     );
-    await this.updateRelatedTables(Project,id)
-    await this.updateRelatedTables(Work,id)
-    await this.updateRelatedTables(Education,id)
-    await this.updateRelatedTables(Certificate,id)
-    await this.updateRelatedTables(Adward,id)
-    await this.updateRelatedTables(Volunteering,id)
-    await this.updateRelatedTables(Publication,id)
-    // await Project.update({where:{resumeId:id}})
-    // await Work.update({where:{resumeId:id}})
-    // await Education.update({where:{resumeId:id}})
-    // await Certificate.update({where:{resumeId:id}})
-    // await Adward.update({where:{resumeId:id}})
-    // await Volunteering.update({where:{resumeId:id}})
-    // await Publication.update({where:{resumeId:id}})
-    console.log("updatedResume:", updatedResume)
-    return updatedResume
+    const filteredData = this.checkNotNullFielsd(info);
+    const { projExp, workExp, educ, certif, award, voluntering, publ } =
+      filteredData;
+
+    await this.updateRelatedTables(Project, id, projExp);
+    await this.updateRelatedTables(Work, id, workExp);
+    await this.updateRelatedTables(Education, id, educ);
+    await this.updateRelatedTables(Certificate, id, certif);
+    await this.updateRelatedTables(Adward, id, award);
+    await this.updateRelatedTables(Volunteering, id, voluntering);
+    await this.updateRelatedTables(Publication, id, publ);
+
+    const updatedResume = await Resume.findByPk(id);
+    return updatedResume;
+  }
+
+  async delete(id, ids, userId) {
+    if (id) {
+      await Resume.destroy({ where: { id } });
+    } else {
+      await Resume.destroy({ where: { id: ids } });
+    }
+    return this.getAll(userId);
   }
 }
 

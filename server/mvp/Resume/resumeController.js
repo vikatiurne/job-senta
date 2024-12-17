@@ -45,6 +45,19 @@ class ResumeController {
       next(ApiErrors.badRequest(error.message));
     }
   }
+
+  async delete(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { resumeIds } = req.body
+      console.log("IDS:",req.body)
+      const userId = req.user.id;
+      const resume = await resumeService.delete(id,resumeIds,userId);
+      return res.json(resume);
+    } catch (error) {
+      next(ApiErrors.badRequest(error.message));
+    }
+  }
   
 }
 

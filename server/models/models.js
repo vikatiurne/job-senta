@@ -40,92 +40,118 @@ const Resume = sequelize.define("resume", {
 
 const Project = sequelize.define("project", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, unique: true },
-  role: { type: DataTypes.STRING, defaultValue: "USER" },
+  name: { type: DataTypes.STRING, unique: false },
+  role: { type: DataTypes.STRING },
   link: { type: DataTypes.STRING },
 });
 
 const Work = sequelize.define("work", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  company: { type: DataTypes.STRING, unique: true },
+  companyName: { type: DataTypes.STRING, unique: false },
   position: { type: DataTypes.STRING },
   dateStart: { type: DataTypes.DATE },
   dateEnd: { type: DataTypes.DATE },
-  reaponsibilities: { type: DataTypes.STRING },
+  responsibilities: { type: DataTypes.STRING },
 });
 
 const Education = sequelize.define("education", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  institution: { type: DataTypes.STRING, unique: true },
+  educName: { type: DataTypes.STRING, unique: false },
   specialty: { type: DataTypes.STRING },
   dateStart: { type: DataTypes.DATE },
   dateEnd: { type: DataTypes.DATE },
 });
 const Certificate = sequelize.define("certificate", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  certificate: { type: DataTypes.STRING },
+  certificateName: { type: DataTypes.STRING },
   institution: { type: DataTypes.STRING },
   dateStart: { type: DataTypes.DATE },
   dateEnd: { type: DataTypes.DATE },
 });
 const Adward = sequelize.define("adward", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING },
-  institution: { type: DataTypes.STRING },
-  dateStart: { type: DataTypes.DATE },
-  dateEnd: { type: DataTypes.DATE },
+  nameAward: { type: DataTypes.STRING },
+  institutionAward: { type: DataTypes.STRING },
+  merit: { type: DataTypes.STRING },
+  date: { type: DataTypes.DATE },
 });
-const Volunteering = sequelize.define("adward", {
+const Volunteering = sequelize.define("voluntering", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  organization: { type: DataTypes.STRING },
+  voluntering: { type: DataTypes.STRING },
   dateStart: { type: DataTypes.DATE },
   dateEnd: { type: DataTypes.DATE },
   obligations: { type: DataTypes.STRING },
 });
 const Publication = sequelize.define("publication", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  title: { type: DataTypes.STRING },
+  publication: { type: DataTypes.STRING },
   date: { type: DataTypes.DATE },
-  link: { type: DataTypes.STRING },
+  publicationLink: { type: DataTypes.STRING },
 });
 const AiAnalyse = sequelize.define("aiAnalise", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   score: { type: DataTypes.STRING },
   cons: { type: DataTypes.STRING },
   recommended: { type: DataTypes.STRING },
-})
+});
 
 User.hasOne(Token, { onDelete: "CASCADE" });
 Token.belongsTo(User);
 
-User.hasMany(Resume, { as: 'resumes', onDelete: 'CASCADE', foreignKey: 'userId' })
-Resume.belongsTo(User)
+User.hasMany(Resume, {
+  as: "resumes",
+  onDelete: "CASCADE",
+  foreignKey: "userId",
+});
+Resume.belongsTo(User);
 
-Resume.hasMany(Project, { onDelete: "CASCADE" })
-Project.belongsTo(Resume)
+Resume.hasMany(Project, { onDelete: "CASCADE" });
+Project.belongsTo(Resume);
 
-Resume.hasMany(Work, { onDelete: "CASCADE" })
-Work.belongsTo(Resume)
+Resume.hasMany(Work, {
+  onDelete: "CASCADE",
+  foreignKey: "resumeId",
+  as: "works",
+});
+Work.belongsTo(Resume);
 
-Resume.hasMany(Education, { onDelete: "CASCADE" })
-Education.belongsTo(Resume)
+Resume.hasMany(Education, {
+  onDelete: "CASCADE",
+  foreignKey: "resumeId",
+  as: "educations",
+});
+Education.belongsTo(Resume);
 
-Resume.hasMany(Certificate,{ onDelete: "CASCADE" })
-Certificate.belongsTo(Resume)
+Resume.hasMany(Certificate, {
+  onDelete: "CASCADE",
+  foreignKey: "resumeId",
+  as: "certificates",
+});
+Certificate.belongsTo(Resume);
 
-Resume.hasMany(Adward,{ onDelete: "CASCADE" })
-Adward.belongsTo(Resume)
+Resume.hasMany(Adward, {
+  onDelete: "CASCADE",
+  foreignKey: "resumeId",
+  as: "adwards",
+});
+Adward.belongsTo(Resume);
 
-Resume.hasMany(Volunteering,{ onDelete: "CASCADE" })
-Volunteering.belongsTo(Resume)
+Resume.hasMany(Volunteering, {
+  onDelete: "CASCADE",
+  foreignKey: "resumeId",
+  as: "volunteerings",
+});
+Volunteering.belongsTo(Resume);
 
-Resume.hasMany(Publication,{ onDelete: "CASCADE" })
-Publication.belongsTo(Resume)
+Resume.hasMany(Publication, {
+  onDelete: "CASCADE",
+  foreignKey: "resumeId",
+  as: "publications",
+});
+Publication.belongsTo(Resume);
 
-Resume.hasOne(AiAnalyse,{ onDelete: "CASCADE" })
-AiAnalyse.belongsTo(Resume)
-
-
+Resume.hasOne(AiAnalyse, { onDelete: "CASCADE" });
+AiAnalyse.belongsTo(Resume);
 
 module.exports = {
   UserLanding,
@@ -139,5 +165,5 @@ module.exports = {
   Adward,
   Volunteering,
   Publication,
-  AiAnalyse
+  AiAnalyse,
 };
