@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../../../../components/UI/Button/Button";
 import BuilderDropDown from "../Builder/BuilderDropDown/BuilderDropDown";
+import { ReactComponent as Star } from "../../../../assets/user_page/home/star.svg";
+import { ReactComponent as StarBorder } from "../../../../assets/user_page/home/starborder.svg";
 import ScoreResumeCircle from "../UserHome/TopResume/ScoreResumeCircle/ScoreResumeCircle";
 
 import { ReactComponent as Remove } from "../../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/pajamas_remove-all.svg";
@@ -24,9 +26,11 @@ import {
 } from "../NewResume/NewResumeSlice";
 import DateServices from "../../../../utils/DateServices";
 import Loader from "../../../../components/UI/Loader/Loader";
+import { useOptimistic } from "react";
 
 export default function Builder() {
   const [limit, setLimit] = useState(10);
+  const [activeStarIds, setActiveStarIds] = useState([]);
   const [isArchive, setIsArchive] = useState(false);
   const [isShowArchive, setIsShowArchive] = useState(false);
   const [isShowFavorite, setIsShowFavorite] = useState(false);
@@ -71,6 +75,15 @@ export default function Builder() {
   const limitHandler = (e) => {
     !!e.target.value ? setLimit(Number(e.target.value)) : setLimit(10);
   };
+
+  const handleStarClick = (id) => {  
+    setActiveStarIds((prevActiveStars) => {  
+        if (prevActiveStars.includes(id)) {  
+            return prevActiveStars.filter(starId => starId !== id);  
+        }   
+        return [...prevActiveStars, id];  
+    });  
+};  
 
   const clickResumeHandler = (id) => {
     dispatch(fetchGetOneResume(id));
@@ -135,18 +148,17 @@ export default function Builder() {
   };
 
   const handleAddArchive = () => {
-    setIsArchive(true)
-    chengeStatusResume()
-  }
+    setIsArchive(true);
+    chengeStatusResume();
+  };
   const handleReturnToActive = () => {
-    setIsArchive(false)
-    chengeStatusResume()
-  }
+    setIsArchive(false);
+    chengeStatusResume();
+  };
 
   const hendleShowArchive = () => setIsShowArchive(true);
 
   const hendleShowActive = () => setIsShowArchive(false);
-
 
   const render = (
     <>
@@ -189,6 +201,12 @@ export default function Builder() {
             checked={!!checkedItems[item.id]}
             onChange={checkedCheckboxHandler}
           />
+          <StarBorder
+            id={item.id}
+            onClick={()=>handleStarClick(item.id)}
+            style={{ fill: activeStarIds.includes(item.id) ? "red" : "green" }}
+          />
+         
           <p onClick={() => clickResumeHandler(item.id)}>{item.target}</p>
           <p>{DateServices.getDate(item.createdAt, "long")}</p>
           <p>{DateServices.getDate(item.updatedAt, "long")}</p>
