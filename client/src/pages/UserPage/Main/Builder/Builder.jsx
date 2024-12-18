@@ -14,6 +14,9 @@ import { ReactComponent as Clone } from "../../../../assets/user_page/builder/Ac
 
 import styles from "./Builder.module.css";
 import {
+  fetchArchiveOneResume,
+  fetchArchiveSeveralResume,
+  fetchCloneResume,
   fetchDeleteOneResume,
   fetchDeleteSeveralResume,
   fetchGetAllResume,
@@ -24,19 +27,35 @@ import Loader from "../../../../components/UI/Loader/Loader";
 
 export default function Builder() {
   const [limit, setLimit] = useState(10);
+  const [isArchive, setIsArchive] = useState(false);
+  const [isShowArchive, setIsShowArchive] = useState(false);
+  const [isShowFavorite, setIsShowFavorite] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
-  console.log(checkedItems)
 
   // вытаскиваем из стора тип сортировки
-  const { sort, resumes, getallstatus,info } = useSelector((state) => state.resume);
+  const { sort, resumes, getallstatus, info } = useSelector(
+    (state) => state.resume
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (sort === "favorite") setIsShowFavorite(true);
+  }, [sort]);
+
   // при загрузке страницы делаем запрос на получение всех резюмешек из бд
   useEffect(() => {
-    dispatch(fetchGetAllResume({ page: 1, limit, sort }));
-  }, [dispatch, limit, sort, info]);
+    dispatch(
+      fetchGetAllResume({
+        page: 1,
+        limit,
+        sort,
+        isArchive: isShowArchive,
+        isFavorite: isShowFavorite,
+      })
+    );
+  }, [dispatch, limit, sort, info, isShowArchive, isShowFavorite]);
 
   const filter = [
     { title: "All resumes", value: "" },
@@ -66,23 +85,73 @@ export default function Builder() {
     }));
   };
 
+  const getArrCheckedItems = () => {
+    return Object.keys(checkedItems).filter((key) => checkedItems[key]);
+  };
+
   const handleDelete = () => {
-    const idsToDelete = Object.keys(checkedItems).filter(
-      (key) => checkedItems[key]
-    );
-    console.log(idsToDelete);
+    const idsToDelete = getArrCheckedItems();
     if (idsToDelete.length > 0) {
       idsToDelete.length === 1
         ? dispatch(fetchDeleteOneResume(idsToDelete[0]))
-        : dispatch(fetchDeleteSeveralResume(idsToDelete))
-          setCheckedItems({});
+        : dispatch(fetchDeleteSeveralResume(idsToDelete));
+      setCheckedItems({});
     } else {
       //сделать неактивной кнопку del
     }
   };
 
+  const handleClone = () => {
+    const idsToClone = getArrCheckedItems();
+    if (idsToClone.length === 1) {
+      console.log(Object.keys(checkedItems)[0]);
+      dispatch(fetchCloneResume(Object.keys(checkedItems)[0]));
+      setCheckedItems({});
+    } else {
+      //сделать неактивной кнопку clone
+    }
+  };
+
+  const chengeStatusResume = () => {
+    const idsToArchive = getArrCheckedItems();
+    if (idsToArchive.length > 0) {
+      idsToArchive.length === 1
+        ? dispatch(
+            fetchArchiveOneResume({
+              resumeId: idsToArchive[0],
+              isArchive,
+            })
+          )
+        : dispatch(
+            fetchArchiveSeveralResume({
+              resumeIds: idsToArchive,
+              isArchive,
+            })
+          );
+      setCheckedItems({});
+    } else {
+      //сделать неактивной кнопку archive
+    }
+  };
+
+  const handleAddArchive = () => {
+    setIsArchive(true)
+    chengeStatusResume()
+  }
+  const handleReturnToActive = () => {
+    setIsArchive(false)
+    chengeStatusResume()
+  }
+
+  const hendleShowArchive = () => setIsShowArchive(true);
+
+  const hendleShowActive = () => setIsShowArchive(false);
+
+
   const render = (
     <>
+      <div onClick={hendleShowArchive}>Show Archive</div>
+      <div onClick={hendleShowActive}>Show Active</div>
       <div
         style={{
           display: "flex",
@@ -126,6 +195,9 @@ export default function Builder() {
         </div>
       ))}
       <div onClick={handleDelete}>Delete</div>
+      <div onClick={handleClone}>Clone</div>
+      <div onClick={handleAddArchive}>Add Archive</div>
+      <div onClick={handleReturnToActive}>Return to active</div>
     </>
   );
   return getallstatus === "loading" ? <Loader /> : render;

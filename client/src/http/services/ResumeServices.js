@@ -4,9 +4,9 @@ export default class ResumeServices {
   static async createResume(values) {
     return await $api.post("api/resumes/create", { values });
   }
-  static async getAllResume(page, limit, sort) {
+  static async getAllResume(page, limit, sort, isArchive,isFavorite) {
     return await $api.get("api/resumes/getAll", {
-      params: { page, limit, sort },
+      params: { page, limit, sort, isArchive, isFavorite },
     });
   }
   static async getOneResume(resumeId) {
@@ -20,5 +20,15 @@ export default class ResumeServices {
   }
   static async deleteSeveralResume(resumeIds) {
     return await $api.post("api/resumes/deleteSeveral", { resumeIds });
+  }
+  static async cloneResume(resumeId) {
+    return await $api.post(`api/resumes/clone/${resumeId}`);
+  }
+
+  static async archiveOneResume(resumeId, isArchive) {
+    return await $api.put(`api/resumes/archiveOne/${resumeId}`, {isArchive});
+  }
+  static async archiveSeveralResume(resumeIds, isArchive) {
+    return await $api.put("api/resumes/archiveSeveral", { resumeIds, isArchive });
   }
 }

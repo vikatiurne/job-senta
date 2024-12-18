@@ -26,9 +26,9 @@ export const fetchCreateResume = createAsyncThunk(
 );
 export const fetchGetAllResume = createAsyncThunk(
   "resume/fetchGetAllResume",
-  async ({ page, limit, sort }, { rejectWithValue }) => {
+  async ({ page, limit, sort, isArchive, isFavorite }, { rejectWithValue }) => {
     try {
-      return await ResumeServices.getAllResume(page, limit, sort);
+      return await ResumeServices.getAllResume(page, limit, sort, isArchive, isFavorite);
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data);
@@ -71,9 +71,44 @@ export const fetchDeleteOneResume = createAsyncThunk(
 export const fetchDeleteSeveralResume = createAsyncThunk(
   "resume/fetchDeleteSeveralResume",
   async (resumeIds, { rejectWithValue }) => {
-    console.log(resumeIds)
     try {
       return await ResumeServices.deleteSeveralResume(resumeIds);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const fetchCloneResume = createAsyncThunk(
+  "resume/fetchCloneResume",
+  async (resumeId, { rejectWithValue }) => {
+    try {
+      return await ResumeServices.cloneResume(resumeId);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchArchiveOneResume = createAsyncThunk(
+  "resume/fetchArchiveOneResume",
+  async ({ resumeId, isArchive }, { rejectWithValue }) => {
+    console.log(resumeId,isArchive)
+    try {
+      return await ResumeServices.archiveOneResume(resumeId, isArchive);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const fetchArchiveSeveralResume = createAsyncThunk(
+  "resume/fetchArchiveSeveralResume",
+  async ({resumeIds,isArchive}, { rejectWithValue }) => {
+    console.log(resumeIds,isArchive)
+    try {
+      return await ResumeServices.archiveSeveralResume(resumeIds, isArchive);
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data);
@@ -103,6 +138,7 @@ const resumeReducer = createSlice({
       })
       .addCase(fetchCreateResume.fulfilled, (state, { payload }) => {
         state.status = "success";
+        state.info = payload.data
       })
       .addCase(fetchCreateResume.rejected, (state, { payload }) => {
         state.status = "error";
@@ -147,26 +183,59 @@ const resumeReducer = createSlice({
         state.getonestatus = "error";
       })
       .addCase(fetchDeleteOneResume.pending, (state, { payload }) => {
-        // state.getonestatus = "loading";
+        state.getallstatus = "loading";
       })
       .addCase(fetchDeleteOneResume.fulfilled, (state, { payload }) => {
         console.log(payload);
-        // state.getonestatus = "success";
+        state.getallstatus = "success";
         state.info = payload.data;
       })
       .addCase(fetchDeleteOneResume.rejected, (state, { payload }) => {
-        // state.getonestatus = "error";
+        state.getallstatus = "error";
       })
       .addCase(fetchDeleteSeveralResume.pending, (state, { payload }) => {
-        // state.getonestatus = "loading";
+        state.getallstatus = "loading";
       })
       .addCase(fetchDeleteSeveralResume.fulfilled, (state, { payload }) => {
         console.log(payload);
-        // state.getonestatus = "success";
+        state.getallstatus = "success";
         state.info = payload.data;
       })
       .addCase(fetchDeleteSeveralResume.rejected, (state, { payload }) => {
-        // state.getonestatus = "error";
+        state.getallstatus = "error";
+      })
+      .addCase(fetchCloneResume.pending, (state, { payload }) => {
+        state.getallstatus = "loading";
+      })
+      .addCase(fetchCloneResume.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.getallstatus = "success";
+        state.info = payload.data;
+      })
+      .addCase(fetchCloneResume.rejected, (state, { payload }) => {
+        state.getallstatus = "error";
+      })
+      .addCase(fetchArchiveOneResume.pending, (state, { payload }) => {
+        state.getallstatus = "loading";
+      })
+      .addCase(fetchArchiveOneResume.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.getallstatus = "success";
+        state.info = payload.data;
+      })
+      .addCase(fetchArchiveOneResume.rejected, (state, { payload }) => {
+        state.getallstatus = "error";
+      })
+      .addCase(fetchArchiveSeveralResume.pending, (state, { payload }) => {
+        state.getallstatus = "loading";
+      })
+      .addCase(fetchArchiveSeveralResume.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.getallstatus = "success";
+        state.info = payload.data;
+      })
+      .addCase(fetchArchiveSeveralResume.rejected, (state, { payload }) => {
+        state.getallstatus = "error";
       })
   },
 });
