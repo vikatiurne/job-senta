@@ -197,10 +197,12 @@ class ResumeService {
       }
     }
 
-    return resume;
+    return this.getAll(userId);
   }
 
-  async getAll(userId, page, limit, sort) {
+  async getAll(userId, page, limit, sort, isArchive, isFavorite) {
+    isFavorite = isFavorite || false
+    isArchive = isArchive || false
     page = page || 1;
     limit = limit || 10;
     let offset = (page - 1) * limit;
@@ -239,9 +241,16 @@ class ResumeService {
     };
 
     const resumes = await Resume.findAndCountAll({
-      where: { userId },
+      where: { userId, isArchive, isFavorite },
       ...queries,
-      attributes: ["id", "target", "ifFavorite", "createdAt", "updatedAt"],
+      attributes: [
+        "id",
+        "target",
+        "isFavorite",
+        "createdAt",
+        "updatedAt",
+        "isArchive",
+      ],
       distinct: true,
     });
 
@@ -292,6 +301,21 @@ class ResumeService {
       await Resume.destroy({ where: { id } });
     } else {
       await Resume.destroy({ where: { id: ids } });
+    }
+    return this.getAll(userId);
+  }
+
+  async clone(id, userId) {
+    const originalResume = await Resume.findByPk(id);
+    return await this.create(userId, originalResume.info );
+  }
+
+  async archive(id, ids, userId, isArchive) {
+    if (id) {
+      await Resume.update({ isArchive }, { where: { id } });
+      return this.getAll(userId);
+    } else {
+      await Resume.update({ isArchive }, { where: { id: ids } });
     }
     return this.getAll(userId);
   }

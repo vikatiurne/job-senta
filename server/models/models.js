@@ -34,8 +34,8 @@ const Resume = sequelize.define("resume", {
   profSummaries: { type: DataTypes.STRING, unique: false },
   skills: { type: DataTypes.ARRAY(DataTypes.STRING) },
   interests: { type: DataTypes.STRING, unique: false },
-  ifFavorite: { type: DataTypes.BOOLEAN, defaultValue: "false" },
-  ifArchive: { type: DataTypes.BOOLEAN, defaultValue: "false" },
+  isFavorite: { type: DataTypes.BOOLEAN, defaultValue: "false" },
+  isArchive: { type: DataTypes.BOOLEAN, defaultValue: "false" },
 });
 
 const Project = sequelize.define("project", {
