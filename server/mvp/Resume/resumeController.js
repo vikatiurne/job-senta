@@ -2,6 +2,12 @@ const ApiErrors = require("../../errors/ApiErrors");
 const resumeService = require("./resumeService");
 
 class ResumeController {
+  constructor() {
+    this.updateResumeField = this.updateResumeField.bind(this);
+    this.archive = this.archive.bind(this);
+    this.favorite = this.favorite.bind(this);
+  }
+
   async create(req, res, next) {
     const userId = req.user.id;
     const { values } = req.body;
@@ -15,10 +21,17 @@ class ResumeController {
 
   async getAll(req, res, next) {
     const { id } = req.user;
-    const { page, limit, sort, isArchive } = req.query;
+    const { page, limit, sort, isArchive, isFavorite } = req.query;
 
     try {
-      const resumes = await resumeService.getAll(id, page, limit, sort, isArchive);
+      const resumes = await resumeService.getAll(
+        id,
+        page,
+        limit,
+        sort,
+        isArchive,
+        isFavorite
+      );
       return res.json(resumes);
     } catch (error) {
       next(ApiErrors.badRequest(error.message));
@@ -39,8 +52,9 @@ class ResumeController {
     try {
       const { id } = req.params;
       const { info } = req.body;
-      const updatedResume = await resumeService.update(id, info);
-      return res.json(updatedResume);
+      const userId = req.user.id;
+      const resumes = await resumeService.update(id, info, userId);
+      return res.json(resumes);
     } catch (error) {
       next(ApiErrors.badRequest(error.message));
     }
@@ -51,8 +65,8 @@ class ResumeController {
       const { id } = req.params;
       const { resumeIds } = req.body;
       const userId = req.user.id;
-      const resume = await resumeService.delete(id, resumeIds, userId);
-      return res.json(resume);
+      const resumes = await resumeService.delete(id, resumeIds, userId);
+      return res.json(resumes);
     } catch (error) {
       next(ApiErrors.badRequest(error.message));
     }
@@ -62,7 +76,25 @@ class ResumeController {
     try {
       const { id } = req.params;
       const userId = req.user.id;
-      const resume = await resumeService.clone(id, userId);
+      const resumes = await resumeService.clone(id, userId);
+      return res.json(resumes);
+    } catch (error) {
+      next(ApiErrors.badRequest(error.message));
+    }
+  }
+
+  async updateResumeField(req, res, next, action) {
+    try {
+      const { id } = req.params;
+      const { resumeIds, isArchive } = req.body;
+      const userId = req.user.id;
+
+      const resume = await resumeService.updateResumeField(
+        id,
+        resumeIds,
+        userId,
+        isArchive
+      );
       return res.json(resume);
     } catch (error) {
       next(ApiErrors.badRequest(error.message));
@@ -70,11 +102,16 @@ class ResumeController {
   }
 
   async archive(req, res, next) {
+    return this.updateResumeField(req, res, next, "archive");
+  }
+
+  async favorite(req, res, next) {
     try {
       const { id } = req.params;
-      const { resumeIds, isArchive, isFavorite } = req.body;
+      const { isFavorite } = req.body;
+      console.log("FAV:", isFavorite);
       const userId = req.user.id;
-      const resume = await resumeService.archive(id, resumeIds, userId, isArchive, isFavorite);
+      const resume = await resumeService.favorite(id, userId, isFavorite);
       return res.json(resume);
     } catch (error) {
       next(ApiErrors.badRequest(error.message));

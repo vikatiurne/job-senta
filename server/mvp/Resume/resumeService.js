@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const {
   Resume,
   Project,
@@ -11,6 +12,12 @@ const {
 } = require("../../models/models");
 
 class ResumeService {
+  constructor() {
+    this.updateResumeField = this.updateResumeField.bind(this);
+    this.archive = this.archive.bind(this);
+    this.favorite = this.favorite.bind(this);
+  }
+
   checkNotNullFielsd(data) {
     const filterFields = (item) => {
       if (Array.isArray(item)) {
@@ -201,8 +208,9 @@ class ResumeService {
   }
 
   async getAll(userId, page, limit, sort, isArchive, isFavorite) {
-    isFavorite = isFavorite || false
-    isArchive = isArchive || false
+    
+    isFavorite = isFavorite || false;
+    isArchive = isArchive || false;
     page = page || 1;
     limit = limit || 10;
     let offset = (page - 1) * limit;
@@ -240,8 +248,23 @@ class ResumeService {
       subQuery: false,
     };
 
+    const whereCondition = {
+      userId,
+      isArchive,
+    };
+    console.log("FAV:", isFavorite)
+    console.log("FAV:", isFavorite)
+    if (isFavorite===true) whereCondition.isFavorite = true;
+
+    // isFavorite===true
+    //   ? (whereCondition.isFavorite = true)
+    //   : (whereCondition[Op.or] = [
+    //       { isFavorite: false },
+    //       { isFavorite: true },
+    //     ]);
+
     const resumes = await Resume.findAndCountAll({
-      where: { userId, isArchive, isFavorite },
+      where: whereCondition,
       ...queries,
       attributes: [
         "id",
@@ -264,7 +287,7 @@ class ResumeService {
     return resume.info;
   }
 
-  async update(id, info) {
+  async update(id, info, userId) {
     await Resume.update(
       {
         info,
@@ -292,8 +315,7 @@ class ResumeService {
     await this.updateRelatedTables(Volunteering, id, voluntering);
     await this.updateRelatedTables(Publication, id, publ);
 
-    const updatedResume = await Resume.findByPk(id);
-    return updatedResume;
+    return this.getAll(userId);
   }
 
   async delete(id, ids, userId) {
@@ -307,16 +329,25 @@ class ResumeService {
 
   async clone(id, userId) {
     const originalResume = await Resume.findByPk(id);
-    return await this.create(userId, originalResume.info );
+    return await this.create(userId, originalResume.info);
   }
 
-  async archive(id, ids, userId, isArchive) {
+  async updateResumeField(id, ids, userId, isArchive) {
     if (id) {
       await Resume.update({ isArchive }, { where: { id } });
-      return this.getAll(userId);
     } else {
       await Resume.update({ isArchive }, { where: { id: ids } });
     }
+    return this.getAll(userId);
+  }
+
+  async archive(id, ids, userId, isArchive) {
+    return this.updateResumeField(id, ids, userId, "isArchive", isArchive);
+  }
+
+  async favorite(id, userId, isFavorite) {
+    console.log("FAV:", isFavorite);
+    await Resume.update({ isFavorite }, { where: { id } });
     return this.getAll(userId);
   }
 }
