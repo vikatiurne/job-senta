@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import BuilderDropDown from "../Builder/BuilderDropDown/BuilderDropDown";
+import HeaderTable from "../../../../components/Builder/HeaderTable/HeaderTable";
 
 import { ReactComponent as StarBorder } from "../../../../assets/user_page/home/starborder.svg";
 
@@ -20,9 +21,12 @@ import {
 } from "../NewResume/NewResumeSlice";
 import DateServices from "../../../../utils/DateServices";
 import Loader from "../../../../components/UI/Loader/Loader";
+import ResumeListItem from "../../../../components/Builder/ResumeListItem/ResumeListItem";
+import BuilderFooter from "../../../../components/Builder/BuilderFooter/BuilderFooter";
 
 export default function Builder() {
   const [limit, setLimit] = useState(10);
+  const [isAllChecked, setIsAllChecked] = useState(false);
   const [activeStarIds, setActiveStarIds] = useState([]);
   const [isShowArchive, setIsShowArchive] = useState(false);
   const [isShowFavorite, setIsShowFavorite] = useState(false);
@@ -34,7 +38,12 @@ export default function Builder() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log("SHOEFAV:", isShowFavorite)
+  useEffect(() => {
+    setActiveStarIds(
+      resumes.filter((item) => item.isFavorite).map((item) => item.id)
+    );
+  }, [resumes]);
+
   useEffect(() => {
     if (sort === "favorite") {
       setIsShowFavorite(true);
@@ -97,6 +106,23 @@ export default function Builder() {
       ...prevState,
       [id]: checked,
     }));
+    if (checked) {
+      const allChecked =
+        Object.keys(checkedItems).length ===
+        Object.keys(checkedItems).length - 1;
+      setIsAllChecked(allChecked);
+    } else {
+      setIsAllChecked(false);
+    }
+  };
+
+  const handleAllCheckboxChange = (checked) => {
+    setIsAllChecked(checked);
+    const newCheckedItems = {};
+    Object.keys(checkedItems).forEach((item) => {
+      newCheckedItems[item] = checked;
+    });
+    setCheckedItems(newCheckedItems);
   };
 
   const getArrCheckedItems = () => {
@@ -118,7 +144,6 @@ export default function Builder() {
   const handleClone = () => {
     const idsToClone = getArrCheckedItems();
     if (idsToClone.length === 1) {
-      console.log(Object.keys(checkedItems)[0]);
       dispatch(fetchCloneResume(Object.keys(checkedItems)[0]));
       setCheckedItems({});
     } else {
@@ -217,5 +242,39 @@ export default function Builder() {
       <div onClick={handleReturnToActive}>Return to active</div>
     </>
   );
-  return getallstatus === "loading" ? <Loader /> : render;
+
+  const render2 = (
+    <div className={styles.builderWrapper}>
+          <div className={styles.resumeStatus}>
+            <p
+              onClick={hendleShowActive}
+              className={`${styles.statusTitle} ${
+                !isShowArchive ? styles.active : styles.archive
+              }`}
+            >
+              Active Resumes
+            </p>
+            <p
+              onClick={hendleShowArchive}
+              className={`${styles.statusTitle} ${
+                !isShowArchive ? styles.archive : styles.active
+              }`}
+            >
+              Archived Resumes
+            </p>
+          </div>
+      <div className={styles.builderContainer}>
+        
+          <div className={styles.builderTable}>
+            <HeaderTable onAllCheckboxChange={handleAllCheckboxChange} />
+            {resumes.map((item) => (
+              <ResumeListItem key={uuidv4()} item={item} />
+            ))}
+          </div>
+       
+        <BuilderFooter/>
+      </div>
+    </div>
+  );
+  return getallstatus === "loading" ? <Loader /> : render2;
 }

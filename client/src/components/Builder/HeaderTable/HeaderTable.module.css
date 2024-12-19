@@ -1,0 +1,16 @@
+.headerTable {
+  padding: 24px 39px 24px 24px;
+  background-color: var(--brown);
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  font-family: var(--montserrat);
+  font-size: 22px;
+  line-height: 32px;
+  color: var(--white);
+}

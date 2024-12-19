@@ -1,4 +1,44 @@
-.container {
+.builderWrapper {
+  margin: 0 auto;
+  max-width: 995px;
+  width: 100%;
+  height: calc(100vh - 155px);
+}
+.builderContainer {
+  border: 1px solid var(--brown-dark);
+  border-radius: 20px;
+  height: calc(100% - 50px);
+}
+.resumeStatus {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 24px;
+  justify-content: flex-end;
+}
+.statusTitle {
+  font-family: var(--montserrat);
+  font-size: 22px;
+  line-height: 32px;
+}
+
+.active {
+  position: relative;
+  color: var(--brown);
+}
+.active::after {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: var(--brown);
+}
+
+.archive {
+  color: var(--gray);
+}
+
+/* .container {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -23,9 +63,9 @@
 .bilderNavLink:last-of-type{
     margin-right: 0;
     border-bottom: none;
-}
+} */
 /* ------------- NAVIGATION END-------------- */
-
+/* 
 .bilderContantContainer{
     border: 2px solid #958060;
     border-radius: 15px;
@@ -74,7 +114,7 @@
 }
 
 /* ---- */
-.bilderTablePosition{
+/* .bilderTablePosition{
     max-width: 250px;
     min-width: 250px;
 }
@@ -100,5 +140,5 @@
 }
  .tableAction:hover svg {
     /* color: #604B2B; */
-    color: red;
- }
+/* color: red;
+ } */

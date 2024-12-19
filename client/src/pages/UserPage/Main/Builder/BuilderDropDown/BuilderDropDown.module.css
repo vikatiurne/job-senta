@@ -1,16 +1,9 @@
-.sectResume {
-    padding: 16px;
-    background-color: var(--white);
-    border-radius: 20px;
-}
-
-
 .sectResumeWrap {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4px;
+gap: 69px;
 }
 
 .sectResumeToTrack {
