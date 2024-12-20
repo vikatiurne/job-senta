@@ -268,7 +268,7 @@ export default function Builder() {
           <div className={styles.builderTable}>
             <HeaderTable onAllCheckboxChange={handleAllCheckboxChange} />
             {resumes.map((item) => (
-              <ResumeListItem key={uuidv4()} item={item} />
+              <ResumeListItem key={uuidv4()} item={item} isArchive={isShowArchive} />
             ))}
           </div>
        

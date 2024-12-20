@@ -11,6 +11,12 @@
   align-items: center;
   gap: 69px;
 }
+.sectResumeToTrack p {
+  font-size: 22px;
+  line-height: 32px;
+  font-family: var(--montserrat);
+  color: var(--white);
+}
 
 .sectResumeBtnDropDown {
   cursor: pointer;
@@ -30,14 +36,19 @@
 }
 
 .sectResumeDropDown {
-  padding: 0 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
   border-width: 2px;
   border-style: solid;
   border-color: var(--brown-dark);
   color: var(--brown);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  max-width: 200px;
+  width: 160px;
+  left: 160px;
   margin-left: auto;
 }
 
@@ -67,10 +78,10 @@
 }
 
 .sectResumeDropDownText {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 19px;
-  color: #958060;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--dark-gray);
   cursor: pointer;
 }
 .sectResumeDropDownText:hover {
@@ -79,4 +90,37 @@
 .sectResumeDropDownText:focus {
   color: #c8b18d;
   border-bottom: 2px solid #c8b18d;
+}
+
+@media (max-width: 1150px) {
+  .sectResumeDropDown {
+    width: calc(100% + 20px);
+    left: 140px;
+  }
+}
+@media (max-width: 1024px) {
+
+  .sectResumeToTrack {
+    gap: 40px;
+  }
+  .sectResumeToTrack p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+@media (max-width: 738px) {
+  .sectResumeDropDown {
+    left: 105px;
+  }
+}
+@media (max-width: 650px) {
+  .sectResumeWrap {
+    padding: 4px 8px;
+    border: 1px solid var(--white);
+    border-radius: 20px;
+  }
+  .sectResumeDropDown {
+    left: 130px;
+    bottom: -5px;
+  }
 }

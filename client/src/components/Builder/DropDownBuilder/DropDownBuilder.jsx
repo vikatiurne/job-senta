@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import DropDown from "../../../components/UI/DropDown/DropDown";
 
 import { ReactComponent as DropDownIcon } from "../../../assets/user_page/home/dropdown.svg";
+
 import { setSort } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
 
 
@@ -37,9 +38,7 @@ export default function DropDownBuilder({ className, title, childrenText }) {
           activeClass={selectedResumes}
           maxHeight="500px"
         >
-          {/* <Scroll
-                        height="80px"
-                  > */}
+          
           {childrenText.map((item, i) => (
             <button
               key={i}
@@ -50,7 +49,7 @@ export default function DropDownBuilder({ className, title, childrenText }) {
             </button>
           ))}
 
-          {/* </Scroll> */}
+         
         </DropDown>
       </div>
     </section>

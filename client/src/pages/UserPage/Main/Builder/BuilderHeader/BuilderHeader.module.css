@@ -72,11 +72,6 @@
     font-family: var(--montserrat);
   }
 
-  /* .menu,
-  .newResume {
-    order: 0;
-  } */
-
   .nav {
     gap: 16px;
     width: 100%;
@@ -98,6 +93,9 @@
 }
 
 @media (min-width: 1024px) {
+  .nav {
+    justify-content: space-between;
+  }
   .header {
     flex-wrap: wrap;
     margin-bottom: 32px;
@@ -117,13 +115,19 @@
     min-width: unset;
   }
 
-  .nav {
-    gap: 10px;
-    width: 100%;
+}
+
+@media (min-width: 1140px) {
+  .header {
+    gap: 32px;
+    flex-wrap: nowrap;
   }
 }
 
 @media (min-width: 1360px) {
+  .nav {
+    justify-content: flex-end;
+  }
   .title {
     font-size: 32px;
   }
@@ -131,16 +135,5 @@
   .sectMenuDropDown,
   .sectNewResumeDropDown {
     padding: 14px;
-  }
-}
-
-@media (min-width: 1300px) {
-  .nav {
-    gap: 32px;
-  }
-
-  .header {
-    gap: 32px;
-    flex-wrap: nowrap;
   }
 }

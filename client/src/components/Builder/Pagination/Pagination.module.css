@@ -1,0 +1,15 @@
+.paginationContainer {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--brown-dark);
+}
+.arrowLeft,
+.arrowRight {
+  cursor: pointer;
+}
+
+.arrowRight {
+  transform: rotate(180deg);
+}

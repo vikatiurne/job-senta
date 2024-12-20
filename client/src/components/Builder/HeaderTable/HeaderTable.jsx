@@ -1,17 +1,60 @@
 import CustomCheckbox from "../../UI/CustomCheckbox/CustomCheckbox";
 import DropDownBuilder from "../DropDownBuilder/DropDownBuilder";
 
+import { ReactComponent as Arrow } from "../../../assets/user_page/builder/arrow_filter.svg";
+import { ReactComponent as Star } from "../../../assets/user_page/home/star.svg";
+
 import styles from "./HeaderTable.module.css";
 
 const filter = [
   { title: "All resumes", value: "" },
   { title: "From A to Z", value: "target_A-Z" },
   { title: "From Z to A", value: "target_Z-A" },
-  { title: "up Created", value: "createdAt_ASC" },
-  { title: "down Created", value: "createdAt_DESC" },
-  { title: "up Last edit", value: "updatedAt_ASC" },
-  { title: "down Last edit", value: "updatedAt_DESC" },
-  { title: "Favorite", value: "favorite" },
+  {
+    title: (
+      <div className={styles.sort}>
+        <Arrow />
+        Created
+      </div>
+    ),
+    value: "createdAt_ASC",
+  },
+  {
+    title: (
+      <div className={styles.sort}>
+        <Arrow className={styles.arrowDown} />
+        Created
+      </div>
+    ),
+    value: "createdAt_DESC",
+  },
+  {
+    title: (
+      <div className={styles.sort}>
+        <Arrow />
+        Last edit
+      </div>
+    ),
+    value: "updatedAt_ASC",
+  },
+  {
+    title: (
+      <div className={styles.sort}>
+        <Arrow className={styles.arrowDown} />
+        Last edit
+      </div>
+    ),
+    value: "updatedAt_DESC",
+  },
+  {
+    title: (
+      <div className={styles.sort}>
+        <Star className={styles.star} />
+        Favorite
+      </div>
+    ),
+    value: "favorite",
+  },
 ];
 
 const HeaderTable = ({ onAllCheckboxChange }) => {
@@ -22,7 +65,7 @@ const HeaderTable = ({ onAllCheckboxChange }) => {
 
   return (
     <div className={styles.headerTable}>
-      <CustomCheckbox>
+      <CustomCheckbox className={styles.checkbox}>
         <input
           type="checkbox"
           onChange={onAllCheckboxChange}
@@ -31,9 +74,9 @@ const HeaderTable = ({ onAllCheckboxChange }) => {
       </CustomCheckbox>
 
       <p className={styles.text}>Resume Title</p>
-      <p className={styles.text}>Creation date</p>
-      <p className={styles.text}>Edit date</p>
-      <DropDownBuilder title={"Filter"} childrenText={filter} />
+      <p className={styles.textDate}>Creation date</p>
+      <p className={styles.textDate}>Edit date</p>
+      <DropDownBuilder title={"Filter"} childrenText={filter} className={styles.dropdown}/>
     </div>
   );
 };
