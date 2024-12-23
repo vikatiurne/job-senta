@@ -32,7 +32,7 @@ const BuilderHeader = () => {
 
   return (
     <div className={styles.header}>
-      <h1 className={styles.title}>Resume&nbsp;Builder</h1>
+      <h1 className={styles.title}>My&nbsp;Resume</h1>
       <div className={styles.nav}>
         <SearchBox />
         <div className={styles.newResume}>

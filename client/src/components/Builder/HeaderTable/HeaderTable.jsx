@@ -5,6 +5,9 @@ import { ReactComponent as Arrow } from "../../../assets/user_page/builder/arrow
 import { ReactComponent as Star } from "../../../assets/user_page/home/star.svg";
 
 import styles from "./HeaderTable.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { setCheckedResumes } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
 
 const filter = [
   { title: "All resumes", value: "" },
@@ -57,10 +60,20 @@ const filter = [
   },
 ];
 
-const HeaderTable = ({ onAllCheckboxChange }) => {
+const HeaderTable = () => {
+ 
+
+  const { resumes } = useSelector((state) => state.resume);
+  const dispatch = useDispatch();
+
   const handleAllCheckboxChange = (event) => {
     const { checked } = event.target;
-    onAllCheckboxChange(checked);
+    if (checked) {
+      const allCheckedResumes = resumes.map((resume) => ({ [resume.id]: true }));
+      dispatch(setCheckedResumes(allCheckedResumes))
+    } else {
+      dispatch(setCheckedResumes([]));
+    }
   };
 
   return (
@@ -68,7 +81,7 @@ const HeaderTable = ({ onAllCheckboxChange }) => {
       <CustomCheckbox className={styles.checkbox}>
         <input
           type="checkbox"
-          onChange={onAllCheckboxChange}
+          onChange={handleAllCheckboxChange}
           className={styles.checkbox}
         />
       </CustomCheckbox>
@@ -76,7 +89,11 @@ const HeaderTable = ({ onAllCheckboxChange }) => {
       <p className={styles.text}>Resume Title</p>
       <p className={styles.textDate}>Creation date</p>
       <p className={styles.textDate}>Edit date</p>
-      <DropDownBuilder title={"Filter"} childrenText={filter} className={styles.dropdown}/>
+      <DropDownBuilder
+        title={"Filter"}
+        childrenText={filter}
+        className={styles.dropdown}
+      />
     </div>
   );
 };

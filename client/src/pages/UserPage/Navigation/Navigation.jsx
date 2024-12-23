@@ -57,7 +57,7 @@ const Navigation = () => {
             })}
             to="/user/builder"
           >
-            <Builder /> Resume builder
+            <Builder />My Resume
           </Link>
         </li>
         <li className={style.userNavBarItem}>

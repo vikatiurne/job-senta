@@ -11,6 +11,7 @@ const initialState = {
   limit: 10,
   page: 1,
   sort: "",
+  checkedResumes: [],
 };
 
 export const fetchCreateResume = createAsyncThunk(
@@ -28,7 +29,13 @@ export const fetchGetAllResume = createAsyncThunk(
   "resume/fetchGetAllResume",
   async ({ page, limit, sort, isArchive, isFavorite }, { rejectWithValue }) => {
     try {
-      return await ResumeServices.getAllResume(page, limit, sort, isArchive, isFavorite);
+      return await ResumeServices.getAllResume(
+        page,
+        limit,
+        sort,
+        isArchive,
+        isFavorite
+      );
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.response.data);
@@ -94,7 +101,7 @@ export const fetchCloneResume = createAsyncThunk(
 export const fetchArchiveOneResume = createAsyncThunk(
   "resume/fetchArchiveOneResume",
   async ({ resumeId, isArchive }, { rejectWithValue }) => {
-    console.log(resumeId,isArchive)
+    console.log(resumeId, isArchive);
     try {
       return await ResumeServices.archiveOneResume(resumeId, isArchive);
     } catch (error) {
@@ -105,8 +112,8 @@ export const fetchArchiveOneResume = createAsyncThunk(
 );
 export const fetchArchiveSeveralResume = createAsyncThunk(
   "resume/fetchArchiveSeveralResume",
-  async ({resumeIds,isArchive}, { rejectWithValue }) => {
-    console.log(resumeIds,isArchive)
+  async ({ resumeIds, isArchive }, { rejectWithValue }) => {
+    console.log(resumeIds, isArchive);
     try {
       return await ResumeServices.archiveSeveralResume(resumeIds, isArchive);
     } catch (error) {
@@ -118,7 +125,7 @@ export const fetchArchiveSeveralResume = createAsyncThunk(
 export const fetchFavoriteResume = createAsyncThunk(
   "resume/fetchFavoriteResume",
   async ({ resumeId, isFavorite }, { rejectWithValue }) => {
-    console.log(resumeId,isFavorite)
+    console.log(resumeId, isFavorite);
     try {
       return await ResumeServices.favoriteResume(resumeId, isFavorite);
     } catch (error) {
@@ -142,6 +149,21 @@ const resumeReducer = createSlice({
         state.sort = payload;
       },
     },
+    setLimit: {
+      reducer(state, { payload }) {
+        state.limit = payload;
+      },
+    },
+    setPage: {
+      reducer(state, { payload }) {
+        state.page = payload;
+      },
+    },
+    setCheckedResumes: {
+      reducer(state, { payload }) {
+        state.checkedResumes = payload;
+      },
+    },
   },
   extraReducers(builder) {
     builder
@@ -150,14 +172,14 @@ const resumeReducer = createSlice({
       })
       .addCase(fetchCreateResume.fulfilled, (state, { payload }) => {
         state.status = "success";
-        state.info = payload.data
+        state.info = payload.data;
       })
       .addCase(fetchCreateResume.rejected, (state, { payload }) => {
         state.status = "error";
       })
       .addCase(fetchGetAllResume.pending, (state, { payload }) => {
         state.getallstatus = "loading";
-        state.isEdit = false
+        state.isEdit = false;
         localStorage.removeItem("_jobseeker_resume_isedit");
       })
       .addCase(fetchGetAllResume.fulfilled, (state, { payload }) => {
@@ -259,9 +281,10 @@ const resumeReducer = createSlice({
       })
       .addCase(fetchFavoriteResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
-      })
+      });
   },
 });
 
-export const { setInfo, setSort } = resumeReducer.actions;
+export const { setInfo, setSort, setLimit, setPage, setCheckedResumes } =
+  resumeReducer.actions;
 export default resumeReducer.reducer;

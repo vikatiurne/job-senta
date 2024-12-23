@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ReactComponent as StarBorder } from "../../../assets/user_page/home/starborder.svg";
 import { ReactComponent as Edit } from "../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg";
@@ -8,6 +8,7 @@ import { ReactComponent as Edit } from "../../../assets/user_page/builder/Active
 import {
   fetchFavoriteResume,
   fetchGetOneResume,
+  setCheckedResumes,
 } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
 import DateServices from "../../../utils/DateServices";
 
@@ -15,12 +16,18 @@ import styles from "./ResumeListItem.module.css";
 import CustomCheckbox from "../../UI/CustomCheckbox/CustomCheckbox";
 
 const ResumeListItem = ({ item, isArchive }) => {
+  const [checkedItem, setCheckedItem] = useState(false);
   const [activeStarIds, setActiveStarIds] = useState([]);
-  const [checkedItems, setCheckedItems] = useState({});
-  const [isAllChecked, setIsAllChecked] = useState(false);
+
+  const { checkedResumes } = useSelector((state) => state.resume);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const isChecked = checkedResumes.some((checkbox) => checkbox[item.id]);
+    setCheckedItem(isChecked);
+  }, [checkedResumes, item.id]);
 
   const clickResumeHandler = (id) => {
     dispatch(fetchGetOneResume(id));
@@ -28,28 +35,14 @@ const ResumeListItem = ({ item, isArchive }) => {
   };
 
   const checkedCheckboxHandler = (event) => {
-    const { id, checked } = event.target;
-    setCheckedItems((prevState) => ({
-      ...prevState,
-      [id]: checked,
-    }));
-    if (checked) {
-      const allChecked =
-        Object.keys(checkedItems).length ===
-        Object.keys(checkedItems).length - 1;
-      setIsAllChecked(allChecked);
-    } else {
-      setIsAllChecked(false);
-    }
-  };
+    const { checked } = event.target;
 
-  const handleAllCheckboxChange = (checked) => {
-    setIsAllChecked(checked);
-    const newCheckedItems = {};
-    Object.keys(checkedItems).forEach((item) => {
-      newCheckedItems[item] = checked;
-    });
-    setCheckedItems(newCheckedItems);
+    const newCheckedResumes = checked
+      ? [...checkedResumes, { [item.id]: true }]
+      : checkedResumes.filter((checkbox) => !checkbox[item.id]);
+
+    dispatch(setCheckedResumes(newCheckedResumes));
+    setCheckedItem(checked);
   };
 
   const handleStarClick = (id) => {
@@ -74,7 +67,7 @@ const ResumeListItem = ({ item, isArchive }) => {
             type="checkbox"
             id={item.id}
             className={styles.checkBox}
-            checked={!!checkedItems[item.id]}
+            checked={checkedItem}
             onChange={checkedCheckboxHandler}
           />
         </CustomCheckbox>

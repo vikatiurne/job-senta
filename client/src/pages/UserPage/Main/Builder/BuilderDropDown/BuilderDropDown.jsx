@@ -9,7 +9,7 @@ import { setSort } from "../../NewResume/NewResumeSlice";
 import cn from "classnames";
 import style from "./BuilderDropDown.module.css";
 
-export default function BuilderDropDown({ className, title, childrenText }) {
+const BuilderDropDown = ({ className, title, childrenText })=> {
   const [selectedResumes, setSelectedResumes] = useState(false);
   const handleSelectedResume = () => setSelectedResumes(!selectedResumes);
   const dispatch = useDispatch();
@@ -49,3 +49,5 @@ export default function BuilderDropDown({ className, title, childrenText }) {
     </section>
   );
 }
+
+export default BuilderDropDown

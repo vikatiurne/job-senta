@@ -24,8 +24,8 @@ import Loader from "../../../../components/UI/Loader/Loader";
 import ResumeListItem from "../../../../components/Builder/ResumeListItem/ResumeListItem";
 import BuilderFooter from "../../../../components/Builder/BuilderFooter/BuilderFooter";
 
-export default function Builder() {
-  const [limit, setLimit] = useState(10);
+const Builder = () => {
+  // const [limit, setLimit] = useState(10);
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [activeStarIds, setActiveStarIds] = useState([]);
   const [isShowArchive, setIsShowArchive] = useState(false);
@@ -33,7 +33,9 @@ export default function Builder() {
   const [checkedItems, setCheckedItems] = useState({});
 
   // вытаскиваем из стора тип сортировки
-  const { sort, resumes, getallstatus } = useSelector((state) => state.resume);
+  const { sort, resumes, getallstatus, limit } = useSelector(
+    (state) => state.resume
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -76,9 +78,9 @@ export default function Builder() {
     { title: "Favorite", value: "favorite" },
   ];
 
-  const limitHandler = (e) => {
-    !!e.target.value ? setLimit(Number(e.target.value)) : setLimit(10);
-  };
+  // const limitHandler = (e) => {
+  //   !!e.target.value ? setLimit(Number(e.target.value)) : setLimit(10);
+  // };
 
   const handleStarClick = (id) => {
     setActiveStarIds((prevActiveStars) => {
@@ -204,7 +206,7 @@ export default function Builder() {
       </div>
       <div className={styles.limit}>
         <p>Show:</p>
-        <input type="number" value={limit} onChange={limitHandler} />
+        {/* <input type="number" value={limit} onChange={limitHandler} /> */}
       </div>
 
       {resumes.map((item) => (
@@ -245,36 +247,41 @@ export default function Builder() {
 
   const render2 = (
     <div className={styles.builderWrapper}>
-          <div className={styles.resumeStatus}>
-            <p
-              onClick={hendleShowActive}
-              className={`${styles.statusTitle} ${
-                !isShowArchive ? styles.active : styles.archive
-              }`}
-            >
-              Active Resumes
-            </p>
-            <p
-              onClick={hendleShowArchive}
-              className={`${styles.statusTitle} ${
-                !isShowArchive ? styles.archive : styles.active
-              }`}
-            >
-              Archived Resumes
-            </p>
-          </div>
+      <div className={styles.resumeStatus}>
+        <p
+          onClick={hendleShowActive}
+          className={`${styles.statusTitle} ${
+            !isShowArchive ? styles.active : styles.archive
+          }`}
+        >
+          Active Resumes
+        </p>
+        <p
+          onClick={hendleShowArchive}
+          className={`${styles.statusTitle} ${
+            !isShowArchive ? styles.archive : styles.active
+          }`}
+        >
+          Archived Resumes
+        </p>
+      </div>
       <div className={styles.builderContainer}>
-        
-          <div className={styles.builderTable}>
-            <HeaderTable onAllCheckboxChange={handleAllCheckboxChange} />
-            {resumes.map((item) => (
-              <ResumeListItem key={uuidv4()} item={item} isArchive={isShowArchive} />
-            ))}
-          </div>
-       
-        <BuilderFooter/>
+        <div className={styles.builderTable}>
+          <HeaderTable/>
+          {resumes.map((item) => (
+            <ResumeListItem
+              key={uuidv4()}
+              item={item}
+              isArchive={isShowArchive}
+            />
+          ))}
+        </div>
+
+        <BuilderFooter />
       </div>
     </div>
   );
   return getallstatus === "loading" ? <Loader /> : render2;
-}
+};
+
+export default Builder;
