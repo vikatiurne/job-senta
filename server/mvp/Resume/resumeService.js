@@ -1,4 +1,3 @@
-const { Op } = require("sequelize");
 const {
   Resume,
   Project,
@@ -208,8 +207,7 @@ class ResumeService {
   }
 
   async getAll(userId, page, limit, sort, isArchive, isFavorite) {
-    
-    isFavorite = isFavorite || false;
+    isFavorite = isFavorite === undefined ? false : isFavorite !== "false";
     isArchive = isArchive || false;
     page = page || 1;
     limit = limit || 10;
@@ -244,7 +242,7 @@ class ResumeService {
     const queries = {
       offset,
       limit,
-      resumeSort,
+      order: resumeSort,
       subQuery: false,
     };
 
@@ -252,16 +250,8 @@ class ResumeService {
       userId,
       isArchive,
     };
-    console.log("FAV:", isFavorite)
-    console.log("FAV:", isFavorite)
-    if (isFavorite===true) whereCondition.isFavorite = true;
-
-    // isFavorite===true
-    //   ? (whereCondition.isFavorite = true)
-    //   : (whereCondition[Op.or] = [
-    //       { isFavorite: false },
-    //       { isFavorite: true },
-    //     ]);
+    console.log("SORT:", queries);
+    if (isFavorite) whereCondition.isFavorite = true;
 
     const resumes = await Resume.findAndCountAll({
       where: whereCondition,
