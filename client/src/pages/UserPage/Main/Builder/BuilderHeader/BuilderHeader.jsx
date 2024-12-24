@@ -10,6 +10,7 @@ import styles from './BuilderHeader.module.css';
 const BuilderHeader = () => {
   const [selectedMenu, setSelectedMenu] = useState(false);
   const [selectedNewResume, setSelectedNewResume] = useState(false);
+  
   const handleSelectedMenu = () => {
     setSelectedMenu((prev) => !prev);
     if (selectedNewResume) {
@@ -24,8 +25,6 @@ const BuilderHeader = () => {
     }
   };
 
-  const deleteHandler = () => {};
-  const guideHandler = () => {};
   const importPdfHandler = () => {};
   const importLinkedInHandler = () => {};
   const createHandler = () => {};

@@ -12,6 +12,7 @@ const initialState = {
   page: 1,
   sort: "",
   checkedResumes: [],
+  isShowArchive:false,
 };
 
 export const fetchCreateResume = createAsyncThunk(
@@ -164,6 +165,11 @@ const resumeReducer = createSlice({
         state.checkedResumes = payload;
       },
     },
+    setIsArciveResumes: {
+      reducer(state, { payload }) {
+        state.isShowArchive = payload;
+      },
+    },
   },
   extraReducers(builder) {
     builder
@@ -285,6 +291,6 @@ const resumeReducer = createSlice({
   },
 });
 
-export const { setInfo, setSort, setLimit, setPage, setCheckedResumes } =
+export const { setInfo, setSort, setLimit, setPage, setCheckedResumes,setIsArciveResumes } =
   resumeReducer.actions;
 export default resumeReducer.reducer;

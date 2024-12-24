@@ -10,9 +10,12 @@ import Button from "../../UI/Button/Button";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchArchiveOneResume,
+  fetchArchiveSeveralResume,
   fetchCloneResume,
   fetchDeleteOneResume,
   fetchDeleteSeveralResume,
+  fetchGetAllResume,
   setCheckedResumes,
   setLimit,
 } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
@@ -20,26 +23,20 @@ import {
 import styles from "./BtnsBuilder.module.css";
 
 const BtnsBuilder = () => {
-  const { limit, checkedResumes } = useSelector((state) => state.resume);
+  const { limit, checkedResumes, isShowArchive, sort, isShowFavorite } = useSelector(
+    (state) => state.resume
+  );
 
   const [limitNum, setLimitNum] = useState(limit);
   const [activeCloneBtn, setActiveCloneBtn] = useState(false);
   const [activeDownloadBtn, setActiveDownloadBtn] = useState(true);
   const [activeMultiBtn, setActiveMultiBtn] = useState(false);
-  const [idsChecked, setIsdChecked] = useState([]);
-
-  // const getArrCheckedItems = () => {
-  //   return Object.keys(checkedResumes).filter((key) => checkedResumes[key]);
-  // };
-  const getArrCheckedItems = () => {
-    return checkedResumes.map(obj => Object.keys(obj)[0]) 
-  };
+  const [idsChecked, setIdsChecked] = useState([]);
 
   const dispatch = useDispatch();
 
-  console.log(checkedResumes)
   useEffect(() => {
-    setIsdChecked(checkedResumes);
+    setIdsChecked(checkedResumes);
     const countChecked = checkedResumes.length;
     setActiveMultiBtn(countChecked > 0);
     setActiveDownloadBtn(countChecked === 0);
@@ -47,17 +44,47 @@ const BtnsBuilder = () => {
   }, [checkedResumes]);
 
   const handleClone = () => {
-    dispatch(fetchCloneResume(Object.keys(idsChecked[0])));
+    dispatch(fetchCloneResume(idsChecked[0]));
     dispatch(setCheckedResumes([]));
   };
 
   const handleDelete = () => {
-    const idsToDelete = getArrCheckedItems();
+    const idsToDelete = checkedResumes;
     idsToDelete.length === 1
       ? dispatch(fetchDeleteOneResume(idsToDelete[0]))
       : dispatch(fetchDeleteSeveralResume(idsToDelete));
-      dispatch(setCheckedResumes([]));
-    setIsdChecked([]);
+    dispatch(setCheckedResumes([]));
+    setIdsChecked([]);
+  };
+
+  const chengeStatusResume = ({ isArchive }) => {  
+    const idsToChangeStatus = checkedResumes;  
+    const action =  
+      idsToChangeStatus.length === 1  
+        ? fetchArchiveOneResume({ resumeId: idsToChangeStatus[0], isArchive })  
+        : fetchArchiveSeveralResume({  
+            resumeIds: idsToChangeStatus,  
+            isArchive,  
+          });  
+
+    dispatch(action).then(() => {  
+        dispatch(fetchGetAllResume({  
+            page: 1,  
+            limit,  
+            sort,  
+            isArchive: isShowArchive,
+            isFavorite: isShowFavorite,  
+        }));  
+        dispatch(setCheckedResumes([]));  
+        setIdsChecked([]);  
+    });  
+}; 
+
+  const handleArchive = () => {
+    const newArchiveStatus = !isShowArchive;  
+    chengeStatusResume({  
+        isArchive: newArchiveStatus 
+    });  
   };
 
   const handleLimit = (e) => {
@@ -92,8 +119,9 @@ const BtnsBuilder = () => {
         </Button>
 
         <Button
+          onClick={handleArchive}
           className={activeMultiBtn ? styles.icon : styles.notActiveLd}
-          title="add to archive"
+          title={!isShowArchive ? "add to archive" : "add to active"}
           disabled={!activeMultiBtn}
         >
           <Archive />

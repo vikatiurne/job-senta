@@ -1,21 +1,23 @@
-import style from "./DropDownBuilder.module.css";
 import  { useState } from "react";
-
-import cn from "classnames";
 import { useDispatch } from "react-redux";
+import cn from "classnames";
+
 import DropDown from "../../../components/UI/DropDown/DropDown";
 
 import { ReactComponent as DropDownIcon } from "../../../assets/user_page/home/dropdown.svg";
 
 import { setSort } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
 
+import style from "./DropDownBuilder.module.css";
 
-export default function DropDownBuilder({ className, title, childrenText }) {
+
+const DropDownBuilder=({ className, title, childrenText }) =>{
   const [selectedResumes, setSelectedResumes] = useState(false);
+
   const handleSelectedResume = () => setSelectedResumes(!selectedResumes);
+
   const dispatch = useDispatch();
 
-  // закидываем в стор тип сортировки
   const filterHandler = (val) => dispatch(setSort(val));
 
   return (
@@ -55,3 +57,5 @@ export default function DropDownBuilder({ className, title, childrenText }) {
     </section>
   );
 }
+
+export default DropDownBuilder

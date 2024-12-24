@@ -23,11 +23,18 @@
   align-items: center;
   gap: 16px;
 }
-.edit,
 .star,
+.edit,
 .checkBox {
   min-width: 24px;
   min-height: 24px;
+  cursor: pointer;
+}
+.hide{
+  display: none;
+}
+.fill{
+  fill: var(--brown);
 }
 .itemText,
 .itemDate {

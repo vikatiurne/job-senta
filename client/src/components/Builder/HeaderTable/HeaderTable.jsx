@@ -1,13 +1,14 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import CustomCheckbox from "../../UI/CustomCheckbox/CustomCheckbox";
 import DropDownBuilder from "../DropDownBuilder/DropDownBuilder";
 
 import { ReactComponent as Arrow } from "../../../assets/user_page/builder/arrow_filter.svg";
 import { ReactComponent as Star } from "../../../assets/user_page/home/star.svg";
 
-import styles from "./HeaderTable.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { setCheckedResumes } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
+
+import styles from "./HeaderTable.module.css";
 
 const filter = [
   { title: "All resumes", value: "" },
@@ -61,16 +62,15 @@ const filter = [
 ];
 
 const HeaderTable = () => {
- 
-
   const { resumes } = useSelector((state) => state.resume);
+
   const dispatch = useDispatch();
 
   const handleAllCheckboxChange = (event) => {
     const { checked } = event.target;
     if (checked) {
-      const allCheckedResumes = resumes.map((resume) => ({ [resume.id]: true }));
-      dispatch(setCheckedResumes(allCheckedResumes))
+      const allCheckedResumes = resumes.map((resume) => String(resume.id));
+      dispatch(setCheckedResumes(allCheckedResumes));
     } else {
       dispatch(setCheckedResumes([]));
     }
