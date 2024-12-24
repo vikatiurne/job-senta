@@ -250,7 +250,7 @@ class ResumeService {
       userId,
       isArchive,
     };
-    console.log("SORT:", queries);
+ 
     if (isFavorite) whereCondition.isFavorite = true;
 
     const resumes = await Resume.findAndCountAll({
