@@ -18,7 +18,7 @@ const Builder = () => {
   const [isShowArchive, setIsShowArchive] = useState(false);
   const [isShowFavorite, setIsShowFavorite] = useState(false);
 
-  const { sort, resumes, getallstatus, limit, page } = useSelector(
+  const { sort, resumes, getallstatus, limit, page, searchText } = useSelector(
     (state) => state.resume
   );
 
@@ -36,9 +36,10 @@ const Builder = () => {
         sort,
         isArchive: isShowArchive,
         isFavorite: isShowFavorite,
+        searchText
       })
     );
-  }, [dispatch, limit, sort, isShowArchive, isShowFavorite, page]);
+  }, [dispatch, limit, sort, isShowArchive, isShowFavorite, page, searchText]);
 
   const hendleShowArchive = () => {
     setIsShowArchive(true);

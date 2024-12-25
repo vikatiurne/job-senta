@@ -14,6 +14,7 @@ const initialState = {
   resumesCount: null,
   checkedResumes: [],
   isShowArchive: false,
+  searchText: "",
 };
 
 export const fetchCreateResume = createAsyncThunk(
@@ -29,14 +30,18 @@ export const fetchCreateResume = createAsyncThunk(
 );
 export const fetchGetAllResume = createAsyncThunk(
   "resume/fetchGetAllResume",
-  async ({ page, limit, sort, isArchive, isFavorite }, { rejectWithValue }) => {
+  async (
+    { page, limit, sort, isArchive, isFavorite, searchText },
+    { rejectWithValue }
+  ) => {
     try {
       return await ResumeServices.getAllResume(
         page,
         limit,
         sort,
         isArchive,
-        isFavorite
+        isFavorite,
+        searchText
       );
     } catch (error) {
       console.log(error);
@@ -171,6 +176,11 @@ const resumeReducer = createSlice({
         state.isShowArchive = payload;
       },
     },
+    setSearch: {
+      reducer(state, { payload }) {
+        state.searchText = payload;
+      },
+    },
   },
   extraReducers(builder) {
     builder
@@ -300,5 +310,6 @@ export const {
   setPage,
   setCheckedResumes,
   setIsArciveResumes,
+  setSearch,
 } = resumeReducer.actions;
 export default resumeReducer.reducer;

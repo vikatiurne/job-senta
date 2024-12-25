@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { ReactComponent as Search } from "../../../assets/user_page/home/search.svg";
-import { ReactComponent as Close } from "../../../assets/user_page/home/close.svg";
-import styles from "./SearchBox.module.css";
+import { useDispatch } from "react-redux";
 import cn from 'classnames'
-import { useMedia } from '../../../hoc/useMedia/useMedia.js'
 
+import { ReactComponent as Search } from "../../../assets/user_page/home/search.svg";
+
+import { setSearch } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
+
+import styles from "./SearchBox.module.css";
 
 const SearchBox = () => {
+  const dispatch = useDispatch();  
   const [searchText, setSearchText] = useState("");
   const [isInputFocus, setIsInputFocus] = useState(true)
 
@@ -14,6 +17,7 @@ const SearchBox = () => {
   const changeHandler = (e) => {
     const text = e.target.value;
     setSearchText(text);
+    dispatch(setSearch(text))
   };
 
   const handleBlurInput = () => {

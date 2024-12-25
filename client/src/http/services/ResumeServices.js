@@ -4,9 +4,9 @@ export default class ResumeServices {
   static async createResume(values) {
     return await $api.post("api/resumes/create", { values });
   }
-  static async getAllResume(page, limit, sort, isArchive, isFavorite) {
+  static async getAllResume(page, limit, sort, isArchive, isFavorite, searchText) {
     return await $api.get("api/resumes/getAll", {
-      params: { page, limit, sort, isArchive, isFavorite },
+      params: { page, limit, sort, isArchive, isFavorite,searchText },
     });
   }
   static async getOneResume(resumeId) {
