@@ -1,3 +1,5 @@
+const { Op } = require("sequelize");
+
 const {
   Resume,
   Project,
@@ -206,7 +208,15 @@ class ResumeService {
     return this.getAll(userId);
   }
 
-  async getAll(userId, page, limit, sort, isArchive, isFavorite) {
+  async getAll(
+    userId,
+    page,
+    limit,
+    sort,
+    isArchive,
+    isFavorite,
+    searchText = ""
+  ) {
     isFavorite = isFavorite === undefined ? false : isFavorite !== "false";
     isArchive = isArchive || false;
     page = page || 1;
@@ -250,8 +260,13 @@ class ResumeService {
       userId,
       isArchive,
     };
- 
+
     if (isFavorite) whereCondition.isFavorite = true;
+    if (searchText!=="") {
+      whereCondition.target = {
+        [Op.like]: `%${searchText}%`,
+      };
+    }
 
     const resumes = await Resume.findAndCountAll({
       where: whereCondition,

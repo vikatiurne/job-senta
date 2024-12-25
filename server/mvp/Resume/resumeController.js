@@ -21,7 +21,7 @@ class ResumeController {
 
   async getAll(req, res, next) {
     const { id } = req.user;
-    const { page, limit, sort, isArchive, isFavorite } = req.query;
+    const { page, limit, sort, isArchive, isFavorite, searchText } = req.query;
 
     try {
       const resumes = await resumeService.getAll(
@@ -30,7 +30,7 @@ class ResumeController {
         limit,
         sort,
         isArchive,
-        isFavorite
+        isFavorite, searchText
       );
       return res.json(resumes);
     } catch (error) {
