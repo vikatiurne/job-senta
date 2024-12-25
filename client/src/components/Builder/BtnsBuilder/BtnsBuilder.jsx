@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { ReactComponent as Add } from "../../../assets/user_page/builder/ActiveResume/ic-duplicate.svg";
-import { ReactComponent as Linkedin } from "../../../assets/user_page/builder/ActiveResume/ic-linkedin-download.svg";
-import { ReactComponent as Download } from "../../../assets/user_page/builder/ActiveResume/ic-download.svg";
-import { ReactComponent as Archive } from "../../../assets/user_page/builder/ActiveResume/archive.svg";
-import { ReactComponent as Remove } from "../../../assets/user_page/builder/ActiveResume/ic-remove-all.svg";
-
-import Button from "../../UI/Button/Button";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchArchiveOneResume,
@@ -21,11 +13,15 @@ import {
 } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
 
 import styles from "./BtnsBuilder.module.css";
+import Clone from "./Btns/Clone";
+import LinkedInDownload from "./Btns/LinkedInDownload";
+import Download from "./Btns/Download";
+import Archive from "./Btns/Archive";
+import Delete from "./Btns/Delete";
 
 const BtnsBuilder = () => {
-  const { limit, checkedResumes, isShowArchive, sort, isShowFavorite } = useSelector(
-    (state) => state.resume
-  );
+  const { limit, checkedResumes, isShowArchive, sort, isShowFavorite } =
+    useSelector((state) => state.resume);
 
   const [limitNum, setLimitNum] = useState(limit);
   const [activeCloneBtn, setActiveCloneBtn] = useState(false);
@@ -57,34 +53,36 @@ const BtnsBuilder = () => {
     setIdsChecked([]);
   };
 
-  const chengeStatusResume = ({ isArchive }) => {  
-    const idsToChangeStatus = checkedResumes;  
-    const action =  
-      idsToChangeStatus.length === 1  
-        ? fetchArchiveOneResume({ resumeId: idsToChangeStatus[0], isArchive })  
-        : fetchArchiveSeveralResume({  
-            resumeIds: idsToChangeStatus,  
-            isArchive,  
-          });  
+  const changeStatusResume = async ({ isArchive }) => {
+    const idsToChangeStatus = checkedResumes;
+    const action =
+      idsToChangeStatus.length === 1
+        ? fetchArchiveOneResume({ resumeId: idsToChangeStatus[0], isArchive })
+        : fetchArchiveSeveralResume({
+            resumeIds: idsToChangeStatus,
+            isArchive,
+          });
 
-    dispatch(action).then(() => {  
-        dispatch(fetchGetAllResume({  
-            page: 1,  
-            limit,  
-            sort,  
-            isArchive: isShowArchive,
-            isFavorite: isShowFavorite,  
-        }));  
-        dispatch(setCheckedResumes([]));  
-        setIdsChecked([]);  
-    });  
-}; 
+    await dispatch(action);
+    await dispatch(
+      fetchGetAllResume({
+        page: 1,
+        limit,
+        sort,
+        isArchive: isShowArchive,
+        isFavorite: isShowFavorite,
+      })
+    );
+
+    dispatch(setCheckedResumes([]));
+    setIdsChecked([]);
+  };
 
   const handleArchive = () => {
-    const newArchiveStatus = !isShowArchive;  
-    chengeStatusResume({  
-        isArchive: newArchiveStatus 
-    });  
+    const newArchiveStatus = !isShowArchive;
+    changeStatusResume({
+      isArchive: newArchiveStatus,
+    });
   };
 
   const handleLimit = (e) => {
@@ -95,46 +93,20 @@ const BtnsBuilder = () => {
   return (
     <div className={styles.btnsConainer}>
       <div className={styles.btns}>
-        <Button
-          onClick={handleClone}
-          className={activeCloneBtn ? styles.icon : styles.notActive}
-          title="clone one resume"
-          disabled={!activeCloneBtn}
-        >
-          <Add />
-        </Button>
+        {!isShowArchive && (
+          <>
+            <Clone onClick={handleClone} isActive={activeCloneBtn} />
+            <LinkedInDownload isActive={activeDownloadBtn} />
+            <Download onClick={() => {}} isActive={activeDownloadBtn} />
+          </>
+        )}
 
-        <Button
-          className={activeDownloadBtn ? styles.iconLd : styles.notActiveLd}
-          title="download linkedin resume"
-        >
-          <Linkedin />
-        </Button>
-
-        <Button
-          className={activeDownloadBtn ? styles.icon : styles.notActive}
-          title="download .docx/.pdf resume"
-        >
-          <Download />
-        </Button>
-
-        <Button
+        <Archive
           onClick={handleArchive}
-          className={activeMultiBtn ? styles.icon : styles.notActiveLd}
-          title={!isShowArchive ? "add to archive" : "add to active"}
-          disabled={!activeMultiBtn}
-        >
-          <Archive />
-        </Button>
-
-        <Button
-          onClick={handleDelete}
-          className={activeMultiBtn ? styles.icon : styles.notActiveLd}
-          title="delete"
-          disabled={!activeMultiBtn}
-        >
-          <Remove />
-        </Button>
+          isActive={activeMultiBtn}
+          isShowArchive={isShowArchive}
+        />
+        <Delete onClick={handleDelete} isActive={activeMultiBtn} />
       </div>
 
       <label className={styles.label}>

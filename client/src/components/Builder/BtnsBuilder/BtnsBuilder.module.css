@@ -19,21 +19,21 @@
   line-height: 24px;
 }
 
-.iconLd svg{
+.iconLd svg {
   color: var(--brown);
   cursor: pointer;
 }
 
-.icon svg{
+.icon svg {
   cursor: pointer;
   color: var(--brown);
   fill: var(--brown);
 }
-.notActiveLd svg{
+.notActiveLd svg {
   color: var(--gray);
 }
 
-.notActive svg{
+.notActive svg {
   color: var(--gray);
   fill: var(--gray);
 }
@@ -47,4 +47,66 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 19px;
+}
+.content {
+  margin: 0 24px;
+  text-align: left;
+  border-radius: 20px;
+  width: 342px;
+  background-color: var(--brown);
+  color: var(--white);
+  transform: scale(0.5);
+  transition: 0.4s all;
+}
+.cross {
+  display: none;
+}
+.popup {
+  padding: 24px 40px;
+}
+.textPopap {
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  font-family: var(--open-sans);
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 32px;
+}
+.delPopap,.cancelPopap {
+  margin: 0 auto 24px;
+  padding: 8px 99px;
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--montserrat);
+ cursor: pointer;
+}
+.delPopap{
+  color: var(--dark-gray);
+  background-color: var(--white);
+  border-radius: 20px;
+  transition: all 0.3s ease-in;
+}
+.delPopap:hover{
+  color: var(--white);
+  background-color: var(--brown-hover);
+}
+.delPopap:active{
+  color: var(--white);
+  background-color: var(----brown-focused);
+}
+.cancelPopap{
+  color: var(--white);
+  border:2px solid var(--white);
+  border-radius: 20px;
+}
+.cancelPopap:hover{
+  color: var(--brown-hover);
+  border:2px solid var(--brown-hover);
+  border-radius: 20px;
+}
+.cancelPopap:active{
+  color: var(--brown-focused);
+  border:2px solid var(--brown-focused);
+  border-radius: 20px;
 }

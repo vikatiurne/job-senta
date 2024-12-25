@@ -11,8 +11,9 @@ const initialState = {
   limit: 10,
   page: 1,
   sort: "",
+  resumesCount: null,
   checkedResumes: [],
-  isShowArchive:false,
+  isShowArchive: false,
 };
 
 export const fetchCreateResume = createAsyncThunk(
@@ -192,6 +193,7 @@ const resumeReducer = createSlice({
         console.log(payload);
         state.getallstatus = "success";
         state.resumes = payload.data.rows;
+        state.resumesCount = payload.data.count;
       })
       .addCase(fetchGetAllResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -291,6 +293,12 @@ const resumeReducer = createSlice({
   },
 });
 
-export const { setInfo, setSort, setLimit, setPage, setCheckedResumes,setIsArciveResumes } =
-  resumeReducer.actions;
+export const {
+  setInfo,
+  setSort,
+  setLimit,
+  setPage,
+  setCheckedResumes,
+  setIsArciveResumes,
+} = resumeReducer.actions;
 export default resumeReducer.reducer;

@@ -1,6 +1,6 @@
 import styles from "./Popup.module.css";
 
-const Popup = ({ active, setActive, children }) => {
+const Popup = ({ active, setActive, children, style, cross }) => {
   return (
     <div
       className={active ? `${styles.modal} ${styles.active}` : styles.modal}
@@ -9,12 +9,16 @@ const Popup = ({ active, setActive, children }) => {
       <div
         className={
           active
-            ? `${styles.modalContent} ${styles.active}`
+            ? `${styles.modalContent} ${styles.active} `
             : styles.modalContent
         }
+        style={{ width: !!style ? style.width : null, marginLeft: !!style ? style.margin : null }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={styles.close} onClick={() => setActive()}></div>
+        <div
+          className={!cross ? styles.close : cross}
+          onClick={() => setActive()}
+        ></div>
 
         {children}
       </div>

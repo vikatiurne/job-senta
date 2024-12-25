@@ -14,12 +14,11 @@ import {
 
 import styles from "./Builder.module.css";
 
-
 const Builder = () => {
   const [isShowArchive, setIsShowArchive] = useState(false);
   const [isShowFavorite, setIsShowFavorite] = useState(false);
 
-  const { sort, resumes, getallstatus, limit } = useSelector(
+  const { sort, resumes, getallstatus, limit, page } = useSelector(
     (state) => state.resume
   );
 
@@ -32,14 +31,14 @@ const Builder = () => {
   useEffect(() => {
     dispatch(
       fetchGetAllResume({
-        page: 1,
+        page,
         limit,
         sort,
         isArchive: isShowArchive,
         isFavorite: isShowFavorite,
       })
     );
-  }, [dispatch, limit, sort, isShowArchive, isShowFavorite]);
+  }, [dispatch, limit, sort, isShowArchive, isShowFavorite, page]);
 
   const hendleShowArchive = () => {
     setIsShowArchive(true);

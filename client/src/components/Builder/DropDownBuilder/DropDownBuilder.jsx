@@ -39,8 +39,7 @@ const DropDownBuilder=({ className, title, childrenText }) =>{
           className={cn(style.sectResumeDropDown)}
           activeClass={selectedResumes}
           maxHeight="500px"
-        >
-          
+        >  
           {childrenText.map((item, i) => (
             <button
               key={i}
@@ -50,8 +49,6 @@ const DropDownBuilder=({ className, title, childrenText }) =>{
               {item.title}
             </button>
           ))}
-
-         
         </DropDown>
       </div>
     </section>

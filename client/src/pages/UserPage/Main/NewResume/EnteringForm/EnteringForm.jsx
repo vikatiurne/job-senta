@@ -3,11 +3,9 @@ import { Form, Formik } from "formik";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import Button from "../../../../../components/UI/Button/Button";
 import Scroll from "../../../../../components/UI/Scroll/Scroll";
 import Loader from "../../../../../components/UI/Loader/Loader";
 
-import arrow from "../../../../../assets/user_page/builder/arrow-outlined.svg";
 
 import { initialValues, schemas } from "../helper";
 import { useMedia } from "../../../../../hoc/useMedia/useMedia";
