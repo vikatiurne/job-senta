@@ -203,8 +203,8 @@ const resumeReducer = createSlice({
       .addCase(fetchGetAllResume.fulfilled, (state, { payload }) => {
         state.getallstatus = "success";
         state.resumes = payload.data.activeResumes.rows;
-        state.archiveCount = payload.data.archivedCount
-        state.resumesCount = payload.data.count;
+        state.achiveCount = payload.data.archivedCount
+        state.resumesCount = payload.data.activeResumes.count;
       })
       .addCase(fetchGetAllResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
