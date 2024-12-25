@@ -5,7 +5,7 @@ import InputForResume from "../../../../../../components/UI/InputForResume/Input
 
 import styles from './FormComponents.module.css'
 
-const Target = ({values,touched}) => {
+const Target = ({values,touched, errors}) => {
   return (
     <section className={styles.target}>
     <p className={styles.label}>Target Title</p>
@@ -27,7 +27,8 @@ const Target = ({values,touched}) => {
           <Check />
         )
       }
-      touched={touched}
+        touched={touched}
+        errors={errors}
     />
   </section>
   )

@@ -42,9 +42,7 @@ export default class DateServices {
         }  
         return acc;  
       }, {});  
-    }  
-
-    // Если это не объект и не массив, возвращаем как есть  
+    }   
     return obj;  
   };  
 

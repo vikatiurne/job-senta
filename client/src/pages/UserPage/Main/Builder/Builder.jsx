@@ -39,7 +39,7 @@ const Builder = () => {
         searchText
       })
     );
-  }, [dispatch, limit, sort, isShowArchive, isShowFavorite, page, searchText]);
+  }, [dispatch, limit, sort, isShowArchive, isShowFavorite, page, searchText,resumes.length]);
 
   const hendleShowArchive = () => {
     setIsShowArchive(true);

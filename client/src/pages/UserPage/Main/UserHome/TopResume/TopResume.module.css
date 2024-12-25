@@ -110,6 +110,7 @@
     align-items: center;
     gap: 4px;
     counter-increment: list-counter;
+    cursor: pointer;
 }
 
 .sectResumeDropDownItem::before {

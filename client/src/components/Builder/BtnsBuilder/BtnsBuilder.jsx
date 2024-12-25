@@ -12,12 +12,13 @@ import {
   setLimit,
 } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
 
-import styles from "./BtnsBuilder.module.css";
 import Clone from "./Btns/Clone";
 import LinkedInDownload from "./Btns/LinkedInDownload";
 import Download from "./Btns/Download";
 import Archive from "./Btns/Archive";
 import Delete from "./Btns/Delete";
+
+import styles from "./BtnsBuilder.module.css";
 
 const BtnsBuilder = () => {
   const { limit, checkedResumes, isShowArchive, sort, isShowFavorite } =
@@ -67,7 +68,7 @@ const BtnsBuilder = () => {
     await dispatch(
       fetchGetAllResume({
         page: 1,
-        limit,
+        limit:limitNum,
         sort,
         isArchive: isShowArchive,
         isFavorite: isShowFavorite,

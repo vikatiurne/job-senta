@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import WelcomeMessAndSearch from "./WelcomeMessAndSearch/WelcomeMessAndSearch";
 import CareerGoal from "./CareerGoal/CareerGoal.jsx";
@@ -10,9 +10,27 @@ import CalendarUser from "./CalendarUser/CalendarUser.jsx";
 import Loader from "../../../../components/UI/Loader/Loader.jsx";
 
 import style from "./UserHome.module.css";
+import { useEffect } from "react";
+import { fetchGetAllResume } from "../NewResume/NewResumeSlice.js";
 
 const UserHome = () => {
   const { status } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      fetchGetAllResume({
+        page: 1,
+        limit: 1000,
+        sort: "createdAt_DESC",
+        isArchive: false,
+        isFavorite: false,
+        searchText: "",
+      })
+    );
+  }, [dispatch]);
+  
 
   return status === "loading" ? (
     <Loader loading color="#958060" />

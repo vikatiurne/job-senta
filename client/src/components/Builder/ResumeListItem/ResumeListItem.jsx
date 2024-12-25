@@ -17,11 +17,13 @@ import DateServices from "../../../utils/DateServices";
 import styles from "./ResumeListItem.module.css";
 import CustomCheckbox from "../../UI/CustomCheckbox/CustomCheckbox";
 
-const ResumeListItem = ({ item}) => {
+const ResumeListItem = ({ item }) => {
   const [checkedItem, setCheckedItem] = useState(false);
   const [activeStarIds, setActiveStarIds] = useState([]);
 
-  const { checkedResumes, resumes,isShowArchive } = useSelector((state) => state.resume);
+  const { checkedResumes, resumes, isShowArchive } = useSelector(
+    (state) => state.resume
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,8 +40,10 @@ const ResumeListItem = ({ item}) => {
   }, [resumes]);
 
   const clickResumeHandler = (id) => {
-    dispatch(fetchGetOneResume(id));
-    navigate(`edit/${id}`);
+    if (!isShowArchive) {
+      dispatch(fetchGetOneResume(id));
+      navigate(`edit/${id}`);
+    }
   };
 
   const checkedCheckboxHandler = (event) => {

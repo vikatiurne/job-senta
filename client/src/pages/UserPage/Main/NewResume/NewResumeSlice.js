@@ -12,6 +12,7 @@ const initialState = {
   page: 1,
   sort: "",
   resumesCount: null,
+  achiveCount:null,
   checkedResumes: [],
   isShowArchive: false,
   searchText: "",
@@ -200,9 +201,9 @@ const resumeReducer = createSlice({
         localStorage.removeItem("_jobseeker_resume_isedit");
       })
       .addCase(fetchGetAllResume.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.rows;
+        state.resumes = payload.data.activeResumes.rows;
+        state.archiveCount = payload.data.archivedCount
         state.resumesCount = payload.data.count;
       })
       .addCase(fetchGetAllResume.rejected, (state, { payload }) => {
@@ -212,7 +213,6 @@ const resumeReducer = createSlice({
         state.getonestatus = "loading";
       })
       .addCase(fetchGetOneResume.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.getonestatus = "success";
         state.info = payload.data;
         localStorage.setItem("_jobseeker_resume_isedit", true);
@@ -240,7 +240,7 @@ const resumeReducer = createSlice({
       .addCase(fetchDeleteOneResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.rows;
+        state.resumes = payload.data.activeResumes.rows;
       })
       .addCase(fetchDeleteOneResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -251,7 +251,7 @@ const resumeReducer = createSlice({
       .addCase(fetchDeleteSeveralResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.rows;
+        state.resumes = payload.data.activeResumes.rows;
       })
       .addCase(fetchDeleteSeveralResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -262,7 +262,7 @@ const resumeReducer = createSlice({
       .addCase(fetchCloneResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.rows;
+        state.resumes = payload.data.activeResumes.rows;
       })
       .addCase(fetchCloneResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -273,7 +273,7 @@ const resumeReducer = createSlice({
       .addCase(fetchArchiveOneResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.rows;
+        state.resumes = payload.data.activeResumes.rows;
       })
       .addCase(fetchArchiveOneResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -284,7 +284,7 @@ const resumeReducer = createSlice({
       .addCase(fetchArchiveSeveralResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.rows;
+        state.resumes = payload.data.activeResumes.rows;
       })
       .addCase(fetchArchiveSeveralResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -295,7 +295,7 @@ const resumeReducer = createSlice({
       .addCase(fetchFavoriteResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.rows;
+        state.resumes = payload.data.activeResumes.rows;
       })
       .addCase(fetchFavoriteResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";

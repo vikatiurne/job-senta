@@ -10,8 +10,6 @@ import styles from './BuilderHeader.module.css';
 const BuilderHeader = () => {
   const [selectedNewResume, setSelectedNewResume] = useState(false);
   
-
-
   const handleSelectedNewResume = () => {
     setSelectedNewResume((prev) => !prev);
   };

@@ -4,7 +4,7 @@ import { ReactComponent as Linked } from "../../../../../../assets/user_page/bui
 
 import InputsBlock from '../../../../../../components/UI/InputsBlock/InputsBlock'
 
-const Publications = ({errors}) => {
+const Publications = ({ errors }) => {
   return (
     <InputsBlock
     blockName="publ"

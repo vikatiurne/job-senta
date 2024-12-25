@@ -80,6 +80,7 @@ const InputsBlock = ({ blockName, labelBlock, initial, errors, fields }) => {
                                   ? styles.inputField
                                   : styles.textareaField
                               }
+                              errors={errors}
                             />
                           ) : (
                             <InputDate
