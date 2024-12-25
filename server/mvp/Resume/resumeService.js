@@ -268,7 +268,7 @@ class ResumeService {
       };
     }
 
-    const resumes = await Resume.findAndCountAll({
+    const activeResumes  = await Resume.findAndCountAll({
       where: whereCondition,
       ...queries,
       attributes: [
@@ -282,7 +282,11 @@ class ResumeService {
       distinct: true,
     });
 
-    return resumes;
+    const archivedResumesCount = await Resume.count({  
+      where: { userId, isArchive: true }  
+  });
+
+  return { activeResumes: activeResumes, archivedCount: archivedResumesCount }
   }
 
   async getOne(id) {
