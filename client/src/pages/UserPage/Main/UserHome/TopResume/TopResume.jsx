@@ -31,6 +31,7 @@ const TopResume = ({ className }) => {
   }, [resumes]);
 
   const handleSelectedResume = () => setSelectedResumes(!selectedResumes);
+
   const handleSelectTop = (id) => {
     const newTop = resumes.filter((item) => id === item.id);
     setTopResume(newTop[0]);
@@ -46,7 +47,9 @@ const TopResume = ({ className }) => {
         {" "}
         <Star /> Top resume{" "}
       </h1>
-      <div className={style.sectResumeWrap}>
+
+
+   { !!resumes.length &&  <div className={style.sectResumeWrap}>
         <div className={style.sectResumeToTrack} onClick={handleSelectedResume}>
           <button
             className={cn(style.sectResumeBtnDropDown, {
@@ -98,7 +101,7 @@ const TopResume = ({ className }) => {
             </ul>
           </Scroll>
         </DropDown>
-      </div>
+      </div>}
 
       <ScoreResumeCircle
         size={hasMediaQuery ? 110 : 140}
