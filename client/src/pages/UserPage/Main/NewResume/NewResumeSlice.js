@@ -4,7 +4,6 @@ import ResumeServices from "../../../../http/services/ResumeServices";
 const initialState = {
   info: {},
   resumes: [{}],
-  isEdit: false,
   status: "idle",
   getonestatus: "idle",
   getallstatus: "idle",
@@ -12,7 +11,7 @@ const initialState = {
   page: 1,
   sort: "",
   resumesCount: null,
-  achiveCount:null,
+  archiveCount:null,
   checkedResumes: [],
   isShowArchive: false,
   searchText: "",
@@ -197,13 +196,12 @@ const resumeReducer = createSlice({
       })
       .addCase(fetchGetAllResume.pending, (state, { payload }) => {
         state.getallstatus = "loading";
-        state.isEdit = false;
         localStorage.removeItem("_jobseeker_resume_isedit");
       })
       .addCase(fetchGetAllResume.fulfilled, (state, { payload }) => {
         state.getallstatus = "success";
         state.resumes = payload.data.activeResumes.rows;
-        state.achiveCount = payload.data.archivedCount
+        state.archiveCount = payload.data.archivedCount
         state.resumesCount = payload.data.activeResumes.count;
       })
       .addCase(fetchGetAllResume.rejected, (state, { payload }) => {
@@ -215,8 +213,6 @@ const resumeReducer = createSlice({
       .addCase(fetchGetOneResume.fulfilled, (state, { payload }) => {
         state.getonestatus = "success";
         state.info = payload.data;
-        localStorage.setItem("_jobseeker_resume_isedit", true);
-        state.isEdit = true;
       })
       .addCase(fetchGetOneResume.rejected, (state, { payload }) => {
         state.getonestatus = "error";
@@ -229,7 +225,6 @@ const resumeReducer = createSlice({
         state.getonestatus = "success";
         state.info = payload.data;
         localStorage.removeItem("_jobseeker_resume_isedit");
-        state.isEdit = false;
       })
       .addCase(fetchUpdateResume.rejected, (state, { payload }) => {
         state.getonestatus = "error";

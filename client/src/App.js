@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import RootRouter from './router/Router.jsx';
 import {
   fetchAutoLogin,
-  fetchSocialAuth,
   resetAuthState,
 } from './pages/Autorization/AuthSlice.js';
 

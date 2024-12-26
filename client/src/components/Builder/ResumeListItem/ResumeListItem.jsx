@@ -2,20 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-// import StarBorder from "../../../assets/user_page/home/starborder.svg";
 import Edit from "../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg";
 import { ReactComponent as StarBorder } from "../../../assets/user_page/home/starborder.svg";
-// import { ReactComponent as Edit } from "../../../assets/user_page/builder/ActiveResume/Resume builder/Personal cabinet/lucide_edit.svg";
+import CustomCheckbox from "../../UI/CustomCheckbox/CustomCheckbox";
 
 import {
   fetchFavoriteResume,
-  fetchGetOneResume,
   setCheckedResumes,
 } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
 import DateServices from "../../../utils/DateServices";
 
 import styles from "./ResumeListItem.module.css";
-import CustomCheckbox from "../../UI/CustomCheckbox/CustomCheckbox";
 
 const ResumeListItem = ({ item }) => {
   const [checkedItem, setCheckedItem] = useState(false);
@@ -41,8 +38,8 @@ const ResumeListItem = ({ item }) => {
 
   const clickResumeHandler = (id) => {
     if (!isShowArchive) {
-      dispatch(fetchGetOneResume(id));
       navigate(`edit/${id}`);
+      localStorage.setItem("_jobseeker_resume_isedit", true);
     }
   };
 

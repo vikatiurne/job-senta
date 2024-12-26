@@ -10,7 +10,6 @@ import { initialValues, schemas } from "../helper";
 import { useMedia } from "../../../../../hoc/useMedia/useMedia";
 import {
   fetchCreateResume,
-  fetchGetOneResume,
   fetchUpdateResume,
   setInfo,
 } from "../NewResumeSlice";
@@ -38,16 +37,17 @@ const EnteringForm = () => {
     initialValues.entering
   );
 
-  const { isEdit, getonestatus, info } = useSelector((state) => state.resume);
-  console.log(isEdit)
+  const { getonestatus, info } = useSelector((state) => state.resume);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isMediaQuery = useMedia("(max-width:1024px)");
 
+  const isEdit = localStorage.getItem("_jobseeker_resume_isedit") === "true";
+
   const pathArr = pathname.split("/");
-  const resumeId = pathArr[pathArr.length - 1];
+  const resumeId = Number(pathArr[pathArr.length - 1]);
 
   useEffect(() => {
     if (isEdit) {

@@ -6,6 +6,7 @@ import style from "./ActiveAndArchivResume.module.css";
 
 const ActiveAndArchivResume = ({ className }) => {
   const { resumes, archiveCount } = useSelector((state) => state.resume);
+  console.log(archiveCount);
 
   return (
     <section className={cn(style.sectAcriveArchiv, className)}>

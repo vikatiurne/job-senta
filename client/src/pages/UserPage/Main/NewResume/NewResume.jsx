@@ -12,18 +12,21 @@ import { fetchGetOneResume } from "./NewResumeSlice";
 import styles from "./NewResume.module.css";
 
 const NewResume = () => {
+  const { getonestatus } = useSelector((state) => state.resume);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
-  const { getonestatus } = useSelector((state) => state.resume);
+  const isEdit = localStorage.getItem("_jobseeker_resume_isedit") === "true";
+
+  const pathArr = pathname.split("/");
+  const resumeId = Number(pathArr[pathArr.length - 1]);
 
   useEffect(() => {
-    const isEdit = localStorage.getItem("_jobseeker_resume_isedit");
-    const pathArr = pathname.slice("/");
-    const id = pathArr[pathArr.length - 1];
-    console.log(isEdit);
-    if (isEdit) dispatch(fetchGetOneResume(id));
-  }, [dispatch, pathname]);
+    if (isEdit) {
+      dispatch(fetchGetOneResume(resumeId));
+    }
+  }, [dispatch, resumeId, isEdit]);
+  
 
   return getonestatus === "loading" ? (
     <Loader loading color="#958060" />
