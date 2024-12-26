@@ -13,14 +13,14 @@ import {
 } from "../NewResume/NewResumeSlice";
 
 import styles from "./Builder.module.css";
+import BtnsImport from "../../../../components/Builder/BtnsImport/BtnsImport";
 
 const Builder = () => {
   const [isShowArchive, setIsShowArchive] = useState(false);
   const [isShowFavorite, setIsShowFavorite] = useState(false);
 
-  const { sort, resumes, getallstatus, limit, page, searchText } = useSelector(
-    (state) => state.resume
-  );
+  const { sort, resumes, getallstatus, limit, page, searchText, archiveCount } =
+    useSelector((state) => state.resume);
 
   const dispatch = useDispatch();
 
@@ -36,10 +36,19 @@ const Builder = () => {
         sort,
         isArchive: isShowArchive,
         isFavorite: isShowFavorite,
-        searchText
+        searchText,
       })
     );
-  }, [dispatch, limit, sort, isShowArchive, isShowFavorite, page, searchText,resumes.length]);
+  }, [
+    dispatch,
+    limit,
+    sort,
+    isShowArchive,
+    isShowFavorite,
+    page,
+    searchText,
+    resumes.length,
+  ]);
 
   const hendleShowArchive = () => {
     setIsShowArchive(true);
@@ -50,39 +59,48 @@ const Builder = () => {
     setIsShowArchive(false);
     dispatch(setIsArciveResumes(false));
   };
-
-  const render = (
-    <div className={styles.builderWrapper}>
-      <div className={styles.resumeStatus}>
-        <p
-          onClick={hendleShowActive}
-          className={`${styles.statusTitle} ${
-            !isShowArchive ? styles.active : styles.archive
-          }`}
-        >
-          Active Resumes
-        </p>
-        <p
-          onClick={hendleShowArchive}
-          className={`${styles.statusTitle} ${
-            !isShowArchive ? styles.archive : styles.active
-          }`}
-        >
-          Archived Resumes
-        </p>
-      </div>
-      <div className={styles.builderContainer}>
-        <div className={styles.builderTable}>
-          <HeaderTable />
-          {resumes.map((item) => (
-            <ResumeListItem key={uuidv4()} item={item} />
-          ))}
+ 
+  const render =
+    resumes.length > 0 || archiveCount > 0 ? (
+      <div className={styles.builderWrapper}>
+        <div className={styles.resumeStatus}>
+          <p
+            onClick={hendleShowActive}
+            className={`${styles.statusTitle} ${
+              !isShowArchive ? styles.active : styles.archive
+            }`}
+          >
+            Active Resumes
+          </p>
+          <p
+            onClick={hendleShowArchive}
+            className={`${styles.statusTitle} ${
+              !isShowArchive ? styles.archive : styles.active
+            }`}
+          >
+            Archived Resumes
+          </p>
         </div>
+        <div className={styles.builderContainer}>
+          <div className={styles.builderTable}>
+            <HeaderTable />
+            {resumes.map((item) => (
+              <ResumeListItem key={uuidv4()} item={item} />
+            ))}
+          </div>
 
-        <BuilderFooter />
+          <BuilderFooter />
+        </div>
       </div>
-    </div>
-  );
+    ) : (
+      <>
+        <p className={styles.emptydata}>
+          You don't have a resume yet. To create a resume, click the "+ Create
+          resume" button or "+ Import Resume" button .
+        </p>
+        <BtnsImport />
+      </>
+    );
   return getallstatus === "loading" ? <Loader /> : render;
 };
 
