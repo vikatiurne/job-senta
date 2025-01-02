@@ -1,3 +1,4 @@
+const fs = require("fs");
 const ApiErrors = require("../../errors/ApiErrors");
 const resumeService = require("./resumeService");
 
@@ -124,6 +125,30 @@ class ResumeController {
     } catch (error) {
       next(ApiErrors.badRequest(error.message));
     }
+  }
+
+  async uploadResume(req, res) {
+    const userId = req.user.id;
+    let resumeData;
+    console.log("File:", req.file);
+
+    if (req.file.mimetype === "application/pdf") {
+      resumeData = await resumeService.processPDF(req.file.path);
+    } else if (
+      req.file.mimetype ===
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ) {
+      resumeData = await resumeService.processDOCX(req.file.path);
+    } else {
+      return res.status(400).json({ message: "Unsupported file format" });
+    }
+    // console.log("RESUMEDATA:", resumeData);
+    // const newResume = await resumeService.create(userId, resumeData);
+    const newResume = {}
+
+    fs.unlinkSync(req.file.path);
+
+    res.status(201).json(newResume);
   }
 }
 

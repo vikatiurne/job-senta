@@ -1,5 +1,10 @@
 const { Op } = require("sequelize");
+const mammoth = require('mammoth'); 
+const pdf = require('pdf-parse');
+const fs = require('fs')
+const resumeParser = require('resume-parser');
 
+const { extractResumeData } = require("./extractResumeData");
 const {
   Resume,
   Project,
@@ -11,6 +16,7 @@ const {
   Publication,
   AiAnalyse,
 } = require("../../models/models");
+
 
 class ResumeService {
   constructor() {
@@ -359,6 +365,22 @@ class ResumeService {
     await Resume.update({ isFavorite }, { where: { id } });
     return this.getAll(userId);
   }
+ 
+  async processPDF(filePath) {  
+    const dataBuffer = fs.readFileSync(filePath);  
+    const data = await pdf(dataBuffer);  
+    console.log("DATATEXT:",data.text)
+    return extractResumeData(data.text);  
+  }  
+
+  async processDOCX(filePath) {  
+    const { value: text } = await mammoth.extractRawText({ path: filePath });  
+    return extractResumeData(text)
+  };  
+  
 }
+
+
+
 
 module.exports = new ResumeService();
