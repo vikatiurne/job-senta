@@ -37,6 +37,7 @@ const EnteringForm = () => {
     initialValues.entering
   );
 
+  console.log(initialFormValues)
   const { getonestatus, info } = useSelector((state) => state.resume);
 
   const navigate = useNavigate();

@@ -11,7 +11,7 @@ const initialState = {
   page: 1,
   sort: "",
   resumesCount: null,
-  archiveCount:null,
+  archiveCount: null,
   checkedResumes: [],
   isShowArchive: false,
   searchText: "",
@@ -142,6 +142,20 @@ export const fetchFavoriteResume = createAsyncThunk(
   }
 );
 
+export const fetchUploadDocOrPdf = createAsyncThunk(
+  "resume/fetchUploadDocOrPdf",
+  async ({formData, config}, { rejectWithValue }) => {
+    console.log(formData)
+    try {
+      const response = await ResumeServices.uploadDocOrPdf(formData, config);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response ? error.response.data : error.message)
+    }
+  }
+);
+
 const resumeReducer = createSlice({
   name: "resume",
   initialState,
@@ -201,7 +215,7 @@ const resumeReducer = createSlice({
       .addCase(fetchGetAllResume.fulfilled, (state, { payload }) => {
         state.getallstatus = "success";
         state.resumes = payload.data.activeResumes.rows;
-        state.archiveCount = payload.data.archivedCount
+        state.archiveCount = payload.data.archivedCount;
         state.resumesCount = payload.data.activeResumes.count;
       })
       .addCase(fetchGetAllResume.rejected, (state, { payload }) => {
@@ -293,6 +307,18 @@ const resumeReducer = createSlice({
         state.resumes = payload.data.activeResumes.rows;
       })
       .addCase(fetchFavoriteResume.rejected, (state, { payload }) => {
+        state.getallstatus = "error";
+      })
+      .addCase(fetchUploadDocOrPdf.pending, (state, { payload }) => {
+        state.getallstatus = "loading";
+      })
+      .addCase(fetchUploadDocOrPdf.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.getallstatus = "success";
+        state.resumes = payload.data.activeResumes.rows;
+      })
+      .addCase(fetchUploadDocOrPdf.rejected, (state, { payload }) => {
+        console.log(payload);
         state.getallstatus = "error";
       });
   },

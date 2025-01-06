@@ -19,6 +19,7 @@ import Archive from "./Btns/Archive";
 import Delete from "./Btns/Delete";
 
 import styles from "./BtnsBuilder.module.css";
+import DragAndDropUpload from "../DragAndDropUpload/DragAndDropUpload";
 
 const BtnsBuilder = () => {
   const { limit, checkedResumes, isShowArchive, sort, isShowFavorite } =
@@ -29,6 +30,7 @@ const BtnsBuilder = () => {
   const [activeDownloadBtn, setActiveDownloadBtn] = useState(true);
   const [activeMultiBtn, setActiveMultiBtn] = useState(false);
   const [idsChecked, setIdsChecked] = useState([]);
+  const [activeModalFile, setActiveModalFile] = useState(false)
 
   const dispatch = useDispatch();
 
@@ -54,6 +56,8 @@ const BtnsBuilder = () => {
     setIdsChecked([]);
   };
 
+  const importPdforDocHandler = () => setActiveModalFile(true);
+
   const changeStatusResume = async ({ isArchive }) => {
     const idsToChangeStatus = checkedResumes;
     const action =
@@ -68,7 +72,7 @@ const BtnsBuilder = () => {
     await dispatch(
       fetchGetAllResume({
         page: 1,
-        limit:limitNum,
+        limit: limitNum,
         sort,
         isArchive: isShowArchive,
         isFavorite: isShowFavorite,
@@ -92,34 +96,45 @@ const BtnsBuilder = () => {
   };
 
   return (
-    <div className={styles.btnsConainer}>
-      <div className={styles.btns}>
-        {!isShowArchive && (
-          <>
-            <Clone onClick={handleClone} isActive={activeCloneBtn} />
-            <LinkedInDownload isActive={activeDownloadBtn} />
-            <Download onClick={() => {}} isActive={activeDownloadBtn} />
-          </>
-        )}
+    <>
+      <div className={styles.btnsConainer}>
+        <div className={styles.btns}>
+          {!isShowArchive && (
+            <>
+              <Clone onClick={handleClone} isActive={activeCloneBtn} />
+              <LinkedInDownload isActive={activeDownloadBtn} />
+              <Download
+                onClick={importPdforDocHandler}
+                isActive={activeDownloadBtn}
+              />
+            </>
+          )}
 
-        <Archive
-          onClick={handleArchive}
-          isActive={activeMultiBtn}
-          isShowArchive={isShowArchive}
-        />
-        <Delete onClick={handleDelete} isActive={activeMultiBtn} />
+          <Archive
+            onClick={handleArchive}
+            isActive={activeMultiBtn}
+            isShowArchive={isShowArchive}
+          />
+          <Delete onClick={handleDelete} isActive={activeMultiBtn} />
+        </div>
+
+        <label className={styles.label}>
+          Show:{" "}
+          <input
+            className={styles.inputLimit}
+            type="number"
+            value={limitNum}
+            onChange={handleLimit}
+          />
+        </label>
       </div>
-
-      <label className={styles.label}>
-        Show:{" "}
-        <input
-          className={styles.inputLimit}
-          type="number"
-          value={limitNum}
-          onChange={handleLimit}
+      {activeModalFile && (
+        <DragAndDropUpload
+          active={activeModalFile}
+          setModalActive={setActiveModalFile}
         />
-      </label>
-    </div>
+      )}
+    </>
   );
 };
 

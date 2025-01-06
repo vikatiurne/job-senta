@@ -8,16 +8,22 @@ import { ReactComponent as Plus } from "../../../assets/user_page/builder/btn_pl
 import { ReactComponent as DropDownIcon } from "../../../assets/user_page/home/dropdown.svg";
 
 import styles from "./BtnsImport.module.css";
+import DragAndDropUpload from "../DragAndDropUpload/DragAndDropUpload";
 
 const BtnsImport = () => {
   const [dropDownActive, setDropDownActive] = useState(false);
+  const [activeModalFile, setActiveModalFile] = useState(false)
+  const [activeModalLinkedin, setActiveModalLinkedin] = useState(false)
+
+  console.log(activeModalFile)
 
   const handleDropDown = () => setDropDownActive((prev) => !prev);
 
-  const importPdfHandler = () => {};
-  const importLinkedInHandler = () => {};
+  const importPdforDocHandler = () => setActiveModalFile(true);
+  const importLinkedInHandler = () => setActiveModalLinkedin(true);
 
   return (
+    <>
     <div className={styles.btnContainer}>
       <Link to="./create" className={styles.createBtn}>
         <Plus /> <p>Create Resume</p>
@@ -46,7 +52,7 @@ const BtnsImport = () => {
           <ul className={styles.sectMenuDropDownList}>
             <li
               className={styles.sectMenuDropDownItem}
-              onClick={importPdfHandler}
+              onClick={importPdforDocHandler}
             >
               Import&nbsp;from&nbsp;PDF&nbsp;or&nbsp;Doc
             </li>
@@ -60,6 +66,8 @@ const BtnsImport = () => {
         </DropDown>
       </div>
     </div>
+    {activeModalFile && <DragAndDropUpload active={activeModalFile} setModalActive={setActiveModalFile}/>}
+    </>
   );
 };
 

@@ -108,7 +108,9 @@ export class DocumentCreator {
                 if (item.name !== "") {
                   arr.push(
                     this.createSubHeading("Project: ", item.name),
-                    this.createDescription(item.role),
+                    this.createSubHeading("Role: ", item.role),
+                    // this.createDescription(item.role),
+                    this.createSubHeading("Project link (if any): ", item.link),
                     new Paragraph("")
                   );
                 }
@@ -144,7 +146,7 @@ export class DocumentCreator {
                 const arr = [];
                 if (item.educName !== "") {
                   arr.push(
-                    this.createSubHeading("Institution ", item.educName),
+                    this.createSubHeading("Institution: ", item.educName),
                     this.createSubHeading("Degree: ", item.specialty),
                     this.createDateBlock(item.dateStart, item.dateEnd),
                     new Paragraph("")
@@ -197,8 +199,12 @@ export class DocumentCreator {
                       "Institution: ",
                       item.institutionAward
                     ),
-                    this.createDateBlock(item.date),
-                    new Paragraph("")
+                    this.createDateBlock(item.date, false, true),
+                    new Paragraph(""),
+                    this.createSubHeading(
+                      "A brief description of merit: ",
+                      item.merit
+                    )
                   );
                 }
                 return arr;
@@ -240,7 +246,7 @@ export class DocumentCreator {
                       "Name of the publication: ",
                       item.publication
                     ),
-                    this.createDateBlock(item.date),
+                    this.createDateBlock(item.date, false, true),
                     this.createSubHeading(
                       "Publication link (if any): ",
                       item.publicationLink
@@ -339,8 +345,8 @@ export class DocumentCreator {
     if (value)
       return new Paragraph({
         indent: {
-          left: 1000, // Левый отступ
-          right: 720, // Правый отступ
+          left: 1000,
+          right: 720,
         },
         children: [
           new TextRun({
@@ -364,8 +370,8 @@ export class DocumentCreator {
     if (text)
       return new Paragraph({
         indent: {
-          left: 1000, // Левый отступ
-          right: 720, // Правый отступ
+          left: 1000,
+          right: 720,
         },
         children: [
           new TextRun({
@@ -377,10 +383,12 @@ export class DocumentCreator {
         ],
       });
   }
-  createDateBlock(dateStart, dateEnd) {
+  createDateBlock(dateStart, dateEnd, notEnd) {
+    notEnd = notEnd || false;
     if (dateStart) {
       const start = DateServices.getDate(dateStart, "short");
-      let end = "Present";
+      let end = "";
+      if (!notEnd) end = " - Present";
       if (!!dateEnd) {
         end = ` - ${DateServices.getDate(dateEnd, "short")}`;
       }

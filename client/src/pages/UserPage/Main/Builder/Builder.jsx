@@ -19,7 +19,7 @@ const Builder = () => {
   const [isShowArchive, setIsShowArchive] = useState(false);
   const [isShowFavorite, setIsShowFavorite] = useState(false);
 
-  const { sort, resumes, getallstatus, limit, page, searchText, archiveCount } =
+  const { sort, resumes, getallstatus, limit, page, searchText, info, archiveCount } =
     useSelector((state) => state.resume);
 
   const dispatch = useDispatch();
@@ -39,6 +39,7 @@ const Builder = () => {
         searchText,
       })
     );
+    console.log(11111)
   }, [
     dispatch,
     limit,
@@ -48,6 +49,7 @@ const Builder = () => {
     page,
     searchText,
     resumes.length,
+    info
   ]);
 
   const hendleShowArchive = () => {
@@ -59,9 +61,9 @@ const Builder = () => {
     setIsShowArchive(false);
     dispatch(setIsArciveResumes(false));
   };
- 
+  // || archiveCount > 0
   const render =
-    resumes.length > 0 || archiveCount > 0 ? (
+    resumes.length > 0  ? (
       <div className={styles.builderWrapper}>
         <div className={styles.resumeStatus}>
           <p
