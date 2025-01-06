@@ -31,9 +31,9 @@ const Resume = sequelize.define("resume", {
   email: { type: DataTypes.STRING, unique: false },
   phone: { type: DataTypes.STRING, allowNull: false },
   linkedin: { type: DataTypes.STRING, unique: false },
-  profSummaries: { type: DataTypes.STRING, unique: false },
+  profSummaries: { type: DataTypes.TEXT, unique: false },
   skills: { type: DataTypes.ARRAY(DataTypes.STRING) },
-  interests: { type: DataTypes.STRING, unique: false },
+  interests: { type: DataTypes.TEXT, unique: false },
   isFavorite: { type: DataTypes.BOOLEAN, defaultValue: "false" },
   isArchive: { type: DataTypes.BOOLEAN, defaultValue: "false" },
 });
@@ -41,7 +41,7 @@ const Resume = sequelize.define("resume", {
 const Project = sequelize.define("project", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, unique: false },
-  role: { type: DataTypes.STRING },
+  role: { type: DataTypes.TEXT },
   link: { type: DataTypes.STRING },
 });
 
@@ -51,7 +51,7 @@ const Work = sequelize.define("work", {
   position: { type: DataTypes.STRING },
   dateStart: { type: DataTypes.DATE },
   dateEnd: { type: DataTypes.DATE },
-  responsibilities: { type: DataTypes.STRING },
+  responsibilities: { type: DataTypes.TEXT },
 });
 
 const Education = sequelize.define("education", {
@@ -72,7 +72,7 @@ const Adward = sequelize.define("adward", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   nameAward: { type: DataTypes.STRING },
   institutionAward: { type: DataTypes.STRING },
-  merit: { type: DataTypes.STRING },
+  merit: { type: DataTypes.TEXT },
   date: { type: DataTypes.DATE },
 });
 const Volunteering = sequelize.define("voluntering", {
@@ -80,7 +80,7 @@ const Volunteering = sequelize.define("voluntering", {
   voluntering: { type: DataTypes.STRING },
   dateStart: { type: DataTypes.DATE },
   dateEnd: { type: DataTypes.DATE },
-  obligations: { type: DataTypes.STRING },
+  obligations: { type: DataTypes.TEXT },
 });
 const Publication = sequelize.define("publication", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -92,7 +92,7 @@ const AiAnalyse = sequelize.define("aiAnalise", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   score: { type: DataTypes.STRING },
   cons: { type: DataTypes.STRING },
-  recommended: { type: DataTypes.STRING },
+  recommended: { type: DataTypes.TEXT },
 });
 
 User.hasOne(Token, { onDelete: "CASCADE" });

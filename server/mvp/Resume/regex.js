@@ -7,64 +7,58 @@ const socialMedia =
   /(https?:\/\/)?(www\.)?(linkedin\.com|github\.com)\/[A-z0-9._-]+/g;
 
 const desiredPosition =
-  /(?:desired\s*position|desired\s*role|desired\s*job|position|role|job)\s*:\s*(.+)/i;
+  /^(.*?)(?=\s+[A-Z][a-zA-Zа-яА-ЯёЁ]+(?:\s+[A-Z][a-zA-Zа-яА-ЯёЁ]+)?)/is;
 
 const profSummary =
-  /(?<=\b(?:Professional summaries|about me|About me|About Me|profile|Profile)\b\s*)(.*?)(?=\n\s*(?:Project Experience|projects|Work Experience|work|skills|education|contacts)\s*|\s*$)/is;
+  /(?<=\b(?:Professional summaries|about me|About me|About Me|profile|Profile)\b\s*)(.*?)(?=\s*(?:Project Experience|Certifications|Work Experience|Awards & Scholarships|Volunteering & Leadership|Education|Publications|Skills & Interests)\s*|\s*$)/is;
 
 const projects =
-  /(?<=\b(?:projects|Projects|project experience|Project Experience|My projects|my projects)\b\s*)(.*?)(?=\n\s*(?:Project Experience|Work Experience|work|skills|education|contacts|Professional summaries|about me|About me|About Me|profile|Profile)\s*|\s*$)/is;
+  /(?<=\b(?:projects|Projects|project experience|Project Experience|My projects|my projects)\b\s*)(.*?)(?=\s*(?:Certifications|Work Experience|Awards & Scholarships|Volunteering & Leadership|Education|Publications|Skills & Interests)\s*|\s*$)/is;
 
 const work =
-  /(?<=\b(?:Work Experience|work experience|Work experience|My Experience|my experience|My experience)\b\s*)(.*?)(?=\n\s*(?:Project Experience|skills|education|contacts|Professional summaries|about me|About me|About Me|profile|Profile)\s*|\s*$)/is;
+  /(?<=\b(?:Work Experience|work experience|Work experience|My Experience|my experience|My experience)\b\s*)(.*?)(?=\s*Certifications|Awards & Scholarships|Volunteering & Leadership|Education|Publications|Skills & Interests)/i;
 
 const certification =
-  /(?<=\b(?:Certifications|certifications|My Certifications|my certifications|My certifications)\b\s*)(.*?)(?=\n\s*(?:Project Experience|skills|education|contacts|Professional summaries|about me|About me|About Me|profile|Profile|Awards & Scholarships)\s*|\s*$)/is;
+  /(?<=\b(?:Certifications|certifications|My Certifications|my certifications|My certifications)\b\s*)(.*?)(?=\s*(?:Awards & Scholarships|Volunteering & Leadership|Education|Publications|Skills & Interests)\s*|\s*$)/is;
 
 const voluntering =
-  /(?<=\b(?:Volunteering & Leadership|volunteering & leadership)\b\s*)(.*?)(?=\n\s*(?:Project Experience|skills|education|contacts|Professional summaries|about me|About me|About Me|profile|Profile|Awards & Scholarships|Publications)\s*|\s*$)/is;
+  /(?<=\b(?:Volunteering & Leadership|volunteering & leadership)\b\s*)(.*?)(?=\s*(?:Certifications|Awards & Scholarships|Education|Publications|Skills & Interests)\s*|\s*$)/is;
 
 const publications =
-  /(?<=\b(?:Publications|publications)\b\s*)(.*?)(?=\n\s*(?:Project Experience|Skills|education|contacts|Professional summaries|about me|About me|About Me|profile|Profile|Awards & Scholarships|Volunteering & Leadership)\s*|\s*$)/is;
+  /(?<=\b(?:Publications|publications)\b\s*)(.*?)(?=\s*(?:Awards & Scholarships|Volunteering & Leadership|Education|Skills & Interests)\s*|\s*$)/is;
 
 const awards =
-  /(?<=\b(?:Awards & Scholarships|awards & scholarships)\b\s*)([\s\S]*?)(?=\n\s*(?:Project Experience|Skills|Education|Contacts|Professional Summaries|About Me|Profile|Volunteering & Leadership)\s*|\s*$)/is;
+  /(?<=\b(?:Awards & Scholarships|awards & scholarships)\b\s*)([\s\S]*?)(?=\s*(?:Volunteering & Leadership|Education|Publications|Skills & Interests)\s*|\s*$)/is;
 
 const skills =
-  /(?<=\b(?:Skills|Tech Skills|skills|My Skills|my skills|tech skills)\b\s*:\s*)([\s\S]*?)(?=\n\s*(?:Project Experience|Education|Contacts|Professional Summaries|About Me|Profile)\s*|\s*$)/i;
+  /(?<=\b(?:Skills|Tech Skills|skills|My Skills|my skills|tech skills)\b\s*:\s*)([\s\S]*?)(?=\s*Interests:\s*(?:Project Experience|Education|Contacts|Professional Summaries|About Me|Profile|Volunteering|$))/i;
 
 const interests =
-  /(?<=\b(?:interests|Interests|My interests|my interests|My Interests)\b\s*:\s*)([\s\S]*?)(?=\n\s*(?:Project Experience|Skills|Education|Contacts|Professional Summaries|About Me|Profile)\s*|\s*$)/i;
+  /(?<=\b(?:interests|Interests|My interests|my interests|My Interests)\b\s*:\s*)([\s\S]*?)(?=\s*(?:Project Experience|Skills|Education|Contacts|Professional Summaries|About Me|Profile)\s*|\s*$)/i;
 
 const education =
-  /(?<=\b(?:Education|My Education|my education)\b\s*:?)([\s\S]*?)(?=\n\s*(?:Project Experience|Skills|Certifications|Contacts|Professional Summaries|About Me|Profile|Publications|Awards & Scholarships|Volunteering & Leadership|Skills & Interests)\s*|\s*$)/i;
+  /(?<=\b(?:Education|My Education|my education)\b\s*:?)([\s\S]*?)(?=\s*(?:Project Experience|Skills|Certifications|Contacts|Professional Summaries|About Me|Profile|Publications|Awards & Scholarships|Volunteering & Leadership|Skills & Interests)\s*|\s*$)/i;
 
 const projectGroup =
-  /(?:Project:\s*|project:\s*|project\s*[0-9]*:\s*|Project\s*[0-9]*:\s*)(?<name>.+?)\n(?<role>.*?\.(?:\s|$))(?:\s*(?<link>https?:\/\/[^\s]+))?/g;
+  /Project:\s*(?<name>.+?)\s*(?:Role:\s*(?<role>.+?)\s*)?(?:Project link \(if any\):\s*(?<link>https?:\/\/[^\s]+))?(?=\s*Project:|$)/g;
 
 const workGroup =
-  /(?:Company:\s*|company:\s*|Company\s*\d*:\s*|company\s*\d*:\s*)(?<companyName>.+?)\nPosition:\s*(?<position>.+?)\n\s*(?<dateStart>[\w\s]+?)\s*-\s*(?<dateEnd>(?:[\w\s]+|Present))\s*\s*\nResponsibilities:\s*(?<responsibilities>[\s\S]*?)(?=\n\s*Company:|$)/gs;
+  /Company:\s*(?<companyName>.+?)\s*(?:Position:\s*(?<position>.+?)\s*)?(?:(?<dateStart>\w+\s+\d{4})?\s*-\s*(?<dateEnd>(?:\w+\s+\d{4}|Present))?)?\s*(?:Responsibilities:\s*(?<responsibilities>.+?))?(?=\s*Company:|$)/g;
 
 const educationGroup =
-  /Institution\s*:? ?(?<institution>.+?)\n(?:Degree:\s*(?<degree>.+?)\n)?\s*(?<dateStart>[\w\s]+?)\s*-\s*(?<dateEnd>(?:[\w\s]+|Present))\s*(?=\n\s*Institution:|$|\n\s*\n)/gs;
+  /Institution:\s*(?<institution>.+?)\s*(?:Degree:\s*(?<degree>.+?)\s*)?(?:(?<dateStart>\w+\s+\d{4})?\s*-\s*(?<dateEnd>(?:\w+\s+\d{4}|Present))?)?(?=\s*Institution:|$)/g;
 
 const certificationGroup =
-  /Name of the certificate\s*:? ?(?<certificate>.+?)\n(?:Institution:\s*(?<institution>.+?)\n)?\s*(?<dateStart>[\w\s]+?)\s*-\s*(?<dateEnd>(?:[\w\s]+|Present))\s*(?=\n\s*Name of the certificate:|$|\n\s*\n)/gs;
+  /Name of the certificate:\s*(?<certificate>.+?)\s*(?:Institution:\s*(?<institution>.+?)\s*)?(?:(?<dateStart>\w+\s+\d{4})?\s*-\s*(?<dateEnd>(?:\w+\s+\d{4}|Present))?)?(?=\s*Name of the certificate:|$)/g;
 
 const volunteringGroup =
-  /Name of organization\s*:? ?(?<organization>.+?)\s*(?<dateStart>[\w\s]+?)\s*-\s*(?<dateEnd>(?:[\w\s]+|Present))\s*Obligations:\s*(?<obligations>.+?)(?=\n\s*Name of organization:|$)/gs;
+  /Name of organization:\s*(?<organization>.+?)?(?:(?<dateStart>\w+\s+\d{4})?\s*-\s*(?<dateEnd>(?:\w+\s+\d{4}|Present))?)?\s*(?:Obligations:\s*(?<obligations>.+?))?(?=\s*Name of organization:|$)/g;
 
 const publicationsGroup =
-  /Name of the publication\s*:? ?(?<publication>.+?)\s*(?<dateStart>[\w\s]+?)\s*Publication link \(if any\):\s*(?<link>.+?)(?=\n\s*Name of the publication:|$)/gs;
+  /Name of the publication:\s*(?<publication>.+?)?(?<dateStart>\w+\s+\d{4})?\s*(?:Publication link \(if any\):\s*(?<link>https?:\/\/[^\s]+))?\s*(?=\s*Name of the publication:|$)/g;
 
-// const awardsGroup =
-//   /Name of the award\s*:? ?(?<award>.+?)\s*Institution:\s*(?<institution>.+?)\s*(?<dateStart>[\w\s]+)\s*A brief description of merit:\s*(?<merit>.+?)(?=\n\s*Name of the award:|$)/gs;
-// const awardsGroup = /Name of the award\s*:? ?(?<award>.+?)\s*Institution:\s*(?<institution>.+?)\s*(?<dateStart>[\w\s]+(?: - Present)?)?\s*(?:A brief description of merit:\s*(?<merit>.+?))?(?=\n\s*Name of the award:|$)/gs;
-// const awardsGroup = /Name of the award\s*:? ?(?<award>.+?)\s*Institution:\s*(?<institution>.+?)\s*(?<dateStart>[\w\s]+)(?:\s*-\s*Present)?\s*(?:A brief description of merit:\s*(?<merit>.+?))?(?=\n\s*Name of the award:|$)/gs;
-// const awardsGroup =
-//   /Name of the award\s*:? ?(?<award>.+?)\s*Institution:\s*(?<institution>.+?)\s*(?<dateStart>[\w\s]+)(?:\s*-\s*Present)?\s*(?:A brief description of merit:\s*(?<merit>.+?))?(?=\n\s*Name of the award:|$)/gs;
 const awardsGroup =
-  /Name of the award\s*:? ?(?<award>.+?)\s*Institution:\s*(?<institution>.+?)\s*(?<dateStart>[\w\s]+)(?:\s*-\s*Present)?\s*(?:A brief description of merit:\s*(?<merit>.+?))?(?=\n\s*Name of the award:|$)/gs;
+  /Name of the award:\s*(?<award>.+?)?(?:Institution:\s*(?<institution>.+?)\s*)?(?<dateStart>\w+\s+\d{4})?\s*(?:A brief description of merit:\s*(?<merit>.+?))?\s*(?=\s*Name of the award:|$)/g;
 
 const regexs = {
   email,

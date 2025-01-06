@@ -1,8 +1,8 @@
 const { Op } = require("sequelize");
-const mammoth = require('mammoth'); 
-const pdf = require('pdf-parse');
-const fs = require('fs')
-const resumeParser = require('resume-parser');
+const mammoth = require("mammoth");
+const pdf = require("pdf-parse");
+const fs = require("fs");
+const resumeParser = require("resume-parser");
 
 const { extractResumeData } = require("./extractResumeData");
 const {
@@ -16,7 +16,6 @@ const {
   Publication,
   AiAnalyse,
 } = require("../../models/models");
-
 
 class ResumeService {
   constructor() {
@@ -268,13 +267,13 @@ class ResumeService {
     };
 
     if (isFavorite) whereCondition.isFavorite = true;
-    if (searchText!=="") {
+    if (searchText !== "") {
       whereCondition.target = {
         [Op.like]: `%${searchText}%`,
       };
     }
 
-    const activeResumes  = await Resume.findAndCountAll({
+    const activeResumes = await Resume.findAndCountAll({
       where: whereCondition,
       ...queries,
       attributes: [
@@ -288,11 +287,14 @@ class ResumeService {
       distinct: true,
     });
 
-    const archivedResumesCount = await Resume.count({  
-      where: { userId, isArchive: true }  
-  });
+    const archivedResumesCount = await Resume.count({
+      where: { userId, isArchive: true },
+    });
 
-  return { activeResumes: activeResumes, archivedCount: archivedResumesCount }
+    return {
+      activeResumes: activeResumes,
+      archivedCount: archivedResumesCount,
+    };
   }
 
   async getOne(id) {
@@ -365,22 +367,27 @@ class ResumeService {
     await Resume.update({ isFavorite }, { where: { id } });
     return this.getAll(userId);
   }
- 
-  async processPDF(filePath) {  
-    const dataBuffer = fs.readFileSync(filePath);  
-    const data = await pdf(dataBuffer);  
-    console.log("DATATEXT:",data.text)
-    return extractResumeData(data.text);  
-  }  
 
-  async processDOCX(filePath) {  
-    const { value: text } = await mammoth.extractRawText({ path: filePath });  
-    return extractResumeData(text)
-  };  
-  
+  cleanedText(text) {
+    return text
+      .replace(/\s+/g, " ")
+      .replace(/\n/g, "\n")
+      .replace(/(\n[^\n]*)\n+/g, "$1")
+      .trim();
+  }
+
+  async processPDF(filePath) {
+    const dataBuffer = fs.readFileSync(filePath);
+    const data = await pdf(dataBuffer);
+    const cleanedText = this.cleanedText(data.text);
+    return extractResumeData(cleanedText);
+  }
+
+  async processDOCX(filePath) {
+    const { value: text } = await mammoth.extractRawText({ path: filePath });
+    const cleanedText = this.cleanedText(text);
+    return extractResumeData(cleanedText);
+  }
 }
-
-
-
 
 module.exports = new ResumeService();

@@ -118,7 +118,6 @@ class ResumeController {
     try {
       const { id } = req.params;
       const { isFavorite } = req.body;
-      console.log("FAV:", isFavorite);
       const userId = req.user.id;
       const resume = await resumeService.favorite(id, userId, isFavorite);
       return res.json(resume);
@@ -127,28 +126,35 @@ class ResumeController {
     }
   }
 
-  async uploadResume(req, res) {
-    const userId = req.user.id;
-    let resumeData;
-    console.log("File:", req.file);
+  async uploadResume(req, res, next) {
+    try {
+      if (!req.file) {
+        return next(ApiErrors.badRequest("File is required"));
+      }
 
-    if (req.file.mimetype === "application/pdf") {
-      resumeData = await resumeService.processPDF(req.file.path);
-    } else if (
-      req.file.mimetype ===
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ) {
-      resumeData = await resumeService.processDOCX(req.file.path);
-    } else {
-      return res.status(400).json({ message: "Unsupported file format" });
+      const userId = req.user.id;
+      let resumeData;
+
+      if (req.file.mimetype === "application/pdf") {
+        resumeData = await resumeService.processPDF(req.file.path);
+      } else if (
+        req.file.mimetype ===
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ) {
+        resumeData = await resumeService.processDOCX(req.file.path);
+      } else {
+        return next(ApiErrors.badRequest("Unsupported file format"));
+      }
+
+      const newResume = await resumeService.create(userId, resumeData);
+
+      fs.unlinkSync(req.file.path);
+
+      return res.json(newResume);
+    } catch (error) {
+      console.error("Error while uploading resume:", error);
+      next(ApiErrors.internal("An error occurred while uploading the resume"));
     }
-    // console.log("RESUMEDATA:", resumeData);
-    // const newResume = await resumeService.create(userId, resumeData);
-    const newResume = {}
-
-    fs.unlinkSync(req.file.path);
-
-    res.status(201).json(newResume);
   }
 }
 

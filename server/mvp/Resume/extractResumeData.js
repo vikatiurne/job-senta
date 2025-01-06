@@ -2,7 +2,9 @@ const regexs = require("./regex");
 
 function extractResumeData(resumeText) {
   const resumeData = {
-    contacts: {},
+    email: "",
+    phone: "",
+    LinkedIn:"",
     skills: [],
     workExp: [],
     educ: [],
@@ -16,16 +18,16 @@ function extractResumeData(resumeText) {
   };
 
   const emailMatches = resumeText.match(regexs.email);
-  const email = emailMatches ? emailMatches[1] : null;
-  resumeData.contacts.email = email;
+  const email = emailMatches ? emailMatches[1] : "";
+  resumeData.email = email;
 
   const phoneMatches = resumeText.match(regexs.phone);
-  const phone = phoneMatches ? phoneMatches[0] : null;
-  resumeData.contacts.phone = phone;
+  const phone = phoneMatches ? phoneMatches[0] : "";
+  resumeData.phone = phone;
 
   const socialMediaMatches = resumeText.match(regexs.socialMedia);
-  const linkedIn = socialMediaMatches ? socialMediaMatches[0] : null;
-  resumeData.contacts.LinkedIn = linkedIn;
+  const linkedIn = socialMediaMatches ? socialMediaMatches[0] : "";
+  resumeData.LinkedIn = linkedIn;
 
   const positionMatch = resumeText.match(regexs.desiredPosition);
   const desiredPosition = positionMatch ? positionMatch[1] : null;
@@ -59,8 +61,8 @@ function extractResumeData(resumeText) {
         ? match.groups.position.trim()
         : "";
       const responsibilities = match.groups.responsibilities
-        .trim()
-        .replace(/\s+/g, " ");
+        ? match.groups.responsibilities.trim().replace(/\s+/g, " ")
+        : "";
       const dateStart = match.groups.dateStart
         ? match.groups.dateStart.trim()
         : null;
@@ -79,14 +81,12 @@ function extractResumeData(resumeText) {
     }
   }
 
-  console.log("WORK:", resumeData.workExp);
-
   const skillsMatch = resumeText.match(regexs.skills);
-  const skills = skillsMatch ? skillsMatch[0] : null;
+  const skills = skillsMatch ? skillsMatch[0] :[];
   resumeData.skills = skills;
 
   const interestMatches = resumeText.match(regexs.interests);
-  const interests = interestMatches ? interestMatches[0] : null;
+  const interests = interestMatches ? interestMatches[0] : "";
   resumeData.interests = interests;
 
   const educationMatches = resumeText.match(regexs.education);
@@ -139,7 +139,6 @@ function extractResumeData(resumeText) {
       resumeData.certif.push(certification);
     }
   }
-  console.log("CERTIF:", resumeData.certif);
 
   const volunteeringMatches = resumeText.match(regexs.voluntering);
   if (volunteeringMatches) {
@@ -167,7 +166,6 @@ function extractResumeData(resumeText) {
       resumeData.voluntering.push(volunter);
     }
   }
-  console.log("VOLUNT:", resumeData.voluntering);
 
   const publicationMatches = resumeText.match(regexs.publications);
   if (publicationMatches) {
@@ -191,7 +189,6 @@ function extractResumeData(resumeText) {
       resumeData.publ.push(publications);
     }
   }
-  console.log("PUBL:", resumeData.publ);
 
   const awardMatches = resumeText.match(regexs.awards);
   if (awardMatches) {
@@ -217,18 +214,6 @@ function extractResumeData(resumeText) {
       };
       resumeData.award.push(awards);
     }
-  }
-  // console.log("AWARD:", awardMatches[0]);
-  console.log("awardscbb:", resumeData.award);
-
-  // Извлечение образования
-  const educationRegex = /Education\s*([\s\S]*?)(?=\n\n|\r\n\r\n)/;
-  const educationMatch = resumeText.match(educationRegex);
-  if (educationMatch) {
-    resumeData.education = educationMatch[1]
-      .trim()
-      .split("\n")
-      .map((edu) => edu.trim());
   }
 
   return resumeData;
