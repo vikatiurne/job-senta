@@ -4,7 +4,7 @@ function extractResumeData(resumeText) {
   const resumeData = {
     email: "",
     phone: "",
-    LinkedIn:"",
+    LinkedIn: "",
     skills: [],
     workExp: [],
     educ: [],
@@ -30,11 +30,13 @@ function extractResumeData(resumeText) {
   resumeData.LinkedIn = linkedIn;
 
   const positionMatch = resumeText.match(regexs.desiredPosition);
-  const desiredPosition = positionMatch ? positionMatch[1] : null;
+  const desiredPosition = positionMatch
+    ? positionMatch[1]
+    : "Your Desired Position";
   resumeData.desiredPosition = desiredPosition;
 
   const profSummaryMatches = resumeText.match(regexs.profSummary);
-  const profSummary = profSummaryMatches ? profSummaryMatches[0] : null;
+  const profSummary = profSummaryMatches ? profSummaryMatches[0] : "";
   resumeData.professionalSummary = profSummary;
 
   const projectMatches = resumeText.match(regexs.projects);
@@ -48,6 +50,9 @@ function extractResumeData(resumeText) {
       };
       resumeData.projExp.push(project);
     }
+  }
+  if (resumeData.projExp.length === 0) {
+    resumeData.projExp.push({ name: "", role: "", link: "" });
   }
 
   const workMatches = resumeText.match(regexs.work);
@@ -80,9 +85,18 @@ function extractResumeData(resumeText) {
       resumeData.workExp.push(work);
     }
   }
+  if (resumeData.workExp.length === 0) {
+    resumeData.workExp.push({
+      companyName: "",
+      dateEnd: null,
+      dateStart: null,
+      position: "",
+      responsibilities: "",
+    });
+  }
 
   const skillsMatch = resumeText.match(regexs.skills);
-  const skills = skillsMatch ? skillsMatch[0] :[];
+  const skills = skillsMatch ? skillsMatch[0] : [];
   resumeData.skills = skills;
 
   const interestMatches = resumeText.match(regexs.interests);
@@ -112,6 +126,14 @@ function extractResumeData(resumeText) {
       resumeData.educ.push(education);
     }
   }
+  if (resumeData.educ.length === 0) {
+    resumeData.educ.push({
+      dateEnd: null,
+      dateStart: null,
+      educName: "",
+      specialty: "",
+    });
+  }
 
   const certificationMatches = resumeText.match(regexs.certification);
   if (certificationMatches) {
@@ -138,6 +160,14 @@ function extractResumeData(resumeText) {
       };
       resumeData.certif.push(certification);
     }
+  }
+  if (resumeData.certif.length === 0) {
+    resumeData.certif.push({
+      certificateName: "",
+      dateEnd: null,
+      dateStart: null,
+      institution: "",
+    });
   }
 
   const volunteeringMatches = resumeText.match(regexs.voluntering);
@@ -166,6 +196,14 @@ function extractResumeData(resumeText) {
       resumeData.voluntering.push(volunter);
     }
   }
+  if (resumeData.voluntering.length === 0) {
+    resumeData.voluntering.push({
+      dateEnd: null,
+      dateStart: null,
+      obligations: "",
+      voluntering: "",
+    });
+  }
 
   const publicationMatches = resumeText.match(regexs.publications);
   if (publicationMatches) {
@@ -188,6 +226,13 @@ function extractResumeData(resumeText) {
       };
       resumeData.publ.push(publications);
     }
+  }
+  if (resumeData.publ.length === 0) {
+    resumeData.publ.push({
+      date: null,
+      publication: "",
+      publicationLink: "",
+    });
   }
 
   const awardMatches = resumeText.match(regexs.awards);
@@ -215,7 +260,16 @@ function extractResumeData(resumeText) {
       resumeData.award.push(awards);
     }
   }
+  if (resumeData.award.length === 0) {
+    resumeData.award.push({
+      date: null,
+      institutionAward: "",
+      merit: "",
+      nameAward: "",
+    });
+  }
 
+  console.log(resumeData);
   return resumeData;
 }
 

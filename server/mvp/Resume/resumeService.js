@@ -218,12 +218,10 @@ class ResumeService {
     page,
     limit,
     sort,
-    isArchive,
     isFavorite,
     searchText = ""
   ) {
     isFavorite = isFavorite === undefined ? false : isFavorite !== "false";
-    isArchive = isArchive || false;
     page = page || 1;
     limit = limit || 10;
     let offset = (page - 1) * limit;
@@ -259,23 +257,6 @@ class ResumeService {
       limit,
       order: resumeSort,
       subQuery: false,
-    };
-
-    const whereCondition = {
-      userId,
-      isArchive,
-    };
-
-    if (isFavorite) whereCondition.isFavorite = true;
-    if (searchText !== "") {
-      whereCondition.target = {
-        [Op.like]: `%${searchText}%`,
-      };
-    }
-
-    const activeResumes = await Resume.findAndCountAll({
-      where: whereCondition,
-      ...queries,
       attributes: [
         "id",
         "target",
@@ -285,16 +266,41 @@ class ResumeService {
         "isArchive",
       ],
       distinct: true,
-    });
-
-    const archivedResumesCount = await Resume.count({
-      where: { userId, isArchive: true },
-    });
-
-    return {
-      activeResumes: activeResumes,
-      archivedCount: archivedResumesCount,
     };
+
+    const whereCondition = {
+      userId,
+    };
+
+    if (isFavorite) whereCondition.isFavorite = true;
+    if (searchText !== "") {
+      whereCondition.target = {
+        [Op.iLike]: `%${searchText}%`,
+      };
+    }
+
+console.log("whereCondition:", whereCondition)
+    const allResumes = await Resume.findAndCountAll({
+      where: whereCondition,
+      ...queries,
+    });
+
+    const activeResumes = allResumes.rows.filter((resume) => !resume.isArchive);
+    const archiveResumes = allResumes.rows.filter(
+      (resume) => resume.isArchive
+    );
+
+    return {  
+      activeResumes: {  
+        count: activeResumes.length,  
+        rows: activeResumes,  
+      },  
+      archiveResumes:{  
+        count: archiveResumes.length,  
+        rows: archiveResumes,  
+      },   
+    };  
+
   }
 
   async getOne(id) {

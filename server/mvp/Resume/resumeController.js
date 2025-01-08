@@ -26,7 +26,6 @@ class ResumeController {
       page = 1,
       limit = 10,
       sort = null,
-      isArchive = false,
       isFavorite = false,
       searchText = "",
     } = req.query;
@@ -37,7 +36,6 @@ class ResumeController {
         page,
         limit,
         sort,
-        isArchive,
         isFavorite,
         searchText
       );
@@ -148,12 +146,14 @@ class ResumeController {
 
       const newResume = await resumeService.create(userId, resumeData);
 
-      fs.unlinkSync(req.file.path);
-
       return res.json(newResume);
     } catch (error) {
       console.error("Error while uploading resume:", error);
       next(ApiErrors.internal("An error occurred while uploading the resume"));
+    } finally {
+      if (fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
     }
   }
 }
