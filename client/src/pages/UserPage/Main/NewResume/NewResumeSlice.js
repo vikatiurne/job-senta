@@ -3,7 +3,10 @@ import ResumeServices from "../../../../http/services/ResumeServices";
 
 const initialState = {
   info: {},
-  resumes: [{}],
+  // resumes: [{}],
+  archiveResumes: [{}],
+  activeResumes: [{}],
+  
   status: "idle",
   getonestatus: "idle",
   getallstatus: "idle",
@@ -12,6 +15,7 @@ const initialState = {
   sort: "",
   resumesCount: null,
   archiveCount: null,
+  activeCount:null,
   checkedResumes: [],
   isShowArchive: false,
   searchText: "",
@@ -144,14 +148,16 @@ export const fetchFavoriteResume = createAsyncThunk(
 
 export const fetchUploadDocOrPdf = createAsyncThunk(
   "resume/fetchUploadDocOrPdf",
-  async ({formData, config}, { rejectWithValue }) => {
-    console.log(formData)
+  async ({ formData, config }, { rejectWithValue }) => {
+    console.log(formData);
     try {
       const response = await ResumeServices.uploadDocOrPdf(formData, config);
-      console.log(response);
+      return response
     } catch (error) {
       console.log(error);
-      return rejectWithValue(error.response ? error.response.data : error.message)
+      return rejectWithValue(
+        error.response ? error.response.data : error.message
+      );
     }
   }
 );
@@ -213,10 +219,12 @@ const resumeReducer = createSlice({
         localStorage.removeItem("_jobseeker_resume_isedit");
       })
       .addCase(fetchGetAllResume.fulfilled, (state, { payload }) => {
+        console.log("wwrwe",payload)
         state.getallstatus = "success";
-        state.resumes = payload.data.activeResumes.rows;
-        state.archiveCount = payload.data.archivedCount;
-        state.resumesCount = payload.data.activeResumes.count;
+        state.activeResumes = payload.data.activeResumes.rows;
+        state.archiveResumes = payload.data.archiveResumes.rows;
+        state.archiveCount = payload.data.archiveResumes.count;
+        state.activeCount = payload.data.activeResumes.count;
       })
       .addCase(fetchGetAllResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -249,7 +257,10 @@ const resumeReducer = createSlice({
       .addCase(fetchDeleteOneResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.activeResumes.rows;
+        state.activeResumes = payload.data.activeResumes.rows;
+        state.archiveResumes = payload.data.archiveResumes.rows;
+        state.archiveCount = payload.data.archiveResumes.count;
+        state.activeCount = payload.data.activeResumes.count;
       })
       .addCase(fetchDeleteOneResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -260,7 +271,10 @@ const resumeReducer = createSlice({
       .addCase(fetchDeleteSeveralResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.activeResumes.rows;
+        state.activeResumes = payload.data.activeResumes.rows;
+        state.archiveResumes = payload.data.archiveResumes.rows;
+        state.archiveCount = payload.data.archiveResumes.count;
+        state.activeCount = payload.data.activeResumes.count;
       })
       .addCase(fetchDeleteSeveralResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -271,7 +285,8 @@ const resumeReducer = createSlice({
       .addCase(fetchCloneResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.activeResumes.rows;
+        state.activeResumes = payload.data.activeResumes.rows;
+        state.activeCount = payload.data.activeResumes.count;
       })
       .addCase(fetchCloneResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -282,7 +297,10 @@ const resumeReducer = createSlice({
       .addCase(fetchArchiveOneResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.activeResumes.rows;
+        state.activeResumes = payload.data.activeResumes.rows;
+        state.archiveResumes = payload.data.archiveResumes.rows;
+        state.archiveCount = payload.data.archiveResumes.count;
+        state.activeCount = payload.data.activeResumes.count;
       })
       .addCase(fetchArchiveOneResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -293,7 +311,10 @@ const resumeReducer = createSlice({
       .addCase(fetchArchiveSeveralResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.activeResumes.rows;
+        state.activeResumes = payload.data.activeResumes.rows;
+        state.archiveResumes = payload.data.archiveResumes.rows;
+        state.archiveCount = payload.data.archiveResumes.count;
+        state.activeCount = payload.data.activeResumes.count;
       })
       .addCase(fetchArchiveSeveralResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -304,7 +325,8 @@ const resumeReducer = createSlice({
       .addCase(fetchFavoriteResume.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.activeResumes.rows;
+        state.activeResumes = payload.data.activeResumes.rows;
+        
       })
       .addCase(fetchFavoriteResume.rejected, (state, { payload }) => {
         state.getallstatus = "error";
@@ -315,11 +337,13 @@ const resumeReducer = createSlice({
       .addCase(fetchUploadDocOrPdf.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "success";
-        state.resumes = payload.data.activeResumes.rows;
+        state.activeResumes = payload.data.activeResumes.rows;
+        state.activeCount = payload.data.activeResumes.count;
       })
       .addCase(fetchUploadDocOrPdf.rejected, (state, { payload }) => {
         console.log(payload);
         state.getallstatus = "error";
+        state.error = payload.message;
       });
   },
 });

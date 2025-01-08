@@ -5,13 +5,12 @@
   height: calc(100vh - 155px);
 }
 
-.emptydata{
+.emptydata {
   max-width: 900px;
   width: 100%;
   font-size: 22px;
   line-height: 32px;
 }
-
 
 .builderContainer {
   display: flex;
@@ -54,6 +53,11 @@
   color: var(--gray);
 }
 
+.emptyInfo {
+  margin-top: 35%;
+  text-align: center;
+}
+
 @media (max-width: 1140px) {
   .builderWrapper {
     height: calc(100vh - 221px);
@@ -73,9 +77,8 @@
   }
 }
 
-
 @media (max-width: 499px) {
-  .emptydata{
+  .emptydata {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;

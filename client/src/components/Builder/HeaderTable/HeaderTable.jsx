@@ -62,14 +62,18 @@ const filter = [
 ];
 
 const HeaderTable = () => {
-  const { resumes } = useSelector((state) => state.resume);
+  const { archiveResumes, activeResumes, isShowArchive } = useSelector(
+    (state) => state.resume
+  );
 
   const dispatch = useDispatch();
 
   const handleAllCheckboxChange = (event) => {
     const { checked } = event.target;
     if (checked) {
-      const allCheckedResumes = resumes.map((resume) => String(resume.id));
+      const allCheckedResumes = !isShowArchive
+        ? activeResumes.map((resume) => String(resume.id))
+        : archiveResumes.map((resume) => String(resume.id));
       dispatch(setCheckedResumes(allCheckedResumes));
     } else {
       dispatch(setCheckedResumes([]));

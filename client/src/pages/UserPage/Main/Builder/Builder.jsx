@@ -19,8 +19,16 @@ const Builder = () => {
   const [isShowArchive, setIsShowArchive] = useState(false);
   const [isShowFavorite, setIsShowFavorite] = useState(false);
 
-  const { sort, resumes, getallstatus, limit, page, searchText, info, archiveCount } =
-    useSelector((state) => state.resume);
+  const {
+    sort,
+    archiveResumes,
+    activeResumes,
+    getallstatus,
+    limit,
+    page,
+    searchText,
+    info,
+  } = useSelector((state) => state.resume);
 
   const dispatch = useDispatch();
 
@@ -34,22 +42,19 @@ const Builder = () => {
         page,
         limit,
         sort,
-        isArchive: isShowArchive,
         isFavorite: isShowFavorite,
         searchText,
       })
     );
-    console.log(11111)
   }, [
     dispatch,
     limit,
     sort,
-    isShowArchive,
     isShowFavorite,
     page,
     searchText,
-    resumes.length,
-    info
+    info,
+    isShowArchive,
   ]);
 
   const hendleShowArchive = () => {
@@ -61,9 +66,30 @@ const Builder = () => {
     setIsShowArchive(false);
     dispatch(setIsArciveResumes(false));
   };
-  // || archiveCount > 0
+
+  const renderResumes = (resumes, isActive) => {
+    if (resumes.length === 0) {
+      return (
+        <p className={styles.emptyInfo}>
+          {isActive ? "No active resumes found" : "No archived resumes found"}
+        </p>
+      );
+    } else {
+      return resumes.map((item) => (
+        <ResumeListItem key={uuidv4()} item={item} />
+      ));
+    }
+  };
+
+  const noResultsFound =
+    searchText !== "" &&
+    activeResumes.length === 0 &&
+    archiveResumes.length === 0;
+
   const render =
-    resumes.length > 0  ? (
+    activeResumes.length > 0 ||
+    archiveResumes.length > 0 ||
+    searchText !== "" ? (
       <div className={styles.builderWrapper}>
         <div className={styles.resumeStatus}>
           <p
@@ -86,9 +112,9 @@ const Builder = () => {
         <div className={styles.builderContainer}>
           <div className={styles.builderTable}>
             <HeaderTable />
-            {resumes.map((item) => (
-              <ResumeListItem key={uuidv4()} item={item} />
-            ))}
+            {!isShowArchive
+              ? renderResumes(activeResumes, noResultsFound)
+              : renderResumes(archiveResumes, noResultsFound)}
           </div>
 
           <BuilderFooter />
@@ -103,6 +129,7 @@ const Builder = () => {
         <BtnsImport />
       </>
     );
+
   return getallstatus === "loading" ? <Loader /> : render;
 };
 

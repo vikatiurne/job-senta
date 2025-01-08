@@ -18,22 +18,22 @@ import style from "./TopResume.module.css";
 import DateServices from "../../../../../utils/DateServices.js";
 
 const TopResume = ({ className }) => {
-  const { resumes } = useSelector((state) => state.resume);
+  const { activeResumes } = useSelector((state) => state.resume);
 
   const [selectedResumes, setSelectedResumes] = useState(false);
   const [activeStarIds, setActiveStarIds] = useState([]);
-  const [topResume, setTopResume] = useState(resumes[0]);
+  const [topResume, setTopResume] = useState(activeResumes[0]);
 
   useEffect(() => {
     setActiveStarIds(
-      resumes.filter((item) => item.isFavorite).map((item) => item.id)
+      activeResumes.filter((item) => item.isFavorite).map((item) => item.id)
     );
-  }, [resumes]);
+  }, [activeResumes]);
 
   const handleSelectedResume = () => setSelectedResumes(!selectedResumes);
 
   const handleSelectTop = (id) => {
-    const newTop = resumes.filter((item) => id === item.id);
+    const newTop = activeResumes.filter((item) => id === item.id);
     setTopResume(newTop[0]);
     setSelectedResumes(false);
   };
@@ -49,7 +49,7 @@ const TopResume = ({ className }) => {
       </h1>
 
 
-   { !!resumes.length &&  <div className={style.sectResumeWrap}>
+   { !!activeResumes.length &&  <div className={style.sectResumeWrap}>
         <div className={style.sectResumeToTrack} onClick={handleSelectedResume}>
           <button
             className={cn(style.sectResumeBtnDropDown, {
@@ -79,7 +79,7 @@ const TopResume = ({ className }) => {
           </h3>
           <Scroll height="80px">
             <ul className={style.sectResumeDropDownList}>
-              {resumes.map((item) => (
+              {activeResumes.map((item) => (
                 <li
                   key={uuidv4()}
                   className={style.sectResumeDropDownItem}

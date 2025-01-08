@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import cn from "classnames";
 
 import style from "./ActiveAndArchivResume.module.css";
 
 const ActiveAndArchivResume = ({ className }) => {
-  const { resumes, archiveCount } = useSelector((state) => state.resume);
+  const { activeCount, archiveCount } = useSelector((state) => state.resume);
   console.log(archiveCount);
 
   return (
     <section className={cn(style.sectAcriveArchiv, className)}>
       <div className={cn(style.activeResume, style.sectAcriveArchivBlock)}>
-        <p className={style.activeResumeCount}>{resumes.length}</p>
+        <p className={style.activeResumeCount}>{activeCount}</p>
         <p className={style.activeResumeText}>Your active resumes</p>
       </div>
       <div className={cn(style.archivResume, style.sectAcriveArchivBlock)}>

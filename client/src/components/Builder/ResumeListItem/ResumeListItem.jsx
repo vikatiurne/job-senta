@@ -18,9 +18,8 @@ const ResumeListItem = ({ item }) => {
   const [checkedItem, setCheckedItem] = useState(false);
   const [activeStarIds, setActiveStarIds] = useState([]);
 
-  const { checkedResumes, resumes, isShowArchive } = useSelector(
-    (state) => state.resume
-  );
+  const { checkedResumes, archiveResumes, activeResumes, isShowArchive } =
+    useSelector((state) => state.resume);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,10 +30,18 @@ const ResumeListItem = ({ item }) => {
   }, [checkedResumes, item.id]);
 
   useEffect(() => {
-    setActiveStarIds(
-      resumes.filter((item) => item.isFavorite).map((item) => item.id)
-    );
-  }, [resumes]);
+    let showedResumes = [];
+    if (!isShowArchive) {
+      showedResumes = activeResumes
+        .filter((item) => item.isFavorite)
+        .map((item) => item.id);
+    } else {
+      showedResumes = archiveResumes
+        .filter((item) => item.isFavorite)
+        .map((item) => item.id);
+    }
+    setActiveStarIds(showedResumes);
+  }, [isShowArchive,activeResumes,archiveResumes]);
 
   const clickResumeHandler = (id) => {
     if (!isShowArchive) {

@@ -7,7 +7,6 @@ import {
   fetchCloneResume,
   fetchDeleteOneResume,
   fetchDeleteSeveralResume,
-  fetchGetAllResume,
   setCheckedResumes,
   setLimit,
 } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
@@ -22,15 +21,16 @@ import styles from "./BtnsBuilder.module.css";
 import DragAndDropUpload from "../DragAndDropUpload/DragAndDropUpload";
 
 const BtnsBuilder = () => {
-  const { limit, checkedResumes, isShowArchive, sort, isShowFavorite } =
-    useSelector((state) => state.resume);
+  const { limit, checkedResumes, isShowArchive } = useSelector(
+    (state) => state.resume
+  );
 
   const [limitNum, setLimitNum] = useState(limit);
   const [activeCloneBtn, setActiveCloneBtn] = useState(false);
   const [activeDownloadBtn, setActiveDownloadBtn] = useState(true);
   const [activeMultiBtn, setActiveMultiBtn] = useState(false);
   const [idsChecked, setIdsChecked] = useState([]);
-  const [activeModalFile, setActiveModalFile] = useState(false)
+  const [activeModalFile, setActiveModalFile] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -58,7 +58,8 @@ const BtnsBuilder = () => {
 
   const importPdforDocHandler = () => setActiveModalFile(true);
 
-  const changeStatusResume = async ({ isArchive }) => {
+  const changeStatusResume = ({ isArchive }) => {
+    console.log(isArchive);
     const idsToChangeStatus = checkedResumes;
     const action =
       idsToChangeStatus.length === 1
@@ -68,16 +69,7 @@ const BtnsBuilder = () => {
             isArchive,
           });
 
-    await dispatch(action);
-    await dispatch(
-      fetchGetAllResume({
-        page: 1,
-        limit: limitNum,
-        sort,
-        isArchive: isShowArchive,
-        isFavorite: isShowFavorite,
-      })
-    );
+    dispatch(action);
 
     dispatch(setCheckedResumes([]));
     setIdsChecked([]);
@@ -85,6 +77,7 @@ const BtnsBuilder = () => {
 
   const handleArchive = () => {
     const newArchiveStatus = !isShowArchive;
+    console.log(newArchiveStatus);
     changeStatusResume({
       isArchive: newArchiveStatus,
     });

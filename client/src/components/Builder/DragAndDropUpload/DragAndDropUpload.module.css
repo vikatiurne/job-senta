@@ -6,8 +6,8 @@
   width: 100%;
 }
 .dragging {  
-  border: 2px dashed #9c9d9e;  
-  background-color: #929496;  
+  border: 2px dashed var(--gray-light);  
+  background-color: var(--gray-light);  
 }
 .title {
   margin-bottom: 24px;
@@ -90,6 +90,14 @@
   font-size: 12px;
   line-height: 19px;
   font-weight: 500;
+}
+.errorMessage{
+  color: var(--red);
+}
+.error{
+  margin-bottom: 24px;
+  border: 3px dashed var(--red);
+  border-radius: 20px;
 }
 
 .doneBtn {

@@ -13,7 +13,7 @@ export default class ResumeServices {
     searchText
   ) {
     return await $api.get("api/resumes/getAll", {
-      params: { page, limit, sort, isArchive, isFavorite, searchText },
+      params: { page, limit, sort,  isFavorite, searchText },
     });
   }
   static async getOneResume(resumeId) {
