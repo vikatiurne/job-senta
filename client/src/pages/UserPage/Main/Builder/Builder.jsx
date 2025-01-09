@@ -68,10 +68,15 @@ const Builder = () => {
   };
 
   const renderResumes = (resumes, isActive) => {
+    console.log(isActive, isShowFavorite);
     if (resumes.length === 0) {
       return (
         <p className={styles.emptyInfo}>
-          {isActive ? "No active resumes found" : "No archived resumes found"}
+          {isActive
+            ? isShowFavorite
+              ? "No favorite resumes found"
+              : "No active resumes found"
+            : "No archived resumes found"}
         </p>
       );
     } else {
@@ -81,15 +86,18 @@ const Builder = () => {
     }
   };
 
-  const noResultsFound =
-    searchText !== "" &&
-    activeResumes.length === 0 &&
-    archiveResumes.length === 0;
+  const renderActiveResumes = isShowFavorite
+    ? activeResumes.filter((resume) => resume.isFavorite)
+    : activeResumes;
+  const renderArchiveResumes = isShowFavorite
+    ? archiveResumes.filter((resume) => resume.isFavorite)
+    : archiveResumes;
 
   const render =
     activeResumes.length > 0 ||
     archiveResumes.length > 0 ||
-    searchText !== "" ? (
+    searchText !== "" ||
+    isShowFavorite ? (
       <div className={styles.builderWrapper}>
         <div className={styles.resumeStatus}>
           <p
@@ -113,8 +121,8 @@ const Builder = () => {
           <div className={styles.builderTable}>
             <HeaderTable />
             {!isShowArchive
-              ? renderResumes(activeResumes, noResultsFound)
-              : renderResumes(archiveResumes, noResultsFound)}
+              ? renderResumes(renderActiveResumes, true)
+              : renderResumes(renderArchiveResumes, false)}
           </div>
 
           <BuilderFooter />

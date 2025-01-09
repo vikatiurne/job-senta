@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import cn from "classnames";
 
@@ -6,19 +6,24 @@ import DropDown from "../../../components/UI/DropDown/DropDown";
 
 import { ReactComponent as DropDownIcon } from "../../../assets/user_page/home/dropdown.svg";
 
-import { setSort } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
+import {
+  setSearch,
+  setSort,
+} from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
 
 import style from "./DropDownBuilder.module.css";
 
-
-const DropDownBuilder=({ className, title, childrenText }) =>{
+const DropDownBuilder = ({ className, title, childrenText }) => {
   const [selectedResumes, setSelectedResumes] = useState(false);
 
   const handleSelectedResume = () => setSelectedResumes(!selectedResumes);
 
   const dispatch = useDispatch();
 
-  const filterHandler = (val) => dispatch(setSort(val));
+  const filterHandler = (val) => {
+    dispatch(setSort(val));
+    dispatch(setSearch(""));
+  };
 
   return (
     <section className={cn(style.sectResume, className)}>
@@ -39,12 +44,12 @@ const DropDownBuilder=({ className, title, childrenText }) =>{
           className={cn(style.sectResumeDropDown)}
           activeClass={selectedResumes}
           maxHeight="500px"
-        >  
+        >
           {childrenText.map((item, i) => (
             <button
               key={i}
               className={style.sectResumeDropDownText}
-                onClick={() => filterHandler(item.value)}
+              onClick={() => filterHandler(item.value)}
             >
               {item.title}
             </button>
@@ -53,6 +58,6 @@ const DropDownBuilder=({ className, title, childrenText }) =>{
       </div>
     </section>
   );
-}
+};
 
-export default DropDownBuilder
+export default DropDownBuilder;
