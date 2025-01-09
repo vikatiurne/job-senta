@@ -213,14 +213,7 @@ class ResumeService {
     return this.getAll(userId);
   }
 
-  async getAll(
-    userId,
-    page,
-    limit,
-    sort,
-    isFavorite,
-    searchText = ""
-  ) {
+  async getAll(userId, page, limit, sort, isFavorite, searchText = "") {
     isFavorite = isFavorite === undefined ? false : isFavorite !== "false";
     page = page || 1;
     limit = limit || 10;
@@ -279,28 +272,24 @@ class ResumeService {
       };
     }
 
-console.log("whereCondition:", whereCondition)
     const allResumes = await Resume.findAndCountAll({
       where: whereCondition,
       ...queries,
     });
 
     const activeResumes = allResumes.rows.filter((resume) => !resume.isArchive);
-    const archiveResumes = allResumes.rows.filter(
-      (resume) => resume.isArchive
-    );
+    const archiveResumes = allResumes.rows.filter((resume) => resume.isArchive);
 
-    return {  
-      activeResumes: {  
-        count: activeResumes.length,  
-        rows: activeResumes,  
-      },  
-      archiveResumes:{  
-        count: archiveResumes.length,  
-        rows: archiveResumes,  
-      },   
-    };  
-
+    return {
+      activeResumes: {
+        count: activeResumes.length,
+        rows: activeResumes,
+      },
+      archiveResumes: {
+        count: archiveResumes.length,
+        rows: archiveResumes,
+      },
+    };
   }
 
   async getOne(id) {
