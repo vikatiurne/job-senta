@@ -39,7 +39,10 @@ const SearchBox = ({
       <input
         type="text"
         placeholder="Resume search"
-        className={styles.searchInput}
+        className={cn({
+          [styles.searchMobInput]: showInputForMobile,
+          [styles.searchInput]: !showInputForMobile,
+        })}
         ref={inputRef}
         value={searchText}
         onChange={changeHandler}
@@ -52,6 +55,5 @@ const SearchBox = ({
     </div>
   );
 };
-
 
 export default SearchBox;

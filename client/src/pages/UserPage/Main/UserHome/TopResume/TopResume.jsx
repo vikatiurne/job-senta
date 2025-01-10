@@ -12,17 +12,22 @@ import { ReactComponent as DropDownIcon } from "../../../../../assets/user_page/
 import { ReactComponent as Star } from "../../../../../assets/user_page/home/star.svg";
 import { ReactComponent as StarBorder } from "../../../../../assets/user_page/home/starborder.svg";
 
+import DateServices from "../../../../../utils/DateServices.js";
+
 import { useMedia } from "../../../../../hoc/useMedia/useMedia.js";
 
 import style from "./TopResume.module.css";
-import DateServices from "../../../../../utils/DateServices.js";
 
 const TopResume = ({ className }) => {
   const { activeResumes } = useSelector((state) => state.resume);
 
   const [selectedResumes, setSelectedResumes] = useState(false);
   const [activeStarIds, setActiveStarIds] = useState([]);
-  const [topResume, setTopResume] = useState(activeResumes[0]);
+  const [topResume, setTopResume] = useState({});
+
+  useEffect(() => {
+    setTopResume(activeResumes[0]);
+  }, [activeResumes]);
 
   useEffect(() => {
     setActiveStarIds(
@@ -48,60 +53,66 @@ const TopResume = ({ className }) => {
         <Star /> Top resume{" "}
       </h1>
 
-
-   { !!activeResumes.length &&  <div className={style.sectResumeWrap}>
-        <div className={style.sectResumeToTrack} onClick={handleSelectedResume}>
-          <button
-            className={cn(style.sectResumeBtnDropDown, {
-              [style.sectResumeBtnDropDownActive]: selectedResumes,
-            })}
+      {!!activeResumes.length && (
+        <div className={style.sectResumeWrap}>
+          <div
+            className={style.sectResumeToTrack}
+            onClick={handleSelectedResume}
           >
-            <DropDownIcon />
-          </button>
-          <p className={style.sectResumeText}>
-            Resume:{" "}
-            <span className={style.sectResumeResourse}>
-              {topResume?.target}
-            </span>
+            <button
+              className={cn(style.sectResumeBtnDropDown, {
+                [style.sectResumeBtnDropDownActive]: selectedResumes,
+              })}
+            >
+              <DropDownIcon />
+            </button>
+            <p className={style.sectResumeText}>
+              Resume:{" "}
+              <span className={style.sectResumeResourse}>
+                {topResume?.target}
+              </span>
+            </p>
+          </div>
+          <p className={style.sectResumeDate}>
+            {DateServices.getDate(topResume?.createdAt, "long")}
           </p>
-        </div>
-        <p className={style.sectResumeDate}>
-          {DateServices.getDate(topResume?.createdAt, "long")}
-        </p>
 
-        <DropDown
-          className={cn(style.sectResumeDropDown)}
-          activeClass={selectedResumes}
-          maxHeight="119px"
-        >
-          <h3 className={style.sectResumeDropDownTitle}>
-            Select the resume you want to track
-          </h3>
-          <Scroll height="80px">
-            <ul className={style.sectResumeDropDownList}>
-              {activeResumes.map((item) => (
-                <li
-                  key={uuidv4()}
-                  className={style.sectResumeDropDownItem}
-                  onClick={() => handleSelectTop(item.id)}
-                >
-                  <p className={style.sectResumeDropDownText}>{item.target}</p>
-                  <time className={style.sectResumeDropDownDate}>
-                    {DateServices.getDate(item.createdAt, "long")}
-                  </time>
-                  <StarBorder
-                    style={{
-                      fill: activeStarIds.includes(item.id)
-                        ? "#958060"
-                        : "transparent",
-                    }}
-                  />
-                </li>
-              ))}
-            </ul>
-          </Scroll>
-        </DropDown>
-      </div>}
+          <DropDown
+            className={cn(style.sectResumeDropDown)}
+            activeClass={selectedResumes}
+            maxHeight="119px"
+          >
+            <h3 className={style.sectResumeDropDownTitle}>
+              Select the resume you want to track
+            </h3>
+            <Scroll height="80px">
+              <ul className={style.sectResumeDropDownList}>
+                {activeResumes.map((item) => (
+                  <li
+                    key={uuidv4()}
+                    className={style.sectResumeDropDownItem}
+                    onClick={() => handleSelectTop(item.id)}
+                  >
+                    <p className={style.sectResumeDropDownText}>
+                      {item.target}
+                    </p>
+                    <time className={style.sectResumeDropDownDate}>
+                      {DateServices.getDate(item.createdAt, "long")}
+                    </time>
+                    <StarBorder
+                      style={{
+                        fill: activeStarIds.includes(item.id)
+                          ? "#958060"
+                          : "transparent",
+                      }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </Scroll>
+          </DropDown>
+        </div>
+      )}
 
       <ScoreResumeCircle
         size={hasMediaQuery ? 110 : 140}

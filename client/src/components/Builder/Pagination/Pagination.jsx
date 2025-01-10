@@ -16,7 +16,6 @@ const Pagination = () => {
   const pagesCount = Math.ceil(resumesCount / limit);
   const activePrevArrow = page > 1;
   const activeNextArrow = page < pagesCount;
-  console.log(resumesCount)
 
   const handlePrevPage = () => {
     if (page > 1) dispatch(setPage(page - 1));

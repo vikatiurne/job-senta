@@ -68,7 +68,6 @@ const Builder = () => {
   };
 
   const renderResumes = (resumes, isActive) => {
-    console.log(isActive, isShowFavorite);
     if (resumes.length === 0) {
       return (
         <p className={styles.emptyInfo}>

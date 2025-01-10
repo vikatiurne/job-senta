@@ -9,7 +9,8 @@
   margin: 2px;
 }
 
-.searchInput {
+.searchInput,
+.searchMobInput {
   border: none;
   background-color: transparent;
   padding: 14px 10px 14px 68px;
@@ -70,7 +71,16 @@
     box-shadow: none;
     background-color: transparent;
   }
+
   .searchInput {
     padding-left: 16px;
+  }
+  .searchMobInput {
+    padding: 10px 8px 10px 16px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+  .searchInput::placeholder{
+    width: 0;
   }
 }

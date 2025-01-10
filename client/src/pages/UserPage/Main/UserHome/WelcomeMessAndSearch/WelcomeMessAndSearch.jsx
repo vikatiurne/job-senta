@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
-import style from "./WelcomeMessAndSearch.module.css";
-import cn from "classnames";
-import Search from "./Search/Search.jsx";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useMedia } from "../../../../../hoc/useMedia/useMedia.js";
 import { useNavigate } from "react-router-dom";
+import cn from "classnames";
+
+import Search from "./Search/Search.jsx";
+import { useMedia } from "../../../../../hoc/useMedia/useMedia.js";
+
 import { setSearch } from "../../NewResume/NewResumeSlice.js";
-import { useState } from "react";
+
+import style from "./WelcomeMessAndSearch.module.css";
 
 const WelcomeMessAndSearch = ({ className }) => {
   const [showInputForMobile, setShowInputForMobile] = useState(false);
@@ -19,16 +22,18 @@ const WelcomeMessAndSearch = ({ className }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleClickSearch = () => {
+  useEffect(() => {
+    dispatch(setSearch(""));
+  }, [dispatch]);
+
+  const handleSearchClick = () => {
     const trimmedSearchText = searchText.trim();
-    if (trimmedSearchText) {
+    if (trimmedSearchText || !isMediaQuery) {
       navigate("../builder");
       dispatch(setSearch(trimmedSearchText));
+    } else if (isMediaQuery) {
+      setShowInputForMobile(true);
     }
-  };
-
-  const handleOpenSearch = () => {
-    setShowInputForMobile(true);
   };
 
   return (
@@ -43,9 +48,7 @@ const WelcomeMessAndSearch = ({ className }) => {
       <Search
         showInputForMobile={showInputForMobile}
         setShowInputForMobile={setShowInputForMobile}
-        handleClickSearch={
-          !isMediaQuery ? handleClickSearch :()=> setShowInputForMobile(true)
-        }
+        handleClickSearch={handleSearchClick}
       />
     </section>
   );
