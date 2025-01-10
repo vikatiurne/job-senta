@@ -1,116 +1,132 @@
 .sectCareerGoal {
-    position: relative;
-    border-radius: 20px;
-    box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
-    background-color: var(--white);
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px 0px rgba(149, 128, 96, 0.2);
+  background-color: var(--white);
 }
 
 .sectCareerGoalTitle {
-    color: var(--dark-gray);
-    text-align: center;
-    text-transform: uppercase;
-
+  color: var(--dark-gray);
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .sectCareerGoalList {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .sectCareerGoalItem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .sectCareerGoalText {
-    font-weight: 500;
-    color: #A4A4A4;
+  font-weight: 500;
+  color: #a4a4a4;
 }
 
-.sectCareerGoalAdd {
-    position: absolute;
-    cursor: pointer;
+.sectCareerGoalAdd,
+.sectCareerGoalDel,
+.sectCareerGoalEdit {
+  position: absolute;
+  cursor: pointer;
 }
 
-
-@media(max-width: 390px), (min-width:390px) {
-    .sectCareerGoal {
-        padding: 4px;
-    }
-
-    .sectCareerGoalTitle {
-        padding-top: 4px;
-        padding-bottom: 4px;
-        font-family: var(--montserrat);
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 24px;
-    }
-
-    .sectCareerGoalList {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-
-    .sectCareerGoalItem svg {
-        width: 19px;
-        height: 19px;
-    }
-
-    .sectCareerGoalText {
-        font-size: 12px;
-        line-height: 19px;
-
-    }
-
-    .sectCareerGoalAdd {
-
-        top: 4px;
-        right: 4px;
-
-    }
-
-
+.sectCareerGoalDel svg {
+  fill: var(--brown-dark);
+  width: 24px;
+  height: 24px;
+}
+.sectCareerGoalEdit svg {
+  width: 24px;
+  height: 24px;
 }
 
+@media (max-width: 390px), (min-width: 390px) {
+  .sectCareerGoal {
+    padding: 4px;
+  }
 
-@media (min-width:1024px) {
-    .sectCareerGoal {
-        padding: 16px;
-    }
+  .sectCareerGoalTitle {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-family: var(--montserrat);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+  }
 
-    .sectCareerGoalTitle {
-        font-family: var(--open-sans);
-        font-size: 27px;
-        line-height: 32px;
-        padding: 0;
-        font-weight: 700;
-        margin-bottom: 16px;
-    }
+  .sectCareerGoalList {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 
-    .sectCareerGoalList {
-        flex-direction: row;
-        align-items: center;
+  .sectCareerGoalItem svg {
+    width: 19px;
+    height: 19px;
+  }
 
-    }
+  .sectCareerGoalText {
+    font-size: 12px;
+    line-height: 19px;
+  }
 
-    .sectCareerGoalItem svg {
-        width: 24px;
-        height: 24px;
-    }
+  .sectCareerGoalAdd,
+  .sectCareerGoalEdit {
+    top: 5px;
+    right: 8px;
+  }
+  .sectCareerGoalDel {
+    top: 4px;
+    right: 45px;
+  }
+}
 
-    .sectCareerGoalText {
-        font-size: 22px;
-        line-height: 32px;
-    }
+@media (min-width: 1024px) {
+  .sectCareerGoal {
+    padding: 16px;
+  }
 
-    .sectCareerGoalAdd {
+  .sectCareerGoalTitle {
+    font-family: var(--open-sans);
+    font-size: 27px;
+    line-height: 32px;
+    padding: 0;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
 
-        top: 16px;
-        right: 16px;
+  .sectCareerGoalList {
+    flex-direction: row;
+    align-items: center;
+  }
 
-    }
+  .sectCareerGoalItem svg {
+    width: 24px;
+    height: 24px;
+  }
+  .sectCareerGoalEdit svg,
+  .sectCareerGoalDel svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .sectCareerGoalText {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .sectCareerGoalAdd,
+  .sectCareerGoalEdit {
+    top: 16px;
+    right: 16px;
+  }
+  .sectCareerGoalDel {
+    top: 14px;
+    right: 55px;
+  }
 }

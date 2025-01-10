@@ -10,7 +10,7 @@ import { ReactComponent as Calendar } from "../../../assets/user_page/builder/cr
 import "react-datepicker/dist/react-datepicker.css";
 import "./InputDate.css";
 
-const InputDate = ({ name, placeholder }) => {
+const InputDate = ({ name, placeholder, styles, maxDate = true }) => {
   const [field, meta, helpers] = useField(name);
   const { value } = meta;
   const { setValue } = helpers;
@@ -54,7 +54,7 @@ const InputDate = ({ name, placeholder }) => {
     "November",
     "December",
   ];
-  const years = range(1990, getYear(new Date()) + 1, 1);
+  const years = range(1990, getYear(new Date()) + (maxDate ? 1 : 5), 1);
 
   return (
     <DatePicker
@@ -70,8 +70,8 @@ const InputDate = ({ name, placeholder }) => {
       popperClassName="popper"
       showMonthDropdown
       showYearDropdown
-      maxDate={addDays(new Date(), 0)}
-      className="datePicker"
+      maxDate={maxDate ? addDays(new Date(), 0) : undefined}
+      className={!styles ? "datePicker" : styles}
       showPopperArrow={false}
       dateFormat="dd MMMM, yyyy"
       calendarStartDay={1}

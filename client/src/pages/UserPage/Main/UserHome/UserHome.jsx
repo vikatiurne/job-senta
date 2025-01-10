@@ -12,11 +12,16 @@ import Loader from "../../../../components/UI/Loader/Loader.jsx";
 import style from "./UserHome.module.css";
 import { useEffect } from "react";
 import { fetchGetAllResume } from "../NewResume/NewResumeSlice.js";
+import { fetchGetGoal } from "./HomeSlice.js";
 
 const UserHome = () => {
   const { status } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGetGoal());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(
@@ -30,7 +35,6 @@ const UserHome = () => {
       })
     );
   }, [dispatch]);
-  
 
   return status === "loading" ? (
     <Loader loading color="#958060" />
