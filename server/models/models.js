@@ -24,6 +24,13 @@ const Token = sequelize.define("token", {
   accessToken: { type: DataTypes.STRING(1254), allowNull: false },
 });
 
+const CareerGoal = sequelize.define("careergoal", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  target: { type: DataTypes.STRING },
+  date: { type: DataTypes.DATE },
+  salary: { type: DataTypes.INTEGER },
+});
+
 const Resume = sequelize.define("resume", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   info: { type: DataTypes.JSON, allowNull: true },
@@ -98,6 +105,9 @@ const AiAnalyse = sequelize.define("aiAnalise", {
 User.hasOne(Token, { onDelete: "CASCADE" });
 Token.belongsTo(User);
 
+User.hasOne(CareerGoal, { onDelete: "CASCADE" });
+CareerGoal.belongsTo(User);
+
 User.hasMany(Resume, {
   as: "resumes",
   onDelete: "CASCADE",
@@ -157,6 +167,7 @@ module.exports = {
   UserLanding,
   User,
   Token,
+  CareerGoal,
   Resume,
   Project,
   Work,

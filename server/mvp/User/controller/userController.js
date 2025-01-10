@@ -2,7 +2,6 @@ const { User } = require("../../../models/models");
 
 class UserController {
   async delete(req, res, next) {
-    // удаление юзеров
     try {
       const { id } = req.params;
       const userData = await User.destroy({ where: { id: id } });
@@ -14,7 +13,6 @@ class UserController {
   }
 
   async getUser(req, res, next) {
-    // получение юзеров
     try {
       const userData = await User.findAll();
 
@@ -25,7 +23,6 @@ class UserController {
   }
 
   async getUserOne(req, res, next) {
-    // получение 1 юзера
     try {
       const { id } = req.params;
 
