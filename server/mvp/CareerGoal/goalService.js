@@ -17,15 +17,15 @@ class GoalService {
   }
 
   async update(userId, goalData) {
-    const goal = await CareerGoal.update(
+    await CareerGoal.update(
       {
         target: goalData?.title,
         date: goalData?.date,
         salary: goalData?.salary,
       },
-      { where: userId }
+      { where: { userId: userId } }
     );
-    return goal;
+    return await this.get(userId);
   }
 
   async delete(userId) {

@@ -24,7 +24,7 @@ class GoalController {
     }
   }
   async get(req, res, next) {
-      const userId = req.user.id;
+    const userId = req.user.id;
     try {
       const goal = await goalService.get(userId);
       return res.status(201).json(goal);

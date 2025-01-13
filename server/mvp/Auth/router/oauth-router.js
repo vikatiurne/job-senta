@@ -1,6 +1,7 @@
 const Router = require("express");
 const passport = require("../strategies");
 const axios = require("axios");
+const ApiErrors = require("../../../errors/ApiErrors");
 
 const router = new Router();
 
@@ -44,8 +45,13 @@ router.get("/linkedin/callback", (req, res, next) => {
     { failureRedirect: "/error" },
     (err, user, info) => {
       if (err) {
-        return next(err);
+        return res.status(400).json({   
+          title: "Ошибка аутентификации",   
+          text: err.message || "Непредвиденная ошибка"   
+        });  
       }
+
+      console.log(user)
       if (!user) {
         return res.redirect("/error");
       }
@@ -66,7 +72,6 @@ router.get("/linkedin/callback", (req, res, next) => {
   )(req, res, next);
 });
 
-// получение юзера
 router.get("/social/user", (req, res) => {
   if (req.session.user) {
     return res.json(req.session.user);
