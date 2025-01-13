@@ -16,6 +16,7 @@ import { textData } from "../../../utils/textData";
 
 import {
   fetchLogin,
+  resetAuthErr,
   resetAuthState,
   setRememberMe,
 } from "../../../pages/Autorization/AuthSlice";
@@ -26,12 +27,18 @@ const LoginForm = () => {
   const { error, status } = useSelector((state) => state.auth);
   const [modalActive, setModalActive] = useState(!!error);
 
-  useEffect(() => {
-    if (!!error) setModalActive(true);
-  }, [error]);
-
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    dispatch(resetAuthErr());
+  }, [dispatch]);
+
+  useEffect(() => {
+    error ? setModalActive(true) : setModalActive(false);
+  }, [error]);
+
+  console.log(error);
 
   const submitFormHandler = (values) => {
     dispatch(

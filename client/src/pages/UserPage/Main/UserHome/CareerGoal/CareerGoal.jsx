@@ -29,11 +29,10 @@ const CareerGoal = ({ className }) => {
   const handleShowModalCareerGoal = () => fnShowModalCareerGoal();
 
   const handleEditGoal = () => {
-    fnShowModalCareerGoal();
     setIsEdit(true);
+    fnShowModalCareerGoal();
   };
   const handleDeleteGoal = () => dispatch(fetchDeleteGoal());
-
 
   return (
     <section className={cn([style.sectCareerGoal], className)}>

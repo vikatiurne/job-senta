@@ -16,16 +16,17 @@ const LoginAuth0Button = ({ btnName }) => {
 
   const { pathname } = useLocation();
 
-
   useEffect(() => {
     const img = btnName === "Google" ? imgBtnGoogle : imgBtnLinkedIn;
     setSrc(img);
   }, [btnName]);
 
-
   const handleLogin = () => {
-    dispatch(setMethodAuth('social'))
-    window.location.href = `${process.env.REACT_APP_API_URL}/api/oauth/${btnName.toLowerCase()}`;
+    dispatch(setMethodAuth("social"));
+    const path = `${
+      process.env.REACT_APP_API_URL
+    }/api/oauth/${btnName.toLowerCase()}`;
+    window.location.href = path;
   };
 
   return (

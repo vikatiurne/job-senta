@@ -24,7 +24,7 @@ export const fetchRegistration = createAsyncThunk(
     } catch (error) {
       return rejectWithValue({
         title: "The server is unavailable. Please try again later",
-        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!Registaration",
+        text: "Sorry, the server is temporarily unavailable. Please try registaration later.",
       });
     }
   }
@@ -51,7 +51,7 @@ export const fetchSocialAuth = createAsyncThunk(
       console.log(error);
       return rejectWithValue({
         title: "The server is unavailable. Please try again later",
-        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!SocialAuth",
+        text: "Sorry, the server is temporarily unavailable. Please try again later.",
       });
     }
   }
@@ -65,7 +65,7 @@ export const fetchLogout = createAsyncThunk(
     } catch (error) {
       return rejectWithValue({
         title: "The server is unavailable. Please try again later",
-        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!Logout",
+        text: "Sorry, the server is temporarily unavailable. Please try logout later",
       });
     }
   }
@@ -90,7 +90,7 @@ export const fetchForgotPassword = createAsyncThunk(
     } catch (error) {
       return rejectWithValue({
         title: "Unknown Error",
-        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!ForgotPassword",
+        text: "Sorry, the server is temporarily unavailable. Please try reset password later.",
       });
     }
   }
@@ -104,7 +104,7 @@ export const fetchResetPassword = createAsyncThunk(
     } catch (error) {
       return rejectWithValue({
         title: "Unknown Error",
-        text: "СЮДА НУЖНО НАПИСАТЬ ТЕКСТ!!!ResetPassword",
+        text: "Sorry, the server is temporarily unavailable. Please try recovery password later.",
       });
     }
   }
@@ -128,16 +128,19 @@ const authSlice = createSlice({
     },
     resetAuthState: (state) => {
       if (!state.isRemember && state.methodAuth === "app") {
-        localStorage.removeItem("_jobseeker");
-        sessionStorage.removeItem("_jobseeker");
-        state.user = {};
-        state.isAuth = false;
-        state.isRemember = false;
-        state.error = null;
-        state.methodAuth = null;
-        state.status = "idle";
-        state.msg = null;
+      localStorage.removeItem("_jobseeker");
+      sessionStorage.removeItem("_jobseeker");
+      state.user = {};
+      state.isAuth = false;
+      state.isRemember = false;
+      state.error = null;
+      state.methodAuth = null;
+      state.status = "idle";
+      state.msg = null;
       }
+    },
+    resetAuthErr: (state) => {
+      state.error = null;
     },
   },
   extraReducers(builder) {
@@ -150,7 +153,7 @@ const authSlice = createSlice({
         localStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data.user;
         state.error = payload.data?.message;
-        state.status = "success";
+        state.status = payload.data.message ? "error" : "success";
       })
       .addCase(fetchRegistration.rejected, (state, { payload }) => {
         state.error = payload;
@@ -186,7 +189,7 @@ const authSlice = createSlice({
         localStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data;
         state.methodAuth = "app";
-        state.isRemember = true
+        state.isRemember = true;
         state.error = payload?.data.message;
       })
       .addCase(fetchSocialAuth.rejected, (state, { payload }) => {
@@ -234,7 +237,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchForgotPassword.fulfilled, (state, { payload }) => {
         console.log(payload);
-        state.msg = payload.data;
+        state.msg = payload.data || payload.data.message;
         state.status = "success";
       })
       .addCase(fetchForgotPassword.rejected, (state, { payload }) => {
@@ -260,6 +263,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setRememberMe, setMethodAuth, resetAuthState } =
+export const { setRememberMe, setMethodAuth, resetAuthState, resetAuthErr } =
   authSlice.actions;
 export default authSlice.reducer;

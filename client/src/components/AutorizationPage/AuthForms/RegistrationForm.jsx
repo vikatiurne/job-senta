@@ -17,7 +17,7 @@ import Popup from "../../UI/Popup/Popup";
 import { useEffect, useState } from "react";
 
 const LoginForm = () => {
-  const error = useSelector((state) => state.auth.error);
+  const {error, status} = useSelector((state) => state.auth);
   const [modalActive, setModalActive] = useState(!!error);
 
 
@@ -39,7 +39,9 @@ const LoginForm = () => {
         lastName: values.lastName,
       })
     );
-    if(!error)navigate('/login')
+    console.log(!error && status==="success")
+    console.log(!error,status==="success")
+    if(!error && status==="success")navigate('/login')
   };
 
   return (

@@ -14,7 +14,7 @@ import Button from "../../../../../../components/UI/Button/Button.jsx";
 import Input from "../../../../../../components/UI/Input/Input.jsx";
 import InputDate from "../../../../../../components/UI/InputDate/InputDate.jsx";
 
-import { fetchCreateGoal } from "../../HomeSlice.js";
+import { fetchCreateGoal, fetchUpdateGoal } from "../../HomeSlice.js";
 
 import validation from "./validation/validationSchema.js";
 
@@ -24,6 +24,7 @@ const ModalCareerGoal = ({ isEdit }) => {
   isEdit = false || isEdit;
   const { careerGoal } = useSelector((state) => state.home);
 
+  console.log(isEdit);
   const initialStateCarer = {
     title: !isEdit ? "" : careerGoal.target,
     date: !isEdit ? "" : careerGoal.date,
@@ -37,7 +38,9 @@ const ModalCareerGoal = ({ isEdit }) => {
   const handleSubmit = (values) => {
     const transformData = new Date(values.date);
     values.date = transformData;
-    dispatch(fetchCreateGoal(values));
+    !isEdit
+      ? dispatch(fetchCreateGoal(values))
+      : dispatch(fetchUpdateGoal(values));
   };
 
   return (
