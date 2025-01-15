@@ -16,29 +16,29 @@ import { textData } from "../../../utils/textData";
 
 import {
   fetchLogin,
-  resetAuthErr,
   resetAuthState,
   setRememberMe,
 } from "../../../pages/Autorization/AuthSlice";
 
 import styles from "./AuthForms.module.css";
+import { clearError } from "../../../pages/errors/errorSlice";
 
 const LoginForm = () => {
-  const { error, status } = useSelector((state) => state.auth);
+  const { status } = useSelector((state) => state.auth);
+  const error = useSelector((state) => state.error);
+
   const [modalActive, setModalActive] = useState(!!error);
 
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
   useEffect(() => {
-    dispatch(resetAuthErr());
+    dispatch(clearError());
   }, [dispatch]);
 
   useEffect(() => {
     error ? setModalActive(true) : setModalActive(false);
   }, [error]);
-
-  console.log(error);
 
   const submitFormHandler = (values) => {
     dispatch(
@@ -121,7 +121,7 @@ const LoginForm = () => {
               {status === "loading" ? (
                 <Loader loading color="#f7f7f7" />
               ) : (
-                status === "error" && <PopupContent msg={error} />
+                error && <PopupContent />
               )}
             </Popup>
           )}

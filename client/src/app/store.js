@@ -4,6 +4,7 @@ import {
   homePageReducer,
   authReducer,
   homeUserReducer,
+  errorReducer,
 } from "../pages";
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     homePage: homePageReducer,
     auth: authReducer,
     home: homeUserReducer,
+    error: errorReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
@@ -14,15 +14,21 @@ import PopupContent from "../PopupContent/PopupContent";
 import passIcon from "../../../assets/passIcon.png";
 import { textData } from "../../../utils/textData";
 
-import styles from "./AuthForms.module.css";
 import { fetchResetPassword } from "../../../pages/Autorization/AuthSlice";
+import { clearError } from "../../../pages/errors/errorSlice";
+
+import styles from "./AuthForms.module.css";
 
 const NewPasswordForm = () => {
   const [modalActive, setModalActive] = useState(false);
-  const { msg, status } = useSelector((state) => state.auth);
+  const { status,msg } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { link } = useParams();
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   const submitFormHandler = (values) => {
     dispatch(fetchResetPassword({ newPass: values.password, resetLink: link }));
@@ -83,7 +89,7 @@ const NewPasswordForm = () => {
               {status === "loading" ? (
                 <Loader loading color="#f7f7f7" />
               ) : (
-                <PopupContent msg={msg} />
+                <PopupContent msg={msg}/>
               )}
             </Popup>
           )}

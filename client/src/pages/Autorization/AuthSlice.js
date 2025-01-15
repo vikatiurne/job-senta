@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthorizationServices from "../../http/services/AuthorizationServices";
+import { setError } from "../errors/errorSlice";
+import { handleError } from "../errors/handleError";
 
 const initialState = {
   user: {},
@@ -9,11 +11,15 @@ const initialState = {
   methodAuth: null,
   status: "idle",
   msg: null,
+  isServerConnect: false,
 };
 
 export const fetchRegistration = createAsyncThunk(
   "auth/fetchRegistration",
-  async ({ email, password, username, lastName }, { rejectWithValue }) => {
+  async (
+    { email, password, username, lastName },
+    { dispatch, rejectWithValue }
+  ) => {
     try {
       return await AuthorizationServices.registration(
         email,
@@ -22,90 +28,99 @@ export const fetchRegistration = createAsyncThunk(
         lastName
       );
     } catch (error) {
-      return rejectWithValue({
-        title: "The server is unavailable. Please try again later",
-        text: "Sorry, the server is temporarily unavailable. Please try registaration later.",
-      });
+      const handledError = handleError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ email, password }, { dispatch, rejectWithValue }) => {
     try {
       return await AuthorizationServices.login(email, password);
     } catch (error) {
-      console.log(error);
-      return rejectWithValue(error.response.data);
+      const handledError = handleError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 
 export const fetchSocialAuth = createAsyncThunk(
   "auth/fetchSocialAuth",
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       return await AuthorizationServices.socialAuth();
     } catch (error) {
-      console.log(error);
-      return rejectWithValue({
-        title: "The server is unavailable. Please try again later",
-        text: "Sorry, the server is temporarily unavailable. Please try again later.",
-      });
+      const handledError = handleError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 
 export const fetchLogout = createAsyncThunk(
   "auth/fetchLogout",
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       return await AuthorizationServices.logout();
     } catch (error) {
-      return rejectWithValue({
-        title: "The server is unavailable. Please try again later",
-        text: "Sorry, the server is temporarily unavailable. Please try logout later",
-      });
+      const handledError = handleError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 
 export const fetchAutoLogin = createAsyncThunk(
   "auth/fetchAutoLogin",
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       return await AuthorizationServices.autoLogin();
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      const handledError = handleError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 
 export const fetchForgotPassword = createAsyncThunk(
   "auth/fetchForgotPassword",
-  async ({ email }, { rejectWithValue }) => {
+  async ({ email }, { dispatch, rejectWithValue }) => {
     try {
       return await AuthorizationServices.forgotPassword(email);
     } catch (error) {
-      return rejectWithValue({
-        title: "Unknown Error",
-        text: "Sorry, the server is temporarily unavailable. Please try reset password later.",
-      });
+      const handledError = handleError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 
 export const fetchResetPassword = createAsyncThunk(
   "auth/fetchResetPassword",
-  async ({ newPass, resetLink }, { rejectWithValue }) => {
+  async ({ newPass, resetLink }, { dispatch, rejectWithValue }) => {
     try {
       return await AuthorizationServices.resetPassword(newPass, resetLink);
     } catch (error) {
-      return rejectWithValue({
-        title: "Unknown Error",
-        text: "Sorry, the server is temporarily unavailable. Please try recovery password later.",
-      });
+      const handledError = handleError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
+    }
+  }
+);
+export const fetchCheckConnect = createAsyncThunk(
+  "auth/fetchCheckConnect",
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      return await AuthorizationServices.checkServerConnection();
+    } catch (error) {
+      const handledError = handleError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
@@ -123,24 +138,22 @@ const authSlice = createSlice({
       state.isRemember = payload;
     },
     setMethodAuth: (state, { payload }) => {
-      state.methodAuth = payload;
       state.isAuth = true;
+      state.methodAuth = payload;
     },
     resetAuthState: (state) => {
+      console.log(!state.isRemember && state.methodAuth === "app");
       if (!state.isRemember && state.methodAuth === "app") {
-      localStorage.removeItem("_jobseeker");
-      sessionStorage.removeItem("_jobseeker");
-      state.user = {};
-      state.isAuth = false;
-      state.isRemember = false;
-      state.error = null;
-      state.methodAuth = null;
-      state.status = "idle";
-      state.msg = null;
+        localStorage.removeItem("_jobseeker");
+        sessionStorage.removeItem("_jobseeker");
+        state.user = {};
+        state.isRemember = false;
+        state.isAuth = false;
+        state.error = null;
+        state.methodAuth = null;
+        state.status = "idle";
+        state.msg = null;
       }
-    },
-    resetAuthErr: (state) => {
-      state.error = null;
     },
   },
   extraReducers(builder) {
@@ -152,8 +165,7 @@ const authSlice = createSlice({
       .addCase(fetchRegistration.fulfilled, (state, { payload }) => {
         localStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data.user;
-        state.error = payload.data?.message;
-        state.status = payload.data.message ? "error" : "success";
+        state.status = "success";
       })
       .addCase(fetchRegistration.rejected, (state, { payload }) => {
         state.error = payload;
@@ -164,7 +176,6 @@ const authSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchLogin.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.status = "success";
         state.isAuth = true;
         state.methodAuth = "app";
@@ -172,11 +183,9 @@ const authSlice = createSlice({
           ? localStorage.setItem("_jobseeker", payload.data.accessToken)
           : sessionStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data;
-        state.error = payload?.data.message;
       })
       .addCase(fetchLogin.rejected, (state, { payload }) => {
-        console.log(payload);
-        state.error = payload?.message;
+        state.error = payload;
         state.status = "error";
       })
       .addCase(fetchSocialAuth.pending, (state) => {
@@ -189,12 +198,14 @@ const authSlice = createSlice({
         localStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data;
         state.methodAuth = "app";
+        state.isAuth = true
         state.isRemember = true;
-        state.error = payload?.data.message;
       })
       .addCase(fetchSocialAuth.rejected, (state, { payload }) => {
+        console.log(payload);
         state.error = payload;
-        state.status = "error";
+        // state.isAuth = false;
+        // state.status = "error";
       })
       .addCase(fetchLogout.pending, (state) => {
         state.error = null;
@@ -237,12 +248,12 @@ const authSlice = createSlice({
       })
       .addCase(fetchForgotPassword.fulfilled, (state, { payload }) => {
         console.log(payload);
-        state.msg = payload.data || payload.data.message;
+        state.msg = payload.data;
         state.status = "success";
       })
       .addCase(fetchForgotPassword.rejected, (state, { payload }) => {
         console.log(payload);
-        state.msg = payload;
+        state.error = payload;
         state.status = "error";
       })
       .addCase(fetchResetPassword.pending, (state) => {
@@ -256,13 +267,24 @@ const authSlice = createSlice({
         state.status = "success";
       })
       .addCase(fetchResetPassword.rejected, (state, { payload }) => {
-        console.log(payload);
-        state.msg = payload;
+        state.error = payload;
         state.status = "error";
+      })
+      .addCase(fetchCheckConnect.pending, (state) => {
+        state.msg = null;
+        state.error = null;
+      })
+      .addCase(fetchCheckConnect.fulfilled, (state, { payload }) => {
+        state.isServerConnect = payload.data.status;
+      })
+      .addCase(fetchCheckConnect.rejected, (state, { payload }) => {
+        console.log(payload);
+        state.error = payload;
+        state.isServerConnect = false;
       });
   },
 });
 
-export const { setRememberMe, setMethodAuth, resetAuthState, resetAuthErr } =
+export const { setRememberMe, setMethodAuth, resetAuthState } =
   authSlice.actions;
 export default authSlice.reducer;

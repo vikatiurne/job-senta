@@ -1,49 +1,59 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import GoalServices from "../../../../http/services/GoalServices";
+import { setError } from "../../../errors/errorSlice";
 
 const initialState = {
   careerGoal: null,
   status: "idle",
+  error: null,
 };
 
 export const fetchCreateGoal = createAsyncThunk(
   "home/fetchCreateGoal",
-  async (values, { rejectWithValue }) => {
+  async (values, { dispatch, rejectWithValue }) => {
     try {
       return await GoalServices.createGoal(values);
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      const handledError = handledError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 
 export const fetchGetGoal = createAsyncThunk(
   "home/fetchGetGoal",
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       return await GoalServices.getGoal();
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      const handledError = handledError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 export const fetchUpdateGoal = createAsyncThunk(
   "home/fetchUpdateGoal",
-  async (values, { rejectWithValue }) => {
+  async (values, { dispatch, rejectWithValue }) => {
     try {
       return await GoalServices.updateGoal(values);
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      const handledError = handledError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
 export const fetchDeleteGoal = createAsyncThunk(
   "home/fetchDeleteGoal",
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       return await GoalServices.deleteGoal();
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      const handledError = handledError(error);
+      dispatch(setError(handledError));
+      return rejectWithValue(handledError);
     }
   }
 );
@@ -55,6 +65,7 @@ const homeReduser = createSlice({
     builder
       .addCase(fetchCreateGoal.pending, (state, { payload }) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(fetchCreateGoal.fulfilled, (state, { payload }) => {
         state.status = "success";
@@ -62,9 +73,11 @@ const homeReduser = createSlice({
       })
       .addCase(fetchCreateGoal.rejected, (state, { payload }) => {
         state.status = "error";
+        state.error = payload;
       })
       .addCase(fetchGetGoal.pending, (state, { payload }) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(fetchGetGoal.fulfilled, (state, { payload }) => {
         state.status = "success";
@@ -72,9 +85,11 @@ const homeReduser = createSlice({
       })
       .addCase(fetchGetGoal.rejected, (state, { payload }) => {
         state.status = "error";
+        state.error = payload;
       })
       .addCase(fetchUpdateGoal.pending, (state, { payload }) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(fetchUpdateGoal.fulfilled, (state, { payload }) => {
         state.status = "success";
@@ -82,9 +97,11 @@ const homeReduser = createSlice({
       })
       .addCase(fetchUpdateGoal.rejected, (state, { payload }) => {
         state.status = "error";
+        state.error = payload;
       })
       .addCase(fetchDeleteGoal.pending, (state, { payload }) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(fetchDeleteGoal.fulfilled, (state, { payload }) => {
         state.status = "success";
@@ -92,8 +109,8 @@ const homeReduser = createSlice({
       })
       .addCase(fetchDeleteGoal.rejected, (state, { payload }) => {
         state.status = "error";
-      })
-        ;
+        state.error = payload;
+      });
   },
 });
 

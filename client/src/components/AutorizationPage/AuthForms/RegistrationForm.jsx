@@ -15,15 +15,23 @@ import styles from "./AuthForms.module.css";
 import { fetchRegistration } from "../../../pages/Autorization/AuthSlice";
 import Popup from "../../UI/Popup/Popup";
 import { useEffect, useState } from "react";
+import { clearError } from "../../../pages/errors/errorSlice";
 
 const LoginForm = () => {
-  const {error, status} = useSelector((state) => state.auth);
+  const { status} = useSelector((state) => state.auth);
+  const error = useSelector((state) => state.error);
   const [modalActive, setModalActive] = useState(!!error);
+
+  console.log(error)
 
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   useEffect(() => {
     setModalActive(!!error);
@@ -39,8 +47,6 @@ const LoginForm = () => {
         lastName: values.lastName,
       })
     );
-    console.log(!error && status==="success")
-    console.log(!error,status==="success")
     if(!error && status==="success")navigate('/login')
   };
 

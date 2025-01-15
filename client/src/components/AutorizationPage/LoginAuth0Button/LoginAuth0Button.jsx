@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -10,7 +10,11 @@ import { setMethodAuth } from "../../../pages/Autorization/AuthSlice";
 
 import styles from "./LoginAuth0Button.module.css";
 
+
 const LoginAuth0Button = ({ btnName }) => {
+  const { isAuth } = useSelector((state) => state.auth);
+  console.log(isAuth)
+
   const dispatch = useDispatch();
   const [src, setSrc] = useState("");
 

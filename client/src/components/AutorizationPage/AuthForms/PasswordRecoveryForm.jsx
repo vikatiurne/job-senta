@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
@@ -17,14 +17,20 @@ import { textData } from "../../../utils/textData";
 import { fetchForgotPassword } from "../../../pages/Autorization/AuthSlice";
 
 import styles from "./AuthForms.module.css";
+import { clearError } from "../../../pages/errors/errorSlice";
 
 const PasswordRecoveryForm = () => {
   const [modalActive, setModalActive] = useState(false);
 
-  const { msg, status } = useSelector((state) => state.auth);
+  const {status,msg } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
+
 
   const submitFormHandler = (values) => {
     dispatch(fetchForgotPassword(values));
@@ -74,7 +80,7 @@ const PasswordRecoveryForm = () => {
               {status === "loading" ? (
                 <Loader loading color="#f7f7f7" />
               ) : (
-                <PopupContent msg={msg} />
+                <PopupContent msg={msg}/>
               )}
             </Popup>
           )}
