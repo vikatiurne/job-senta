@@ -20,21 +20,22 @@ const UserHome = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchGetGoal());
-  }, [dispatch]);
+    if (status === "success") dispatch(fetchGetGoal());
+  }, [dispatch, status]);
 
   useEffect(() => {
-    dispatch(
-      fetchGetAllResume({
-        page: 1,
-        limit: 1000,
-        sort: "createdAt_DESC",
-        isArchive: false,
-        isFavorite: false,
-        searchText: "",
-      })
-    );
-  }, [dispatch]);
+    if (status === "success")
+      dispatch(
+        fetchGetAllResume({
+          page: 1,
+          limit: 1000,
+          sort: "createdAt_DESC",
+          isArchive: false,
+          isFavorite: false,
+          searchText: "",
+        })
+      );
+  }, [dispatch, status]);
 
   return status === "loading" ? (
     <Loader loading color="#958060" />

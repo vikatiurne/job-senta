@@ -117,11 +117,11 @@ const TopResume = ({ className }) => {
       <ScoreResumeCircle
         size={hasMediaQuery ? 110 : 140}
         strokeWidth={10}
-        progress={65}
+        progress={0}
         colorProgress="#958060"
       >
         <div className={style.sectResumeDescScore}>
-          <p className={style.sectResumeScorePercent}>65%</p>
+          <p className={style.sectResumeScorePercent}>0%</p>
           <p className={style.sectResumeScoreText}>
             Resume <br /> assessment
           </p>
@@ -134,7 +134,7 @@ const TopResume = ({ className }) => {
           title="Resume Structure"
           progressColor="#A6A482"
           maxValue={10}
-          progressValue={6}
+          progressValue={0}
         />
         <ProgressBar
           width={hasMediaQueryProgressBar ? 262 : 573}
@@ -142,7 +142,7 @@ const TopResume = ({ className }) => {
           title="Measurable Results"
           progressColor="#685843"
           maxValue={10}
-          progressValue={2}
+          progressValue={0}
         />
         <ProgressBar
           width={hasMediaQueryProgressBar ? 262 : 573}
@@ -150,7 +150,7 @@ const TopResume = ({ className }) => {
           title="Resume Structure"
           progressColor="#737084"
           maxValue={10}
-          progressValue={8}
+          progressValue={0}
         />
         <p className={style.sectResumeProgressBarIssues}>0 Issues</p>
       </div>

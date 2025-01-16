@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ReactComponent as Close } from "../../../../../../assets/user_page/home/close.svg";
 import { ReactComponent as Calendar } from "../../../../../../assets/user_page/home/formDate.svg";
-import User from "../../../../../../assets/user_page/home/formUser.svg";
 import { ReactComponent as Check } from "../../../../../../assets/checkIcon.svg";
+import User from "../../../../../../assets/user_page/home/formUser.svg";
 import Salary from "../../../../../../assets/user_page/home/formSalary.svg";
 
 import { ModalContext } from "../../../../../../context/ModalContext.jsx";
@@ -24,7 +24,6 @@ const ModalCareerGoal = ({ isEdit }) => {
   isEdit = false || isEdit;
   const { careerGoal } = useSelector((state) => state.home);
 
-  console.log(isEdit);
   const initialStateCarer = {
     title: !isEdit ? "" : careerGoal.target,
     date: !isEdit ? "" : careerGoal.date,
@@ -118,6 +117,5 @@ const ModalCareerGoal = ({ isEdit }) => {
   );
 };
 
-ModalCareerGoal.propTypes = {};
 
 export default ModalCareerGoal;

@@ -9,6 +9,7 @@ import NewPassword from "../pages/Autorization/NewPassword/NewPassword.jsx";
 import UserPage from "../pages/UserPage/UserPage.jsx";
 import UnprotectedRouter from "./hoc/UnprotectedRouter.jsx";
 import ProtectedRouter from "./hoc/ProtectedRoute.jsx";
+import Redirect from "../pages/Autorization/Redirect/Redirect.jsx";
 
 const Router = () => {
   const location = useLocation();
@@ -31,6 +32,7 @@ const Router = () => {
             </UnprotectedRouter>
           }
         />
+        <Route path="/get-sosial-user" element={<Redirect />} />
         <Route
           path="/registration"
           element={

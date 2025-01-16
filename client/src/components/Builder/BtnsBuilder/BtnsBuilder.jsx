@@ -59,7 +59,6 @@ const BtnsBuilder = () => {
   const importPdforDocHandler = () => setActiveModalFile(true);
 
   const changeStatusResume = ({ isArchive }) => {
-    console.log(isArchive);
     const idsToChangeStatus = checkedResumes;
     const action =
       idsToChangeStatus.length === 1
@@ -77,7 +76,6 @@ const BtnsBuilder = () => {
 
   const handleArchive = () => {
     const newArchiveStatus = !isShowArchive;
-    console.log(newArchiveStatus);
     changeStatusResume({
       isArchive: newArchiveStatus,
     });

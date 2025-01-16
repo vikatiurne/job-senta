@@ -49,7 +49,6 @@ const MobileBtns = () => {
     const documentCreator = new DocumentCreator();
     const doc = documentCreator.create(info, user);
     Packer.toBlob(doc).then((blob) => {
-      console.log(blob);
       saveAs(blob, "resume.docx");
     });
   };

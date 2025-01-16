@@ -31,7 +31,6 @@ export default class AuthorizationServices {
       return await $api.put("/api/auth/forgot-password", { email });
       
     } catch (error) {
-      console.log(error)
       if (error instanceof TypeError && error.message === 'NetworkError when attempting to fetch resource.') {  
         throw new Error('NetworkError'); 
       }  

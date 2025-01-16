@@ -14,6 +14,8 @@ import Loader from "../../components/UI/Loader/Loader";
 const HomePage = () => {
   const { status } = useSelector((state) => state.auth);
 
+
+
   return status === "loading" ? (
     <Loader loading color="#958060" />
   ) : (

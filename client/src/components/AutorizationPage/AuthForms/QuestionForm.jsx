@@ -17,10 +17,10 @@ import Loader from '../../UI/Loader/Loader';
 const QuestionForm = () => {
   const [modalActive, setModalActive] = useState(false);
   const { msg, status } = useSelector((state) => state.homePage);
+  const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
 
   const submitFormHandler = (values) => {
-    console.log('Sucsess', values);
     setModalActive(true);
     dispatch(
       fetchSendQuestion({
@@ -94,8 +94,8 @@ const QuestionForm = () => {
             <Loader loading color="#f7f7f7" />
           ) : (
             <div className={styles.footerPopup}>
-              <h4 className={styles.footerPopupTitle}>{msg.title}</h4>
-              <p className={styles.footerPopupSubTitle}>{msg.text}</p>
+              <h4 className={styles.footerPopupTitle}>{msg?.title || error?.title}</h4>
+              <p className={styles.footerPopupSubTitle}>{msg?.text || error?.text}</p>
               <p className={styles.footerPopupSubTitle}>
                 Thank you for choosing us - we work for you!
               </p>

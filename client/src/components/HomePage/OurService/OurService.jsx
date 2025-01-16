@@ -158,6 +158,6 @@ const OurService = () => {
   );
 };
 
-OurService.propTypes = {};
+
 
 export default OurService;

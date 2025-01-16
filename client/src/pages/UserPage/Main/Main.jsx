@@ -1,12 +1,7 @@
-import React from 'react';
-import UserRoutes from '../UserRoutes/UserRoutes.jsx';
+import UserRoutes from "../UserRoutes/UserRoutes.jsx";
+
 const Main = () => {
-    return (
-        <UserRoutes />
-
-    );
+  return <UserRoutes />;
 };
-
-Main.propTypes = {};
 
 export default Main;

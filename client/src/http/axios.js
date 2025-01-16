@@ -7,9 +7,11 @@ const $api = axios.create({
 
 // автозапись access token в headers запроса
 $api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem(
-    "_jobseeker"
-  )}`;
+  const jobseekerToken =
+    localStorage.getItem("_jobseeker") || sessionStorage.getItem("_jobseeker");
+  if (jobseekerToken) {
+    config.headers.Authorization = `Bearer ${jobseekerToken}`;
+  }
   return config;
 });
 

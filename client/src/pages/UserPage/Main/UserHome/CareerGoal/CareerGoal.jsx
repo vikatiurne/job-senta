@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cn from "classnames";
 import PropTypes from "prop-types";
+
 import { ReactComponent as User } from "../../../../../assets/user_page/home/user.svg";
 import { ReactComponent as Calendar } from "../../../../../assets/user_page/home/calendar.svg";
 import { ReactComponent as Salary } from "../../../../../assets/user_page/home/salary.svg";
@@ -13,9 +14,9 @@ import ModalCareerGoal from "./ModalCareerGoal/ModalCareerGoal";
 import { ModalContext } from "../../../../../context/ModalContext.jsx";
 
 import DateServices from "../../../../../utils/DateServices.js";
+import { fetchDeleteGoal } from "../HomeSlice.js";
 
 import style from "./CareerGoal.module.css";
-import { fetchDeleteGoal } from "../HomeSlice.js";
 
 const CareerGoal = ({ className }) => {
   const [isEdit, setIsEdit] = useState(false);

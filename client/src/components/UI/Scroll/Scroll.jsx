@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useRef, useEffect, useState } from 'react';
 import cn from 'classnames'
+
 import style from './Scroll.module.css'
 
 const Scroll = (props) => {
@@ -51,6 +51,5 @@ const Scroll = (props) => {
     );
 };
 
-Scroll.propTypes = {};
 
 export default Scroll;

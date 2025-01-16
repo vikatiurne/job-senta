@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
@@ -5,24 +6,22 @@ import { initialValues, schemas } from "./helper";
 
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
+import Popup from "../../UI/Popup/Popup";
 
 import userIcon from "../../../assets/userIcon.png";
 import emailIcon from "../../../assets/emailIcon.png";
 import passIcon from "../../../assets/passIcon.png";
 import { textData } from "../../../utils/textData";
 
-import styles from "./AuthForms.module.css";
 import { fetchRegistration } from "../../../pages/Autorization/AuthSlice";
-import Popup from "../../UI/Popup/Popup";
-import { useEffect, useState } from "react";
 import { clearError } from "../../../pages/errors/errorSlice";
+
+import styles from "./AuthForms.module.css";
 
 const LoginForm = () => {
   const { status} = useSelector((state) => state.auth);
   const error = useSelector((state) => state.error);
   const [modalActive, setModalActive] = useState(!!error);
-
-  console.log(error)
 
 
   const dispatch = useDispatch();

@@ -20,6 +20,5 @@ const ActiveAndArchivResume = ({ className }) => {
   );
 };
 
-ActiveAndArchivResume.propTypes = {};
 
 export default ActiveAndArchivResume;

@@ -1,15 +1,17 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import style from "./WidgetsBtn.module.css";
+import { Link } from "react-router-dom";
+import cn from "classnames";
+
 import { ReactComponent as AddFile } from "../../../../../assets/user_page/home/addfile.svg";
 import { ReactComponent as Contact } from "../../../../../assets/user_page/home/contact.svg";
 import { ReactComponent as File } from "../../../../../assets/user_page/home/file.svg";
 import { ReactComponent as Analyse } from "../../../../../assets/user_page/home/analyse.svg";
 import { ReactComponent as User } from "../../../../../assets/user_page/home/user.svg";
 
-import cn from "classnames";
-import { Link } from "react-router-dom";
 import DragAndDropUpload from "../../../../../components/Builder/DragAndDropUpload/DragAndDropUpload";
+
+import style from "./WidgetsBtn.module.css";
 
 const WidgetsBtn = ({ className }) => {
   const [activeModalFile, setActiveModalFile] = useState(false);

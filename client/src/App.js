@@ -6,22 +6,30 @@ import {
   fetchAutoLogin,
   fetchCheckConnect,
   resetAuthState,
+  setAuth,
 } from "./pages/Autorization/AuthSlice.js";
 
+
 function App() {
-  const { methodAuth, isAuth } = useSelector((state) => state.auth);
+
+
+  const { methodAuth, isAuth } = useSelector(
+    (state) => state.auth
+  );
+
   const dispatch = useDispatch();
 
   // обнуление stote после закрытия браузера
   useEffect(() => {
     const userData = localStorage.getItem("_jobseeker_auth_state");
+
     if (!userData) {
-      console.log(1);
       dispatch(resetAuthState());
     }
     const handleBeforeUnload = () => {
-      console.log(2);
-      dispatch(resetAuthState());
+      if (methodAuth === "app") {
+        dispatch(resetAuthState());
+      }
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -29,23 +37,16 @@ function App() {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [dispatch]);
+  }, [dispatch, methodAuth]);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("_jobseeker");
-  //   console.log(!!token && methodAuth === "app")
-  //   console.log(token )
-  //   console.log(methodAuth)
-  //   if (!!token && methodAuth === "app") {
-  //     dispatch(fetchAutoLogin());
-  //   }
-  // }, [dispatch, methodAuth]);
   useEffect(() => {
-    const token = localStorage.getItem("_jobseeker");
-    if (!!token && isAuth) {
+    const tokenLocal = localStorage.getItem("_jobseeker");
+    const tokenSeccion = sessionStorage.getItem("_jobseeker");
+    if (!!tokenSeccion || !!tokenLocal) dispatch(setAuth(true));
+    if (!!tokenLocal && methodAuth === "app" && !isAuth) {
       dispatch(fetchAutoLogin());
     }
-  }, [dispatch, isAuth]);
+  }, [dispatch, methodAuth, isAuth]);
 
   useEffect(() => {
     dispatch(fetchCheckConnect());

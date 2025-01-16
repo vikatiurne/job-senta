@@ -138,12 +138,13 @@ const authSlice = createSlice({
       state.isRemember = payload;
     },
     setMethodAuth: (state, { payload }) => {
-      state.isAuth = true;
       state.methodAuth = payload;
     },
+    setAuth: (state, { payload }) => {
+      state.isAuth = payload;
+    },
     resetAuthState: (state) => {
-      console.log(!state.isRemember && state.methodAuth === "app");
-      if (!state.isRemember && state.methodAuth === "app") {
+      if (!state.isRemember) {
         localStorage.removeItem("_jobseeker");
         sessionStorage.removeItem("_jobseeker");
         state.user = {};
@@ -163,7 +164,6 @@ const authSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchRegistration.fulfilled, (state, { payload }) => {
-        localStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data.user;
         state.status = "success";
       })
@@ -177,7 +177,6 @@ const authSlice = createSlice({
       })
       .addCase(fetchLogin.fulfilled, (state, { payload }) => {
         state.status = "success";
-        state.isAuth = true;
         state.methodAuth = "app";
         state.isRemember
           ? localStorage.setItem("_jobseeker", payload.data.accessToken)
@@ -193,19 +192,16 @@ const authSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchSocialAuth.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.status = "success";
         localStorage.setItem("_jobseeker", payload.data.accessToken);
         state.user = payload.data;
         state.methodAuth = "app";
-        state.isAuth = true
         state.isRemember = true;
       })
       .addCase(fetchSocialAuth.rejected, (state, { payload }) => {
-        console.log(payload);
         state.error = payload;
-        // state.isAuth = false;
-        // state.status = "error";
+        state.isAuth = false;
+        state.status = "error";
       })
       .addCase(fetchLogout.pending, (state) => {
         state.error = null;
@@ -223,7 +219,6 @@ const authSlice = createSlice({
         state.msg = null;
       })
       .addCase(fetchLogout.rejected, (state, { payload }) => {
-        console.log(payload);
         state.status = "error";
         state.error = payload;
       })
@@ -247,12 +242,10 @@ const authSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchForgotPassword.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.msg = payload.data;
         state.status = "success";
       })
       .addCase(fetchForgotPassword.rejected, (state, { payload }) => {
-        console.log(payload);
         state.error = payload;
         state.status = "error";
       })
@@ -262,7 +255,6 @@ const authSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchResetPassword.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.msg = payload.data;
         state.status = "success";
       })
@@ -278,13 +270,12 @@ const authSlice = createSlice({
         state.isServerConnect = payload.data.status;
       })
       .addCase(fetchCheckConnect.rejected, (state, { payload }) => {
-        console.log(payload);
         state.error = payload;
         state.isServerConnect = false;
       });
   },
 });
 
-export const { setRememberMe, setMethodAuth, resetAuthState } =
+export const { setRememberMe, setMethodAuth, resetAuthState, setAuth } =
   authSlice.actions;
 export default authSlice.reducer;

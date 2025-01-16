@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import style from './ModalBase.module.css'
 import Portal from '../../hoc/portal/portal.js'

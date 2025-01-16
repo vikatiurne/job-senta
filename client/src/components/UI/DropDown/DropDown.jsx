@@ -21,9 +21,7 @@ const DropDown = (props) => {
     );
 };
 
-DropDown.propTypes = {
 
-}
 
 
 export default DropDown;

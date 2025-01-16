@@ -37,7 +37,6 @@ const EnteringForm = () => {
     initialValues.entering
   );
 
-  console.log(initialFormValues)
   const { getonestatus, info } = useSelector((state) => state.resume);
 
   const navigate = useNavigate();
@@ -58,7 +57,6 @@ const EnteringForm = () => {
 
   const submitFormHandler = (values) => {
     //отправка формы на сервер сохранение в бд
-    console.log("Sucsess", values);
     !isEdit
       ? dispatch(fetchCreateResume(values))
       : dispatch(fetchUpdateResume({ resumeId, values }));

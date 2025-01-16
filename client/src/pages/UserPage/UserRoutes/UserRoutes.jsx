@@ -5,6 +5,7 @@ import Builder from "../Main/Builder/Builder.jsx";
 import BuilderLayout from "../../../hoc/layout/builderLayout/BuilderLayout.jsx";
 import NewResume from "../Main/NewResume/NewResume.jsx";
 
+
 const UserRoutes = () => {
   return (
     <Routes>
@@ -13,7 +14,7 @@ const UserRoutes = () => {
         <Route index element={<Builder />} />
         <Route path="create" element={<NewResume />} />
         <Route path="edit/:id" element={<NewResume />} />
-      </Route>
+        </Route>
       {/* <Route path="analyse" element={<Analyse/>}/>
               <Route path='contact' />
            <Route path='settings' /> */}
@@ -21,6 +22,5 @@ const UserRoutes = () => {
   );
 };
 
-UserRoutes.propTypes = {};
 
 export default UserRoutes;

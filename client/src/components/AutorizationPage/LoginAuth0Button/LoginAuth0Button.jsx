@@ -1,20 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 
 import Button from "../../UI/Button/Button";
 import imgBtnGoogle from "../../../assets/Google.png";
 import imgBtnLinkedIn from "../../../assets/LinkedIn.png";
 
-import { setMethodAuth } from "../../../pages/Autorization/AuthSlice";
+import {  setMethodAuth } from "../../../pages/Autorization/AuthSlice";
 
 import styles from "./LoginAuth0Button.module.css";
 
-
 const LoginAuth0Button = ({ btnName }) => {
-  const { isAuth } = useSelector((state) => state.auth);
-  console.log(isAuth)
-
   const dispatch = useDispatch();
   const [src, setSrc] = useState("");
 

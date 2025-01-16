@@ -4,8 +4,6 @@ import styles from "./PopupContent.module.css"
 const PopupContent = ({msg}) => {
   const error = useSelector((state) => state.error);
 
-  console.log(error)
-
   return (
     <div className={styles.popup}>
       <h4>{error?.title||msg?.title}</h4>

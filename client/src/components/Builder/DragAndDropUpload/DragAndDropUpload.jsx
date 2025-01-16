@@ -34,8 +34,6 @@ const DragAndDropUpload = ({ active, setModalActive }) => {
     }
   }, [error]);
 
-  console.log(uploadError);
-
   const checkExt = (file) => {
     const allowedExt = ["pdf", "doc", "docx"];
     const currentExt = file.name.split(".").pop();

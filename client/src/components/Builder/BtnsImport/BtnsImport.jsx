@@ -15,7 +15,6 @@ const BtnsImport = () => {
   const [activeModalFile, setActiveModalFile] = useState(false)
   const [activeModalLinkedin, setActiveModalLinkedin] = useState(false)
 
-  console.log(activeModalFile)
 
   const handleDropDown = () => setDropDownActive((prev) => !prev);
 
