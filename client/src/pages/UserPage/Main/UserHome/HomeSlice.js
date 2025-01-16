@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import GoalServices from "../../../../http/services/GoalServices";
 import { setError } from "../../../errors/errorSlice";
+import { handleError } from "../../../errors/handleError";
 
 const initialState = {
   careerGoal: null,
@@ -14,7 +15,7 @@ export const fetchCreateGoal = createAsyncThunk(
     try {
       return await GoalServices.createGoal(values);
     } catch (error) {
-      const handledError = handledError(error);
+      const handledError = handleError(error);
       dispatch(setError(handledError));
       return rejectWithValue(handledError);
     }
@@ -27,7 +28,7 @@ export const fetchGetGoal = createAsyncThunk(
     try {
       return await GoalServices.getGoal();
     } catch (error) {
-      const handledError = handledError(error);
+      const handledError = handleError(error);
       dispatch(setError(handledError));
       return rejectWithValue(handledError);
     }
@@ -39,7 +40,7 @@ export const fetchUpdateGoal = createAsyncThunk(
     try {
       return await GoalServices.updateGoal(values);
     } catch (error) {
-      const handledError = handledError(error);
+      const handledError = handleError(error);
       dispatch(setError(handledError));
       return rejectWithValue(handledError);
     }
@@ -51,7 +52,7 @@ export const fetchDeleteGoal = createAsyncThunk(
     try {
       return await GoalServices.deleteGoal();
     } catch (error) {
-      const handledError = handledError(error);
+      const handledError = handleError(error);
       dispatch(setError(handledError));
       return rejectWithValue(handledError);
     }
