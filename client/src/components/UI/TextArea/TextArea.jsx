@@ -33,7 +33,6 @@ const TextArea = ({
           name={name}
           id={id}
           placeholder={placeholder}
-          // onKeyUp={handleChange}
           className={
             !touched[name]
               ? `${styles.inputField} `

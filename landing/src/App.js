@@ -6,7 +6,7 @@ import Faq from "./components/Faq/Faq";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
-import Survey from './components/Survey/Survey.jsx'
+import Survey from "./components/Survey/Survey";
 
 function App() {
   return (

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 import style from './ScoreResume.module.css'
 import cn from 'classnames'
 
@@ -143,6 +142,5 @@ const ScoreResume = ({ className }) => {
     );
 };
 
-ScoreResume.propTypes = {};
 
 export default ScoreResume;

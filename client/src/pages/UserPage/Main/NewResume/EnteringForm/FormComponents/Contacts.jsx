@@ -7,7 +7,7 @@ import InputForResume from "../../../../../../components/UI/InputForResume/Input
 
 import styles from './FormComponents.module.css'
 
-const Contacts = ({values,touched}) => {
+const Contacts = ({values,touched,errors}) => {
   return (
     <section className={styles.sectContacts}>
     <p className={styles.label}>Contacts</p>
@@ -30,7 +30,8 @@ const Contacts = ({values,touched}) => {
               <Check />
             )
           }
-          touched={touched}
+            touched={touched}
+            errors={errors}
         />
         <InputForResume
           name="email"
@@ -49,7 +50,8 @@ const Contacts = ({values,touched}) => {
               <Check />
             )
           }
-          touched={touched}
+            touched={touched}
+            errors={errors}
         />
       </div>
       <InputForResume
@@ -69,7 +71,8 @@ const Contacts = ({values,touched}) => {
             <Check />
           )
         }
-        touched={touched}
+          touched={touched}
+          errors={errors}
       />
     </div>
   </section>

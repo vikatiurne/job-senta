@@ -15,6 +15,7 @@ const confirmPassword = Yup.string()
   .trim()
   .required("No data entered")
   .oneOf([Yup.ref("password")], "Password doesn't match");
+const question = Yup.string().trim().required("No data entered");
 
 export const schemas = {
   registration: Yup.object().shape({
@@ -34,6 +35,11 @@ export const schemas = {
   newpass: Yup.object().shape({
     password,
     confirmPassword,
+  }),
+  question: Yup.object().shape({
+    name,
+    email,
+    question,
   }),
 };
 
@@ -56,5 +62,10 @@ export const initialValues = {
   newpass: {
     password: "",
     confirmPassword: "",
+  },
+  question: {
+    name: "",
+    email: "",
+    question: "",
   },
 };

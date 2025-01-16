@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Calendar from "react-calendar";
-import "./Calendar.css";
+
 import { ReactComponent as CalendarIcon } from "../../../assets/user_page/home/calendar.svg";
 import Scroll from "../Scroll/Scroll";
+
+import "./Calendar.css";
 
 const CalendarUI = (props) => {
   const { date, ...restProps } = props;
@@ -14,7 +14,7 @@ const CalendarUI = (props) => {
   return (
     <>
       <Scroll
-        height='175px'>
+        height='198px'>
         <Calendar
           next2Label={null}
           prev2Label={null}
@@ -46,6 +46,5 @@ const CalendarUI = (props) => {
   );
 };
 
-CalendarUI.propTypes = {};
 
 export default CalendarUI;

@@ -1,0 +1,125 @@
+.uploadContainer {
+  padding: 32px;
+  background-color: var(--white);
+  border-radius: 20px;
+  max-width: 621px;
+  width: 100%;
+}
+.dragging {  
+  border: 2px dashed var(--gray-light);  
+  background-color: var(--gray-light);  
+}
+.title {
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 27px;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--brown);
+  font-family: var(--open-sans);
+  text-transform: uppercase;
+}
+
+.form {
+  margin-bottom: 24px;
+  border: 3px dashed var(--brown);
+  border-radius: 20px;
+}
+
+.icons {
+  padding-top: 24px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+}
+
+.instruction {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--brown);
+}
+.label {
+  color: var(--brown-hover);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.progressContainer {
+  flex: 1;
+}
+.fileInfo {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.fileName,
+.progressText {
+  margin-bottom: 4px;
+  color: var(--gray);
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 500;
+}
+
+.progressInfo {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.progress {
+  margin-bottom: 4px;
+  background-color: var(--gray-light);
+  border-radius: 20px;
+  height: 6px;
+}
+
+.progressBar {
+  background-color: var(--brown);
+  height: 100%;
+  border-radius: 20px;
+}
+
+.progressStatus {
+  color: var(--brown-hover);
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 500;
+}
+.errorMessage{
+  color: var(--red);
+}
+.error{
+  margin-bottom: 24px;
+  border: 3px dashed var(--red);
+  border-radius: 20px;
+}
+
+.doneBtn {
+  padding: 5px 83px;
+  margin: 0 auto;
+  display: block;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--brown);
+  border: 2px solid var(--brown);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.doneBtn:hover {
+  background-color: transparent;
+  color: var(--brown);
+}
+.disabled {
+  background-color: var(--gray-light);
+  border: 2px solid var(--white);
+}

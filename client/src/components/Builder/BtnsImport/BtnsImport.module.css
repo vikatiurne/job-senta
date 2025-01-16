@@ -1,0 +1,110 @@
+.btnContainer {
+  margin: 35vh auto 0;
+  display: flex;
+  align-items: center;
+  gap: 46px;
+  position: relative;
+}
+.dropDown svg path {
+  fill: var(--green);
+}
+.withDropDown svg {
+  transform: rotate(180deg);
+}
+.dropDownBtn,
+.createBtn {
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid;
+  border-radius: 20px;
+}
+
+.dropDownBtn {
+  border-color: var(--green);
+}
+.createBtn,
+.btnTitle,
+.sectMenuDropDownItem {
+  user-select: none;
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+.sectMenuDropDownItem:first-child {
+  margin-bottom: 24px;
+}
+.bntWithDropDown {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom: none;
+}
+
+.btnTitle,
+.sectMenuDropDownItem {
+  color: var(--green);
+}
+.createBtn {
+  color: var(--brown);
+  border-color: var(--brown);
+}
+.createBtn:hover {
+  color: var(--white);
+  background-color: var(--brown-hover);
+}
+.dropDownBtn:hover {
+  background-color: var(--green);
+}
+.createBtn:hover svg path {
+  fill: var(--white);
+}
+.dropDownBtn:hover .dropDown svg path {
+  fill: var(--white);
+}
+.dropDownBtn:hover .btnTitle {
+  color: var(--white);
+}
+.importDropDown {
+  padding: 16px;
+  border: 2px solid var(--green);
+  width: 312px;
+  left: 270px;
+  border-top-left-radius: 20px;
+}
+
+@media (max-width: 650px) {
+  .btnContainer {
+    margin-top: 30vh;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .createBtn,
+  .btnTitle,
+  .sectMenuDropDownItem {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+  .createBtn svg {
+    width: 20px;
+  }
+  .createBtn {
+    padding: 3px 50px;
+  }
+  .dropDownBtn {
+    padding: 5px 16px;
+    gap: 70px;
+  }
+  .importDropDown {
+    width: 258px;
+    border-top-left-radius: 0;
+    padding: 12px;
+    left: 0;
+  }
+  .sectMenuDropDownItem:first-child {
+    margin-bottom: 16px;
+  }
+}

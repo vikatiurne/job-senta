@@ -5,10 +5,10 @@ import * as Yup from "yup";
 
 export const schemas = {
   entering: Yup.object().shape({
-    desiredPosition: Yup.string().trim(),
+    desiredPosition: Yup.string().trim().required("No data entered"),
     phone: Yup.string().trim(),
     email: Yup.string().trim(),
-    LinkedIn: Yup.string().trim(),
+    LinkedIn: Yup.string().trim().url("Check if the link is correct"),
     professionalSummary: Yup.string().trim().min(0).max(500),
     projExp: Yup.array().of(
       Yup.object().shape({
@@ -52,7 +52,7 @@ export const schemas = {
     publ: Yup.array().of(
       Yup.object().shape({
         publication: Yup.string().trim(),
-        publicationLink: Yup.string().trim(),
+        publicationLink: Yup.string().trim().url("Check if the link is correct"),
         interests: Yup.string().trim().min(0).max(500),
       })
     ),
@@ -78,8 +78,8 @@ export const initialValues = {
       {
         companyName: "",
         position: "",
-        dateStart: "",
-        dateEnd: "",
+        dateStart: null,
+        dateEnd: null,
         responsibilities: "",
       },
     ],
@@ -87,16 +87,16 @@ export const initialValues = {
       {
         educName: "",
         specialty: "",
-        dateStart: "",
-        dateEnd: "",
+        dateStart: null,
+        dateEnd: null,
       },
     ],
     certif: [
       {
         certificateName: "",
         institution: "",
-        dateStart: "",
-        dateEnd: "",
+        dateStart: null,
+        dateEnd: null,
       },
     ],
     award: [
@@ -104,22 +104,22 @@ export const initialValues = {
         nameAward: "",
         institutionAward: "",
         merit: "",
-        date: "",
+        date: null,
       },
     ],
     voluntering: [
       {
         voluntering: "",
         obligations: "",
-        dateStart: "",
-        dateEnd: "",
+        dateStart: null,
+        dateEnd: null,
       },
     ],
     publ: [
       {
         publication: "",
         publicationLink: "",
-        date: "",
+        date: null,
       },
     ],
     skills: [],

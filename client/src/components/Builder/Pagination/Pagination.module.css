@@ -1,0 +1,23 @@
+.paginationContainer {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--brown-dark);
+}
+.arrowLeft,
+.arrowRight {
+  cursor: pointer;
+}
+
+.arrowRight,
+.arrowNotActiveRight {
+  transform: rotate(180deg);
+}
+
+.arrowNotActiveLeft svg path {
+  stroke: var(--gray-light);
+}
+.arrowNotActiveRight svg path {
+  stroke: var(--gray-light);
+}

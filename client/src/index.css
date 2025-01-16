@@ -1,13 +1,17 @@
 :root {
   --brown: #958060;
-  --brown-light: #A49B8D;
+  --brown-dark: #685843;
+  --brown-light: #a49b8d;
   --background: #f9f9f9;
   --white: #f7f7f7;
   --dark-gray: #545454;
   --gray: #686868;
-  --gray-light: #A4A4A4;
+  --gray-light: #a4a4a4;
   --red: #af2121;
   --green: #2e7f21;
+  --green2: #28a138;
+  --light-green: rgba(46, 127, 33, 0.3);
+  --green-hover: rgb(27, 74, 20);
   --gray-disabled: #a2a2a2;
   --brown-hover: #604b2b;
   --brown-focused: #c8b18d;
@@ -50,8 +54,6 @@ a {
   font-weight: 600;
   text-decoration: none;
 }
-
-
 
 ol,
 ul {

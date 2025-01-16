@@ -1,27 +1,54 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import { initialValues, schemas } from "./helper";
 
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
+import Popup from "../../UI/Popup/Popup";
+import Loader from "../../UI/Loader/Loader";
+import PopupContent from "../PopupContent/PopupContent";
 
 import emailIcon from "../../../assets/emailIcon.png";
 import passIcon from "../../../assets/passIcon.png";
 import { textData } from "../../../utils/textData";
 
+import {
+  fetchLogin,
+  resetAuthState,
+  setRememberMe,
+} from "../../../pages/Autorization/AuthSlice";
+
 import styles from "./AuthForms.module.css";
+import { clearError } from "../../../pages/errors/errorSlice";
 
 const LoginForm = () => {
+  const { status } = useSelector((state) => state.auth);
+  const error = useSelector((state) => state.error);
+
+  const [modalActive, setModalActive] = useState(!!error);
+
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
 
-  const submitFormHandler = (values) => {
-    //запрос в бд на получение данных пользователя, если он есть- внесение данных в store,запись токет в localsorage
-    console.log("Sucsess", values);
-  };
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
-  const rememberMeHandler = () => {
-  //удаление токен из localstorage, запись его в cookies
-  }
+  useEffect(() => {
+    error ? setModalActive(true) : setModalActive(false);
+  }, [error]);
+
+  const submitFormHandler = (values) => {
+    dispatch(
+      fetchLogin({
+        email: values.email,
+        password: values.password,
+      })
+    );
+    dispatch(setRememberMe(values.toggle));
+  };
 
   return (
     <Formik
@@ -29,12 +56,9 @@ const LoginForm = () => {
       validationSchema={schemas.login}
       validateOnBlur
       validateOnChange={false}
-      onSubmit={(values,{ resetForm }) => {
-        submitFormHandler(values)
-        resetForm()
-      }
-      }
-      
+      onSubmit={(values) => {
+        submitFormHandler(values);
+      }}
     >
       {({ errors, values, touched, isValid, dirty }) => (
         <Form className={styles.authForm}>
@@ -64,28 +88,43 @@ const LoginForm = () => {
               type="checkbox"
               name="toggle"
               className={styles.checkboxInput}
-              onClick = {rememberMeHandler}
             />
             <label htmlFor="toggle" className={styles.checkboxLabel}>
               Remember me
             </label>
-            <Link to="../forgot-password" >
-              Forgot your password?
-            </Link>
+            <Link to="../forgot-password">Forgot your password?</Link>
           </div>
-          {/* <Link to="/"> */}
+
           <Button
             type="submit"
             className={styles.authBtn}
             disabled={!isValid || !dirty}
           >
-           {textData[`${pathname}`]["sendBtn"]}
+            {textData[`${pathname}`]["sendBtn"]}
           </Button>
-          {/* </Link> */}
+
           <div className={styles.alernativText}>
             <p>Do you have an account?</p>
-            <Link to="../registration">{textData[`${pathname}`]["linkBtn"]}</Link>
+            <Link to="../registration">
+              {textData[`${pathname}`]["linkBtn"]}
+            </Link>
           </div>
+
+          {modalActive && (
+            <Popup
+              active={modalActive}
+              setActive={() => {
+                setModalActive();
+                dispatch(resetAuthState());
+              }}
+            >
+              {status === "loading" ? (
+                <Loader loading color="#f7f7f7" />
+              ) : (
+                error && <PopupContent />
+              )}
+            </Popup>
+          )}
         </Form>
       )}
     </Formik>

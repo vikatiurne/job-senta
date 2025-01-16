@@ -1,7 +1,19 @@
-.headerContainer{
+.headerContainer {
+    margin: 0 auto 32px;
+    padding: 0 20px;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    max-width: 1248px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+    max-width: 1280px;
+    align-items: center;
+  }
+  
+  @media (max-width: 1124px) {
+    .headerContainer{
+      grid-template-columns: 1fr 4fr;
+    }
+  }
+  @media (max-width: 390px) {
+    .headerContainer{
+      padding: 0;
+    }
+  }

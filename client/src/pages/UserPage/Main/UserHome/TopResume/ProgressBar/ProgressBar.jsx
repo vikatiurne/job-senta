@@ -1,6 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames'
+
 import style from './ProgressBar.module.css'
 
 const ProgressBar = (props) => {

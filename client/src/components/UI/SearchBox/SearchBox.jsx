@@ -1,29 +1,36 @@
-import { useState } from "react";
-import { ReactComponent as Search } from "../../../assets/user_page/home/search.svg";
-import { ReactComponent as Close } from "../../../assets/user_page/home/close.svg";
-import styles from "./SearchBox.module.css";
-import cn from 'classnames'
-import { useMedia } from '../../../hoc/useMedia/useMedia.js'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import cn from "classnames";
 
+import { ReactComponent as Search } from "../../../assets/user_page/home/search.svg";
+
+import { setSearch } from "../../../pages/UserPage/Main/NewResume/NewResumeSlice";
+
+import styles from "./SearchBox.module.css";
 
 const SearchBox = () => {
-  const [searchText, setSearchText] = useState("");
-  const [isInputFocus, setIsInputFocus] = useState(true)
+  const dispatch = useDispatch();
 
+  const search = useSelector((state) => state.resume.searchText);
+  const [searchText, setSearchText] = useState(search);
+  const [isInputFocus, setIsInputFocus] = useState(true);
+
+  useEffect(() => {
+    setSearchText(search);
+  }, [search]);
 
   const changeHandler = (e) => {
     const text = e.target.value;
     setSearchText(text);
+    dispatch(setSearch(text));
   };
 
   const handleBlurInput = () => {
-    setIsInputFocus(true)
-  }
+    setIsInputFocus(true);
+  };
 
   return (
-    <div className={cn(styles.search,
-      { [styles.searchFocus]: !isInputFocus },
-    )}>
+    <div className={cn(styles.search, { [styles.searchFocus]: !isInputFocus })}>
       <input
         type="text"
         placeholder="Resume search"
@@ -31,7 +38,9 @@ const SearchBox = () => {
         value={searchText}
         onChange={changeHandler}
         onBlur={handleBlurInput}
-        onFocus={() => { setIsInputFocus(false) }}
+        onFocus={() => {
+          setIsInputFocus(false);
+        }}
       />
       <Search />
     </div>

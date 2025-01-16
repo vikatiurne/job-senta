@@ -13,6 +13,7 @@ const MultiSelect = ({ field, form, options, placeholder }) => {
   return (
     <CreatableSelect
       name={field.name}
+      value={options.filter(option => field.value.includes(option.value))}
       onBlur={field.onBlur}
       onChange={onChange}
       getNewOptionData={(inputValue, optionLabel) => ({
@@ -47,7 +48,6 @@ const MultiSelect = ({ field, form, options, placeholder }) => {
           lineHeight: "19px",
           color: "#A4A4A4",
         }),
-        // clearIndicator: (styles) => ({ ...styles, color: "#686868" }),
         container: (styles) => ({ ...styles, width: "100%" }),
         input: (styles) => ({
           ...styles,

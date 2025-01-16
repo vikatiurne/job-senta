@@ -1,0 +1,92 @@
+.itemContainer {
+  margin-bottom: 16px;
+  padding-left: 24px;
+  display: grid;
+  grid-template-columns: 9.6% 27% 23% 21% 15.4%;
+  grid-template-rows: 1fr;
+  align-items: center;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 40px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.control {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.star,
+.edit,
+.checkBox {
+  min-width: 24px;
+  min-height: 24px;
+  cursor: pointer;
+}
+.hide{
+  display: none;
+}
+.fill{
+  fill: var(--brown);
+}
+.itemText,
+.itemDate {
+  font-family: var(--montserrat);
+  color: var(--gray);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.itemDate {
+  color: var(--gray-light);
+}
+.line {
+  display: block;
+  content: "";
+  height: 24px;
+  width: 1px;
+  background-color: var(--brown);
+}
+
+@media (max-width: 1024px) {
+  .itemText,
+  .itemDate {
+    font-size: 12px;
+    line-height: 19px;
+  }
+  .edit,
+  .star,
+  .checkBox {
+    width: 20px;
+    height: 20px;
+  }
+  .control {
+    gap: 8px;
+  }
+}
+@media (max-width: 650px) {
+  .itemDate {
+    display: none;
+  }
+  .line {
+    display: none;
+  }
+  .itemContainer {
+    padding-right: 8px;
+    padding-left: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .control {
+    order: 5;
+    flex-direction: row-reverse;
+    gap: 24px;
+  }
+}

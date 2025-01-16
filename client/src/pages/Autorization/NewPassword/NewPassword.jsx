@@ -10,26 +10,28 @@ import styles from "../Autorization.module.css";
 
 const NewPassword = () => {
   const { pathname } = useLocation();
+  const url = pathname.substring(0, pathname.indexOf('/', 1))
+
 
   return (
     <motion.div
       className={styles.authContainerLeft}
-      initial={{ opacity: 0, transform:"translateX(-100%)" }}
-      animate={{ opacity: 1, transform:"translateX(0%)" }}
+      initial={{ opacity: 0, transform: "translateX(-100%)" }}
+      animate={{ opacity: 1, transform: "translateX(0%)" }}
       exit={{ opacity: 0, transform: "translateX(100%)" }}
       transition={{ ease: [0.1, 0.6, 0.8, 0.6] }}
     >
       <div className={styles.greetingsWrapper}>
         <div className={styles.greetingsContainer}>
-          <WelcomeSection />
-          <Link to={textData[`${pathname}`]["link"]}>
-            <Button className={styles.singinBtn}>
-              {textData[`${pathname}`]["linkBtn"]}
-            </Button>
+          <WelcomeSection path={"/recovery-password"} />
+          <Link to={textData[`${url}`]["link"]}>
+          <Button className={styles.singinBtn}>
+            {textData[`${url}`]["linkBtn"]}
+          </Button>
           </Link>
         </div>
       </div>
-      <AuthSection />
+      <AuthSection path={"/recovery-password"}/>
     </motion.div>
   );
 };

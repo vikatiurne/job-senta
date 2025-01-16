@@ -1,30 +1,22 @@
 import styles from "./Popup.module.css";
 
-const Popup = ({ active, setActive, children, className = null }) => {
-  console.log(!className);
-
+const Popup = ({ active, setActive, children, style, cross }) => {
   return (
     <div
-      className={
-        active
-          ? `${styles.modal} ${styles.active} ${
-              !className ? null : styles.modalBottom
-            }`
-          : styles.modal
-      }
+      className={active ? `${styles.modal} ${styles.active}` : styles.modal}
       onClick={() => setActive()}
     >
       <div
         className={
           active
-            ? `${styles.modalContent} ${styles.active}  ${className}`
+            ? `${styles.modalContent} ${styles.active} `
             : styles.modalContent
         }
+        style={{ width: !!style ? style.width : null, marginLeft: !!style ? style.margin : null }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* <div className={styles.close} onClick={() => setActive()}></div> */}
         <div
-          className={!className ? styles.close : styles.closeDark}
+          className={!cross ? styles.close : cross}
           onClick={() => setActive()}
         ></div>
 

@@ -11,8 +11,8 @@ const Educations = ({errors}) => {
     initial={{
       educName: "",
       specialty: "",
-      dateStart: "",
-      dateEnd: "",
+      dateStart: null,
+      dateEnd: null,
     }}
     errors={errors}
     fields={[

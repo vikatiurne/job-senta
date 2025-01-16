@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
 import AuthSection from "../../../components/AutorizationPage/AuthSection/AuthSection";
 import WelcomeSection from "../../../components/AutorizationPage/WelcomeSection/WelcomeSection";
@@ -12,15 +12,16 @@ const Login = () => {
   const { pathname } = useLocation();
 
   return (
-    <motion.div className={styles.authContainerRight}
-    initial={{ opacity: 0, transform:"translateX(100%)" }}
-      animate={{ opacity: 1, transform:"translateX(0%)" }}
+    <motion.div
+      className={styles.authContainerRight}
+      initial={{ opacity: 0, transform: "translateX(100%)" }}
+      animate={{ opacity: 1, transform: "translateX(0%)" }}
       exit={{ opacity: 0, transform: "translateX(-100%)" }}
       transition={{ ease: [0.1, 0.6, 0.8, 0.6] }}
     >
       <div className={styles.greetingsWrapper}>
         <div className={styles.greetingsContainer}>
-          <WelcomeSection />
+          <WelcomeSection path={"/login"} />
           <Link to={textData[`${pathname}`]["link"]}>
             <Button className={styles.singinBtn}>
               {textData[`${pathname}`]["linkBtn"]}
@@ -28,7 +29,7 @@ const Login = () => {
           </Link>
         </div>
       </div>
-      <AuthSection />
+      <AuthSection path={"/login"}/>
     </motion.div>
   );
 };

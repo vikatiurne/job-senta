@@ -9,7 +9,9 @@
 .sectWelcomeTitle {
     color: var(--brown);
 }
-
+.hideTitle{
+    display: none;
+}
 
 
 @media(max-width: 390px), (min-width:390px) {

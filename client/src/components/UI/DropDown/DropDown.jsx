@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+
 import cn from 'classnames'
 import style from './DropDown.module.css'
 
@@ -22,9 +21,7 @@ const DropDown = (props) => {
     );
 };
 
-DropDown.propTypes = {
 
-}
 
 
 export default DropDown;

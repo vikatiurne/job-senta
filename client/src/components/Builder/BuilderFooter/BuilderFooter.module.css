@@ -1,0 +1,9 @@
+.title{
+    padding: 8px;
+    text-align: center;
+    background-color: var(--light-green);
+    color: var(--green2);
+    line-height: 24px;
+    border-top: 1px solid var(--brown-dark);
+    border-bottom: 1px solid var(--brown-dark);
+}

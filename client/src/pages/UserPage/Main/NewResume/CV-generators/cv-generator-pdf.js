@@ -3,7 +3,6 @@ import pdfFonts from "pdfmake/build/vfs_font";
 import DateServices from "../../../../../utils/DateServices";
 pdfMake.vfs = pdfFonts;
 
-
 pdfMake.fonts = {
   Montserrat: {
     normal: "Montserrat-VariableFont_wght.ttf",
@@ -42,7 +41,7 @@ export class PdfCreator {
           alignment: "center",
         },
         {
-          text: user?.name,
+          text: `${user?.username} ${user?.lastName}`,
           fontSize: 27,
           alignment: "center",
           font: "OpenSans",
@@ -64,7 +63,12 @@ export class PdfCreator {
             if (item.name !== "") {
               arr.push(
                 this.createSubHeading("Project: ", item.name),
-                this.createDescription(item.role)
+                this.createSubHeading("Role: ", item.role),
+                // this.createDescription(item.role),
+                this.createSubHeading(
+                  "Project link (if any): ",
+                  item.link
+                )
               );
             }
             return arr;
@@ -98,7 +102,7 @@ export class PdfCreator {
             const arr = [];
             if (item.educName !== "") {
               arr.push(
-                this.createSubHeading("Institution ", item.educName),
+                this.createSubHeading("Institution: ", item.educName),
                 this.createSubHeading("Degree: ", item.specialty),
                 this.createDateBlock(item.dateStart, item.dateEnd)
               );
@@ -135,7 +139,11 @@ export class PdfCreator {
               arr.push(
                 this.createSubHeading("Name of the award: ", item.nameAward),
                 this.createSubHeading("Institution: ", item.institutionAward),
-                this.createDateBlock(item.date)
+                this.createDateBlock(item.date, false, true),
+                this.createSubHeading(
+                  "A brief description of merit: ",
+                  item.merit
+                )
               );
             }
             return arr;
@@ -176,7 +184,7 @@ export class PdfCreator {
                   "Name of the publication: ",
                   item.publication
                 ),
-                this.createDateBlock(item.date),
+                this.createDateBlock(item.date, false, true),
                 this.createSubHeading(
                   "Publication link (if any): ",
                   item.publicationLink
@@ -228,14 +236,14 @@ export class PdfCreator {
 
     if (phone || email || LinkedIn) {
       return {
-        // Прямоугольник для фона
+        // Прямоугольник фона
         canvas: [
           {
             type: "rect",
             x: -20,
             y: 0,
-            w: 595, 
-            h: height, 
+            w: 595,
+            h: height,
             color: "#685843",
           },
         ],
@@ -325,10 +333,12 @@ export class PdfCreator {
         ],
       };
   }
-  createDateBlock(dateStart, dateEnd) {
+  createDateBlock(dateStart, dateEnd, notEnd) {
+    notEnd = notEnd || false;
     if (dateStart) {
       const start = DateServices.getDate(dateStart, "short");
-      let end = "Present";
+      let end = "";
+      if (!notEnd) end = " - Present";
       if (!!dateEnd) {
         end = ` - ${DateServices.getDate(dateEnd, "short")}`;
       }

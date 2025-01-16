@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames'
+
 import style from './ScoreResumeCircle.module.css'
 
 
