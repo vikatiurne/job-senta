@@ -14,12 +14,12 @@ class AuthService {
     const candidate = await User.findOne({ where: { email } });
 
     if (candidate) {
-      return ApiError.badRequest({
+      throw ApiError.badRequest({
         title: "This Email is already in use",
         text: "The email address you entered is already in use. Please go to Sing in where you can enter your personal account and reset your password if necessary. Or enter another email.",
       });
     }
-    const passwordCrypto = await passwordService.cryptoPassword(password); // создание шифра пароля
+    const passwordCrypto = await passwordService.cryptoPassword(password); 
 
     const userData = await User.create({
       email,
@@ -99,7 +99,6 @@ class AuthService {
       tokens.refreshToken,
       tokens.accessToken
     );
-    console.log("USERDATA:", sosialName);
     return userData;
   }
 
@@ -133,7 +132,7 @@ class AuthService {
   async forgotPassword(email) {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return ApiError.badRequest({
+      throw ApiError.badRequest({
         title: "The user with the specified e-mail was not found!",
         text: "User with this email address not found. Please check the email address or register.",
       });

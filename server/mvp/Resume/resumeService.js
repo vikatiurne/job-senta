@@ -358,7 +358,6 @@ class ResumeService {
   }
 
   async favorite(id, userId, isFavorite) {
-    console.log("FAV:", isFavorite);
     await Resume.update({ isFavorite }, { where: { id } });
     return this.getAll(userId);
   }

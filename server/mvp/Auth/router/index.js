@@ -24,6 +24,8 @@ router.get("/refresh", authController.autoLogin);
 router.put("/forgot-password", authController.forgotPassword);
 router.put("/recovery-password", authController.resetPassword);
 
+router.get('/health', authController.checkConnect); 
+
 
 
 module.exports = router;

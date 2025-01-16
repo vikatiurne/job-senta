@@ -5,7 +5,6 @@ const tokenService = require('../mvp/Auth/service/tokenService.js')
 module.exports =  function authMiddleware(req, res, next) {
   try {
     const autorizationHeader = req.headers.authorization;
-    console.log("AUT:", autorizationHeader)
     if (!autorizationHeader) {
       return next(ApiError.unauthorizedError());
     }

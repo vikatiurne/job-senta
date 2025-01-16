@@ -269,7 +269,6 @@ function extractResumeData(resumeText) {
     });
   }
 
-  console.log(resumeData);
   return resumeData;
 }
 

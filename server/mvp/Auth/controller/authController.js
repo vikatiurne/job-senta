@@ -96,6 +96,9 @@ class AuthController {
       next(ApiError.badRequest(error.message));
     }
   }
+  async checkConnect(req, res, next) {
+    res.status(200).json({ status: true });
+  }
 }
 
 module.exports = new AuthController();

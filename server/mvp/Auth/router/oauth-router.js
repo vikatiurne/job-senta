@@ -20,6 +20,7 @@ router.get("/google/callback", (req, res, next) => {
 
     req.logIn(user, (err) => {
       if (err) {
+
         return next(err);
       }
 
@@ -30,7 +31,7 @@ router.get("/google/callback", (req, res, next) => {
         secure: true,
         SameSite: "Strict",
       });
-      return res.redirect(`${process.env.CLIENT_URL}/user/home`);
+      return res.redirect(`${process.env.CLIENT_URL}/get-sosial-user`);
     });
   })(req, res, next);
 });
@@ -50,8 +51,6 @@ router.get("/linkedin/callback", (req, res, next) => {
           text: err.message || "Непредвиденная ошибка"   
         });  
       }
-
-      console.log(user)
       if (!user) {
         return res.redirect("/error");
       }
@@ -66,15 +65,16 @@ router.get("/linkedin/callback", (req, res, next) => {
           secure: true,
           SameSite: "Strict",
         });
-        return res.redirect(`${process.env.CLIENT_URL}/user/home`);
+        return res.redirect(`${process.env.CLIENT_URL}/get-sosial-user`);
       });
     }
   )(req, res, next);
 });
 
-router.get("/social/user", (req, res) => {
-  if (req.session.user) {
-    return res.json(req.session.user);
+router.get("/social/user",async (req, res) => {
+  const user = await req.session.user
+  if (user) {
+    return  res.json(req.session.user);
   } else {
     return res.status(401).json({ message: "User not authenticated" });
   }
