@@ -28,7 +28,8 @@ app.use(
     secret: process.env.AUTH0_CLIENT_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false, httpOnly: true },
+    cookie: { secure: true, httpOnly: true },
+    // cookie: { secure: false, httpOnly: true },
   })
 );
 app.use(passport.initialize());
