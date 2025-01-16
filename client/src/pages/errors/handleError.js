@@ -45,6 +45,12 @@ export const handleError = (error) => {
           "Sorry, the server is temporarily unavailable.",
       };
       break;
+    default:
+      customError = {
+        title: "Unexpected Error",
+        text: "An unexpected error occurred. Please try again later.",
+      };
+      break;
   }
 
   return customError;
