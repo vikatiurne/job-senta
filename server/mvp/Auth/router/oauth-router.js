@@ -75,7 +75,8 @@ router.get("/linkedin/callback", (req, res, next) => {
 
 router.get("/social/user", async (req, res) => {
   const user = await req.session.user;
-  console.log("REQ:",req.session);
+  console.log("REQ:",req);
+  console.log("REQsession:",req.session);
   if (user) {
     return res.json(req.session.user);
   } else {
