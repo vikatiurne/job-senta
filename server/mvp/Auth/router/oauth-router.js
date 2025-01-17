@@ -30,7 +30,8 @@ router.get("/google/callback", (req, res, next) => {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: true,
-        SameSite: "Strict",
+        SameSite: "none",
+        // SameSite: "Strict",
       });
       return res.redirect(`${process.env.CLIENT_URL}/get-sosial-user`);
     });
@@ -65,7 +66,8 @@ router.get("/linkedin/callback", (req, res, next) => {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,
           secure: true,
-          SameSite: "Strict",
+          SameSite: "none",
+          // SameSite: "Strict",
         });
         return res.redirect(`${process.env.CLIENT_URL}/get-sosial-user`);
       });
