@@ -22,8 +22,8 @@ class AuthController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: true,
-        // SameSite: "Strict",
-        SameSite: "None",
+        SameSite: "Strict",
+        // SameSite: "None",
       });
       return res.json(user);
     } catch (err) {
@@ -55,6 +55,7 @@ class AuthController {
       res.clearCookie("connect.sid", { secure: true, httpOnly: true });
       res.clearCookie("refresh_jobseeker", {
         secure: true,
+        httpOnly: true,
         sameSite: "None",
         // sameSite: "Strict",
       });
