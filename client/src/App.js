@@ -43,9 +43,9 @@ function App() {
     }
   }, [dispatch, methodAuth, isAuth]);
 
-  useEffect(() => {
-    dispatch(clearError());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(clearError());
+  // }, [dispatch]);
 
   return <RootRouter />;
 }
