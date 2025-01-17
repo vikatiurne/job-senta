@@ -12,60 +12,64 @@ import DragAndDropUpload from "../DragAndDropUpload/DragAndDropUpload";
 
 const BtnsImport = () => {
   const [dropDownActive, setDropDownActive] = useState(false);
-  const [activeModalFile, setActiveModalFile] = useState(false)
-  const [activeModalLinkedin, setActiveModalLinkedin] = useState(false)
-
+  const [activeModalFile, setActiveModalFile] = useState(false);
+  // const [activeModalLinkedin, setActiveModalLinkedin] = useState(false);
 
   const handleDropDown = () => setDropDownActive((prev) => !prev);
 
   const importPdforDocHandler = () => setActiveModalFile(true);
-  const importLinkedInHandler = () => setActiveModalLinkedin(true);
+  // const importLinkedInHandler = () => setActiveModalLinkedin(true);
 
   return (
     <>
-    <div className={styles.btnContainer}>
-      <Link to="./create" className={styles.createBtn}>
-        <Plus /> <p>Create Resume</p>
-      </Link>
-      <div>
-        <div
-          className={`${styles.dropDownBtn}  ${
-            dropDownActive && styles.bntWithDropDown
-          }`}
-          onClick={handleDropDown}
-        >
-          <p className={styles.btnTitle}>Import Resume</p>
-          <Button
-            className={`${styles.dropDown} ${
-              dropDownActive ? styles.withDropDown : null
+      <div className={styles.btnContainer}>
+        <Link to="./create" className={styles.createBtn}>
+          <Plus /> <p>Create Resume</p>
+        </Link>
+        <div>
+          <div
+            className={`${styles.dropDownBtn}  ${
+              dropDownActive && styles.bntWithDropDown
             }`}
+            onClick={handleDropDown}
           >
-            <DropDownIcon />
-          </Button>
+            <p className={styles.btnTitle}>Import Resume</p>
+            <Button
+              className={`${styles.dropDown} ${
+                dropDownActive ? styles.withDropDown : null
+              }`}
+            >
+              <DropDownIcon />
+            </Button>
+          </div>
+          <DropDown
+            className={styles.importDropDown}
+            activeClass={dropDownActive}
+            maxHeight="119px"
+          >
+            <ul className={styles.sectMenuDropDownList}>
+              <li
+                className={styles.sectMenuDropDownItem}
+                onClick={importPdforDocHandler}
+              >
+                Import&nbsp;from&nbsp;PDF&nbsp;or&nbsp;Doc
+              </li>
+              <li
+                className={styles.sectMenuDropDownItem}
+                // onClick={importLinkedInHandler}
+              >
+                Import&nbsp;from&nbsp;LinkedIn
+              </li>
+            </ul>
+          </DropDown>
         </div>
-        <DropDown
-          className={styles.importDropDown}
-          activeClass={dropDownActive}
-          maxHeight="119px"
-        >
-          <ul className={styles.sectMenuDropDownList}>
-            <li
-              className={styles.sectMenuDropDownItem}
-              onClick={importPdforDocHandler}
-            >
-              Import&nbsp;from&nbsp;PDF&nbsp;or&nbsp;Doc
-            </li>
-            <li
-              className={styles.sectMenuDropDownItem}
-              onClick={importLinkedInHandler}
-            >
-              Import&nbsp;from&nbsp;LinkedIn
-            </li>
-          </ul>
-        </DropDown>
       </div>
-    </div>
-    {activeModalFile && <DragAndDropUpload active={activeModalFile} setModalActive={setActiveModalFile}/>}
+      {activeModalFile && (
+        <DragAndDropUpload
+          active={activeModalFile}
+          setModalActive={setActiveModalFile}
+        />
+      )}
     </>
   );
 };

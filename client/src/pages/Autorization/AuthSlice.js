@@ -186,6 +186,7 @@ const authSlice = createSlice({
         state.user = payload.data;
         state.methodAuth = "app";
         state.isRemember = true;
+        state.isAuth = true
       })
       .addCase(fetchSocialAuth.rejected, (state, { payload }) => {
         state.error = payload;

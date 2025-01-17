@@ -11,14 +11,14 @@ import DragAndDropUpload from "../../../../../components/Builder/DragAndDropUplo
 const BuilderHeader = () => {
   const [selectedNewResume, setSelectedNewResume] = useState(false);
   const [activeModalFile, setActiveModalFile] = useState(false);
-  const [activeModalLinkedin, setActiveModalLinkedin] = useState(false);
+  // const [activeModalLinkedin, setActiveModalLinkedin] = useState(false);
 
   const handleSelectedNewResume = () => {
     setSelectedNewResume((prev) => !prev);
   };
 
   const importPdforDocHandler = () => setActiveModalFile(true);
-  const importLinkedInHandler = () => setActiveModalLinkedin(true);
+  // const importLinkedInHandler = () => setActiveModalLinkedin(true);
 
   return (
     <>
@@ -45,7 +45,7 @@ const BuilderHeader = () => {
                 </li>
                 <li
                   className={styles.sectMenuDropDownItem}
-                  onClick={importLinkedInHandler}
+                  // onClick={importLinkedInHandler}
                 >
                   Import&nbsp;from&nbsp;LinkedIn
                 </li>

@@ -7,7 +7,7 @@ import {
   resetAuthState,
   setAuth,
 } from "./pages/Autorization/AuthSlice.js";
-import { clearError } from "./pages/errors/errorSlice.js";
+
 
 function App() {
   const { methodAuth, isAuth } = useSelector((state) => state.auth);
@@ -43,9 +43,7 @@ function App() {
     }
   }, [dispatch, methodAuth, isAuth]);
 
-  // useEffect(() => {
-  //   dispatch(clearError());
-  // }, [dispatch]);
+
 
   return <RootRouter />;
 }
