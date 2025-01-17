@@ -20,12 +20,11 @@ router.get("/google/callback", (req, res, next) => {
 
     req.logIn(user, (err) => {
       if (err) {
-
         return next(err);
       }
 
       req.session.user = user;
-      console.log("user:",user)
+      console.log("req.session.user:", req.session.user);
       res.cookie("refresh_jobseeker", user.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
@@ -48,10 +47,10 @@ router.get("/linkedin/callback", (req, res, next) => {
     { failureRedirect: "/error" },
     (err, user, info) => {
       if (err) {
-        return res.status(400).json({   
-          title: "Ошибка аутентификации",   
-          text: err.message || "Непредвиденная ошибка"   
-        });  
+        return res.status(400).json({
+          title: "Ошибка аутентификации",
+          text: err.message || "Непредвиденная ошибка",
+        });
       }
       if (!user) {
         return res.redirect("/error");
@@ -61,7 +60,6 @@ router.get("/linkedin/callback", (req, res, next) => {
           return next(err);
         }
         req.session.user = user;
-        console.log("user:",user)
         res.cookie("refresh_jobseeker", user.refreshToken, {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,
@@ -75,10 +73,11 @@ router.get("/linkedin/callback", (req, res, next) => {
   )(req, res, next);
 });
 
-router.get("/social/user",async (req, res) => {
-  const user = await req.session.user
+router.get("/social/user", async (req, res) => {
+  const user = await req.session.user;
+  console.log(req.session);
   if (user) {
-    return  res.json(req.session.user);
+    return res.json(req.session.user);
   } else {
     return res.status(401).json({ message: "User not authenticated" });
   }
