@@ -25,6 +25,7 @@ router.get("/google/callback", (req, res, next) => {
       }
 
       req.session.user = user;
+      console.log("user:",user)
       res.cookie("refresh_jobseeker", user.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
@@ -59,6 +60,7 @@ router.get("/linkedin/callback", (req, res, next) => {
           return next(err);
         }
         req.session.user = user;
+        console.log("user:",user)
         res.cookie("refresh_jobseeker", user.refreshToken, {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,

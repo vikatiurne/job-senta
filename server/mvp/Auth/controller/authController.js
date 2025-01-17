@@ -51,10 +51,9 @@ class AuthController {
       const { refresh_jobseeker } = req.cookies;
       const token = await authService.logout(refresh_jobseeker);
       res.clearCookie("connect.sid", { secure: true, httpOnly: true });
-      // res.clearCookie("connect.sid", { secure: false, httpOnly: true });
       res.clearCookie("refresh_jobseeker", {
         secure: true,
-        sameSite: "none",
+        sameSite: "Strict",
       });
       return res.json(token);
     } catch (error) {
@@ -97,9 +96,7 @@ class AuthController {
       next(ApiError.badRequest(error.message));
     }
   }
-  async checkConnect(req, res, next) {
-    res.status(200).json({ status: true });
-  }
+
 }
 
 module.exports = new AuthController();
