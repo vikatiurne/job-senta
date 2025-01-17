@@ -5,8 +5,8 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRouter = ({ children }) => {
   
-  const {isAuth, isServerConnect} = useSelector((state) => state.auth);
-  return isAuth && isServerConnect ? children : <Navigate to="/" />;
+  const {isAuth} = useSelector((state) => state.auth);
+  return isAuth  ? children : <Navigate to="/" />;
 };
 
 export default ProtectedRouter;

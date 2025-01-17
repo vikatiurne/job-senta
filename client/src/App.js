@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RootRouter from "./router/Router.jsx";
 import {
   fetchAutoLogin,
-  fetchCheckConnect,
+  // fetchCheckConnect,
   resetAuthState,
   setAuth,
 } from "./pages/Autorization/AuthSlice.js";
@@ -48,9 +48,9 @@ function App() {
     }
   }, [dispatch, methodAuth, isAuth]);
 
-  useEffect(() => {
-    dispatch(fetchCheckConnect());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchCheckConnect());
+  // }, [dispatch]);
 
   return <RootRouter />;
 }
