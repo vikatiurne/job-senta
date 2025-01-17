@@ -22,8 +22,9 @@ class AuthController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: true,
-        SameSite: "Strict",
-        // SameSite: "None",
+        sameSite: "none",
+        // SameSite: "Strict",
+        
       });
       return res.json(user);
     } catch (err) {
@@ -39,7 +40,7 @@ class AuthController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: true,
-        SameSite: "None",
+        sameSite: "none",
         // SameSite: "Strict",
       });
       return res.json(user);
@@ -56,7 +57,7 @@ class AuthController {
       res.clearCookie("refresh_jobseeker", {
         secure: true,
         httpOnly: true,
-        sameSite: "None",
+        sameSite: "none",
         // sameSite: "Strict",
       });
       return res.json(token);
@@ -73,7 +74,7 @@ class AuthController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: true,
-        SameSite: "None",
+        sameSite: "none",
         // SameSite: "Strict",
       });
       return res.json(user);

@@ -29,7 +29,7 @@ app.use(
     secret: process.env.AUTH0_CLIENT_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true, httpOnly: true },
+    cookie: { secure: true, httpOnly: true, sameSite: "none" },
     // cookie: { secure: false, httpOnly: true },
   })
 );
