@@ -32,8 +32,7 @@ router.get("/google/callback", (req, res, next) => {
         sameSite: "none",
         // SameSite: "Strict",
       });
-      // return res.redirect(`${process.env.CLIENT_URL}/get-sosial-user`);
-      return res.redirect(`${process.env.CLIENT_URL}/user/home`);
+      return res.redirect(`${process.env.CLIENT_URL}/get-sosial-user`);
     });
   })(req, res, next);
 });
