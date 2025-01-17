@@ -112,18 +112,7 @@ export const fetchResetPassword = createAsyncThunk(
     }
   }
 );
-// export const fetchCheckConnect = createAsyncThunk(
-//   "auth/fetchCheckConnect",
-//   async (_, { dispatch, rejectWithValue }) => {
-//     try {
-//       return await AuthorizationServices.checkServerConnection();
-//     } catch (error) {
-//       const handledError = handleError(error);
-//       dispatch(setError(handledError));
-//       return rejectWithValue(handledError);
-//     }
-//   }
-// );
+
 
 const loadStateFromLocalStorage = () => {
   const savedState = localStorage.getItem("_jobseeker_auth_state");
@@ -262,17 +251,7 @@ const authSlice = createSlice({
         state.error = payload;
         state.status = "error";
       })
-      // .addCase(fetchCheckConnect.pending, (state) => {
-      //   state.msg = null;
-      //   state.error = null;
-      // })
-      // .addCase(fetchCheckConnect.fulfilled, (state, { payload }) => {
-      //   state.isServerConnect = payload.data.status;
-      // })
-      // .addCase(fetchCheckConnect.rejected, (state, { payload }) => {
-      //   state.error = payload;
-      //   state.isServerConnect = false;
-      // });
+      
   },
 });
 

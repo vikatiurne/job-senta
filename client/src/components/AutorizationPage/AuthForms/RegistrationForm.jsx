@@ -19,7 +19,6 @@ import { clearError } from "../../../pages/errors/errorSlice";
 import styles from "./AuthForms.module.css";
 
 const LoginForm = () => {
-  const { status} = useSelector((state) => state.auth);
   const error = useSelector((state) => state.error);
   const [modalActive, setModalActive] = useState(!!error);
 
@@ -36,6 +35,7 @@ const LoginForm = () => {
     setModalActive(!!error);
   }, [error]);
 
+
   const submitFormHandler = (values) => {
     //отправка формы на сервер сохранение в бд
     dispatch(
@@ -46,7 +46,7 @@ const LoginForm = () => {
         lastName: values.lastName,
       })
     );
-    if(!error && status==="success")navigate('/login')
+    if(!error)navigate('/login')
   };
 
   return (

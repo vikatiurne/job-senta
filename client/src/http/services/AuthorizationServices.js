@@ -49,9 +49,5 @@ export default class AuthorizationServices {
   static async socialAuth() {
     return $api.get('/api/oauth/social/user')
   }
-  static async checkServerConnection() {
-    return $api.get('/api/auth/health')
-  }
-
 
 }
